@@ -36,6 +36,11 @@ const routes = [
         path: 'pasien',
         name: 'master.pasien',
         component: () => import('pages/master/pasien/IndexPage.vue')
+      },
+      {
+        path: 'pendidikan',
+        name: 'master.pendidikan',
+        component: () => import('pages/master/pendidikan/IndexPage.vue')
       }
     ]
   },

@@ -18,7 +18,7 @@
       show-if-above
       bordered
       :mini="miniState"
-      mini-width="64"
+
       :width="220"
       @mouseover="miniState = false"
       @mouseleave="miniState = true"
@@ -117,6 +117,12 @@ const menus = [
         title: 'Pasien',
         route: '/master/pasien',
         name: 'master.pasien'
+      },
+      {
+        id: 3,
+        title: 'Pendidikan',
+        route: '/master/pendidikan',
+        name: 'master.pendidikan'
       }
     ]
   }
