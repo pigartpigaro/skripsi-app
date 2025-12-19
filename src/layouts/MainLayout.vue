@@ -1,83 +1,78 @@
 <template>
   <q-layout view="hHh LpR fFf">
 
-    <!-- HEADER (tanpa tombol menu) -->
+    <!-- HEADER -->
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
-        <q-toolbar-title class="row items-center">
+        <q-toolbar-title class="row items-center q-gutter-sm">
           <q-avatar size="32px">
-            <img src="~assets/images/udumbara2.png" style="height:24px; width:auto;">
+            <img src="~assets/images/udumbara2.png" />
           </q-avatar>
-          Emars App
+          <span>Emars App</span>
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
     <!-- LEFT DRAWER -->
     <q-drawer
-  show-if-above
-  side="left"
-  bordered
-  :mini="miniState"
-  mini-width="64"
-  :width="220"
-  @mouseover="miniState = false"
-  @mouseleave="miniState = true"
->
-  <q-scroll-area class="fit">
+      show-if-above
+      bordered
+      :mini="miniState"
+      mini-width="64"
+      :width="220"
+      @mouseover="miniState = false"
+      @mouseleave="miniState = true"
+    >
+      <q-scroll-area class="fit">
+        <q-list padding>
 
-    <q-list padding>
+          <template v-for="menu in menus" :key="menu.id">
 
-      <!-- MASTER -->
-      <q-expansion-item
-        icon="source"
-        label="Master"
-        expand-separator
-        :expand-icon="miniState ? '' : 'keyboard_arrow_down'"
-      >
+            <!-- MENU TANPA CHILD -->
+            <q-item
+              v-if="!menu.children.length"
+              clickable
+              v-ripple
+              :to="menu.route"
+            >
+              <q-item-section avatar>
+                <q-icon :name="menu.icon" />
+              </q-item-section>
 
-        <!-- SUBMENU -->
-        <q-item
-          clickable
-          v-ripple
-          to="/dokter"
-          class="submenu-item"
-        >
-          <!-- BULLET -->
-          <q-item-section
-            avatar
-            v-if="!miniState"
-            class="submenu-bullet"
-          />
+              <q-item-section v-if="!miniState">
+                <q-item-label>{{ menu.title }}</q-item-label>
+              </q-item-section>
+            </q-item>
 
-          <!-- LABEL -->
-          <q-item-section v-if="!miniState">
-            <q-item-label>Dokter</q-item-label>
-          </q-item-section>
-        </q-item>
+            <!-- MENU DENGAN CHILD -->
+            <q-expansion-item
+              v-else
+              :icon="menu.icon"
+              :label="menu.title"
+              expand-separator
+              :default-opened="false"
+              :expand-icon="miniState ? '' : 'keyboard_arrow_down'"
+            >
+              <q-item
+                v-for="child in menu.children"
+                :key="child.id"
+                clickable
+                v-ripple
+                :to="child.route"
+                class="submenu-item"
+              >
+                <q-item-section avatar v-if="!miniState" class="submenu-bullet" />
+                <q-item-section v-if="!miniState">
+                  <q-item-label>{{ child.title }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-expansion-item>
 
-        <q-item
-          clickable
-          v-ripple
-          to="/pasien"
-          class="submenu-item"
-        >
-          <q-item-section
-            avatar
-            v-if="!miniState"
-            class="submenu-bullet"
-          />
-          <q-item-section v-if="!miniState">
-            <q-item-label>Pasien</q-item-label>
-          </q-item-section>
-        </q-item>
+          </template>
 
-      </q-expansion-item>
-
-    </q-list>
-
-  </q-scroll-area>
-</q-drawer>
+        </q-list>
+      </q-scroll-area>
+    </q-drawer>
 
     <!-- PAGE -->
     <q-page-container>
@@ -87,14 +82,47 @@
   </q-layout>
 </template>
 
+
 <script setup>
 import { ref } from 'vue'
 
-const miniState = ref(true) // true = icon only
+const miniState = ref(true)
+
+const menus = [
+  {
+    id: 1,
+    title: 'Dashboard',
+    icon: 'home',
+    route: '/dashboard',
+    name: 'dashboard',
+    children: []
+  },
+  {
+    id: 2,
+    title: 'Master',
+    icon: 'layers',
+    route: '/master',
+    name: 'master',
+    children: [
+      {
+        id: 1,
+        title: 'Dokter',
+        route: '/master/dokter',
+        name: 'master.dokter'
+      },
+      {
+        id: 2,
+        title: 'Pasien',
+        route: '/master/pasien',
+        name: 'master.pasien'
+      }
+    ]
+  }
+]
 </script>
 <style scoped>
 .submenu-item {
-  padding-left: 40px; /* MENJOROK KE KANAN */
+  padding-left: 40px;
 }
 
 .submenu-bullet {
@@ -107,7 +135,7 @@ const miniState = ref(true) // true = icon only
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgb(0, 0, 0);
+  background: #555;
   display: inline-block;
 }
 </style>
