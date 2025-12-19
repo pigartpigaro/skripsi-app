@@ -41,6 +41,11 @@ const routes = [
         path: 'pekerjaan',
         name: 'master.pekerjaan',
         component: () => import('pages/master/pekerjaan/IndexPage.vue')
+      },
+      {
+        path: 'pendidikan',
+        name: 'master.pendidikan',
+        component: () => import('pages/master/pendidikan/IndexPage.vue')
       }
     ]
   },

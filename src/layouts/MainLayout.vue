@@ -19,6 +19,7 @@
       bordered
       :mini="miniState"
       :mini-width="64"
+
       :width="220"
       @mouseover="miniState = false"
       @mouseleave="miniState = true"
@@ -153,7 +154,7 @@ const menus = [
         title: 'Cara Masuk',
         route: '/master/cara-masuk',
         name: 'master.cara-masuk'
-      },
+      }
     ]
   }
 ]
