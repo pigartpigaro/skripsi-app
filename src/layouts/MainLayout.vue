@@ -1,77 +1,41 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view="hHh LpR fFf">
 
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+
         <q-toolbar-title>
           <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+            <!-- <q-img :src="img" spinner-color="white" style="width:20px; height:20px"/> -->
+             <img src="src/assets/images/udumbara2.png" style="height:32px; width:auto;">
           </q-avatar>
-          EMARS
+          Emars App
         </q-toolbar-title>
-
-        <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
     </q-header>
 
-    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered :width="200">
+    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered :width="200">
       <q-scroll-area class="fit">
         <q-list>
-          <q-item>Menu</q-item>
-          <!-- <q-expansion-item>
+          <q-expansion-item>
             <template #header>
               <q-item-section avatar>
                 <q-icon name="source" />
               </q-item-section>
-              <q-item-section>Data Sasiodagrafi Pasien</q-item-section>
-            </template> -->
-            <q-list>
-              <q-item
-                clickable
-                v-ripple
-                :active="link === 'Data Sasiodagrafi Pasien'"
-                @click="link = 'Data Sasiodagrafi Pasien'"
-                active-class="submenu-link"
-                to="/datasasiodagrafipasien"
-              >
-                <q-item-section class="q-pl-md">
-                  <q-item-label>Data Sasiodagrafi Pasien</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-            <q-list>
-              <q-item
-                clickable
-                v-ripple
-                :active="link === 'Pengkajian Pre Anestesi'"
-                @click="link = 'Pengkajian Pre Anestesi'"
-                active-class="submenu-link"
-                to="/pengkajianpreanestesi"
-              >
-                <q-item-section class="q-pl-md">
-                  <q-item-label>Pengkajian Pre Anestesi</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          <!-- </q-expansion-item> -->
-          <q-expansion-item>
-            <template #header>
-              <q-item-section avatar>
-                <q-icon name="storefront" />
-              </q-item-section>
-              <q-item-section>Transaksi</q-item-section>
+              <q-item-section>Master</q-item-section>
             </template>
             <q-list>
               <q-item
                 clickable
                 v-ripple
-                :active="link === 'saldo awal'"
-                @click="link = 'saldo awal'"
+                :active="link === 'Dokter'"
+                @click="link = 'Dokter'"
                 active-class="submenu-link"
-                href="##"
+                to="/dokter"
               >
                 <q-item-section class="q-pl-md">
-                  <q-item-label>Saldo Awal</q-item-label>
+                  <q-item-label>Dokter</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -79,126 +43,23 @@
               <q-item
                 clickable
                 v-ripple
-                :active="link === 'panjar'"
-                @click="link = 'panjar'"
+                :active="link === 'Pasien'"
+                @click="link = 'Pasien'"
                 active-class="submenu-link"
-                href="##"
+                to="/pasien"
               >
                 <q-item-section class="q-pl-md">
-                  <q-item-label>Panjar</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-            <q-list>
-              <q-item
-                clickable
-                v-ripple
-                :active="link === 'ls'"
-                @click="link = 'ls'"
-                active-class="submenu-link"
-                href="##"
-              >
-                <q-item-section class="q-pl-md">
-                  <q-item-label>LS</q-item-label>
+                  <q-item-label>Pasien</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
           </q-expansion-item>
+
         </q-list>
-        <q-expansion-item>
-          <template #header>
-            <q-item-section avatar>
-              <q-icon name="inventory" />
-            </q-item-section>
-            <q-item-section>Laporan</q-item-section>
-          </template>
-          <q-list>
-            <q-item
-              clickable
-              v-ripple
-              :active="link === 'rba'"
-              @click="link = 'rba'"
-              active-class="submenu-link"
-            >
-              <q-item-section>
-                <q-item-label class="q-pl-md">RBA</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-          <q-list>
-            <q-expansion-item>
-              <template #header>
-                <q-item-section class="q-pl-md">BKU</q-item-section>
-              </template>
-              <q-item
-                clickable
-                v-ripple
-                :active="link === 'bkuppk'"
-                @click="link = 'bkuppk'"
-                active-class="submenu-link"
-              >
-                <q-item-section class="q-pl-lg">
-                  <q-item-label>BKU PPK</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item
-                clickable
-                v-ripple
-                :active="link === 'bkupengeluaran'"
-                @click="link = 'bkupengeluaran'"
-                active-class="submenu-link"
-              >
-                <q-item-section class="q-pl-lg">
-                  <q-item-label>BKU Pengeluaran</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item
-                clickable
-                v-ripple
-                :active="link === 'bkuptk'"
-                @click="link = 'bkuptk'"
-                active-class="submenu-link"
-              >
-                <q-item-section class="q-pl-lg">
-                  <q-item-label>BKU PTK</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-expansion-item>
-          </q-list>
-          <q-list>
-            <q-expansion-item>
-              <template #header>
-                <q-item-section class="q-pl-md">BUKU Pembantu</q-item-section>
-              </template>
-              <q-item
-                clickable
-                v-ripple
-                :active="link === 'bukubank'"
-                @click="link = 'bukubank'"
-                active-class="submenu-link"
-                to="/bukubank"
-              >
-                <q-item-section class="q-pl-lg">
-                  <q-item-label>Buku Bank Bend. Pengeluaran</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item
-                clickable
-                v-ripple
-                :active="link === 'bukukas'"
-                @click="link = 'bukukas'"
-                active-class="submenu-link"
-                to="/bukutunai"
-              >
-                <q-item-section class="q-pl-lg">
-                  <q-item-label>Buku Kas Tunai Bend. Pengeluaran</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-expansion-item>
-          </q-list>
-        </q-expansion-item>
+
       </q-scroll-area>
     </q-drawer>
+
 
     <q-page-container>
       <router-view />
@@ -207,20 +68,17 @@
   </q-layout>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup () {
-    const rightDrawerOpen = ref(false)
+const link = ref('')
+const leftDrawerOpen = ref(false)
 
-    return {
-      rightDrawerOpen,
-      toggleRightDrawer () {
-        rightDrawerOpen.value = !rightDrawerOpen.value
-      },
-      link: ref('inbox')
-    }
-  }
+function toggleLeftDrawer () {
+  leftDrawerOpen.value = !leftDrawerOpen.value
 }
+
+// const img = computed(() => {
+//   return new URL('../../../assets/images/udumbara2.png', import.meta.url).href
+// })
 </script>

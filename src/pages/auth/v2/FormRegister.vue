@@ -15,7 +15,7 @@
             <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">Nama</span>
           </template>
           <template #prepend>
-            <q-icon name="icon-mat-person" />
+            <q-icon name="person" />
           </template>
         </q-input>
 
@@ -27,7 +27,7 @@
             <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">Email</span>
           </template>
           <template #prepend>
-            <q-icon name="icon-mat-email" />
+            <q-icon name="email" />
           </template>
         </q-input>
 
@@ -40,7 +40,7 @@
             <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">Username</span>
           </template>
           <template #prepend>
-            <q-icon name="icon-mat-person" />
+            <q-icon name="person" />
           </template>
         </q-input>
 
@@ -52,10 +52,10 @@
             <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">Password</span>
           </template>
           <template #prepend>
-            <q-icon name="icon-mat-key" />
+            <q-icon name="key" />
           </template>
           <template #append>
-            <q-icon :name="isPasw ? 'icon-mat-visibility_off' : 'icon-mat-visibility'" class="cursor-pointer"
+            <q-icon :name="isPasw ? 'visibility_off' : 'visibility'" class="cursor-pointer"
               @click="isPasw = !isPasw" />
           </template>
         </q-input>

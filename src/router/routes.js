@@ -1,15 +1,4 @@
 const routes = [
-  // {
-  //   path: '/',
-  //   // component: () => import('layouts/MainLayout.vue'),
-  //   component: () => import('layouts/Auth/AuthLayout.vue'),
-  //   children: [
-  //     // { path: '', component: () => import('pages/IndexPage.vue') }
-  //     { path: '', redirect: '/login/form-login' },
-  //     { path: '/login', redirect: '/login/form-login' },
-  //     { path: '/login/:mode', name: 'login-mode', component: () => import('pages/auth/LoginPageV2.vue') }
-  //   ]
-  // },
 
   {
     path: '/login',
@@ -19,6 +8,18 @@ const routes = [
         path: '',
         name: 'login',
         component: () => import('pages/auth/LoginPageV2.vue')
+      }
+    ]
+  },
+
+  {
+    path: '/dashboard',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'dashboard',
+        component: () => import('pages/DashboardPage.vue')
       }
     ]
   },

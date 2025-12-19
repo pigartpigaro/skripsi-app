@@ -26,41 +26,17 @@
   </q-page>
 </template>
 <script setup>
-// import { comput } from 'vue'
 import { useAuthStore } from 'src/stores/auth'
 import BgAnimation from './comp/BgAnimation.vue'
 import BoxAnimation from './comp/BoxAnimation.vue'
 import LoginMode from './v2/LoginMode.vue'
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
-// import { useIdentityStore } from 'src/stores/auth/identity'
-// import { channelLogin } from 'src/modules/sockets'
-
-// const ids = useIdentityStore()
 const store = useAuthStore()
 const route = useRoute()
 const mode = computed(() =>
   route.query.mode === 'register' ? 'register' : 'form-login'
 )
-// channelLogin.subscribed(() => {
-//   // console.log('subscribed login!!!')
-// }).listen('.login-qr', (e) => {
-//   // console.log('listen', e)
-//   const msg = e.message
-//   const browser = msg.data
-//   const match = ids.qrCode === browser
-//   if (match) {
-//     // console.log('matches !!!')
-//     login(msg.email, msg.token)
-//   }
-// })
-
-// function login(email, token) {
-//   // console.log('email', email)
-//   const formData = new FormData()
-//   formData.append('email', email)
-//   store.loginQr(formData)
-// }
 
 </script>
 

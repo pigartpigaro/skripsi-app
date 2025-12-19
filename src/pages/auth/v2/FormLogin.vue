@@ -15,7 +15,7 @@
             <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">Username</span>
           </template>
           <template #prepend>
-            <q-icon name="icon-mat-person" />
+            <q-icon name="person" />
           </template>
         </q-input>
         <q-input v-model="form.password" color="white" label="Password" dark
@@ -26,15 +26,15 @@
             <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">Password</span>
           </template>
           <template #prepend>
-            <q-icon name="icon-mat-key" />
+            <q-icon name="key" />
           </template>
           <template #append>
-            <q-icon :name="isPasw ? 'icon-mat-visibility_off' : 'icon-mat-visibility'" class="cursor-pointer"
+            <q-icon :name="isPasw ? 'visibility_off' : 'visibility'" class="cursor-pointer"
               @click="isPasw = !isPasw" />
           </template>
         </q-input>
         <div class="row justify-between q-mt-lg">
-          <q-btn push color="white" text-color="primary" label="Login" type="button" :disable="storeAuth.loading">
+          <q-btn push color="white" text-color="primary" label="Login" type="submit" :disable="storeAuth.loading">
             <template #loading>
               <q-spinner-hourglass class="on-right" />
               Loading...
@@ -66,9 +66,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useQuasar } from 'quasar'
-import { useRouter } from 'vue-router'
 import packageJson from '../../../../package.json'
 import { useAuthStore } from 'src/stores/auth'
+import { useRouter } from 'vue-router'
 const $q = useQuasar()
 const router = useRouter()
 const appVersion = ref(packageJson.version || '0.0.1')
@@ -85,38 +85,10 @@ const form = ref({
 const storeAuth = useAuthStore()
 // const router = useRouter()
 function onSubmit() {
-  // const formData = new FormData()
-  // formData.append('email', form.value.email + '@app.com')
-  // formData.append('password', form.value.password)
-  // // formData.append('device_name', form.value.device_name)
-  // storeAuth.login(formData)
-  // .then(() => {
-  router.push({ name: 'home' }) // ganti dengan nama route sigarang yang sesuai
-  // })
-  // .then(() => {
-  //   const channel = laravelEcho.join('private.notif.1')
-
-  //   channel.subscribed(() => {
-  //     console.log('subscribed notif channel!!!')
-  //   })
-  // })
-  // .then(() => {
-  //   // console.log('loading false', storeAuth.aplications)
-  //   if (storeAuth.aplications?.length === 1) {
-  //     if (storeAuth.aplications[0].aplikasi === 'pegawai') {
-  //       router.push('pegawai/user/list')
-  //     } else {
-  //       router.push(storeAuth.route.link)
-  //     }
-  //   }
-  //   // window.location.reload()
-  // })
+  router.replace('/dashboard')
 }
 
-// function goToQr() {
-//   router.push({ name: 'login-mode', params: { mode: 'qr' }, replace: true })
-//   // location.reload()
-// }
+
 // function goToRegister() {
 //   router.push({ name: 'login-mode', params: { mode: 'register' }, replace: true })
 

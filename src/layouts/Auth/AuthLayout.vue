@@ -9,24 +9,13 @@
   </q-layout>
 </template>
 
-<script>
+<script setup>
 import { useQuasar } from 'quasar'
-import { computed, defineComponent } from 'vue'
+import { computed } from 'vue'
 
-export default defineComponent({
-  name: 'AuthLayout',
-  setup () {
-    const $q = useQuasar()
+const $q = useQuasar()
 
-    const dark = computed(() => {
-      return $q.dark.isActive
-    })
-
-    return {
-      dark
-    }
-  }
-})
+const dark = computed(() => $q.dark.isActive)
 </script>
 
 <style lang="scss" scoped>
