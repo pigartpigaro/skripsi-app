@@ -23,6 +23,22 @@ const routes = [
       }
     ]
   },
+  {
+    path: '/master',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: 'dokter',
+        name: 'master.dokter',
+        component: () => import('pages/master/dokter/IndexPage.vue')
+      },
+      {
+        path: 'pasien',
+        name: 'master.pasien',
+        component: () => import('pages/master/pasien/IndexPage.vue')
+      }
+    ]
+  },
 
   {
     path: '/',

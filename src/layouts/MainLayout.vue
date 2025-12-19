@@ -6,7 +6,7 @@
       <q-toolbar>
         <q-toolbar-title class="row items-center q-gutter-sm">
           <q-avatar size="32px">
-            <img src="~assets/images/udumbara2.png" />
+            <img :src="logo" />
           </q-avatar>
           <span>Emars App</span>
         </q-toolbar-title>
@@ -56,6 +56,7 @@
               <q-item
                 v-for="child in menu.children"
                 :key="child.id"
+
                 clickable
                 v-ripple
                 :to="child.route"
@@ -85,6 +86,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import logo from 'src/assets/images/udumbara2.png'
 
 const miniState = ref(true)
 

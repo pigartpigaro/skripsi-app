@@ -1,0 +1,3 @@
+<template>
+  dokter page
+</template>
