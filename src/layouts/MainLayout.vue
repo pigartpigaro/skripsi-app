@@ -18,7 +18,7 @@
       show-if-above
       bordered
       :mini="miniState"
-      mini-width="64"
+      :mini-width="64"
       :width="220"
       @mouseover="miniState = false"
       @mouseleave="miniState = true"
@@ -117,7 +117,43 @@ const menus = [
         title: 'Pasien',
         route: '/master/pasien',
         name: 'master.pasien'
-      }
+      },
+      {
+        id: 3,
+        title: 'Pendidikan',
+        route: '/master/pendidikan',
+        name: 'master.pendidikan'
+      },
+      {
+        id: 4,
+        title: 'Agama',
+        route: '/master/agama',
+        name: 'master.agama'
+      },
+      {
+        id: 5,
+        title: 'Ruangan',
+        route: '/master/ruangan',
+        name: 'master.ruangan'
+      },
+      {
+        id: 6,
+        title: 'Penanggung Jawab',
+        route: '/master/penanggung-jawab',
+        name: 'master.penanggung-jawab'
+      },
+      {
+        id: 7,
+        title: 'Pekerjaan',
+        route: '/master/pekerjaan',
+        name: 'master.pekerjaan'
+      },
+      {
+        id: 8,
+        title: 'Cara Masuk',
+        route: '/master/cara-masuk',
+        name: 'master.cara-masuk'
+      },
     ]
   }
 ]
