@@ -46,6 +46,21 @@ const routes = [
         path: 'pendidikan',
         name: 'master.pendidikan',
         component: () => import('pages/master/pendidikan/IndexPage.vue')
+      },
+      {
+        path: 'cara-masuk',
+        name: 'master.cara-masuk',
+        component: () => import('pages/master/caramasuk/IndexPage.vue')
+      },
+      {
+        path: 'asuransi',
+        name: 'master.asuransi',
+        component: () => import('pages/master/asuransi/IndexPage.vue')
+      },
+      {
+        path: 'ruangan',
+        name: 'master.ruangan',
+        component: () => import('pages/master/ruangan/IndexPage.vue')
       }
     ]
   },

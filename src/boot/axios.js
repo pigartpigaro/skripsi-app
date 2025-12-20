@@ -38,7 +38,7 @@ const PATHIMG = import.meta.env.VITE_PATHIMG
 // const WSPORT = 6002
 
 // const SERVER = SERV + '/api'
-const SERVER = `${SERV}/api`
+const SERVER = `${SERV}`
 const pathImg = `${PATHIMG}/storage/`
 
 const api = axios.create({ baseURL: SERVER })
