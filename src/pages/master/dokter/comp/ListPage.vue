@@ -11,7 +11,8 @@
       <q-item class="bg-primary text-white">
         <!-- <q-item-section style="max-width: 20px;">No.</q-item-section> -->
         <q-item-section>Kode</q-item-section>
-        <q-item-section>Cara Masuk</q-item-section>
+        <q-item-section>Nama</q-item-section>
+        <q-item-section>DPJP</q-item-section>
         <q-item-section side>
           #
         </q-item-section>
@@ -20,6 +21,7 @@
         <!-- <q-item-section style="max-width: 20px;"> {{ i + 1 }}. </q-item-section> -->
         <q-item-section>{{ row.kode }}</q-item-section>
         <q-item-section>{{ row.nama }}</q-item-section>
+        <q-item-section>{{ row.dpjp }}</q-item-section>
         <q-item-section side>
           <div class="row q-gutter-xs">
             <!-- <q-btn flat icon="layers" size="sm" round color="primary" @click="openRincian(row)" /> -->

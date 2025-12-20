@@ -1,7 +1,11 @@
 <template>
   <q-form ref="formRef" @submit="simpan" class="q-gutter-sm q-pa-sm">
     <div>
-      <q-input v-model.number="store.form.nama" outlined dense label="Cara Masuk"
+      <q-input v-model.number="store.form.nama" outlined dense label="Nama Dokter"
+        :disable="store.loadingSave" :loading="store.loadingSave" />
+    </div>
+    <div>
+      <q-input v-model.number="store.form.dpjp" outlined dense label="DPJP"
         :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <!-- <div class="" style="">
@@ -35,10 +39,10 @@
 <script setup>
 
 // import { api } from 'src/boot/axios';
-import { useMasterCaraMasukStore } from 'src/stores/master/caramasuk/mainstore';
+import { useMasterDokterStore } from 'src/stores/master/dokter/mainstore';
 import { onMounted, ref } from 'vue';
 
-const store = useMasterCaraMasukStore()
+const store = useMasterDokterStore()
 const formRef = ref(null)
 
 // const options = ref([])

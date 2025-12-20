@@ -2,7 +2,7 @@
   <q-layout view="hHh LpR fFf">
 
     <!-- HEADER -->
-    <q-header elevated class="bg-primary text-white">
+    <q-header elevated class="header-gradient text-white">
       <q-toolbar>
         <q-toolbar-title class="row items-center q-gutter-sm">
           <q-avatar size="32px">
@@ -37,7 +37,7 @@
               :to="menu.route"
             >
               <q-item-section avatar>
-                <q-icon :name="menu.icon" />
+                <q-icon color="primary" :name="menu.icon" />
               </q-item-section>
 
               <q-item-section v-if="!miniState">
@@ -54,6 +54,15 @@
               :default-opened="false"
               :expand-icon="miniState ? '' : 'keyboard_arrow_down'"
             >
+            <template #header>
+              <q-item-section avatar>
+                <q-icon :name="menu.icon" color="primary" />
+              </q-item-section>
+
+              <q-item-section v-if="!miniState">
+                <q-item-label>{{ menu.title }}</q-item-label>
+              </q-item-section>
+            </template>
               <q-item
                 v-for="child in menu.children"
                 :key="child.id"
@@ -180,7 +189,18 @@ const menus = [
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #555;
+  background: currentColor;
   display: inline-block;
+}
+
+.header-gradient {
+  background: linear-gradient(135deg, #2ec4cc, #3498db);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.q-toolbar-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 </style>
