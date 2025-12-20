@@ -21,20 +21,25 @@ import { notifErr } from 'src/modules/utils'
 
 // INI SUDAH OTOMATIS .... JIKA Dibuild atau di development ....  lihat di console
 // Jadi jika ingin merubah API untuk development? ... harap di quasar.config.js dibagian build
-const SERV = process.env.API
-
+// const SERV = process.env.API
+const SERV = import.meta.env.VITE_API_URL
+console.log(import.meta.env)
 // const WSHOST = '192.168.150.111'
 // const WSHOST = '192.168.101.80'
 // const WSHOST = 'localhost'
 
-const WSHOST = process.env.WSHOST
+// const WSHOST = process.env.WSHOST
+const WSHOST = import.meta.env.VITE_WSHOST
 
-const WSPORT = 6003
+const WSPORT = 8190
+const PATHIMG = import.meta.env.VITE_PATHIMG
 
 // const WSHOST = 'xenter.my.id'
 // const WSPORT = 6002
 
-const SERVER = SERV + '/api'
+// const SERVER = SERV + '/api'
+const SERVER = `${SERV}/api`
+const pathImg = `${PATHIMG}/storage/`
 
 const api = axios.create({ baseURL: SERVER })
 api.defaults.headers.get.Accepts = 'application/json'
@@ -91,7 +96,7 @@ const interceptRequest = (config) => {
 }
 api.interceptors.request.use(interceptRequest, interceptReqErrors)
 
-const pathImg = process.env.PATHIMG + '/storage/'
+// const pathImg = process.env.PATHIMG + '/storage/'
 
 // const getApp = async () => {
 //   await api.get('/v1/header').then((resp) => {
