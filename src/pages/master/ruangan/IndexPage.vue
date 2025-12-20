@@ -34,7 +34,7 @@
             </div>
             <div class="col-8 full-height bg-grey scroll q-pa-sm">
               <ListPage :listmaster="store.items" @edit="(val) => store.editForm(val)"
-                :loading="store.loadingDelete || store.loading" @delete="hapuskelasifikasi" />
+                :loading="store.loadingDelete || store.loading" @delete="hapuskelasifikasi" :meta="store.meta" @go-to="store.goTo" />
             </div>
           </div>
         </div>
@@ -47,6 +47,7 @@
 import { onMounted } from 'vue';
 import FormPage from './comp/FormPage.vue';
 import ListPage from './comp/ListPage.vue';
+
 import { useQuasar } from 'quasar';
 import { useMasterRuanganStore } from 'src/stores/master/ruangan/mainstore';
 const store = useMasterRuanganStore()

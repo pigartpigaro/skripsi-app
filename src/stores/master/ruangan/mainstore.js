@@ -5,6 +5,7 @@ import { notifErrVue, notifSuccess, notifSuccessVue } from "src/modules/utils";
 export const useMasterRuanganStore = defineStore('master-ruangan-store', {
   state: () => ({
     items: [],
+    meta: {},
     loading: false,
     loadingSave: false,
     loadingDelete: false,
@@ -14,14 +15,19 @@ export const useMasterRuanganStore = defineStore('master-ruangan-store', {
       nama: '',
     },
     params: {
-      q: ''
+      q: '',
+      page: 1,
+      per_page: 10,
     },
     akuns: [],
     bidangs: [],
     optionrekening: [],
   }),
   actions: {
-
+    goTo(page) {
+      this.params.page = page
+      this.getData()
+    },
     async simpanData() {
       this.loadingSave = true
       try {
@@ -51,6 +57,7 @@ export const useMasterRuanganStore = defineStore('master-ruangan-store', {
       // console.log('resp Kegiatan BLUD', resp)
       if (resp.status === 200) {
         this.items = resp?.data?.data
+        this.meta = resp?.data?.meta
         this.loading = false
       }
       this.loading = false

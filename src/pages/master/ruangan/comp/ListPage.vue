@@ -9,15 +9,15 @@
 
     <q-list v-else bordered class="rounded-borders bg-white" separator square>
       <q-item class="bg-primary text-white">
-        <q-item-section style="max-width: 20px;">No.</q-item-section>
+        <!-- <q-item-section style="max-width: 20px;">No.</q-item-section> -->
         <q-item-section>Kode</q-item-section>
         <q-item-section>Ruangan</q-item-section>
         <q-item-section side>
           #
         </q-item-section>
       </q-item>
-      <q-item v-for="(row, i) in props?.listmaster" :key="row?.no" v-ripple class="q-py-xs">
-        <q-item-section style="max-width: 20px;"> {{ i + 1 }}. </q-item-section>
+      <q-item v-for="(row, i) in props?.listmaster" :key="row?.no || i" v-ripple class="q-py-xs">
+        <!-- <q-item-section style="max-width: 20px;"> {{ i + 1 }}. </q-item-section> -->
         <q-item-section>{{ row.kode }}</q-item-section>
         <q-item-section>{{ row.nama }}</q-item-section>
         <q-item-section side>
@@ -28,11 +28,17 @@
           </div>
         </q-item-section>
       </q-item>
+      <div>
+        <footer-page :meta="props.meta" @go-to="goTo($event)"/>
+      </div>
     </q-list>
+
     <!-- <lihat-rincian v-model="showRincian" :listrincian="selectedRincian" /> -->
   </div>
 </template>
 <script setup>
+import FooterPage from './FooterPage.vue';
+
 
 // const LihatRincian = defineAsyncComponent(() => import('./DialogRincian.vue'))
 const props = defineProps({
@@ -43,9 +49,16 @@ const props = defineProps({
   loading: {
     type: Boolean,
     default: false
+  },
+  meta: {
+    type: Object,
+    default: () => ({})
   }
 })
+function goTo(page) {
+  emits('goTo', page)
+}
 
 
-const emits = defineEmits(['edit', 'delete'])
+const emits = defineEmits(['edit', 'delete', 'goTo'])
 </script>
