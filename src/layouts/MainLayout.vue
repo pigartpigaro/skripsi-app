@@ -154,6 +154,12 @@ const menus = [
         title: 'Cara Masuk',
         route: '/master/cara-masuk',
         name: 'master.cara-masuk'
+      },
+      {
+        id: 9,
+        title: 'Asuransi',
+        route: '/master/asuransi',
+        name: 'master.asuransi'
       }
     ]
   }
