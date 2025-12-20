@@ -17,7 +17,7 @@
       :tippy-options="{ duration: 100 }"
     >
     <menu-bar-btn
-      icon="icon-mat-format_bold"
+      icon="format_bold"
       :active="editor.isActive('bold')"
       tooltip="Huruf Tebal"
       @click="editor.chain().focus().toggleBold().run()"

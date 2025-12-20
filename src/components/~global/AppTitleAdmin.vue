@@ -3,7 +3,7 @@
     <div class="flex items-center">
       <div class="icon q-mr-md">
         <q-icon
-          name="icon-mat-transfer_within_a_station"
+          name="transfer_within_a_station"
           size="lg"
         />
       </div>
@@ -22,7 +22,7 @@
         rounded
         elevated
         color="primary"
-        icon="icon-mat-add"
+        icon="add"
         :label="labelAdd"
         size="sm"
         @click="goTo"
@@ -36,7 +36,7 @@
         rounded
         elevated
         color="dark"
-        icon="icon-mat-arrow_back"
+        icon="arrow_back"
         :label="labelBack"
         size="sm"
         @click="prev"

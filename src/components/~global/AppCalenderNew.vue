@@ -12,7 +12,7 @@
               <q-btn
                 round
                 flat
-                icon="icon-mat-chevron_left"
+                icon="chevron_left"
                 color="white"
                 size="1rem"
                 :loading="props.loading"
@@ -79,7 +79,7 @@
               <q-btn
                 round
                 flat
-                icon="icon-mat-chevron_right"
+                icon="chevron_right"
                 color="white"
                 size="1rem"
                 :loading="props.loading"

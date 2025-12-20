@@ -17,7 +17,7 @@
         <!-- <q-btn
           dense
           flat
-          icon="icon-mat-minimize"
+          icon="minimize"
           :disable="!maximizedToggle"
           @click="maximizedToggle = false"
         >
@@ -31,7 +31,7 @@
         <q-btn
           dense
           flat
-          icon="icon-mat-crop_square"
+          icon="crop_square"
           :disable="maximizedToggle"
           @click="maximizedToggle = true"
         >
@@ -45,7 +45,7 @@
         <q-btn
           dense
           flat
-          icon="icon-mat-close"
+          icon="close"
           @click="emits('closeDialog')"
         >
           <q-tooltip class="bg-white text-primary">
@@ -184,7 +184,7 @@
                           v-for="(data, n) in store.ranap.data"
                           :key="n"
                           :subtitle="`${dateFullFormat(data.rs3)}, jam ${formatJam(data.rs3)}`"
-                          icon="icon-mat-event"
+                          icon="event"
                         >
                           <div
                             class="row justify-between f-14"
@@ -255,7 +255,7 @@
                             flat
                             round
                             color="primary"
-                            icon="icon-mat-skip_previous"
+                            icon="skip_previous"
                             size="xs"
                             @click="store.setPageRajal(1)"
                           />
@@ -264,7 +264,7 @@
                             flat
                             round
                             color="primary"
-                            icon="icon-mat-chevron_left"
+                            icon="chevron_left"
                             size="xs"
                             @click="store.setPageRajal(store.ranap.current_page - 1)"
                           />
@@ -276,7 +276,7 @@
                             flat
                             round
                             color="primary"
-                            icon="icon-mat-chevron_right"
+                            icon="chevron_right"
                             size="xs"
                             @click="store.setPageRajal(store.ranap.current_page + 1)"
                           />
@@ -285,7 +285,7 @@
                             flat
                             round
                             color="primary"
-                            icon="icon-mat-skip_next"
+                            icon="skip_next"
                             size="xs"
                             @click="store.setPageRajal(store.ranap.total_page)"
                           />
@@ -321,7 +321,7 @@
                           v-for="(data, i) in store.rajal.data"
                           :key="i"
                           :subtitle="`${dateFullFormat(data.tglkunjungan)}, jam ${formatJam(data.tglkunjungan)}`"
-                          icon="icon-mat-event"
+                          icon="event"
                         >
                           <div
                             class="row justify-between f-14"
@@ -405,7 +405,7 @@
                             flat
                             round
                             color="primary"
-                            icon="icon-mat-skip_previous"
+                            icon="skip_previous"
                             size="xs"
                             @click="store.setPageRajal(1)"
                           />
@@ -414,7 +414,7 @@
                             flat
                             round
                             color="primary"
-                            icon="icon-mat-chevron_left"
+                            icon="chevron_left"
                             size="xs"
                             @click="store.setPageRajal(store.rajal.current_page - 1)"
                           />
@@ -426,7 +426,7 @@
                             flat
                             round
                             color="primary"
-                            icon="icon-mat-chevron_right"
+                            icon="chevron_right"
                             size="xs"
                             @click="store.setPageRajal(store.rajal.current_page + 1)"
                           />
@@ -435,7 +435,7 @@
                             flat
                             round
                             color="primary"
-                            icon="icon-mat-skip_next"
+                            icon="skip_next"
                             size="xs"
                             @click="store.setPageRajal(store.rajal.total_page)"
                           />

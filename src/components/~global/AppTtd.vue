@@ -19,7 +19,7 @@
     <div class="absolute-bottom-right q-ma-md">
       <q-btn
         flat
-        icon="icon-mat-refresh"
+        icon="refresh"
         size="md"
         padding="xs"
         round
@@ -29,7 +29,7 @@
       />
       <q-btn
         flat
-        icon="icon-mat-save"
+        icon="save"
         size="md"
         padding="xs"
         round

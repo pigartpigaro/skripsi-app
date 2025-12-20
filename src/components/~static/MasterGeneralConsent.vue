@@ -180,7 +180,7 @@
               :definitions="{
                 save: {
                   tip: 'Save your work',
-                  icon: 'icon-mat-save',
+                  icon: 'save',
                   label: 'Save',
                   handler: saveWork
                 }
@@ -331,12 +331,12 @@ function parse (val) {
   // const word = val
   // if (store.form.wali1) {
   const word = val?.replace(' 1 ) ..............................  (Hubungan dengan pasien: ..... )',
-      ` 1 ) ${store.form.wali1 ? '<b>' + store.form.wali1 + '</b>' : '..............................'}</b> 
+      ` 1 ) ${store.form.wali1 ? '<b>' + store.form.wali1 + '</b>' : '..............................'}</b>
       (Hubungan dengan pasien: ${store.form.hubunganWali1 ? '<b>' + store.form.hubunganWali1 + '</b>' : '.....'} )`)
   // }
   // if (store.form.wali2) {
   const str = word?.replace('2 ) .............................. (Hubungan dengan pasien: ...... )',
-  `2 ) ${store.form.wali2 ? '<b>' + store.form.wali2 + '</b>' : '..............................'}</b> 
+  `2 ) ${store.form.wali2 ? '<b>' + store.form.wali2 + '</b>' : '..............................'}</b>
       (Hubungan dengan pasien: ${store.form.hubunganWali2 ? '<b>' + store.form.hubunganWali2 + '</b>' : '.....'} )`)
   // }
   return str

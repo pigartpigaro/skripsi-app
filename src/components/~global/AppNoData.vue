@@ -5,7 +5,7 @@
   >
     <div>
       <q-icon
-        name="icon-mat-receipt_long"
+        name="receipt_long"
         color="primary"
         size="60px"
       />

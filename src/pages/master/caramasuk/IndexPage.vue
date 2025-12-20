@@ -24,7 +24,7 @@
             <q-input v-model="store.params.q" placeholder="Cari Akun ..." dense outlined style="min-width:200px"
               debounce="800" :loading="store.loading" @update:model-value="store.search" standout="bg-yellow-3">
               <template #prepend>
-                <q-icon name="icon-mat-search" />
+                <q-icon name="search" />
               </template>
             </q-input>
           </div>

@@ -24,7 +24,7 @@
             flat
             round
             color="primary"
-            icon="icon-mat-skip_previous"
+            icon="skip_previous"
             size="sm"
             @click="emits('first')"
           />
@@ -33,7 +33,7 @@
             flat
             round
             color="primary"
-            icon="icon-mat-chevron_left"
+            icon="chevron_left"
             size="sm"
             @click="emits('prev')"
           />
@@ -45,7 +45,7 @@
             flat
             round
             color="primary"
-            icon="icon-mat-chevron_right"
+            icon="chevron_right"
             size="sm"
             @click="emits('next')"
           />
@@ -55,7 +55,7 @@
             flat
             round
             color="primary"
-            icon="icon-mat-skip_next"
+            icon="skip_next"
             size="sm"
             @click="emits('last', lastPage)"
           />

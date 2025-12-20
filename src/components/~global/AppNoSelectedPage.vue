@@ -18,7 +18,7 @@
 <script setup>
 const props = defineProps({
   text: { type: String, default: 'Belum ada menu yang dipilih' },
-  icon: { type: String, default: 'icon-mat-warning' },
+  icon: { type: String, default: 'warning' },
   color: { type: String, default: 'negative' }
 })
 </script>

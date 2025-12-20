@@ -11,7 +11,7 @@
         <q-space />
         <q-btn
           v-close-popup
-          icon="icon-mat-close"
+          icon="close"
           flat
           round
           dense

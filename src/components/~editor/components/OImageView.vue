@@ -35,7 +35,7 @@
         <q-btn
           v-if="selected || resizing"
           color="yellow"
-          icon="icon-mat-settings"
+          icon="settings"
           size="xs"
           padding="xs"
           flat
@@ -58,7 +58,7 @@
                 <div>
                   <q-btn
                     v-close-popup
-                    icon="icon-mat-close"
+                    icon="close"
                     size="0.7rem"
                     flat
                     dense
@@ -68,7 +68,7 @@
               <q-separator />
               <div class="row col-12 items-start q-pa-sm">
                 <q-btn
-                  icon="icon-mat-menu"
+                  icon="menu"
                   color="primary"
                   @click="handleClassP"
                 />

@@ -34,7 +34,7 @@
   </div>
   <div class="q-mt-md">
     <q-btn
-      icon="icon-mat-add"
+      icon="add"
       size="sm"
       round
       flat
@@ -44,7 +44,7 @@
       <q-tooltip>Tanda Tangan</q-tooltip>
     </q-btn>
     <!-- <q-btn
-      icon="icon-mat-delete"
+      icon="delete"
       size="sm"
       round
       flat

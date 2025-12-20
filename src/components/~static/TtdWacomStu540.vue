@@ -4,12 +4,12 @@
     <div style="width:60mm;">
       <div class="row">
         <div class="col-6">
-          <q-btn class="full-width bg-dark" icon="icon-mat-add" size="sm" flat square color="white" @click="capture">
+          <q-btn class="full-width bg-dark" icon="add" size="sm" flat square color="white" @click="capture">
             <q-tooltip>Tanda Tangan</q-tooltip>
           </q-btn>
         </div>
         <div class="col-6">
-          <q-btn class="full-width bg-negative" icon="icon-mat-delete" size="sm" flat square color="white" @click="clearSignature">
+          <q-btn class="full-width bg-negative" icon="delete" size="sm" flat square color="white" @click="clearSignature">
             <q-tooltip>Hapus Ttd</q-tooltip>
           </q-btn>
         </div>

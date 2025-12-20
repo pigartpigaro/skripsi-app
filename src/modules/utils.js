@@ -184,7 +184,7 @@ const notifSuccess = (resp) => {
   const msg = resp?.data?.message ?? 'Sucees!, Wow Kerja Bagus!'
   Notify.create({
     message: msg || 'Sucees!, Wow Kerja Bagus!',
-    icon: 'icon-mat-thumb_up_off_alt',
+    icon: 'thumb_up_off_alt',
     position: 'top-right',
     actions: [
       { label: 'Dismiss', color: 'yellow', handler: () => { /* console.log('wooow') */ } }
@@ -216,7 +216,7 @@ const notifInfVue = (msg) => {
 const notifSuccessVue = (msg) => {
   Notify.create({
     message: msg,
-    icon: 'icon-mat-thumb_up_off_alt',
+    icon: 'thumb_up_off_alt',
     position: 'top-right',
     actions: [
       { label: 'Dismiss', color: 'yellow', handler: () => { /* console.log('wooow') */ } }

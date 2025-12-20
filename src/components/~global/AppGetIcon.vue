@@ -3,7 +3,7 @@
     <q-card class="">
       <q-bar class="bg-primary text-white">
         <q-space />
-        <q-btn v-close-popup dense flat icon="icon-mat-close">
+        <q-btn v-close-popup dense flat icon="close">
           <q-tooltip class="bg-white text-primary">
             Close
           </q-tooltip>

@@ -8,7 +8,7 @@
         <q-btn
           flat
           :color="textColor"
-          icon="icon-mat-skip_previous"
+          icon="skip_previous"
           size="sm"
           round
           :disable="meta.current_page===1"
@@ -17,7 +17,7 @@
         <q-btn
           flat
           :color="textColor"
-          icon="icon-mat-chevron_left"
+          icon="chevron_left"
           size="sm"
           round
           :disable="meta.current_page===1"
@@ -37,7 +37,7 @@
         <q-btn
           flat
           :color="textColor"
-          icon="icon-mat-chevron_right"
+          icon="chevron_right"
           size="sm"
           round
           :disable="meta.current_page===lastPage"
@@ -46,7 +46,7 @@
         <q-btn
           flat
           :color="textColor"
-          icon="icon-mat-skip_next"
+          icon="skip_next"
           size="sm"
           round
           :disable="meta.current_page===lastPage"

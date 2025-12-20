@@ -7,7 +7,7 @@
     @update:model-value="selected" @filter="filterFn" @new-value="createValue" @input-value="inputValue"
     @clear="bersihkan" class="input-box" :bgColor="hasValue ? 'yellow-1' : ''">
     <template v-if="modelProp" #append>
-      <q-icon name="icon-mat-cancel" class="cursor-pointer" @click.stop.prevent="bersihkan" />
+      <q-icon name="cancel" class="cursor-pointer" @click.stop.prevent="bersihkan" />
     </template>
     <template #option="scope">
       <q-item v-bind="scope.itemProps">

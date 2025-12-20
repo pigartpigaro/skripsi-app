@@ -13,7 +13,7 @@
     </template>
     <template v-if="props.type === 'password' || props.rightIcon" #append>
       <q-icon v-if="props.type === 'password'"
-        :name="typeInput === 'password' ? 'icon-mat-visibility_off' : 'icon-mat-visibility'" size="18px"
+        :name="typeInput === 'password' ? 'visibility_off' : 'visibility'" size="18px"
         class="cursor-pointer" @click="changeType" />
       <q-icon v-if="props.rightIcon" :name="props.rightIconName" size="20px" class="cursor-pointer"
         @click="emits('iconRightClick')">
@@ -60,7 +60,7 @@ const props = defineProps({
   dense: { type: Boolean, default: false },
   currency: { type: Boolean, default: false },
   rightIcon: { type: Boolean, default: false },
-  rightIconName: { type: String, default: 'icon-mat-search' },
+  rightIconName: { type: String, default: 'search' },
   rightIconTooltip: { type: String, default: 'Cari...' },
   error: { type: Boolean, default: false },
   valid: { type: Boolean, default: false },

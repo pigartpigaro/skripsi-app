@@ -9,7 +9,7 @@
           color="dark"
           round
           size="sm"
-          icon="icon-mat-print"
+          icon="print"
         >
           <q-tooltip
             class="primary"
@@ -36,7 +36,7 @@
           color="primary"
           round
           size="sm"
-          icon="icon-mat-close"
+          icon="close"
           @click="emits('close')"
         >
           <q-tooltip

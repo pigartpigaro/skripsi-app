@@ -15,7 +15,7 @@
           <q-input v-model="search" outlined class="search-big" borderless :debounce="debounce" clearable dense
             :placeholder="textCari" @keydown.enter.prevent="searchEnter">
             <template #prepend>
-              <q-icon name="icon-mat-search" size="20px" />
+              <q-icon name="search" size="20px" />
             </template>
           </q-input>
         </div>
@@ -24,21 +24,21 @@
       <div class="col-one">
         <!-- delete Ids -->
         <slot name="header-right-before" class="q-ml-md" />
-        <q-btn v-if="selected?.length > 0" unelevated color="red" round size="sm" icon="icon-mat-delete_sweep"
+        <q-btn v-if="selected?.length > 0" unelevated color="red" round size="sm" icon="delete_sweep"
           @click="deleteData()">
           <q-tooltip class="primary" :offset="[10, 10]">
             Hapus Data
           </q-tooltip>
         </q-btn>
         <!-- refresh Ids -->
-        <q-btn v-if="adaRefresh" unelevated round size="sm" color="teal" icon="icon-mat-refresh"
+        <q-btn v-if="adaRefresh" unelevated round size="sm" color="teal" icon="refresh"
           @click="emits('refresh')">
           <q-tooltip class="primary" :offset="[10, 10]">
             Refresh Table
           </q-tooltip>
         </q-btn>
         <!-- per page -->
-        <q-btn v-if="adaPerPage" class="q-ml-sm" unelevated color="orange" round size="sm" icon="icon-mat-layers">
+        <q-btn v-if="adaPerPage" class="q-ml-sm" unelevated color="orange" round size="sm" icon="layers">
           <q-tooltip class="primary" :offset="[10, 10]">
             Per Baris
           </q-tooltip>
@@ -54,7 +54,7 @@
           </q-menu>
         </q-btn>
         <!-- filter table -->
-        <q-btn v-if="adaFilter" class="q-ml-sm" unelevated color="indigo" round size="sm" icon="icon-mat-sort">
+        <q-btn v-if="adaFilter" class="q-ml-sm" unelevated color="indigo" round size="sm" icon="sort">
           <q-tooltip class="primary" :offset="[10, 10]">
             Filter Table
           </q-tooltip>
@@ -71,7 +71,7 @@
         </q-btn>
         <!-- data baru -->
         <q-btn v-if="addData && adaTambah" class="q-ml-sm" unelevated round color="primary" size="sm"
-          icon="icon-mat-add" @click="emits('newData')">
+          icon="add" @click="emits('newData')">
           <q-tooltip class="primary" :offset="[10, 10]">
             Data Baru
           </q-tooltip>
@@ -112,8 +112,8 @@
                 </div>
               </slot>
               <div v-if="orderBy === head">
-                <q-icon v-if="sort === 'desc'" class="q-ml-xs" name="icon-mat-vertical_align_bottom" />
-                <q-icon v-else class="q-ml-xs" name="icon-mat-vertical_align_top" />
+                <q-icon v-if="sort === 'desc'" class="q-ml-xs" name="vertical_align_bottom" />
+                <q-icon v-else class="q-ml-xs" name="vertical_align_top" />
               </div>
             </div>
           </th>
@@ -139,7 +139,7 @@
           <td :colspan="rowImage === null ? filterColumn?.length + 2 : filterColumn?.length + 3">
             <div class="flex column flex-center bg-loading-bg__table" style="height:300px">
               <div>
-                <q-icon name="icon-mat-receipt_long" color="primary" size="60px" />
+                <q-icon name="receipt_long" color="primary" size="60px" />
               </div>
               <div class="text-primary q-mt-sm">
                 Data Belum Ada
@@ -170,14 +170,14 @@
               <!-- class="q-ml-md" -->
               <slot name="left-acttion" :row="item" :col="i" />
               <div v-if="defaultBtn">
-                <q-btn v-if="adaEdit" flat class="" size="sm" round color="grey" icon="icon-mat-edit"
+                <q-btn v-if="adaEdit" flat class="" size="sm" round color="grey" icon="edit"
                   @click="emits('editData', item)">
                   <q-tooltip anchor="top middle" self="center middle">
                     Edit Data
                   </q-tooltip>
                 </q-btn>
                 <q-btn v-if="selected?.length < 2 && adaDelete" flat class="" size="sm" round color="grey"
-                  icon="icon-mat-delete_sweep" @click="deleteOne(item.id)">
+                  icon="delete_sweep" @click="deleteOne(item.id)">
                   <q-tooltip anchor="top middle" self="center middle">
                     Delete Data
                   </q-tooltip>

@@ -24,7 +24,7 @@
           >
             <template #prepend>
               <q-icon
-                name="icon-mat-search"
+                name="search"
                 size="20px"
               />
             </template>
@@ -43,7 +43,7 @@
           color="red"
           round
           size="sm"
-          icon="icon-mat-delete_sweep"
+          icon="delete_sweep"
           @click="deleteData()"
         >
           <q-tooltip
@@ -58,7 +58,7 @@
           unelevated
           round
           size="sm"
-          icon="icon-mat-refresh"
+          icon="refresh"
           @click="emits('refresh')"
         >
           <q-tooltip
@@ -75,7 +75,7 @@
           color="orange"
           round
           size="sm"
-          icon="icon-mat-layers"
+          icon="layers"
         >
           <q-tooltip
             class="primary"
@@ -117,7 +117,7 @@
           color="indigo"
           round
           size="sm"
-          icon="icon-mat-sort"
+          icon="sort"
         >
           <q-tooltip
             class="primary"
@@ -159,7 +159,7 @@
           round
           color="primary"
           size="sm"
-          icon="icon-mat-add"
+          icon="add"
           @click="emits('newData')"
         >
           <q-tooltip
@@ -225,12 +225,12 @@
                 <q-icon
                   v-if="sort==='desc'"
                   class="q-ml-xs"
-                  name="icon-mat-vertical_align_bottom"
+                  name="vertical_align_bottom"
                 />
                 <q-icon
                   v-else
                   class="q-ml-xs"
-                  name="icon-mat-vertical_align_top"
+                  name="vertical_align_top"
                 />
               </div>
             </div>
@@ -255,7 +255,7 @@
             >
               <div>
                 <q-icon
-                  name="icon-mat-receipt_long"
+                  name="receipt_long"
                   color="grey"
                   size="30px"
                 />
@@ -312,7 +312,7 @@
                 size="sm"
                 round
                 color="grey"
-                icon="icon-mat-edit"
+                icon="edit"
                 @click="emits('editData',item)"
               >
                 <q-tooltip
@@ -329,7 +329,7 @@
                 size="sm"
                 round
                 color="grey"
-                icon="icon-mat-delete_sweep"
+                icon="delete_sweep"
                 @click="deleteOne(item.id)"
               >
                 <q-tooltip

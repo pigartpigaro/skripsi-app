@@ -45,7 +45,7 @@
                     style="min-height:250px"
                   >
                     <q-icon
-                      name="icon-mat-cloud_upload"
+                      name="cloud_upload"
                       size="40px"
                       color="primary"
                     />
@@ -92,7 +92,7 @@
                           </div>
                           <div class="absolute no-padding transparent">
                             <q-icon
-                              :name="file.__status==='uploaded'?'icon-mat-done_all':'icon-mat-warnimg'"
+                              :name="file.__status==='uploaded'?'done_all':'warnimg'"
                               size="sm"
                               :color="file.__status==='idle'?'negative':'green-5'"
                               class="q-pa-xs"
@@ -105,7 +105,7 @@
                             round
                             color="grey"
                             size="sm"
-                            icon="icon-mat-content_copy"
+                            icon="content_copy"
                             @click="handleCopyUrl(`${pathImg}gallery/${file.name}`)"
                           />
                           <q-btn
@@ -113,7 +113,7 @@
                             round
                             color="negative"
                             size="sm"
-                            icon="icon-mat-delete"
+                            icon="delete"
                             @click="handleRemoveImage(file)"
                           />
                         </q-card-actions>
@@ -161,7 +161,7 @@
                       round
                       color="grey"
                       size="xs"
-                      icon="icon-mat-content_copy"
+                      icon="content_copy"
                       @click="handleCopyUrl(`${pathImg}gallery/${item.original}`)"
                     />
                   </q-card-section>
@@ -205,8 +205,8 @@ const emits = defineEmits(['selectImage'])
 
 const link = ref(0)
 const listsMenu = ref([
-  { link: 'Upload', icon: 'icon-mat-upload_file' },
-  { link: 'Gallery', icon: 'icon-mat-collections' }
+  { link: 'Upload', icon: 'upload_file' },
+  { link: 'Gallery', icon: 'collections' }
 ])
 
 const selected = ref(null)

@@ -7,16 +7,16 @@
       </div>
       <div :class="!details ? 'col-12' : 'col-md-6 col-xs-12'">
         <div class="flex items-center justify-end q-mr-md">
-          <q-btn :disable="meta.current_page === 1" flat round color="primary" icon="icon-mat-skip_previous" size="sm"
+          <q-btn :disable="meta.current_page === 1" flat round color="primary" icon="skip_previous" size="sm"
             @click="emits('first')" />
-          <q-btn :disable="(!meta?.prev_page_url)" flat round color="primary" icon="icon-mat-chevron_left" size="md"
+          <q-btn :disable="(!meta?.prev_page_url)" flat round color="primary" icon="chevron_left" size="md"
             @click="emits('prev')" />
           <div class="bold q-pa-xs">
             {{ meta.current_page }} {{ meta.last_page ? `/ ${meta.last_page}` : '' }}
           </div>
-          <q-btn :disable="(!meta.next_page_url)" flat round color="primary" icon="icon-mat-chevron_right" size="md"
+          <q-btn :disable="(!meta.next_page_url)" flat round color="primary" icon="chevron_right" size="md"
             @click="emits('next')" />
-          <q-btn :disable="meta.current_page === meta.last_page" flat round color="primary" icon="icon-mat-skip_next"
+          <q-btn :disable="meta.current_page === meta.last_page" flat round color="primary" icon="skip_next"
             size="md" @click="emits('last')" />
         </div>
       </div>

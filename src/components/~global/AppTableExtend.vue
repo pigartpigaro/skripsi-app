@@ -31,7 +31,7 @@
           >
             <template #prepend>
               <q-icon
-                name="icon-mat-search"
+                name="search"
                 size="20px"
               />
             </template>
@@ -54,7 +54,7 @@
             color="red"
             round
             size="sm"
-            icon="icon-mat-delete_sweep"
+            icon="delete_sweep"
             @click="deleteData()"
           >
             <q-tooltip
@@ -71,7 +71,7 @@
             round
             :color="useFull?'yellow':'blue-grey'"
             size="sm"
-            icon="icon-mat-refresh"
+            icon="refresh"
             @click="emits('refresh')"
           >
             <q-tooltip
@@ -89,7 +89,7 @@
             color="orange"
             round
             size="sm"
-            icon="icon-mat-layers"
+            icon="layers"
           >
             <q-tooltip
               class="primary"
@@ -132,7 +132,7 @@
             color="indigo"
             round
             size="sm"
-            icon="icon-mat-sort"
+            icon="sort"
           >
             <q-tooltip
               class="primary"
@@ -174,7 +174,7 @@
             round
             :color="useFull?'green':'primary'"
             size="sm"
-            icon="icon-mat-add"
+            icon="add"
             @click="emits('newData')"
           >
             <q-tooltip
@@ -188,7 +188,7 @@
           <q-btn
             v-if="useFull"
             flat
-            :icon="!style.componentfull ? 'icon-mat-open_in_full' : 'icon-mat-close_fullscreen'"
+            :icon="!style.componentfull ? 'open_in_full' : 'close_fullscreen'"
             round
             :color="style.componentfull ? 'green' : 'white'"
             size="12px"
@@ -272,12 +272,12 @@
                 <q-icon
                   v-if="sort==='desc'"
                   class="q-ml-xs"
-                  name="icon-mat-vertical_align_bottom"
+                  name="vertical_align_bottom"
                 />
                 <q-icon
                   v-else
                   class="q-ml-xs"
-                  name="icon-mat-vertical_align_top"
+                  name="vertical_align_top"
                 />
               </div>
             </div>
@@ -312,7 +312,7 @@
             >
               <div>
                 <q-icon
-                  name="icon-mat-receipt_long"
+                  name="receipt_long"
                   color="primary"
                   size="60px"
                 />
@@ -387,7 +387,7 @@
                     size="sm"
                     round
                     color="grey"
-                    icon="icon-mat-edit"
+                    icon="edit"
                     @click="emits('editData',item)"
                   >
                     <q-tooltip
@@ -404,7 +404,7 @@
                     size="sm"
                     round
                     color="grey"
-                    icon="icon-mat-delete_sweep"
+                    icon="delete_sweep"
                     @click="deleteOne(item.id)"
                   >
                     <q-tooltip
@@ -496,7 +496,7 @@
           <q-btn
             flat
             :color="textColor"
-            icon="icon-mat-skip_previous"
+            icon="skip_previous"
             size="sm"
             round
             :disable="meta.current_page===1"
@@ -505,7 +505,7 @@
           <q-btn
             flat
             :color="textColor"
-            icon="icon-mat-chevron_left"
+            icon="chevron_left"
             size="sm"
             round
             :disable="meta.current_page===1"
@@ -525,7 +525,7 @@
           <q-btn
             flat
             :color="textColor"
-            icon="icon-mat-chevron_right"
+            icon="chevron_right"
             size="sm"
             round
             :disable="!meta.next_page_url"
@@ -534,7 +534,7 @@
           <!-- <q-btn
             flat
             :color="textColor"
-            icon="icon-mat-skip_next"
+            icon="skip_next"
             size="sm"
             round
             :disable="meta.current_page===lastPage"

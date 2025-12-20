@@ -40,7 +40,7 @@
                     <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">Username</span>
                   </template>
                   <template #prepend>
-                    <q-icon name="icon-mat-person" />
+                    <q-icon name="person" />
                   </template>
                 </q-input>
                 <q-input v-model="form.password" color="white" label="Password" dark
@@ -50,10 +50,10 @@
                     <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">Password</span>
                   </template>
                   <template #prepend>
-                    <q-icon name="icon-mat-key" />
+                    <q-icon name="key" />
                   </template>
                   <template #append>
-                    <q-icon :name="isPasw ? 'icon-mat-visibility_off' : 'icon-mat-visibility'" class="cursor-pointer"
+                    <q-icon :name="isPasw ? 'visibility_off' : 'visibility'" class="cursor-pointer"
                       @click="isPasw = !isPasw" />
                   </template>
                 </q-input>

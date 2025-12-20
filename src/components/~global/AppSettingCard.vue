@@ -28,7 +28,7 @@ import { useRouter } from 'vue-router'
 defineProps({
   icon: {
     type: String,
-    default: 'icon-mat-dashboard'
+    default: 'dashboard'
   },
   title: {
     type: String,

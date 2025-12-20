@@ -16,7 +16,7 @@
           <q-btn
             dense
             flat
-            icon="icon-mat-minimize"
+            icon="minimize"
             :disable="!maximizedToggle"
             @click="maximizedToggle = false"
           >
@@ -30,7 +30,7 @@
           <q-btn
             dense
             flat
-            icon="icon-mat-crop_square"
+            icon="crop_square"
             :disable="maximizedToggle"
             @click="maximizedToggle = true"
           >
@@ -45,7 +45,7 @@
             v-close-popup
             dense
             flat
-            icon="icon-mat-close"
+            icon="close"
             @click="emits('close')"
           >
             <q-tooltip class="bg-white text-primary">

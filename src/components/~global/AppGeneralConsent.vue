@@ -20,7 +20,7 @@
             v-close-popup
             dense
             flat
-            icon="icon-mat-close"
+            icon="close"
             @click="emits('close')"
           >
             <q-tooltip class="bg-white text-primary">
@@ -131,7 +131,7 @@
                         flat
                         round
                         color="red"
-                        icon="icon-mat-refresh"
+                        icon="refresh"
                         dense
                         @click="store.form.hubunganWali1=null"
                       />
@@ -177,7 +177,7 @@
                         flat
                         round
                         color="red"
-                        icon="icon-mat-refresh"
+                        icon="refresh"
                         dense
                         @click="store.form.hubunganWali2=null"
                       />
@@ -203,7 +203,7 @@
             <q-icon
               left
               size="sm"
-              name="icon-mat-menu_book"
+              name="menu_book"
             />
             <div>Informasi General Consent</div>
           </q-btn>

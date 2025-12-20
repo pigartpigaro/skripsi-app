@@ -61,6 +61,11 @@ const routes = [
         path: 'ruangan',
         name: 'master.ruangan',
         component: () => import('pages/master/ruangan/IndexPage.vue')
+      },
+      {
+        path: 'agama',
+        name: 'master.agama',
+        component: () => import('pages/master/agama/IndexPage.vue')
       }
     ]
   },

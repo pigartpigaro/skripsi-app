@@ -27,7 +27,7 @@
             "
           >
             <q-btn
-              icon="icon-mat-close"
+              icon="close"
               size="sm"
               color="negative"
               class="q-py-md"

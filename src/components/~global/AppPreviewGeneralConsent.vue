@@ -31,7 +31,7 @@
           <q-btn
             dense
             flat
-            icon="icon-mat-refresh"
+            icon="refresh"
             @click="refresh=true"
           >
             <q-tooltip
@@ -43,7 +43,7 @@
           <q-btn
             dense
             flat
-            icon="icon-mat-close"
+            icon="close"
             @click="emits('close')"
           >
             <q-tooltip

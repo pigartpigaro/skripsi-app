@@ -12,18 +12,18 @@
     :definitions="{
       fullpage: {
         tip: 'Layar Penuh',
-        icon: `${!style.componentfull?'icon-mat-fullscreen':'icon-mat-close_fullscreen'}`,
+        icon: `${!style.componentfull?'fullscreen':'close_fullscreen'}`,
         handler: pageFull
       },
       save: {
         tip: 'Simpan',
-        icon: 'icon-mat-save',
+        icon: 'save',
         label: 'Simpan',
         handler: Saved
       },
       image: {
         tip: 'Pilih Gambar',
-        icon: 'icon-mat-cloud_upload',
+        icon: 'cloud_upload',
         // label: 'Upload',
         handler: insertImage
       },
@@ -54,7 +54,7 @@
             @click="colorChange('backColor', highlight)"
           >
             <q-item-section side>
-              <q-icon name="icon-mat-highlight" />
+              <q-icon name="highlight" />
             </q-item-section>
             <q-item-section>
               <q-color
@@ -76,7 +76,7 @@
             @click="colorChange('foreColor', foreColor)"
           >
             <q-item-section side>
-              <q-icon name="icon-mat-format_paint" />
+              <q-icon name="format_paint" />
             </q-item-section>
             <q-item-section>
               <q-color

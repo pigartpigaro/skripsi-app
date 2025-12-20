@@ -25,7 +25,7 @@
 <script setup>
 const props = defineProps({
   text: { type: String, default: 'Sedang Dalam Perbaikan' },
-  icon: { type: String, default: 'icon-mat-construction' },
+  icon: { type: String, default: 'construction' },
   color: { type: String, default: 'orange' },
   withIcon: { type: Boolean, default: false }
 })

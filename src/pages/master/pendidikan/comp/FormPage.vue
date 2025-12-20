@@ -1,7 +1,7 @@
 <template>
   <q-form ref="formRef" @submit="simpan" class="q-gutter-sm q-pa-sm">
     <div>
-      <q-input v-model.number="store.form.nomenklatur" outlined dense label="Nama Pendidikan"
+      <q-input v-model.number="store.form.nama" outlined dense label="Nama Pendidikan"
         :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <!-- <div class="" style="">
@@ -41,39 +41,39 @@ import { onMounted, ref } from 'vue';
 const store = useMasterPendidikanStore()
 const formRef = ref(null)
 
-const options = ref([])
-const tahuns = ref([])
+// const options = ref([])
+// const tahuns = ref([])
 function simpan() {
   store.simpanData().then(() => {
     formRef.value.resetValidation()
   })
 }
-function init() {
-  const d = new Date()
-  store.form.tahun = d.getFullYear()
-  generateArrayOfYears()
-}
-function generateArrayOfYears() {
-  const current = new Date().getFullYear()
-  const years = []
+// function init() {
+//   const d = new Date()
+//   store.form.tahun = d.getFullYear()
+//   generateArrayOfYears()
+// }
+// function generateArrayOfYears() {
+//   const current = new Date().getFullYear()
+//   const years = []
 
-  for (let i = current + 2; i >= current - 1; i--) {
-    years.push(i)
-  }
+//   for (let i = current + 2; i >= current - 1; i--) {
+//     years.push(i)
+//   }
 
-  tahuns.value = years
-}
+//   tahuns.value = years
+// }
 
 onMounted(async () => {
-  init()
-  await store.getPegawai()
-  store.optionrekening = store.akuns   // ← WAJIB
+  // init()
+  // await store.getPegawai()
+  // store.optionrekening = store.akuns
 
-  options.value = store.akuns.map(a => ({
-    ...a,
-    label: `${a.kode} - ${a.nama}`,
-    value: a.kode
-  }))
+  // options.value = store.akuns.map(a => ({
+  //   ...a,
+  //   label: `${a.kode} - ${a.nama}`,
+  //   value: a.kode
+  // }))
 
   // store.optionrekening = []
   // await store.getRekening()

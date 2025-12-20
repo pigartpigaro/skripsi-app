@@ -13,7 +13,7 @@
           class="text-right"
           dense
           flat
-          icon="icon-mat-close"
+          icon="close"
         >
           <q-tooltip>Close</q-tooltip>
         </q-btn>
@@ -30,7 +30,7 @@
               <q-tooltip class="bg-primary" anchor="center right" self="center left" :offset="[5, 5]">
                 <strong class="">{{ menu.name }}</strong>
                 (
-                <q-icon name="icon-mat-keyboard_arrow_right" />)
+                <q-icon name="keyboard_arrow_right" />)
               </q-tooltip>
               <q-icon :name="menu.icon" size="25px" />
             </div>
@@ -39,7 +39,7 @@
                 <strong> {{ menu.name }}</strong>
               </div>
               <div class="col-2 text-right">
-                <q-icon name="icon-mat-chevron_right" size="25px" />
+                <q-icon name="chevron_right" size="25px" />
               </div>
             </div>
           </router-link> -->
@@ -66,7 +66,7 @@
                   >
                     <strong class="">{{ menu.name }}</strong>
                     (
-                    <q-icon name="icon-mat-keyboard_arrow_right" />)
+                    <q-icon name="keyboard_arrow_right" />)
                   </q-tooltip>
                   <q-icon
                     :name="menu.icon"
@@ -83,7 +83,7 @@
                   </div>
                   <div class="col-2 text-right">
                     <q-icon
-                      name="icon-mat-chevron_right"
+                      name="chevron_right"
                       size="25px"
                     />
                   </div>

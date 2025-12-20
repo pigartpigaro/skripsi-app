@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-btn-dropdown
-      :icon="item?item.icon:'icon-mat-menu'"
+      :icon="item?item.icon:'menu'"
       size="sm"
       elevated
       padding="xs"
@@ -48,7 +48,7 @@ defineProps({
   },
   icon: {
     type: String,
-    default: 'icon-mat-format_size'
+    default: 'format_size'
   },
   item: {
     type: Object,

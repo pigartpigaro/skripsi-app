@@ -1,7 +1,7 @@
 <template>
   <q-form ref="formRef" @submit="simpan" class="q-gutter-sm q-pa-sm">
     <div>
-      <q-input v-model.number="store.form.nomenklatur" outlined dense label="Nama Pendidikan"
+      <q-input v-model.number="store.form.nomenklatur" outlined dense label="Nama Cara Masuk"
         :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <!-- <div class="" style="">

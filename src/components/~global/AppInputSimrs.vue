@@ -45,7 +45,7 @@ const props = defineProps({
   },
   appendIcon: {
     type: String,
-    default: 'icon-mat-close'
+    default: 'close'
   },
   appendBtn: {
     type: Boolean,

@@ -32,7 +32,7 @@
       #append
     >
       <q-icon
-        name="icon-mat-cancel"
+        name="cancel"
         class="cursor-pointer"
         @click.stop.prevent="modelProp = null"
       />
