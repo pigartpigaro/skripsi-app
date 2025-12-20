@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { api } from "src/boot/axios";
 import { notifErrVue, notifSuccessVue } from "src/modules/utils";
 
-export const useMasterRuanganStore = defineStore('master-ruangan-store', {
+export const useMasterAsuransiStore = defineStore('master-asuransi-store', {
   state: () => ({
     items: [],
     meta: {},
@@ -31,8 +31,8 @@ export const useMasterRuanganStore = defineStore('master-ruangan-store', {
     async simpanData() {
       this.loadingSave = true
       try {
-        const resp = await api.post('v1/master/ruangan/simpan', this.form)
-        console.log('resp', resp.data)
+        const resp = await api.post('v1/master/asuransi/simpan', this.form)
+        console.log('resp', resp.data.data)
         if (resp.status === 200) {
           //this.items = resp?.data?.data
           if(this.form.id === '') this.items.unshift(resp?.data?.data)
@@ -53,7 +53,7 @@ export const useMasterRuanganStore = defineStore('master-ruangan-store', {
     async getData() {
       this.loading = true
       const params = { params: this.params }
-      const resp = await api.get('/v1/master/ruangan/get-list', params)
+      const resp = await api.get('/v1/master/asuransi/get-list', params)
       // console.log('resp Kegiatan BLUD', resp)
       if (resp.status === 200) {
         this.items = resp?.data?.data
@@ -74,7 +74,7 @@ export const useMasterRuanganStore = defineStore('master-ruangan-store', {
       this.loadingDelete = true
       const payload = { id }
       try {
-        const resp = await api.post('/v1/master/ruangan/delete', payload)
+        const resp = await api.post('/v1/master/asuransi/delete', payload)
         if (resp.status === 200) {
           // this.items = resp?.data?.data
           this.items = this.items.filter(item => item.id !== id)

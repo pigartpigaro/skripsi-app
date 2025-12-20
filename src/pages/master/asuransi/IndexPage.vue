@@ -22,9 +22,9 @@
                 store.getData()
               }" /> -->
             <q-input v-model="store.params.q" placeholder="Cari ..." dense outlined style="min-width:200px"
-              debounce="800" :loading="store.loading" @update:model-value="store.search" standout="bg-yellow-3">
+              debounce="800" :loading="store.loading" @update:model-value="store.search" standout="bg-yellow-3" clearable>
               <template #prepend>
-                <q-icon name="icon-mat-search" />
+                <q-icon name="search" />
               </template>
             </q-input>
           </div>
@@ -39,7 +39,7 @@
             </div>
             <div class="col-8 full-height bg-grey scroll q-pa-sm">
               <ListPage :listmaster="store.items" @edit="(val) => store.editForm(val)"
-                :loading="store.loadingDelete || store.loading" @delete="(val) => hapuskelasifikasi(val)" />
+                :loading="store.loadingDelete || store.loading" @delete="hapuskelasifikasi" :meta="store.meta" @go-to="store.goTo" />
             </div>
           </div>
         </div>
@@ -53,14 +53,14 @@ import { onMounted, ref } from 'vue';
 import FormPage from './comp/FormPage.vue';
 import ListPage from './comp/ListPage.vue';
 import { useQuasar } from 'quasar';
-import { usePekerjaanStore } from 'src/stores/master/pekerjaan';
-const store = usePekerjaanStore()
+import { useMasterAsuransiStore } from 'src/stores/master/asuransi/mainstore';
+const store = useMasterAsuransiStore()
 const $q = useQuasar()
 // const options = ref([])
 const tahuns = ref([])
 
-function hapuskelasifikasi(no) {
-  console.log('sasa', no)
+function hapuskelasifikasi(val) {
+  const id = val.id
   $q.dialog({
     dark: true,
     title: 'Peringatan',
@@ -68,7 +68,7 @@ function hapuskelasifikasi(no) {
     cancel: true,
     persistent: true
   }).onOk(() => {
-    store.deleteData(no)
+    store.deleteData(id)
   }).onCancel(() => {
   }).onDismiss(() => {
     // console.log('I am triggered on both OK and Cancel')
@@ -91,37 +91,8 @@ function generateArrayOfYears() {
 }
 
 onMounted(() => {
-  // store.getData()
+  store.getData()
   init()
 })
 
-// function filterFn(val, update) {
-//   if (val === '') {
-//     update(() => {
-//       options.value = store.items
-//       // console.log('opti', options.value)
-//     })
-//     return
-//   }
-//   update(() => {
-//     const needle = val.toLowerCase()
-//     const arr = options.value
-
-//     const filter = ['kode', 'nama']
-
-//     const multiFilter = (data = [], filterKeys = [], value = '') =>
-//       data.filter((item) => filterKeys.some(
-//         (key) =>
-//           item[key].toString().toLowerCase().includes(value.toLowerCase()) &&
-//           item[key]
-//       )
-//       )
-//     const filteredData = multiFilter(arr, filter, needle)
-//     console.log('filterdata', filteredData)
-//     options.value = filteredData
-//     // options.value = store.optionrekening.filter(
-//     //   (v) => v.uraian.toLowerCase().indexOf(needle) > -1 || v.kodeall3.toLowerCase().indexOf(needle) > -1
-//     // )
-//   })
-// }
 </script>

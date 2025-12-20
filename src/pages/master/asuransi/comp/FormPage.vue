@@ -1,7 +1,7 @@
 <template>
   <q-form ref="formRef" @submit="simpan" class="q-gutter-sm q-pa-sm">
     <div>
-      <q-input v-model="store.form.pekerjaan" outlined dense label="Pekerjaan"
+      <q-input v-model="store.form.nama" outlined dense label="Nama Asuransi"
         :disable="store.loadingSave" :loading="store.loadingSave" :rules="[
     val => !!val || 'Data tidak boleh kosong'
   ]"/>
@@ -14,18 +14,17 @@
 </template>
 <script setup>
 
-// import { api } from 'src/boot/axios';
-import { usePekerjaanStore } from 'src/stores/master/pekerjaan';
+import { useMasterAsuransiStore } from 'src/stores/master/asuransi/mainstore';
 import { onMounted } from 'vue';
 
-const store = usePekerjaanStore()
+const store = useMasterAsuransiStore()
 
 function simpan() {
   store.simpanData()
 }
 
 onMounted(async () => {
-  init()
+  store.init()
 })
 
 </script>
