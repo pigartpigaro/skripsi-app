@@ -17,7 +17,7 @@
 
 // import { api } from 'src/boot/axios';
 import { useMasterRuanganStore } from 'src/stores/master/ruangan/mainstore';
-import { onMounted } from 'vue';
+// import { onMounted } from 'vue';
 
 const store = useMasterRuanganStore()
 
@@ -25,8 +25,8 @@ function simpan() {
   store.simpanData()
 }
 
-onMounted(async () => {
-  init()
-})
+// onMounted(async () => {
+//   init()
+// })
 
 </script>

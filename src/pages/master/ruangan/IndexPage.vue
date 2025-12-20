@@ -16,11 +16,6 @@
             </div>
           </div>
           <div class="flex q-gutter-sm">
-            <!-- <q-select v-model="store.params.tahun" :disable="store.loading" :loading="store.loading" :options="tahuns"
-              outlined dense label="Tahun Anggaran" style="min-width:200px" @update:model-value="val => {
-                console.log('Tahun dipilih:', val)
-                store.getData()
-              }" /> -->
             <q-input v-model="store.params.q" placeholder="Cari ..." dense outlined style="min-width:200px"
               debounce="800" :loading="store.loading" @update:model-value="store.search" standout="bg-yellow-3">
               <template #prepend>
@@ -39,7 +34,7 @@
             </div>
             <div class="col-8 full-height bg-grey scroll q-pa-sm">
               <ListPage :listmaster="store.items" @edit="(val) => store.editForm(val)"
-                :loading="store.loadingDelete || store.loading" @delete="(val) => hapuskelasifikasi(val)" />
+                :loading="store.loadingDelete || store.loading" @delete="hapuskelasifikasi" />
             </div>
           </div>
         </div>
@@ -49,18 +44,17 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import FormPage from './comp/FormPage.vue';
 import ListPage from './comp/ListPage.vue';
 import { useQuasar } from 'quasar';
-import { usePekerjaanStore } from 'src/stores/master/pekerjaan';
-const store = usePekerjaanStore()
+import { useMasterRuanganStore } from 'src/stores/master/ruangan/mainstore';
+const store = useMasterRuanganStore()
 const $q = useQuasar()
-// const options = ref([])
-const tahuns = ref([])
 
-function hapuskelasifikasi(no) {
-  console.log('sasa', no)
+function hapuskelasifikasi(val) {
+  console.log('sasa', val)
+  const id = val.id
   $q.dialog({
     dark: true,
     title: 'Peringatan',
@@ -68,31 +62,16 @@ function hapuskelasifikasi(no) {
     cancel: true,
     persistent: true
   }).onOk(() => {
-    store.deleteData(no)
+    store.deleteData(id)
   }).onCancel(() => {
   }).onDismiss(() => {
     // console.log('I am triggered on both OK and Cancel')
   })
 }
-function init() {
-  const d = new Date()
-  store.params.tahun = d.getFullYear()
-  generateArrayOfYears()
-}
-function generateArrayOfYears() {
-  const current = new Date().getFullYear()
-  const years = []
-
-  for (let i = current + 2; i >= current - 1; i--) {
-    years.push(i)
-  }
-
-  tahuns.value = years
-}
 
 onMounted(() => {
-  // store.getData()
-  init()
+  store.getData()
+  store.init()
 })
 
 // function filterFn(val, update) {
