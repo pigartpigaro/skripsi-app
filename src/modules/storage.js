@@ -11,7 +11,7 @@ export const setHeaderToken = token => {
   })
 }
 export const setLocalToken = token => localStorage.setItem('token', JSON.stringify(token))
-export const getLocalToken = () => JSON.parse(localStorage.getItem('token'))
+export const getLocalToken = () => localStorage.getItem('token')
 
 export const setUser = user => {
   return new Promise((resolve, reject) => {

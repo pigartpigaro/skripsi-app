@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { api } from 'boot/axios'
 
+
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
@@ -13,25 +14,41 @@ export const useAuthStore = defineStore('auth', {
   },
 
   actions: {
-    async login (payload) {
+    async login(payload) {
       this.loading = true
       try {
-        const res = await api.post('/login', payload)
+        const res = await api.post('/v1/auth/login', payload)
 
-        this.token = res.data.token
-        this.user = res.data.user
+        if(res.status != 200){
+          throw new Error('Login failed')
+        }else{
+          this.token = res.data.token
+          this.user = res.data.user
 
-        localStorage.setItem('token', this.token)
+          localStorage.setItem('token', this.token)
+          api.defaults.headers.common.Authorization = `Bearer ${this.token}`
+        }
 
-        api.defaults.headers.common.Authorization = `Bearer ${this.token}`
 
-        return res
+        // const router = getRouter()
+        // if (router) router.push('/dashboard')
+
+        return true
       } catch (err) {
+        console.log('err login', err)
+        this.token = null
+        this.user = null
+        localStorage.removeItem('token')
+        delete api.defaults.headers.common.Authorization
+
         throw err.response?.data || err
+        // return false
       } finally {
         this.loading = false
       }
     },
+
+
 
     async register (payload) {
       this.loading = true
@@ -52,18 +69,37 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    async fetchUser () {
-      if (!this.token) return
+    // async register (payload) {
+    //   this.loading = true
+    //   try {
+    //     const res = await api.post('/register', payload)
 
-      api.defaults.headers.common.Authorization = `Bearer ${this.token}`
+    //     this.token = res.data.token
+    //     this.user = res.data.user
 
-      try {
-        const res = await api.get('/me')
-        this.user = res.data
-      } catch {
-        this.logout()
-      }
-    },
+    //     localStorage.setItem('token', this.token)
+    //     api.defaults.headers.common.Authorization = `Bearer ${this.token}`
+
+    //     return res
+    //   } catch (err) {
+    //     throw err.response?.data || err
+    //   } finally {
+    //     this.loading = false
+    //   }
+    // },
+
+    // async fetchUser () {
+    //   if (!this.token) return
+
+    //   api.defaults.headers.common.Authorization = `Bearer ${this.token}`
+
+    //   try {
+    //     const res = await api.get('/me')
+    //     this.user = res.data
+    //   } catch {
+    //     this.logout()
+    //   }
+    // },
 
     logout () {
       this.user = null

@@ -50,31 +50,30 @@ api.defaults.headers.common.Authorization = `Bearer ${getLocalToken()}`
 /* Response Interceptors */
 const interceptResErrors = (err) => {
   try {
-    // check for response code 123 and redirect to login
-    // err = Object.assign(new Error(), { message: err.response.data })
-    // console.log('1. interceptResErrors', err.response)
-    // if (!err.response) {
-    //   removeToken()
-    // }icon-fa-kit-medical-solid
-    console.log('axios', err)
-    if (err.response) notifErr(err.response)
-    else {
-      if (err.message.includes('413')) {
-        notifErr({ status: 413, message: 'The file is too large' })
+    if (err.response) {
+      // Kalau ada response dari server, tampilkan notif dari response-nya
+      notifErr(err.response)
+    } else {
+      // Kalau tidak ada response (network error, dll)
+      if (err.message && err.message.includes('413')) {
+        // Khusus kode 413 (Payload Too Large)
+        notifErr({ status: 413, data: { message: 'The file is too large' } })
       } else {
+        // Fallback notif kalau server tidak merespon
         notifErr({ data: { message: "The server didn't respond, possibly because the file was too large." } })
       }
     }
-    // notifErr(err)
   }
   catch (e) {
-    // check for response code 123 and redirect to login
-    // Will return err if something goes wrong
-    console.log('1. catch', e)
-    // notifErr(e)
+    // Kalau error lain yang tidak terduga di dalam try
+    console.log('interceptResErrors catch:', e)
+    // Kalau mau bisa tambahkan notif error juga di sini
   }
+
+  // Reject promise dengan error aslinya agar bisa di-catch di pemanggil
   return Promise.reject(err)
 }
+
 const interceptResponse = (res) => {
   try {
     // check for response code 123 and redirect to login

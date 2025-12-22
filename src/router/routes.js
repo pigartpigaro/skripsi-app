@@ -2,6 +2,9 @@ const routes = [
 
   {
     path: '/login',
+    meta: {
+      requiresAuth: false
+    },
     component: () => import('layouts/Auth/AuthLayout.vue'),
     children: [
       {
@@ -13,11 +16,18 @@ const routes = [
   },
 
   {
-    path: '/dashboard',
+    path: '/',
+    meta: {
+      requiresAuth: true
+    },
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
         path: '',
+        redirect: '/dashboard'
+      },
+      {
+        path: '/dashboard',
         name: 'dashboard',
         component: () => import('pages/DashboardPage.vue')
       }
@@ -25,6 +35,9 @@ const routes = [
   },
   {
     path: '/master',
+    meta: {
+      requiresAuth: true
+    },
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
@@ -70,10 +83,13 @@ const routes = [
     ]
   },
 
-  {
-    path: '/',
-    redirect: '/login'
-  },
+  // {
+  //   path: '/',
+  //   meta: {
+  //     requiresAuth: true
+  //   },
+  //   redirect: '/dashboard'
+  // },
 
   // Always leave this as last one,
   // but you can also remove it

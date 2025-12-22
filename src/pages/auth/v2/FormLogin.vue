@@ -7,7 +7,7 @@
     </div>
     <div class="q-my-md full-width">
       <q-form ref="myForm" class="q-pa-md" @submit="onSubmit">
-        <q-input v-model="form.email" color="white" label="Username" dark
+        <q-input v-model="formlogin.login" color="white" label="Username" dark
           :rules="[val => !!val || 'Harap diisi terlebih dahulu']" autocorrect="off" autocapitalize="off"
           autocomplete="chrome-off" spellcheck="false">
           <template #label>
@@ -18,7 +18,7 @@
             <q-icon name="person" />
           </template>
         </q-input>
-        <q-input v-model="form.password" color="white" label="Password" dark
+        <q-input v-model="formlogin.password" color="white" label="Password" dark
           :rules="[val => !!val || 'Harap diisi terlebih dahulu']" :type="isPasw ? 'password' : 'text'"
           autocorrect="off" autocapitalize="off" autocomplete="chrome-off" spellcheck="false">
           <template #label>
@@ -72,21 +72,48 @@ import { useRouter } from 'vue-router'
 const $q = useQuasar()
 const router = useRouter()
 const appVersion = ref(packageJson.version || '0.0.1')
-// const registers = ref(null)
 const isPasw = ref(true)
 const hoverred = ref(false)
 const myForm = ref(false)
-const form = ref({
-  email: '',
-  password: '',
-  device_name: $q.platform.is.name + '-' + $q.platform.is.platform
+const formlogin = ref({
+  login: '',
+  password: ''
 })
 
 const storeAuth = useAuthStore()
-// const router = useRouter()
-function onSubmit() {
-  router.replace('/dashboard')
+async function onSubmit () {
+  console.count('LOGIN SUBMIT')
+  try {
+    await storeAuth.login(formlogin.value)
+    // if (auth) {
+      // $q.notify({
+      //   type: 'positive',
+      //   message: 'Login berhasil'
+      // })
+      console.log('login berhasil')
+      router.push({ path: '/dashboard' })
+    // }
+    // else {
+    //   $q.notify({
+    //     type: 'negative',
+    //     message: 'Login gagal'
+    //   })
+    // }
+  } catch (err) {
+    if (err?.status === 422 || err?.errors) {
+      $q.notify({
+        type: 'negative',
+        message: 'Username atau password salah'
+      })
+    } else {
+      $q.notify({
+        type: 'negative',
+        message: err.message || 'Login gagal'
+      })
+    }
+  }
 }
+
 
 
 // function goToRegister() {

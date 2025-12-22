@@ -19,7 +19,7 @@ module.exports = configure(function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
-
+      'router-guard',
       'axios'
     ],
 
@@ -49,7 +49,7 @@ module.exports = configure(function (/* ctx */) {
         node: 'node20'
       },
 
-      vueRouterMode: 'history', // available values: 'hash', 'history'
+      vueRouterMode: 'history',
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
