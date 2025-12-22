@@ -171,6 +171,36 @@ const menus = [
         name: 'master.asuransi'
       }
     ]
+  },
+  {
+    id: 3,
+    title: 'Pendaftaran',
+    icon: 'person_add',
+    route: '/pendaftaran',
+    name: 'pendaftaran',
+    children: [
+      {
+        id: 1,
+        title: 'Pasien Baru',
+        route: '/pendaftaran/pasien-baru',
+        name: 'pendaftaran.pasien-baru'
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: 'Pelayanan',
+    icon: 'vaccines',
+    route: '/pelayanan',
+    name: 'pelayanan',
+    children: [
+      {
+        id: 1,
+        title: 'Anastesi',
+        route: '/pelayanan/anastesi',
+        name: 'pelayanan.anastesi'
+      }
+    ]
   }
 ]
 </script>

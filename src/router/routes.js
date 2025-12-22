@@ -82,6 +82,20 @@ const routes = [
       }
     ]
   },
+  {
+    path: '/pelayanan',
+    meta: {
+      requiresAuth: true
+    },
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: 'anastesi',
+        name: 'pelayanan.anastesi',
+        component: () => import('pages/pelayanan/anastesi/IndexPage.vue')
+      }
+    ]
+  },
 
   // {
   //   path: '/',
