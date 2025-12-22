@@ -11,7 +11,7 @@
       <q-item class="bg-primary text-white">
         <!-- <q-item-section style="max-width: 20px;">No.</q-item-section> -->
         <q-item-section>Kode</q-item-section>
-        <q-item-section>Pendidikan</q-item-section>
+        <q-item-section>Pekerjaan</q-item-section>
         <q-item-section side>
           #
         </q-item-section>
