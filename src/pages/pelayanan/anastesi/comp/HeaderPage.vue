@@ -5,7 +5,7 @@
         <q-input v-model="store.params.q" placeholder="Cari Arsip ..." dense outlined dark color="white"
           style="min-width:200px" debounce="800" :loading="store.loadingcari" @update:model-value="store.search" clearable>
           <template #prepend>
-            <q-icon name="icon-mat-search" />
+            <q-icon name="search" />
           </template>
         </q-input>
       </div>

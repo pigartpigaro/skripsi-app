@@ -8,6 +8,7 @@ export const useListPasienAnastesiStore = defineStore('list-pasien-anastesi-stor
     loadingcari: false,
     loadingSave: false,
     items: [],
+    meta: {},
     params: {
       q: '',
       tgldari: date.formatDate(Date.now(), 'YYYY-MM-DD'),
@@ -26,9 +27,21 @@ export const useListPasienAnastesiStore = defineStore('list-pasien-anastesi-stor
     //   this.params.q = val
 
     // },
-    // refresh () {
-    //   this.params.q = null
-    // },
+    refresh () {
+      this.getData()
+    },
+    async getData() {
+      this.loadingcari = true
+      const params = { params: this.params }
+      const resp = await api.get('/v1/transaksi/kunjungan/get-list', params)
+      // console.log('resp Data Store', resp)
+      if (resp.status === 200) {
+        this.items = resp?.data?.data
+        this.meta = resp?.data?.meta
+        this.loadingcari = false
+      }
+      this.loadingcari = false
+    },
     async simpanData() {
       this.loadingSave = true
       try {
