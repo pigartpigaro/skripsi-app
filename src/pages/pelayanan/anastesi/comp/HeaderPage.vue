@@ -1,55 +1,63 @@
-  <template>
-  <q-header elevated class="bg-white text-dark">
-    <q-toolbar class="q-px-md">
-
-      <!-- LEFT: Title / Logo -->
-      <q-toolbar-title class="text-weight-bold">
-        MyApp
-      </q-toolbar-title>
-
-      <!-- CENTER: Search -->
-      <q-input
-        dense
-        outlined
-        v-model="keyword"
-        placeholder="Cari data..."
-        class="q-mx-md search-input"
-        debounce="300"
-        clearable
-      >
-        <template #prepend>
-          <q-icon name="search" />
-        </template>
-      </q-input>
-
-      <!-- RIGHT: Actions -->
-      <q-btn flat round icon="notifications" />
-      <q-btn flat round icon="account_circle" />
-
-    </q-toolbar>
-  </q-header>
+<template>
+  <div class="row justify-between items-center q-pa-sm bg-primary text-white">
+    <div class="row items-center">
+      <div>
+        <q-input v-model="store.params.q" placeholder="Cari Arsip ..." dense outlined dark color="white"
+          style="min-width:200px" debounce="800" :loading="store.loadingcari" @update:model-value="store.search" clearable>
+          <template #prepend>
+            <q-icon name="icon-mat-search" />
+          </template>
+        </q-input>
+      </div>
+      <div class="q-ml-sm">
+        <app-input-date-human :model="store.tanggaldisplay.tgldari" label="Tgl Dari" color="white" dark dense outlined @db-model="setTo" @set-display="setToDisp"/>
+      </div>
+      <div class="q-ml-sm">
+        <app-input-date-human :model="store.tanggaldisplay.tglsampai" label="Tgl Dari" color="white" dark dense outlined @db-model="setTox" @set-display="setToDispx"/>
+      </div>
+    </div>
+    <div>
+      <q-btn class="q-ml-sm" unelevated color="white" flat size="sm" padding="xs" icon="refresh"
+        @click="store.refresh">
+        <q-tooltip class="primary" :offset="[10, 10]">
+          Refresh Data
+        </q-tooltip>
+      </q-btn>
+    </div>
+  </div>
 </template>
-
 <script setup>
-import { ref, watch } from 'vue'
+import { date } from 'quasar';
+import AppInputDateHuman from 'src/components/~global/AppInputDateHuman.vue';
+import {  notifErrVue } from 'src/modules/utils';
+import { useListPasienAnastesiStore } from 'src/stores/master/pelayanan/listpasienanastesi';
 
-const keyword = ref('')
+const store = useListPasienAnastesiStore()
 
-watch(keyword, (val) => {
-  console.log('Search:', val)
-  // emit ke parent / call API / filter list
-})
-</script>
-
-<style scoped>
-.search-input {
-  width: 320px;
-  max-width: 100%;
-}
-
-@media (max-width: 600px) {
-  .search-input {
-    width: 180px;
+function setTo(val) {
+  if(val > store.params.tglsampai) {
+    notifErrVue('Tanggal Dari tidak boleh lebih besar dari Tanggal Sampai')
+    store.tanggaldisplay.tgldari = date.formatDate(Date.now(), 'DD MMMM YYYY'),
+    store.params.tgldari = date.formatDate(Date.now(), 'YYYY-MM-DD')
+  }else{
+    store.params.tgldari = val
   }
 }
-</style>
+function setTox(val) {
+  if(val < store.params.tgldari) {
+    notifErrVue('Tanggal Sampai tidak boleh lebih kecil dari Tanggal Dari')
+    store.tanggaldisplay.tglsampai = date.formatDate(Date.now(), 'DD MMMM YYYY'),
+    store.params.tglsampai = date.formatDate(Date.now(), 'YYYY-MM-DD')
+  }else{
+    store.params.tglsampai = val
+  }
+}
+
+function setToDisp(val) {
+  store.tanggaldisplay.tgldari = val
+}
+function setToDispx(val) {
+  store.tanggaldisplay.tglsampai = val
+}
+
+</script>
