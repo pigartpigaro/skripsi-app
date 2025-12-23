@@ -28,7 +28,7 @@ export default route(function (/* { store, ssrContext } */) {
   })
 
   Router.beforeEach((to, from, next) => {
-    console.log(!to.matched.some(record => record.meta.requiresAuth), !localStorage.getItem('token'))
+    // console.log(!to.matched.some(record => record.meta.requiresAuth), !localStorage.getItem('token'))
     if (to.matched.some(record => record.meta.requiresAuth) && !localStorage.getItem('token')) {
       next({ path: '/login' })
     }

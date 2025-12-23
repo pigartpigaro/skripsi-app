@@ -35,21 +35,23 @@ import { useListPasienAnastesiStore } from 'src/stores/master/pelayanan/listpasi
 const store = useListPasienAnastesiStore()
 
 function setTo(val) {
-  if(val > store.params.tglsampai) {
+  if(val > store.params.from) {
     notifErrVue('Tanggal Dari tidak boleh lebih besar dari Tanggal Sampai')
     store.tanggaldisplay.tgldari = date.formatDate(Date.now(), 'DD MMMM YYYY'),
-    store.params.tgldari = date.formatDate(Date.now(), 'YYYY-MM-DD')
+    store.params.from = date.formatDate(Date.now(), 'YYYY-MM-DD')
   }else{
-    store.params.tgldari = val
+    store.params.from = val
+    store.getData()
   }
 }
 function setTox(val) {
-  if(val < store.params.tgldari) {
+  if(val < store.params.from) {
     notifErrVue('Tanggal Sampai tidak boleh lebih kecil dari Tanggal Dari')
     store.tanggaldisplay.tglsampai = date.formatDate(Date.now(), 'DD MMMM YYYY'),
-    store.params.tglsampai = date.formatDate(Date.now(), 'YYYY-MM-DD')
+    store.params.to = date.formatDate(Date.now(), 'YYYY-MM-DD')
   }else{
-    store.params.tglsampai = val
+    store.params.to = val
+    store.getData()
   }
 }
 

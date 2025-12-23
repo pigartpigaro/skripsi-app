@@ -11,8 +11,8 @@ export const useListPasienAnastesiStore = defineStore('list-pasien-anastesi-stor
     meta: {},
     params: {
       q: '',
-      tgldari: date.formatDate(Date.now(), 'YYYY-MM-DD'),
-      tglsampai: date.formatDate(Date.now(), 'YYYY-MM-DD'),
+      from: date.formatDate(Date.now(), 'YYYY-MM-DD'),
+      to: date.formatDate(Date.now(), 'YYYY-MM-DD'),
     },
     tanggaldisplay: {
       tgldari: date.formatDate(Date.now(), 'DD MMMM YYYY'),
