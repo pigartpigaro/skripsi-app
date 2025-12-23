@@ -148,24 +148,18 @@ const menus = [
       },
       {
         id: 6,
-        title: 'Penanggung Jawab',
-        route: '/master/penanggung-jawab',
-        name: 'master.penanggung-jawab'
-      },
-      {
-        id: 7,
         title: 'Pekerjaan',
         route: '/master/pekerjaan',
         name: 'master.pekerjaan'
       },
       {
-        id: 8,
+        id: 7,
         title: 'Cara Masuk',
         route: '/master/cara-masuk',
         name: 'master.cara-masuk'
       },
       {
-        id: 9,
+        id: 8,
         title: 'Asuransi',
         route: '/master/asuransi',
         name: 'master.asuransi'
