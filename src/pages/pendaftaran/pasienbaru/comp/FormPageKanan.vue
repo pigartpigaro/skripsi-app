@@ -11,7 +11,7 @@
       />
     </div>
     <div class="col-12 col-md-6">
-      <app-input-date-human v-model="store.displaytanggal.tanggal" label="Tanggal Lahir" outlined :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" @db-model="tglTransaksi" @set-display="displayTanggal" />
+      <app-input-date-human v-model="store.displaytanggal.tgl_lahir" label="Tanggal Lahir" outlined :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" @db-model="tglLahir" @set-display="displayTanggal" />
     </div>
     <div class="col-12 col-md-12 q-pt-md">
       <div class="text-subtitle2 q-mb-sm">
@@ -116,13 +116,13 @@ const store = useKunjunganPasienStore()
 const selectagama = useMasterAgamaStore()
 const selectpekerjaan = useMasterPekerjaanStore()
 const selectpendidikan = useMasterPendidikanStore()
-function tglTransaksi(val) {
+function tglLahir(val) {
   if (!val) return
 
   store.form.tgl_lahir = date.formatDate(val, 'YYYY-MM-DD')
 }
 function displayTanggal(val) {
-  store.displaytanggal.tanggal = val
+  store.displaytanggal.tgl_lahir = val
 }
 
 onMounted(async () => {

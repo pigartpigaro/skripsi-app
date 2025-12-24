@@ -109,7 +109,7 @@ export const useKunjunganPasienStore = defineStore('master-kunjungan-pasien-stor
       { label: 'Langsung', value: 'Langsung' }
     ],
     displaytanggal: {
-      tanggal: date.formatDate(Date.now(), 'DD MMMM YYYY'),
+      tgl_lahir: date.formatDate(Date.now(), 'DD MMMM YYYY'),
       mrs: date.formatDate(Date.now(), 'DD MMMM YYYY'),
       pengkajian: date.formatDate(Date.now(), 'DD MMMM YYYY'),
     },
@@ -242,6 +242,7 @@ export const useKunjunganPasienStore = defineStore('master-kunjungan-pasien-stor
         kabupaten: '',
         provinsi: '',
         negara: '',
+        tgl_lahir: date.formatDate(Date.now(), 'YYYY-MM-DD'),
       }
       this.formkunjungan = {
         tgl_mrs: date.formatDate(Date.now(), 'YYYY-MM-DD HH:mm:ss'),
@@ -258,7 +259,7 @@ export const useKunjunganPasienStore = defineStore('master-kunjungan-pasien-stor
       }
       this.formpendamping = {
         nama: '',
-        tgl_lahir: '',
+        tgl_lahir: date.formatDate(Date.now(), 'YYYY-MM-DD'),
         kelamin: '',
         tlp: '',
         agama: '',
