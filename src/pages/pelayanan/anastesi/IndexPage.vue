@@ -4,8 +4,8 @@
     <header-page />
   </div>
 
-  <div class="q-pa-sm">
-    <list-page :items="store.items" :loading="store.loadingcari"/>
+  <div class="q-pa-sm scroll" style="height: calc(100vh - 200px);">
+    <list-page :items="store.items" :loading="store.loadingcari" @rinci="opendialog($event)"/>
   </div>
   <div class="q-pa-sm absolute-bottom z-top">
       <footer-page :meta="store.meta" @go-to="goTo($event)"/>
@@ -20,6 +20,9 @@ import { onMounted } from 'vue';
 import { useListPasienAnastesiStore } from 'src/stores/master/pelayanan/listpasienanastesi';
 const store = useListPasienAnastesiStore()
 
+function opendialog(pasien) {
+  console.log('pasien', pasien)
+}
 onMounted(() => {
   store.getData()
   // store.init()

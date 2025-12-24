@@ -13,6 +13,8 @@ export const useListPasienAnastesiStore = defineStore('list-pasien-anastesi-stor
       q: '',
       from: date.formatDate(Date.now(), 'YYYY-MM-DD'),
       to: date.formatDate(Date.now(), 'YYYY-MM-DD'),
+      page: 1,
+      per_page: 10
     },
     tanggaldisplay: {
       tgldari: date.formatDate(Date.now(), 'DD MMMM YYYY'),
@@ -23,10 +25,10 @@ export const useListPasienAnastesiStore = defineStore('list-pasien-anastesi-stor
     }
   }),
   actions: {
-    // search (val) {
-    //   this.params.q = val
-
-    // },
+    search (val) {
+      this.params.q = val
+      this.getData()
+    },
     refresh () {
       this.getData()
     },

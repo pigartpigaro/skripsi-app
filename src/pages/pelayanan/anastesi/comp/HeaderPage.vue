@@ -2,7 +2,7 @@
   <div class="row justify-between items-center q-pa-sm bg-primary text-white">
     <div class="row items-center">
       <div>
-        <q-input v-model="store.params.q" placeholder="Cari Arsip ..." dense outlined dark color="white"
+        <q-input v-model="store.params.q" placeholder="Cari Pasien..." dense outlined dark color="white"
           style="min-width:200px" debounce="800" :loading="store.loadingcari" @update:model-value="store.search" clearable>
           <template #prepend>
             <q-icon name="search" />
