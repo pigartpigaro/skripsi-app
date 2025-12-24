@@ -237,23 +237,14 @@
 
 </template>
 <script setup>
-
-// import { api } from 'src/boot/axios';
 import { date } from 'quasar';
 import { api } from 'src/boot/axios';
 import { useKunjunganPasienStore } from 'src/stores/pendaftaran/pasienbaru/mainstore';
 import { onMounted, ref } from 'vue';
 
 const store = useKunjunganPasienStore()
-const formRef = ref(null)
 const options = ref([])
-const tipePasien = ref('lama')
-function simpan() {
-  console.log('store.form sebelum simpan:', store.form);
-  // store.simpanData().then(() => {
-  //   formRef.value.resetValidation()
-  // })
-}
+
 
 function updateModel(val) {
   const item = store.options.find(x => x.norm === val)
@@ -318,7 +309,7 @@ function tglPengkajian(val) {
 function displayPengkajian(val) {
   store.displaytanggal.pengkajian = val
 }
-async function filterFn(val, update, abort) {
+async function filterFn(val, update) {
   // isLoading.value = true // Aktifkan loading saat filter dimulai
 
   // Jika input kosong, kembalikan semua opsi
@@ -406,81 +397,9 @@ async function filterFn(val, update, abort) {
 }
 
 onMounted(async () => {
-  // init()
-  // await store.getPegawai()
-  // store.optionrekening = store.akuns
-
-  // options.value = store.akuns.map(a => ({
-  //   ...a,
-  //   label: `${a.kode} - ${a.nama}`,
-  //   value: a.kode
-  // }))
-
-  // store.optionrekening = []
-  // await store.getRekening()
-  // options.value = store.akuns
 
 })
 
-// async function filterFn(val, update) {
-//   if (!val) {
-//     update(() => {
-//       options.value = store.akuns.map(a => ({
-//         ...a,
-//         label: `${a.kode} - ${a.nama}`,
-//         value: a.kode
-//       }))
-//     })
-//     return
-//   }
-
-//   if (val.length < 2) {
-//     update(() => {
-//       options.value = []
-//     })
-//     return
-//   }
-
-//   let allData = []
-//   let page = 1
-//   let hasMore = true
-
-//   while (hasMore) {
-//     try {
-//       const resp = await api.get('v1/master/siasik/kegiatanblud/getbidang', {
-//         params: {
-//           q: val,
-//           per_page: 100,
-//           page: page
-//         }
-//       })
-
-//       const data = resp.data.data || []
-
-//       if (data.length > 0) {
-//         allData = [...allData, ...data]
-//         hasMore = resp.data.next_page_url !== null
-//         page++
-//       } else {
-//         hasMore = false
-//       }
-
-//     } catch (e) {
-//       console.error('Error load page:', e)
-//       hasMore = false
-//     }
-//   }
-
-//   update(() => {
-//     options.value = allData.map(a => ({
-//       ...a,
-//       label: `${a.kode} - ${a.nama}`,
-//       value: a.kode
-//     }))
-
-//     store.optionrekening = allData
-//   })
-// }
 
 </script>
 <style lang="scss">
