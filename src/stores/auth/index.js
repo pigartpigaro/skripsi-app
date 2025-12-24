@@ -48,6 +48,15 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
+    async getprofil() {
+      try {
+        const res = await api.post('/v1/auth/profile')
+        this.user = res.data
+        localStorage.setItem('user', JSON.stringify(this.user))
+      } catch (err) {
+        throw err.response?.data || err
+      }
+    },
 
 
     async register (payload) {

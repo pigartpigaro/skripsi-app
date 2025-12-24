@@ -7,6 +7,8 @@ export const useListPasienAnastesiStore = defineStore('list-pasien-anastesi-stor
   state: () => ({
     loadingcari: false,
     loadingSave: false,
+    dialogPelayanan: false,
+    pasien: {},
     items: [],
     meta: {},
     params: {

@@ -29,8 +29,7 @@
             <q-icon name="key" />
           </template>
           <template #append>
-            <q-icon :name="isPasw ? 'visibility_off' : 'visibility'" class="cursor-pointer"
-              @click="isPasw = !isPasw" />
+            <q-icon :name="isPasw ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPasw = !isPasw" />
           </template>
         </q-input>
         <div class="row justify-between q-mt-lg">
@@ -81,24 +80,12 @@ const formlogin = ref({
 })
 
 const storeAuth = useAuthStore()
-async function onSubmit () {
+async function onSubmit() {
   console.count('LOGIN SUBMIT')
   try {
     await storeAuth.login(formlogin.value)
-    // if (auth) {
-      // $q.notify({
-      //   type: 'positive',
-      //   message: 'Login berhasil'
-      // })
-      console.log('login berhasil')
-      router.push({ path: '/dashboard' })
-    // }
-    // else {
-    //   $q.notify({
-    //     type: 'negative',
-    //     message: 'Login gagal'
-    //   })
-    // }
+    router.push({ path: '/dashboard' })
+    storeAuth.getprofil()
   } catch (err) {
     if (err?.status === 422 || err?.errors) {
       $q.notify({
@@ -120,7 +107,7 @@ async function onSubmit () {
 //   router.push({ name: 'login-mode', params: { mode: 'register' }, replace: true })
 
 // }
-function goToRegister () {
+function goToRegister() {
   router.replace({
     name: 'login',
     query: { mode: 'register' }

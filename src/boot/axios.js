@@ -23,6 +23,7 @@ import { notifErr } from 'src/modules/utils'
 // Jadi jika ingin merubah API untuk development? ... harap di quasar.config.js dibagian build
 // const SERV = process.env.API
 const SERV = import.meta.env.VITE_API_URL
+console.log('SERV', SERV)
 
 // const WSHOST = '192.168.150.111'
 // const WSHOST = '192.168.101.80'
