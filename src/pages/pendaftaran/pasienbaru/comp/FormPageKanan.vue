@@ -11,7 +11,7 @@
       />
     </div>
     <div class="col-12 col-md-6">
-      <app-input-date-human v-model="store.displaytanggal.tanggal" label="Tanggal Lahir" outlined :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" @db-model="tglTransaksi" @set-display="displayTanggal" />
+      <app-input-date-human v-model="store.displaytanggal.tgl_lahir" label="Tanggal Lahir" outlined :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" @db-model="tglLahir" @set-display="displayTanggal" />
     </div>
     <div class="col-12 col-md-12 q-pt-md">
       <div class="text-subtitle2 q-mb-sm">
@@ -45,15 +45,15 @@
 
       <div class="q-pl-md row q-col-gutter-md">
         <div
-          v-for="opt in store.agamaOptions"
-          :key="opt?.value"
+          v-for="opt in selectagama.items"
+          :key="opt?.kode"
           class="col-12 col-md-3"
         >
           <q-radio
             class="text-caption"
             v-model="store.formpendamping.agama"
-            :val="opt?.value"
-            :label="opt?.label"
+            :val="opt?.nama"
+            :label="opt?.nama"
             dense
           />
         </div>
@@ -66,24 +66,24 @@
 
       <div class="q-pl-md row q-col-gutter-md">
         <div
-          v-for="opt in store.pendidikanOptions"
-          :key="opt?.value"
+          v-for="opt in selectpendidikan.items"
+          :key="opt?.kode"
           class="col-12 col-md-3"
         >
           <q-radio
             class="text-caption"
             v-model="store.formpendamping.pendidikan"
-            :val="opt?.value"
-            :label="opt?.label"
+            :val="opt?.nama"
+            :label="opt?.nama"
             dense
           />
         </div>
       </div>
     </div>
     <div class="col-12 col-md-12 q-pt-md">
-      <app-autocomplete label="Pekerjaan" v-model="store.formpendamping.pekerjaan" autocomplete="value"
-      option-value="value" option-label="label" outlined :disable="store.disabled"
-      :source="store.pekerjaanOptions" @update:model-value="(val) => console.log('val pekerjaan',val)" />
+      <app-autocomplete label="Pekerjaan" v-model="store.formpendamping.pekerjaan" autocomplete="nama"
+      option-value="nama" option-label="nama" outlined :disable="store.disabled"
+      :source="selectpekerjaan.items" @update:model-value="(val) => console.log('val pekerjaan',val)" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
       <q-input v-model="store.formpendamping.suku" outlined dense label="Suku"
@@ -106,22 +106,29 @@
 
 // import { api } from 'src/boot/axios';
 import { date } from 'quasar';
+import { useMasterAgamaStore } from 'src/stores/master/agama/mainstore';
+import { useMasterPekerjaanStore } from 'src/stores/master/pekerjaan/mainstore';
+import { useMasterPendidikanStore } from 'src/stores/master/pendidikan/mainstore';
 import { useKunjunganPasienStore } from 'src/stores/pendaftaran/pasienbaru/mainstore';
 import { onMounted } from 'vue';
 
 const store = useKunjunganPasienStore()
-
-function tglTransaksi(val) {
+const selectagama = useMasterAgamaStore()
+const selectpekerjaan = useMasterPekerjaanStore()
+const selectpendidikan = useMasterPendidikanStore()
+function tglLahir(val) {
   if (!val) return
 
   store.form.tgl_lahir = date.formatDate(val, 'YYYY-MM-DD')
 }
 function displayTanggal(val) {
-  store.displaytanggal.tanggal = val
+  store.displaytanggal.tgl_lahir = val
 }
 
 onMounted(async () => {
-
+  await selectagama.getData()
+  await selectpekerjaan.getData()
+  await selectpendidikan.getData()
 
 })
 </script>

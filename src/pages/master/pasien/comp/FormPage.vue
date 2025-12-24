@@ -20,23 +20,23 @@
         v-model="store.form.kelamin" :val="item?.value" dense size="sm" :disable="store.disabled" />
     </div>
     <div>
-      <app-autocomplete label="Agama" v-model="store.form.agama" autocomplete="value"
-        option-value="value" option-label="label" outlined :disable="store.disabled"
-        :source="store.agamaOptions" @update:model-value="(val) => console.log('val agama',val)" />
+      <app-autocomplete label="Agama" v-model="store.form.agama" autocomplete="nama"
+        option-value="nama" option-label="nama" outlined :disable="store.disabled"
+        :source="selectagama.items" @update:model-value="(val) => console.log('val agama',val)" />
     </div>
     <div>
       <q-input v-model="store.form.suku" outlined dense label="Suku"
         :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <div>
-      <app-autocomplete label="Pendidikan" v-model="store.form.pendidikan" autocomplete="value"
-        option-value="value" option-label="label" outlined :disable="store.disabled"
-        :source="store.pendidikanOptions" @update:model-value="(val) => console.log('val pendidikan',val)" />
+      <app-autocomplete label="Pendidikan" v-model="store.form.pendidikan" autocomplete="nama"
+        option-value="nama" option-label="nama" outlined :disable="store.disabled"
+        :source="selectpendidikan.items" @update:model-value="(val) => console.log('val pendidikan',val)" />
     </div>
     <div>
-      <app-autocomplete label="Pekerjaan" v-model="store.form.pekerjaan" autocomplete="value"
-        option-value="value" option-label="label" outlined :disable="store.disabled"
-        :source="store.pekerjaanOptions" @update:model-value="(val) => console.log('val pekerjaan',val)" />
+      <app-autocomplete label="Pekerjaan" v-model="store.form.pekerjaan" autocomplete="nama"
+        option-value="nama" option-label="nama" outlined :disable="store.disabled"
+        :source="selectpekerjaan.items" @update:model-value="(val) => console.log('val pekerjaan',val)" />
     </div>
     <div>
       <app-autocomplete label="Status Perkawinan" v-model="store.form.status_perkawinan" autocomplete="value"
@@ -91,10 +91,16 @@
 
 // import { api } from 'src/boot/axios';
 import { date } from 'quasar';
+import { useMasterAgamaStore } from 'src/stores/master/agama/mainstore';
 import { useMasterPasienStore } from 'src/stores/master/pasien/mainstore';
+import { useMasterPekerjaanStore } from 'src/stores/master/pekerjaan/mainstore';
+import { useMasterPendidikanStore } from 'src/stores/master/pendidikan/mainstore';
 import { onMounted, ref } from 'vue';
 
 const store = useMasterPasienStore()
+const selectagama = useMasterAgamaStore()
+const selectpekerjaan = useMasterPekerjaanStore()
+const selectpendidikan = useMasterPendidikanStore()
 const formRef = ref(null)
 const reftanggal = ref(null)
 function simpan() {
@@ -114,29 +120,10 @@ function displayTanggal(val) {
 }
 
 
-onMounted(() => {
-  // if (store.form.tgl_lahir) {
-  //   console.log('store.form.tgl_lahir', store.form.tgl_lahir)
-  //   // set display dari iso
-  //   store.displaytanggal.tanggal = date.formatDate(
-  //     store.form.tgl_lahir,
-  //     'DD MMMM YYYY'
-  //   )
-  //   console.log('store.displaytanggal.tanggal', store.displaytanggal.tanggal)
-  // }
-  // init()
-  // await store.getPegawai()
-  // store.optionrekening = store.akuns
-
-  // options.value = store.akuns.map(a => ({
-  //   ...a,
-  //   label: `${a.kode} - ${a.nama}`,
-  //   value: a.kode
-  // }))
-
-  // store.optionrekening = []
-  // await store.getRekening()
-  // options.value = store.akuns
+onMounted(async () => {
+  await selectagama.getData()
+  await selectpekerjaan.getData()
+  await selectpendidikan.getData()
 
 })
 

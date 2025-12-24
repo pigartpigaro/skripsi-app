@@ -182,6 +182,7 @@ export const useMasterPasienStore = defineStore('master-pasien-store', {
         kabupaten: '',
         provinsi: '',
         negara: '',
+        tgl_lahir: date.formatDate(Date.now(), 'YYYY-MM-DD'),
       }
     }
   }

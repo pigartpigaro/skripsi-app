@@ -38,6 +38,7 @@
     <div class="col-12 col-md-12">
       <q-input
         v-model="store.form.nama"
+        :readonly="store.tipePasien === 'lama'"
         outlined
         dense
         label="Nama Pasien"
@@ -51,24 +52,25 @@
         v-model="store.form.norm"
         outlined
         dense
-        label="Nomor Rekam Medis"
+        label="Nomor Rekam Medis (Auto)"
         :disable="store.loadingSave"
         :loading="store.loadingSave"
       />
     </div>
     <div class="col-12 col-md-12">
-      <q-input
-        v-model="store.form.nik"
-        outlined
-        dense
-        label="Nomor Induk Kependudukan"
-        :disable="store.loadingSave"
-        :loading="store.loadingSave"
-      />
+      <q-input v-model="store.form.nik" :readonly="store.tipePasien === 'lama'" outlined dense label="Identitas Kependudukan (KTP)"
+        :disable="store.loadingSave" :loading="store.loadingSave" inputmode="numeric" :rules="[
+        val => !!val || 'Harap diisi',
+        val => /^\d+$/.test(val) || 'Hanya angka',
+      ]" />
     </div>
     <!-- <div class="row q-col-gutter-sm"> -->
     <div class="col-12 col-md-6">
-      <app-input-date-human v-model="store.displaytanggal.tanggal" label="Tanggal Lahir" outlined :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" @db-model="tglTransaksi" @set-display="displayTanggal" />
+      <app-input-date-human v-model="store.displaytanggal.tgl_lahir"
+      label="Tanggal Lahir" outlined
+      :rules="[val => !!val || 'Harap Diisi terlebih dahulu']"
+      :disable="store.tipePasien === 'lama'"
+      @db-model="tglLahir" @set-display="displayTanggal" />
     </div>
     <div class="col-12 col-md-6">
       <q-input
@@ -76,6 +78,7 @@
         outlined
         dense
         label="Umur"
+        :readonly="store.tipePasien === 'lama'"
         :disable="store.loadingSave"
         :loading="store.loadingSave"
       />
@@ -96,6 +99,7 @@
             v-model="store.form.kelamin"
             :val="opt?.value"
             :label="opt?.label"
+            :disable="store.tipePasien === 'lama'"
             dense
           />
         </div>
@@ -108,61 +112,68 @@
 
       <div class="q-pl-md row q-col-gutter-md">
         <div
-          v-for="opt in store.pendidikanOptions"
-          :key="opt?.value"
+          v-for="opt in selectpendidikan.items"
+          :key="opt?.kode"
           class="col-12 col-md-3"
         >
           <q-radio
             class="text-caption"
             v-model="store.form.pendidikan"
-            :val="opt?.value"
-            :label="opt?.label"
+            :val="opt?.nama"
+            :label="opt?.nama"
+            :disable="store.tipePasien === 'lama'"
             dense
           />
         </div>
       </div>
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <app-autocomplete label="Agama" v-model="store.form.agama" autocomplete="value"
-      option-value="value" option-label="label" outlined :disable="store.disabled"
-      :source="store.agamaOptions" @update:model-value="(val) => console.log('val agama',val)" />
+      <app-autocomplete label="Agama" v-model="store.form.agama" autocomplete="nama"
+      option-value="nama" option-label="nama" outlined :disable="store.disabled"
+      :readonly="store.tipePasien === 'lama'"
+      :source="selectagama.items" @update:model-value="(val) => console.log('val agama',val)" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
       <q-input v-model="store.form.suku" outlined dense label="Suku"
-      :disable="store.loadingSave" :loading="store.loadingSave" />
+      :disable="store.loadingSave" :loading="store.loadingSave"
+      :readonly="store.tipePasien === 'lama'" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <app-autocomplete label="Pekerjaan" v-model="store.form.pekerjaan" autocomplete="value"
-      option-value="value" option-label="label" outlined :disable="store.disabled"
-      :source="store.pekerjaanOptions" @update:model-value="(val) => console.log('val pekerjaan',val)" />
+      <app-autocomplete label="Pekerjaan" v-model="store.form.pekerjaan" autocomplete="nama"
+      option-value="nama" option-label="nama" outlined :disable="store.disabled"
+      :readonly="store.tipePasien === 'lama'"
+      :source="selectpekerjaan.items" @update:model-value="(val) => console.log('val pekerjaan',val)" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
       <app-autocomplete label="Status Perkawinan" v-model="store.form.status_perkawinan" autocomplete="value"
       option-value="value" option-label="label" outlined :disable="store.disabled"
+      :readonly="store.tipePasien === 'lama'"
       :source="store.statusPerkawinanOptions" @update:model-value="(val) => console.log('val status_perkawinan',val)" />
     </div>
     <div class="col-12 col-md-12 q-pt-md">
       <q-input v-model="store.form.tlp" outlined dense label="Telepon" type="text" inputmode="numeric" mask="####-####-####"
+      :readonly="store.tipePasien === 'lama'"
       :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
       <app-input-date-human v-model="store.displaytanggal.mrs" label="Tanggal MRS" outlined :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" @db-model="tglMrs" @set-display="displayMrs" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <app-input-date-human :model="store.displaytanggal.pengkajian" label="Tanggal Pengkajian" outlined :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" @db-model="tglPengkajian" @set-display="displayPengkajian" />
+      <app-input-date-human v-model="store.displaytanggal.pengkajian" label="Tanggal Pengkajian" outlined :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" @db-model="tglPengkajian" @set-display="displayPengkajian" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
       <q-input v-model="store.form.nama_asuransi" outlined dense label="Nama Asuransi"
-        :disable="store.loadingSave" :loading="store.loadingSave" />
+        :disable="store.loadingSave" :loading="store.loadingSave" :readonly="store.tipePasien === 'lama'" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
       <q-input v-model="store.form.nomor_asuransi" outlined dense label="Nomor Asuransi"
-        :disable="store.loadingSave" :loading="store.loadingSave" />
+        :disable="store.loadingSave" :loading="store.loadingSave" :readonly="store.tipePasien === 'lama'"/>
     </div>
     <div class="col-12 col-md-12 q-pt-md">
       <q-input v-model="store.form.alamat" type="textarea"
         rows="3" outlined dense label="Alamat Tempat Tinggal"
-        :disable="store.loadingSave" :loading="store.loadingSave" />
+        :disable="store.loadingSave" :loading="store.loadingSave"
+        :readonly="store.tipePasien === 'lama'" />
     </div>
     <div class="col-12 col-md-12 q-pt-md">
       <q-input v-model="store.formkunjungan.diagnosa" type="textarea"
@@ -189,15 +200,15 @@
 
       <div class="q-pl-md row q-col-gutter-md">
         <div
-          v-for="opt in store.caramasukOptions"
-          :key="opt?.value"
+          v-for="opt in selectcaramasuk.items"
+          :key="opt?.kode"
           class="col-12 col-md-3"
         >
           <q-radio
             class="text-caption"
             v-model="store.formkunjungan.cara_masuk"
-            :val="opt?.value"
-            :label="opt?.label"
+            :val="opt?.nama"
+            :label="opt?.nama"
             dense
           />
         </div>
@@ -239,18 +250,39 @@
 <script setup>
 import { date } from 'quasar';
 import { api } from 'src/boot/axios';
+import { useMasterAgamaStore } from 'src/stores/master/agama/mainstore';
+import { useMasterCaraMasukStore } from 'src/stores/master/caramasuk/mainstore';
+import { useMasterPekerjaanStore } from 'src/stores/master/pekerjaan/mainstore';
+import { useMasterPendidikanStore } from 'src/stores/master/pendidikan/mainstore';
 import { useKunjunganPasienStore } from 'src/stores/pendaftaran/pasienbaru/mainstore';
 import { onMounted, ref } from 'vue';
 
 const store = useKunjunganPasienStore()
+const selectagama = useMasterAgamaStore()
+const selectpekerjaan = useMasterPekerjaanStore()
+const selectpendidikan = useMasterPendidikanStore()
+const selectcaramasuk = useMasterCaraMasukStore()
 const options = ref([])
 
+function hitungUmur(tglLahir) {
+  const today = new Date()
+  const birthDate = new Date(tglLahir)
+
+  let umur = today.getFullYear() - birthDate.getFullYear()
+  const bulan = today.getMonth() - birthDate.getMonth()
+
+  if (bulan < 0 || (bulan === 0 && today.getDate() < birthDate.getDate())) {
+    umur--
+  }
+
+  return umur
+}
 
 function updateModel(val) {
   const item = store.options.find(x => x.norm === val)
+  console.log('item ditemukan:', item)
   store.form.norm = val
   store.norm = val
-  store.form.tgl_lahir = item ? item.tgl_lahir : ''
   store.form.nama = item ? item.nama : ''
   store.form.alamat = item ? item.alamat : ''
   store.form.nik = item ? item.nik : ''
@@ -258,19 +290,35 @@ function updateModel(val) {
   store.form.agama = item ? item.agama : ''
   store.form.pendidikan = item ? item.pendidikan : ''
   store.form.pekerjaan = item ? item.pekerjaan : ''
-  store.form.umur = item ? item.umur : ''
   store.form.suku = item ? item.suku : ''
   store.form.status_perkawinan = item ? item.status_perkawinan : ''
   store.form.tlp = item ? item.tlp : ''
   store.form.nama_asuransi = item ? item.nama_asuransi : ''
   store.form.nomor_asuransi = item ? item.nomor_asuransi : ''
+  if (item?.tgl_lahir) {
+    // simpan ke DB format
+    store.form.tgl_lahir = item.tgl_lahir
+
+    // ubah ke format display (Indonesia)
+    store.displaytanggal.tgl_lahir = date.formatDate(
+      new Date(item.tgl_lahir),
+      'DD MMMM YYYY'
+    )
+
+    // hitung umur
+    store.form.umur = hitungUmur(item.tgl_lahir)
+  } else {
+    store.form.tgl_lahir = ''
+    store.displaytanggal.tgl_lahir = ''
+    store.form.umur = ''
+  }
 }
 const clearSearch = () => {
   store.form = {
     ...store.form,
     nama: '',
     norm: '',
-    tgl_lahir: '',
+    tgl_lahir: date.formatDate(Date.now(), 'YYYY-MM-DD'),
     alamat: '',
     nik: '',
     kelamin: '',
@@ -283,20 +331,21 @@ const clearSearch = () => {
     nama_asuransi: '',
     nomor_asuransi: ''
   }
+  store.displaytanggal.tgl_lahir = date.formatDate(Date.now(), 'DD MMMM YYYY')
   options.value = []
 }
-function tglTransaksi(val) {
+function tglLahir(val) {
   if (!val) return
-
-  store.form.tgl_lahir = date.formatDate(val, 'YYYY-MM-DD')
+  const dates = new Date(val)
+  store.form.tgl_lahir = date.formatDate(dates, 'YYYY-MM-DD')
 }
 function displayTanggal(val) {
-  store.displaytanggal.tanggal = val
+  store.displaytanggal.tgl_lahir = val
 }
 function tglMrs(val) {
   if (!val) return
-
-  store.formkunjungan.tgl_mrs = date.formatDate(val, 'YYYY-MM-DD')
+  const dates = new Date(val)
+  store.formkunjungan.tgl_mrs = date.formatDate(dates, 'YYYY-MM-DD HH:mm:ss')
 }
 function displayMrs(val) {
   store.displaytanggal.mrs = val
@@ -397,7 +446,10 @@ async function filterFn(val, update) {
 }
 
 onMounted(async () => {
-
+  await selectagama.getData()
+  await selectpekerjaan.getData()
+  await selectpendidikan.getData()
+  await selectcaramasuk.getData()
 })
 
 
