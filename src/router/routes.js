@@ -83,6 +83,20 @@ const routes = [
     ]
   },
   {
+    path: '/pendaftaran',
+    meta: {
+      requiresAuth: true
+    },
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: 'pasienbaru',
+        name: 'pendaftaran.pasienbaru',
+        component: () => import('pages/pendaftaran/pasienbaru/IndexPage.vue')
+      }
+    ]
+  },
+  {
     path: '/pelayanan',
     meta: {
       requiresAuth: true
@@ -96,6 +110,7 @@ const routes = [
       }
     ]
   },
+
 
   // {
   //   path: '/',

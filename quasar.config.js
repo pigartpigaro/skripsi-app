@@ -20,7 +20,8 @@ module.exports = configure(function (/* ctx */) {
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
       'router-guard',
-      'axios'
+      'axios',
+      'global-components', 'editor-componens', 'other-components', 'static-components',
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -88,7 +89,7 @@ module.exports = configure(function (/* ctx */) {
       config: {},
 
       iconSet: 'material-icons', // Quasar icon set
-      // lang: 'en-US', // Quasar language pack
+      lang: 'id', // Quasar language pack
 
       // For special cases outside of where the auto-import strategy can have an impact
       // (like functional components as one of the examples),

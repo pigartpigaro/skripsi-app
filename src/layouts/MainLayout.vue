@@ -176,8 +176,8 @@ const menus = [
       {
         id: 1,
         title: 'Pasien Baru',
-        route: '/pendaftaran/pasien-baru',
-        name: 'pendaftaran.pasien-baru'
+        route: '/pendaftaran/pasienbaru',
+        name: 'pendaftaran.pasienbaru'
       }
     ]
   },
@@ -195,7 +195,8 @@ const menus = [
         name: 'pelayanan.anastesi'
       }
     ]
-  }
+  },
+
 ]
 </script>
 <style scoped>
