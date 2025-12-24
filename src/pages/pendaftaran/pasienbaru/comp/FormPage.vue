@@ -108,33 +108,33 @@
 
       <div class="q-pl-md row q-col-gutter-md">
         <div
-          v-for="opt in store.pendidikanOptions"
-          :key="opt?.value"
+          v-for="opt in selectpendidikan.items"
+          :key="opt?.kode"
           class="col-12 col-md-3"
         >
           <q-radio
             class="text-caption"
             v-model="store.form.pendidikan"
-            :val="opt?.value"
-            :label="opt?.label"
+            :val="opt?.nama"
+            :label="opt?.nama"
             dense
           />
         </div>
       </div>
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <app-autocomplete label="Agama" v-model="store.form.agama" autocomplete="value"
-      option-value="value" option-label="label" outlined :disable="store.disabled"
-      :source="store.agamaOptions" @update:model-value="(val) => console.log('val agama',val)" />
+      <app-autocomplete label="Agama" v-model="store.form.agama" autocomplete="nama"
+      option-value="nama" option-label="nama" outlined :disable="store.disabled"
+      :source="selectagama.items" @update:model-value="(val) => console.log('val agama',val)" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
       <q-input v-model="store.form.suku" outlined dense label="Suku"
       :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <app-autocomplete label="Pekerjaan" v-model="store.form.pekerjaan" autocomplete="value"
-      option-value="value" option-label="label" outlined :disable="store.disabled"
-      :source="store.pekerjaanOptions" @update:model-value="(val) => console.log('val pekerjaan',val)" />
+      <app-autocomplete label="Pekerjaan" v-model="store.form.pekerjaan" autocomplete="nama"
+      option-value="nama" option-label="nama" outlined :disable="store.disabled"
+      :source="selectpekerjaan.items" @update:model-value="(val) => console.log('val pekerjaan',val)" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
       <app-autocomplete label="Status Perkawinan" v-model="store.form.status_perkawinan" autocomplete="value"
@@ -189,15 +189,15 @@
 
       <div class="q-pl-md row q-col-gutter-md">
         <div
-          v-for="opt in store.caramasukOptions"
-          :key="opt?.value"
+          v-for="opt in selectcaramasuk.items"
+          :key="opt?.kode"
           class="col-12 col-md-3"
         >
           <q-radio
             class="text-caption"
             v-model="store.formkunjungan.cara_masuk"
-            :val="opt?.value"
-            :label="opt?.label"
+            :val="opt?.nama"
+            :label="opt?.nama"
             dense
           />
         </div>
@@ -239,10 +239,18 @@
 <script setup>
 import { date } from 'quasar';
 import { api } from 'src/boot/axios';
+import { useMasterAgamaStore } from 'src/stores/master/agama/mainstore';
+import { useMasterCaraMasukStore } from 'src/stores/master/caramasuk/mainstore';
+import { useMasterPekerjaanStore } from 'src/stores/master/pekerjaan/mainstore';
+import { useMasterPendidikanStore } from 'src/stores/master/pendidikan/mainstore';
 import { useKunjunganPasienStore } from 'src/stores/pendaftaran/pasienbaru/mainstore';
 import { onMounted, ref } from 'vue';
 
 const store = useKunjunganPasienStore()
+const selectagama = useMasterAgamaStore()
+const selectpekerjaan = useMasterPekerjaanStore()
+const selectpendidikan = useMasterPendidikanStore()
+const selectcaramasuk = useMasterCaraMasukStore()
 const options = ref([])
 
 
@@ -397,7 +405,10 @@ async function filterFn(val, update) {
 }
 
 onMounted(async () => {
-
+  await selectagama.getData()
+  await selectpekerjaan.getData()
+  await selectpendidikan.getData()
+  await selectcaramasuk.getData()
 })
 
 
