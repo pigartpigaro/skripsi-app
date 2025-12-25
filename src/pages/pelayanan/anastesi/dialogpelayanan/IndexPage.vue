@@ -57,18 +57,18 @@ const props = defineProps({
 
 const menus = ref([
   {
-    name: 'DataSasiodagrafiPasien',
-    label: 'Data Sasiodagrafi Pasien',
-    icon: 'diversity_2',
-    route: ['anastesi'],
-    comp: shallowRef(defineAsyncComponent(() => import('./submenu/Sasiodagrafi/IndexPage.vue')))
-  },
-  {
     name: 'PengkajianPreAnestesi ',
     label: 'Pengkajian Pre Anestesi ',
     icon: 'medical_information',
     route: ['anastesi'],
     comp: shallowRef(defineAsyncComponent(() => import('./submenu/Pengkajiananastesi/IndexPage.vue')))
+  },
+  {
+    name: 'PemeriksaanPenunjang',
+    label: 'Pemeriksaan Penunjang',
+    icon: 'diversity_2',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/Pemeriksaanpenunjang/IndexPage.vue')))
   },
   // {
   //   name: 'PemeriksaanFisikPage',
