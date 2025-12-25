@@ -24,6 +24,57 @@ export const usePengkajianAnastesiStore = defineStore('pengkajian-anastesi-store
       digitalis: null,
       lainnya: ''
     },
+    fpenyakit: {
+      dm: null,
+      jantung: null,
+      ginjal: null,
+      hipertensi: null,
+      paru: null,
+      lainnya: ''
+    },
+    friwayat: {
+      keluarga: null,
+      operasi: null,
+      anestesi: null,
+    },
+    fenvironment: {
+      merokok: null,
+      alkohol: null,
+    },
+    fpemeriksaanfisik: {
+      e: null,
+      m: null,
+      v: null,
+      t: null,
+      kesadaran: null,
+      tekanandarah: null,
+      nadi: null,
+      suhu: null,
+      map: null,
+      rr: null,
+      skalanyeri: null,
+      bb: null,
+      tb: null,
+      imt: null,
+    },
+    flastmeal: {
+      neonatuspadat: null,
+      neonatusclear: null,
+      neonatusformula: null,
+      neonatusasi: null,
+      bayi6padat: null,
+      bayi6clear: null,
+      bayi6formula: null,
+      bayi6asi: null,
+      balitapadat: null,
+      balitaclear: null,
+      balitaformula: null,
+      balitaasi: null,
+      anakpadat: null,
+      anakclear: null,
+      anakformula: null,
+    },
+
     formcari: {
       pekerjaan: ''
     }
