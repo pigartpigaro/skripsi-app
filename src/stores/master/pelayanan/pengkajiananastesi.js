@@ -75,6 +75,17 @@ export const usePengkajianAnastesiStore = defineStore('pengkajian-anastesi-store
       anakformula: null,
     },
 
+    f6b: {
+      lookexternaly: [],
+      jaraktyhro: null,
+      kemampuanmembukamulut: null,
+      hyoid: null,
+      mallampati: null,
+      obstruksijalan: null,
+      bentukleher: null,
+    },
+
+
     formcari: {
       pekerjaan: ''
     }
