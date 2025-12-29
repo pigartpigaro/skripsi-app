@@ -2,9 +2,9 @@
   <div>
     <div class="row justify-between garis-bawah q-pb-sm">
       <div class="col-2 flex-start ">
-        <div class="row justify-center">
+        <!-- <div class="row justify-center">
           <q-img src="~assets/logos/logo-rsud.png" spinner-color="white" style="height: 2.9cm; max-width: 2.9cm" />
-        </div>
+        </div> -->
 
       </div>
       <div class="col flex-end content-center">
