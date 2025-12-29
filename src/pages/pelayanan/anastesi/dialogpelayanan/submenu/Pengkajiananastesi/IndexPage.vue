@@ -153,7 +153,7 @@
             <div class="row items-center q-mt-xs">
               <div class="col-auto q-pr-sm">Makanan padat :</div>
               <div class="col-1">
-                <q-input v-model="store.flastmeal.bayi6padat" dense type="text" autogrow /> Jam
+                <q-input v-model="store.flastmeal.bayi6padat" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
 
@@ -365,6 +365,30 @@
           label="Simetris" color="cyan" /><q-radio v-model="store.f6b.bentukleher" val="Asimetris" label="Asimetris"
           color="cyan" />
       </div>
+      <div class="q-ml-xl q-pl-md">Leher pendek : <q-radio v-model="store.f6b.leherpendek" val="Ya" label="Ya"
+          color="cyan" /><q-radio v-model="store.f6b.leherpendek" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-md">Dapatkah pasien menggerakkan rahang ke depan (dagu menyentuh dada)? <q-radio
+          v-model="store.f6b.menggerakkanrahan" val="Ya" label="Ya" color="cyan" /><q-radio
+          v-model="store.f6b.menggerakkanrahan" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-md">Dapatkah pasien melakukan ekstensi leher dan kepala? <q-radio
+          v-model="store.f6b.ekstensileherdankepala" val="Ya" label="Ya" color="cyan" /><q-radio
+          v-model="store.f6b.ekstensileherdankepala" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-md">Dapatkah pasien melakukan rotasi leher dan kepala? <q-radio
+          v-model="store.f6b.rotasileherdankepala" val="Ya" label="Ya" color="cyan" /><q-radio
+          v-model="store.f6b.rotasileherdankepala" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-md">Terdapat bekas luka/sikatrik di leher <q-radio v-model="store.f6b.bekasluka" val="Ya"
+          label="Ya" color="cyan" /><q-radio v-model="store.f6b.bekasluka" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-md">Apakah pasien menggunakan neck collar? <q-radio v-model="store.f6b.neckcollar"
+          val="Ya" label="Ya" color="cyan" /><q-radio v-model="store.f6b.neckcollar" val="Tidak" label="Tidak"
+          color="cyan" />
+      </div>
+      <div class="q-ml-md">Penilaian sulit ventilasi (MOANS)</div>
+
       <div class="q-mt-md text-right q-gutter-sm print-hide">
         <q-btn label="Simpan" color="red" />
         <q-btn label="Cetak" color="red" v-print="printObj" />
