@@ -388,6 +388,105 @@
           color="cyan" />
       </div>
       <div class="q-ml-md">Penilaian sulit ventilasi (MOANS)</div>
+      <div class="q-ml-xl q-pl-md">i.Mask Seal (kumis/janggut lebat, kelainan wajah, deformitas, trauma) <q-radio
+          v-model="store.f6b.maskseal" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.maskseal" val="Tidak" label="Tidak" color="cyan" :update:model-value="moans(1)" />
+        <q-input v-if="store.f6b.maskseal === 'Ya'" v-model="store.f6b.keteranganmaskseal" label="Keterangan" dense
+          type="text" autogrow />
+      </div>
+      <div class="q-ml-xl q-pl-md">ii. Obesity (BMI > 26, leher pendek, lingkar leher besar) <q-radio
+          v-model="store.f6b.obesity" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.obesity" val="Tidak" label="Tidak" color="cyan" :update:model-value="moans(2)" />
+        <q-input v-if="store.f6b.obesity === 'Ya'" v-model="store.f6b.keteranganobesity" label="Keterangan" dense
+          type="text" autogrow />
+      </div>
+      <div class="q-ml-xl q-pl-md">iii. Age >55 <q-radio v-model="store.f6b.age" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.age" val="Tidak" label="Tidak" color="cyan" :update:model-value="moans(3)" />
+        <q-input v-if="store.f6b.age === 'Ya'" v-model="store.f6b.keteranganage" label="Keterangan" dense type="text"
+          autogrow />
+      </div>
+      <div class="q-ml-xl q-pl-md">iv. No teeth <q-radio v-model="store.f6b.notooth" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.notooth" val="Tidak" label="Tidak" color="cyan" :update:model-value="moans(4)" />
+        <q-input v-if="store.f6b.notooth === 'Ya'" v-model="store.f6b.keteranganotooth" label="Keterangan" dense
+          type="text" autogrow />
+      </div>
+      <div class="q-ml-xl q-pl-md">v. Stiff/snoring (riwayat mendengkur, OSA) <q-radio v-model="store.f6b.stiffsnoring"
+          val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.stiffsnoring" val="Tidak" label="Tidak" color="cyan"
+          :update:model-value="moans(5)" />
+        <q-input v-if="store.f6b.stiffsnoring === 'Ya'" v-model="store.f6b.keteranganstiffsnoring" label="Keterangan"
+          dense type="text" autogrow />
+      </div>
+      <div class="q-ml-md">Penilaian sulit pemasangan LMA (RODS)</div>
+      <div class="q-ml-xl q-pl-md">i. Restricted Mouth Opening: Jarak gigi seri atas dan bawah dengan lebar 3 jari
+        <q-radio v-model="store.f6b.restrictedmouthopening" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.restrictedmouthopening" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-md">ii. Obstruction/obesity</div>
+      <div class="q-ml-xl q-pl-xl">Massa pada palatume :
+        <q-radio v-model="store.f6b.massapadapalatume" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.massapadapalatume" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Massa pada uvula :
+        <q-radio v-model="store.f6b.massapadauvula" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.massapadauvula" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Massa pada faring :
+        <q-radio v-model="store.f6b.massapadafaring" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.massapadafaring" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Massa pada laring :
+        <q-radio v-model="store.f6b.massapadalaring" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.massapadalaring" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Massa Epigolotis :
+        <q-radio v-model="store.f6b.massaepiglotesis" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.massaepiglotesis" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Obesitas :
+        <q-radio v-model="store.f6b.obesitas" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.obesitas" val="Tidak" label="Tidak" color="cyan"
+          :update:model-value="store.f6b.keteranganobesitas = ''" />
+        <q-input v-if="store.f6b.obesitas === 'Ya'" v-model="store.f6b.keteranganobesitas" label="Keterangan" dense
+          type="text" autogrow />
+      </div>
+      <div class="q-ml-xl q-pl-md">iii. Disrupted or Distorted</div>
+      <div class="q-ml-xl q-pl-xl">Kelainan tulang belakang leher :
+        <q-radio v-model="store.f6b.kelainantulangbelakangleher" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.kelainantulangbelakangleher" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Cedera pada leher :
+        <q-radio v-model="store.f6b.cederapadaleher" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.cederapadaleher" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-md">iv. Stiff Lung or Cervical Spine</div>
+      <div class="q-ml-xl q-pl-xl">Pengembangan dada kiri kanan simetris :
+        <q-radio v-model="store.f6b.pengembangandadakirikanansimetris" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.pengembangandadakirikanansimetris" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Pengembangan dada depan belakang simetris :
+        <q-radio v-model="store.f6b.pengembangandadadepanbelakangsimetris" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.pengembangandadadepanbelakangsimetris" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md">Bentuk thorax:</div>
+      <div class="q-ml-xl q-pl-md">Pola napas:
+        <q-option-group v-model="store.f6b.polanafas" :options="optpolanafas" color="cyan" type="checkbox" inline />
+      </div>
+      <div class="q-ml-md">Penggunaan otot bantu napa:
+        <q-radio v-model="store.f6b.penggunaanototbantunafas" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.penggunaanototbantunafas" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md">Pernapasan cuping hidung:
+        <q-radio v-model="store.f6b.pernapasancupinghidung" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.pernapasancupinghidung" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md">Perkusi paru:
+        <q-radio v-model="store.f6b.perkusiparu" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.perkusiparu" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md">Suara napas:
+        <q-option-group v-model="store.f6b.suaranapas" :options="optsuaranapas" color="cyan" type="checkbox" inline />
+      </div>
 
       <div class="q-mt-md text-right q-gutter-sm print-hide">
         <q-btn label="Simpan" color="red" />
@@ -411,6 +510,27 @@ const optlookexternaly = [
   { label: 'Gigi Goyang', value: 'Gigi Goyang' },
   { label: 'Gigi Maju', value: 'Gigi Maju' }
 ]
+const optpolanafas = [
+  { label: 'Eupnea', value: 'Eupnea' },
+  { label: 'Bradypnea', value: 'Bradypnea' },
+  { label: 'Tchypnea', value: 'Tchypnea' },
+  { label: 'Apneat', value: 'Apnea' },
+  { label: 'Hyperapnea', value: 'Hyperapnea' },
+  { label: 'Cheyne-Stokes', value: 'Cheyne-Stokes' },
+  { label: 'Boit`s', value: 'Boit`s' },
+  { label: 'Kussmaul`s', value: 'Kussmaul`s' },
+  { label: 'Apneustic', value: 'Apneustic' }
+]
+const optsuaranapas = [
+  { label: 'Trakeal', value: 'Trakeal' },
+  { label: 'bronchial', value: 'bronchial' },
+  { label: 'bronkovesikular', value: 'bronkovesikular' },
+  { label: 'vesikuler', value: 'vesikuler' },
+  { label: 'ronchi', value: 'ronchi' },
+  { label: 'wheezing', value: 'wheezing' },
+  { label: 'stridor', value: 'stridor' },
+
+]
 const store = usePengkajianAnastesiStore()
 defineProps({
   pasien: {
@@ -418,7 +538,19 @@ defineProps({
     default: null
   }
 })
-
+function moans(val) {
+  if (val === 1) {
+    store.f6b.keteranganmaskseal = ''
+  } else if (val === 2) {
+    store.f6b.keteranganobesity = ''
+  } else if (val === 3) {
+    store.f6b.keteranganage = ''
+  } else if (val === 4) {
+    store.f6b.keteranganotooth = ''
+  } else if (val === 5) {
+    store.f6b.keteranganstiffsnoring = ''
+  }
+}
 
 const printObj = {
   id: 'printMe',
