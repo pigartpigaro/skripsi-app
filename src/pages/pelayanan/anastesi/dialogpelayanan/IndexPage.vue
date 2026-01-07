@@ -57,6 +57,13 @@ const props = defineProps({
 
 const menus = ref([
   {
+    name: 'SerahTerimaPreOperasi ',
+    label: 'Serah Terima Pre Operasi',
+    icon: 'medication',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/Serahterimapreoperasi/IndexPage.vue')))
+  },
+  {
     name: 'PengkajianPreAnestesi ',
     label: 'Pengkajian Pre Anestesi ',
     icon: 'medical_information',
