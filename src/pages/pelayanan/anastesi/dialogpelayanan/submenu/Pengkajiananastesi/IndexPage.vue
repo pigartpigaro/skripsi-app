@@ -583,11 +583,45 @@
       <div class="text-weight-bold q-ml-md ">B3 (Brain)</div>
       <div class=" q-ml-md"><q-option-group v-model="store.f6b.b3" :options="optb3" color="cyan" type="checkbox"
           inline /></div>
-      <div class="q-ml-md ">Pupil
+      <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm text-weight-medium">
+          Pupil
+        </div>
         <q-option-group v-model="store.f6b.pupil" :options="optpupil" color="cyan" type="checkbox" inline />
       </div>
-      <div class="q-ml-md ">Reflek
+      <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm text-weight-medium">
+          Reflek
+        </div>
+
         <q-option-group v-model="store.f6b.reflek" :options="optreflek" color="cyan" type="checkbox" inline />
+      </div>
+      <div class="text-weight-bold q-ml-md ">B4 (Bladder)</div>
+      <div class="q-ml-lg">Nyeri saat BAK
+        <q-radio v-model="store.f6b.nyerisaatbak" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.nyerisaatbak" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Urine disertai darah
+        <q-radio v-model="store.f6b.urinedisertaidarah" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.urinedisertaidarah" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Kateter
+        <q-radio v-model="store.f6b.kateter" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.kateter" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Nyeri tekan pada Ginjal
+        <q-radio v-model="store.f6b.kateter" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.kateter" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Pembesaran pada Ginjal
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm text-weight-medium">
+          Jumlah urine:
+        </div>
+        <q-input v-model="store.f6b.jumlahurine" type="text" dense autogrow />cc
       </div>
 
       <div class="q-mt-md text-right q-gutter-sm print-hide">
