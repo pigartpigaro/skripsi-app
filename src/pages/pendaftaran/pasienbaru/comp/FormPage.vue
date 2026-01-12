@@ -138,6 +138,15 @@
       <q-input v-model="store.formkunjungan.kelas" outlined dense label="Kelas Rawat Inap" :disable="store.loadingSave"
         :loading="store.loadingSave" />
     </div>
+    <div class="col-12 col-md-6 q-pt-md">
+      <app-autocomplete label="Dokter Anastesi" v-model="store.form.dokter_anastesi" autocomplete="kode"
+        option-value="kode" option-label="nama" outlined :disable="store.disabled" :source="selectdokter?.items" />
+    </div>
+    <div class="col-12 col-md-6 q-pt-md">
+      <app-autocomplete label="Dokter Operator" v-model="store.form.dokter_operator" autocomplete="kode"
+        option-value="kode" option-label="nama" outlined :disable="store.disabled" :source="selectdokter?.items" />
+    </div>
+
     <div class="col-12 col-md-12 q-pt-md">
       <div class="text-subtitle2 q-mb-sm">
         Cara Masuk RS :
@@ -175,23 +184,25 @@
 
 </template>
 <script setup>
-import { date } from 'quasar';
-import { api } from 'src/boot/axios';
-import { useMasterAgamaStore } from 'src/stores/master/agama/mainstore';
-import { useMasterCaraMasukStore } from 'src/stores/master/caramasuk/mainstore';
-import { useMasterPekerjaanStore } from 'src/stores/master/pekerjaan/mainstore';
-import { useMasterPendidikanStore } from 'src/stores/master/pendidikan/mainstore';
-import { useKunjunganPasienStore } from 'src/stores/pendaftaran/pasienbaru/mainstore';
-import { onMounted, ref } from 'vue';
+import { date } from 'quasar'
+import { api } from 'src/boot/axios'
+import { useMasterAgamaStore } from 'src/stores/master/agama/mainstore'
+import { useMasterCaraMasukStore } from 'src/stores/master/caramasuk/mainstore'
+import { useMasterDokterStore } from 'src/stores/master/dokter/mainstore'
+import { useMasterPekerjaanStore } from 'src/stores/master/pekerjaan/mainstore'
+import { useMasterPendidikanStore } from 'src/stores/master/pendidikan/mainstore'
+import { useKunjunganPasienStore } from 'src/stores/pendaftaran/pasienbaru/mainstore'
+import { onMounted, ref } from 'vue'
 
 const store = useKunjunganPasienStore()
 const selectagama = useMasterAgamaStore()
 const selectpekerjaan = useMasterPekerjaanStore()
 const selectpendidikan = useMasterPendidikanStore()
 const selectcaramasuk = useMasterCaraMasukStore()
+const selectdokter = useMasterDokterStore()
 const options = ref([])
 
-function hitungUmur(tglLahir) {
+function hitungUmur (tglLahir) {
   const today = new Date()
   const birthDate = new Date(tglLahir)
 
@@ -205,7 +216,7 @@ function hitungUmur(tglLahir) {
   return umur
 }
 
-function updateModel(val) {
+function updateModel (val) {
   const item = store.options.find(x => x.norm === val)
   console.log('item ditemukan:', item)
   store.form.norm = val
@@ -261,31 +272,31 @@ const clearSearch = () => {
   store.displaytanggal.tgl_lahir = date.formatDate(Date.now(), 'DD MMMM YYYY')
   options.value = []
 }
-function tglLahir(val) {
+function tglLahir (val) {
   if (!val) return
   const dates = new Date(val)
   store.form.tgl_lahir = date.formatDate(dates, 'YYYY-MM-DD')
 }
-function displayTanggal(val) {
+function displayTanggal (val) {
   store.displaytanggal.tgl_lahir = val
 }
-function tglMrs(val) {
+function tglMrs (val) {
   if (!val) return
   const dates = new Date(val)
   store.formkunjungan.tgl_mrs = date.formatDate(dates, 'YYYY-MM-DD HH:mm:ss')
 }
-function displayMrs(val) {
+function displayMrs (val) {
   store.displaytanggal.mrs = val
 }
-function tglPengkajian(val) {
+function tglPengkajian (val) {
   if (!val) return
 
   store.formkunjungan.tgl_pengkajian = date.formatDate(val, 'YYYY-MM-DD')
 }
-function displayPengkajian(val) {
+function displayPengkajian (val) {
   store.displaytanggal.pengkajian = val
 }
-async function filterFn(val, update) {
+async function filterFn (val, update) {
   // isLoading.value = true // Aktifkan loading saat filter dimulai
 
   // Jika input kosong, kembalikan semua opsi
@@ -377,6 +388,7 @@ onMounted(async () => {
   await selectpekerjaan.getData()
   await selectpendidikan.getData()
   await selectcaramasuk.getData()
+  await selectdokter.getData()
 })
 
 
