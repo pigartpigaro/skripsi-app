@@ -77,13 +77,34 @@ const menus = ref([
     route: ['anastesi'],
     comp: shallowRef(defineAsyncComponent(() => import('./submenu/Pemeriksaanpenunjang/IndexPage.vue')))
   },
-  // {
-  //   name: 'PemeriksaanFisikPage',
-  //   label: 'Pemeriksaan Umum & Fisik',
-  //   icon: 'icon-my-stethoscope',
-  //   route: ['igd'],
-  //   comp: shallowRef(defineAsyncComponent(() => import('../layanan/pemeriksaanfisik/PemeriksaanfisikPage.vue')))
-  // },
+  {
+    name: 'AssesmentPraAnestesi',
+    label: 'Assesment Pra Anestesi',
+    icon: 'analytics',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/AssesmentPraAnestesi/IndexPage.vue')))
+  },
+  {
+    name: 'AssesmentPraInduksi',
+    label: 'Assesment Pra Induksi',
+    icon: 'local_hospital',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/AssesmentPraInduksi/IndexPage.vue')))
+  },
+  {
+    name: 'SerahTerimaPasienPreOp',
+    label: 'Serah Terima Pasien Pre Op',
+    icon: 'textsms',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/SerahTerimaPasienPreOp/IndexPage.vue')))
+  },
+  {
+    name: 'SurgicalSafetyChecklist',
+    label: 'Surgical Safety Checklist',
+    icon: 'transfer_within_a_station',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/SurgicalSafetyChecklist/IndexPage.vue')))
+  },
   // {
   //   name: 'AssesmentPage',
   //   label: 'Assesment',
