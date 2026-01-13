@@ -79,9 +79,9 @@ const tinggiDetailPas = ref(180)
 const emits = defineEmits(['clickMenu'])
 
 
-function pilihMenu(item) {
-  emits('clickMenu', item)
-}
+// function pilihMenu(item) {
+//   emits('clickMenu', item)
+// }
 const props = defineProps({
   pasien: {
     type: Object,

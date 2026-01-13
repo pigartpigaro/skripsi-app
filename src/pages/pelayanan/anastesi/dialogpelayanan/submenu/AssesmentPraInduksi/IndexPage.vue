@@ -1,4 +1,5 @@
 <template>
+  <!-- <pre>{{ props.pasien?.asessement_pra_induksi }}</pre> -->
   <q-page class="q-pa-md bg-grey-6">
     <div id="printMe" class="q-pa-md full-width full-height bg-white">
       <div class="text-weight-bold text-h6 text-center q-pb-md">Assesment Pra Induksi</div>
@@ -73,26 +74,26 @@
           <div class="q-mr-sm">
             Pemasangan IV Line:
           </div>
-          <q-radio v-model="store.form.ivline" val="1" label="1 buah" />
-          <q-radio v-model="store.form.ivline" val="2" label="2 buah" />
+          <q-radio v-model="store.form.iv_line" val="1" label="1 buah" />
+          <q-radio v-model="store.form.iv_line" val="2" label="2 buah" />
         </div>
 
         <div class="q-ml-md row items-center no-wrap">
           <div class="q-mr-sm">
             Cairan infus & darah:
           </div>
-          <q-radio v-model="store.form.cairan" val="tidak" label="Tidak" />
-          <q-radio v-model="store.form.cairan" val="siap" label="Siap" />
-          <q-input dense v-if="store.form.cairan === 'siap'" v-model="store.form.jenis_cairan" placeholder="Jenis"
-            class="q-ml-sm" style="max-width:200px" />
+          <q-radio v-model="store.form.infus_darah" val="tidak" label="Tidak" />
+          <q-radio v-model="store.form.infus_darah" val="siap" label="Siap" />
+          <q-input dense v-if="store.form.infus_darah === 'siap'" v-model="store.form.
+            jenis_infus_darah" placeholder="Jenis" class="q-ml-sm" style="max-width:200px" />
         </div>
 
         <div class="q-ml-md row items-center no-wrap">
           <div class="q-mr-sm">
             Mesin Anastesi:
           </div>
-          <q-radio v-model="store.form.mesin" val="siap" label="Siap" />
-          <q-radio v-model="store.form.mesin" val="tidak" label="Tidak" />
+          <q-radio v-model="store.form.mesin_anastesi" val="siap" label="Siap" />
+          <q-radio v-model="store.form.mesin_anastesi" val="tidak" label="Tidak" />
         </div>
 
         <!-- GENERAL ANESTESI -->
@@ -221,6 +222,7 @@
 <script setup>
 
 import { useAssesmentPraInduksiStore } from 'src/stores/transaksi/assesmenprainduksi';
+import { onMounted } from 'vue';
 
 const props = defineProps({
   pasien: {
@@ -242,6 +244,44 @@ function simpan() {
   store.form.noreg = props.pasien.noreg
   store.simpanData()
 }
+
+onMounted(() => {
+  store.form.noreg = props.pasien.noreg
+  const rinci = props.pasien?.asessement_pra_induksi
+  store.form.td = rinci?.td
+  store.form.n = rinci?.n
+  store.form.rr = rinci?.rr
+  store.form.suhu = rinci?.suhu
+  store.form.saturasi = rinci?.saturasi
+  store.form.ekg = rinci?.ekg
+  store.form.iv_line = rinci?.iv_line
+  store.form.infus_darah = rinci?.infus_darah
+  store.form.jenis_infus_darah = rinci?.jenis_infus_darah
+  store.form.mesin_anastesi = rinci?.mesin_anastesi
+  store.form.ga = rinci?.ga
+  store.form.scope = rinci?.scope
+  store.form.tube = rinci?.tube
+  store.form.airway = rinci?.airway
+  store.form.tape = rinci?.tape
+  store.form.introducer = rinci?.introducer
+  store.form.connector = rinci?.connector
+  store.form.suction = rinci?.suction
+  store.form.regionalanastesi = rinci?.regionalanastesi
+  store.form.alatyangdisiapkan = rinci?.alatyangdisiapkan
+  store.form.obatanestesi = rinci?.obatanestesi
+  store.form.obatemergency = rinci?.obatemergency
+  store.form.penyakityangdiderita = rinci?.penyakityangdiderita
+  store.form.keteranganpenyakityangdiderita = rinci?.keteranganpenyakityangdiderita
+  store.form.gigipalsu = rinci?.gigipalsu
+  store.form.alergi = rinci?.alergi
+  store.form.keteranganalergi = rinci?.keteranganalergi
+  store.form.lensakontak = rinci?.lensakontak
+  store.form.keteranganlensakontak = rinci?.keteranganlensakontak
+  store.form.penggunaanobatsebelumnya = rinci?.penggunaanobatsebelumnya
+  store.form.keteranganpenggunaanobatsebelumnya = rinci?.keteranganpenggunaanobatsebelumnya
+  store.form.catatan = rinci?.catatan
+
+})
 
 const printObj = {
   id: 'printMe',
