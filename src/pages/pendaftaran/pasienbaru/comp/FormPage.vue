@@ -1,30 +1,21 @@
 <template>
   <div class="row q-col-gutter-sm">
     <div class="col-12 col-md-6">
-      <q-btn-toggle
-        v-model="store.tipePasien"
-        class="btn-toggle-inset"
-        unelevated
-        color="primary"
-        toggle-color="dark"
-        toggle-text-color="white"
-        :options="[
+      <q-btn-toggle v-model="store.tipePasien" class="btn-toggle-inset" unelevated color="white" toggle-color="primary"
+        toggle-text-color="white" text-color="primary" :options="[
           { label: 'Pasien Lama', value: 'lama' },
           { label: 'Pasien Baru', value: 'baru' }
-        ]"
-      />
+        ]" />
 
     </div>
 
-    <div v-if="store.tipePasien === 'lama'" class="col-12 col-md-6" >
+    <div v-if="store.tipePasien === 'lama'" class="col-12 col-md-6">
       <q-select v-model="store.form.nama" use-input outlined standout="bg-yellow-3" dense emit-value map-options
         option-value="norm" input-debounce="300" label="Cari Pasien" class="ellipsis-2-lines" :options="options"
-        option-label="nama"
-        :disable="store.loadingSave" :loading="store.loadingSave" @filter="filterFn"
+        option-label="nama" :disable="store.loadingSave" :loading="store.loadingSave" @filter="filterFn"
         @clear="clearSearch" @update:model-value="updateModel">
         <template v-if="store.form.nama" #append>
-          <q-icon name="cancel" class="cursor-pointer"
-            @click.stop.prevent="clearSearch" />
+          <q-icon name="cancel" class="cursor-pointer" @click.stop.prevent="clearSearch" />
         </template>
         <template v-else #no-option>
           <q-item>
@@ -36,52 +27,30 @@
       </q-select>
     </div>
     <div class="col-12 col-md-12">
-      <q-input
-        v-model="store.form.nama"
-        :readonly="store.tipePasien === 'lama'"
-        outlined
-        dense
-        label="Nama Pasien"
-        :disable="store.loadingSave"
-        :loading="store.loadingSave"
-      />
+      <q-input v-model="store.form.nama" :readonly="store.tipePasien === 'lama'" outlined dense label="Nama Pasien"
+        :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <div class="col-12 col-md-12">
-      <q-input
-        readonly
-        v-model="store.form.norm"
-        outlined
-        dense
-        label="Nomor Rekam Medis (Auto)"
-        :disable="store.loadingSave"
-        :loading="store.loadingSave"
-      />
+      <q-input readonly v-model="store.form.norm" outlined dense label="Nomor Rekam Medis (Auto)"
+        :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <div class="col-12 col-md-12">
-      <q-input v-model="store.form.nik" :readonly="store.tipePasien === 'lama'" outlined dense label="Identitas Kependudukan (KTP)"
-        :disable="store.loadingSave" :loading="store.loadingSave" inputmode="numeric" :rules="[
-        val => !!val || 'Harap diisi',
-        val => /^\d+$/.test(val) || 'Hanya angka',
-      ]" />
+      <q-input v-model="store.form.nik" :readonly="store.tipePasien === 'lama'" outlined dense
+        label="Identitas Kependudukan (KTP)" :disable="store.loadingSave" :loading="store.loadingSave"
+        inputmode="numeric" :rules="[
+          val => !!val || 'Harap diisi',
+          val => /^\d+$/.test(val) || 'Hanya angka',
+        ]" />
     </div>
     <!-- <div class="row q-col-gutter-sm"> -->
     <div class="col-12 col-md-6">
-      <app-input-date-human v-model="store.displaytanggal.tgl_lahir"
-      label="Tanggal Lahir" outlined
-      :rules="[val => !!val || 'Harap Diisi terlebih dahulu']"
-      :disable="store.tipePasien === 'lama'"
-      @db-model="tglLahir" @set-display="displayTanggal" />
+      <app-input-date-human v-model="store.displaytanggal.tgl_lahir" label="Tanggal Lahir" outlined
+        :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" :disable="store.tipePasien === 'lama'"
+        @db-model="tglLahir" @set-display="displayTanggal" />
     </div>
     <div class="col-12 col-md-6">
-      <q-input
-        v-model="store.form.umur"
-        outlined
-        dense
-        label="Umur"
-        :readonly="store.tipePasien === 'lama'"
-        :disable="store.loadingSave"
-        :loading="store.loadingSave"
-      />
+      <q-input v-model="store.form.umur" outlined dense label="Umur" :readonly="store.tipePasien === 'lama'"
+        :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <div class="col-12 col-md-12 q-pt-md">
       <div class="text-subtitle2 q-mb-sm">
@@ -89,19 +58,9 @@
       </div>
 
       <div class="q-pl-md row q-col-gutter-md">
-        <div
-          v-for="opt in store.kelaminOptions"
-          :key="opt?.value"
-          class="col-12 col-md-3"
-        >
-          <q-radio
-            class="text-caption"
-            v-model="store.form.kelamin"
-            :val="opt?.value"
-            :label="opt?.label"
-            :disable="store.tipePasien === 'lama'"
-            dense
-          />
+        <div v-for="opt in store.kelaminOptions" :key="opt?.value" class="col-12 col-md-3">
+          <q-radio class="text-caption" v-model="store.form.kelamin" :val="opt?.value" :label="opt?.label"
+            :disable="store.tipePasien === 'lama'" dense />
         </div>
       </div>
     </div>
@@ -111,106 +70,92 @@
       </div>
 
       <div class="q-pl-md row q-col-gutter-md">
-        <div
-          v-for="opt in selectpendidikan.items"
-          :key="opt?.kode"
-          class="col-12 col-md-3"
-        >
-          <q-radio
-            class="text-caption"
-            v-model="store.form.pendidikan"
-            :val="opt?.nama"
-            :label="opt?.nama"
-            :disable="store.tipePasien === 'lama'"
-            dense
-          />
+        <div v-for="opt in selectpendidikan.items" :key="opt?.kode" class="col-12 col-md-3">
+          <q-radio class="text-caption" v-model="store.form.pendidikan" :val="opt?.nama" :label="opt?.nama"
+            :disable="store.tipePasien === 'lama'" dense />
         </div>
       </div>
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <app-autocomplete label="Agama" v-model="store.form.agama" autocomplete="nama"
-      option-value="nama" option-label="nama" outlined :disable="store.disabled"
-      :readonly="store.tipePasien === 'lama'"
-      :source="selectagama.items" @update:model-value="(val) => console.log('val agama',val)" />
+      <app-autocomplete label="Agama" v-model="store.form.agama" autocomplete="nama" option-value="nama"
+        option-label="nama" outlined :disable="store.disabled" :readonly="store.tipePasien === 'lama'"
+        :source="selectagama.items" @update:model-value="(val) => console.log('val agama', val)" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <q-input v-model="store.form.suku" outlined dense label="Suku"
-      :disable="store.loadingSave" :loading="store.loadingSave"
-      :readonly="store.tipePasien === 'lama'" />
+      <q-input v-model="store.form.suku" outlined dense label="Suku" :disable="store.loadingSave"
+        :loading="store.loadingSave" :readonly="store.tipePasien === 'lama'" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <app-autocomplete label="Pekerjaan" v-model="store.form.pekerjaan" autocomplete="nama"
-      option-value="nama" option-label="nama" outlined :disable="store.disabled"
-      :readonly="store.tipePasien === 'lama'"
-      :source="selectpekerjaan.items" @update:model-value="(val) => console.log('val pekerjaan',val)" />
+      <app-autocomplete label="Pekerjaan" v-model="store.form.pekerjaan" autocomplete="nama" option-value="nama"
+        option-label="nama" outlined :disable="store.disabled" :readonly="store.tipePasien === 'lama'"
+        :source="selectpekerjaan.items" @update:model-value="(val) => console.log('val pekerjaan', val)" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
       <app-autocomplete label="Status Perkawinan" v-model="store.form.status_perkawinan" autocomplete="value"
-      option-value="value" option-label="label" outlined :disable="store.disabled"
-      :readonly="store.tipePasien === 'lama'"
-      :source="store.statusPerkawinanOptions" @update:model-value="(val) => console.log('val status_perkawinan',val)" />
+        option-value="value" option-label="label" outlined :disable="store.disabled"
+        :readonly="store.tipePasien === 'lama'" :source="store.statusPerkawinanOptions"
+        @update:model-value="(val) => console.log('val status_perkawinan', val)" />
     </div>
     <div class="col-12 col-md-12 q-pt-md">
-      <q-input v-model="store.form.tlp" outlined dense label="Telepon" type="text" inputmode="numeric" mask="####-####-####"
-      :readonly="store.tipePasien === 'lama'"
-      :disable="store.loadingSave" :loading="store.loadingSave" />
+      <q-input v-model="store.form.tlp" outlined dense label="Telepon" type="text" inputmode="numeric"
+        mask="####-####-####" :readonly="store.tipePasien === 'lama'" :disable="store.loadingSave"
+        :loading="store.loadingSave" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <app-input-date-human v-model="store.displaytanggal.mrs" label="Tanggal MRS" outlined :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" @db-model="tglMrs" @set-display="displayMrs" />
+      <app-input-date-human v-model="store.displaytanggal.mrs" label="Tanggal MRS" outlined
+        :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" @db-model="tglMrs" @set-display="displayMrs" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <app-input-date-human v-model="store.displaytanggal.pengkajian" label="Tanggal Pengkajian" outlined :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" @db-model="tglPengkajian" @set-display="displayPengkajian" />
+      <app-input-date-human v-model="store.displaytanggal.pengkajian" label="Tanggal Pengkajian" outlined
+        :rules="[val => !!val || 'Harap Diisi terlebih dahulu']" @db-model="tglPengkajian"
+        @set-display="displayPengkajian" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <q-input v-model="store.form.nama_asuransi" outlined dense label="Nama Asuransi"
+      <q-input v-model="store.form.nama_asuransi" outlined dense label="Nama Asuransi" :disable="store.loadingSave"
+        :loading="store.loadingSave" :readonly="store.tipePasien === 'lama'" />
+    </div>
+    <div class="col-12 col-md-6 q-pt-md">
+      <q-input v-model="store.form.nomor_asuransi" outlined dense label="Nomor Asuransi" :disable="store.loadingSave"
+        :loading="store.loadingSave" :readonly="store.tipePasien === 'lama'" />
+    </div>
+    <div class="col-12 col-md-12 q-pt-md">
+      <q-input v-model="store.form.alamat" type="textarea" rows="3" outlined dense label="Alamat Tempat Tinggal"
         :disable="store.loadingSave" :loading="store.loadingSave" :readonly="store.tipePasien === 'lama'" />
     </div>
-    <div class="col-12 col-md-6 q-pt-md">
-      <q-input v-model="store.form.nomor_asuransi" outlined dense label="Nomor Asuransi"
-        :disable="store.loadingSave" :loading="store.loadingSave" :readonly="store.tipePasien === 'lama'"/>
-    </div>
     <div class="col-12 col-md-12 q-pt-md">
-      <q-input v-model="store.form.alamat" type="textarea"
-        rows="3" outlined dense label="Alamat Tempat Tinggal"
-        :disable="store.loadingSave" :loading="store.loadingSave"
-        :readonly="store.tipePasien === 'lama'" />
-    </div>
-    <div class="col-12 col-md-12 q-pt-md">
-      <q-input v-model="store.formkunjungan.diagnosa" type="textarea"
-        rows="3" outlined dense label="Diagnosis Medis"
+      <q-input v-model="store.formkunjungan.diagnosa" type="textarea" rows="3" outlined dense label="Diagnosis Medis"
         :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <div class="col-12 col-md-12 q-pt-md">
-      <q-input v-model="store.formkunjungan.rencana_tindakan" type="textarea"
-        rows="3" outlined dense label="Rencana Tindakan DPJP"
-        :disable="store.loadingSave" :loading="store.loadingSave" />
+      <q-input v-model="store.formkunjungan.rencana_tindakan" type="textarea" rows="3" outlined dense
+        label="Rencana Tindakan DPJP" :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
       <q-input v-model="store.formkunjungan.ruang_ranap" outlined dense label="Ruang Rawat Inap"
         :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <q-input v-model="store.formkunjungan.kelas" outlined dense label="Kelas Rawat Inap"
-        :disable="store.loadingSave" :loading="store.loadingSave" />
+      <q-input v-model="store.formkunjungan.kelas" outlined dense label="Kelas Rawat Inap" :disable="store.loadingSave"
+        :loading="store.loadingSave" />
     </div>
+    <div class="col-12 col-md-6 q-pt-md">
+      <app-autocomplete label="Dokter Anastesi" v-model="store.form.dokter_anastesi" autocomplete="kode"
+        option-value="kode" option-label="nama" outlined :disable="store.disabled" :source="selectdokter?.items" />
+    </div>
+    <div class="col-12 col-md-6 q-pt-md">
+      <app-autocomplete label="Dokter Operator" v-model="store.form.dokter_operator" autocomplete="kode"
+        option-value="kode" option-label="nama" outlined :disable="store.disabled" :source="selectdokter?.items" />
+    </div>
+
     <div class="col-12 col-md-12 q-pt-md">
       <div class="text-subtitle2 q-mb-sm">
         Cara Masuk RS :
       </div>
 
       <div class="q-pl-md row q-col-gutter-md">
-        <div
-          v-for="opt in selectcaramasuk.items"
-          :key="opt?.kode"
-          class="col-12 col-md-3"
-        >
-          <q-radio
-            class="text-caption"
-            v-model="store.formkunjungan.cara_masuk"
-            :val="opt?.nama"
-            :label="opt?.nama"
-            dense
-          />
+        <div v-for="opt in selectcaramasuk.items" :key="opt?.kode" class="col-12 col-md-3">
+          <q-radio class="text-caption" v-model="store.formkunjungan.cara_masuk" :val="opt?.nama" :label="opt?.nama"
+            dense />
         </div>
       </div>
     </div>
@@ -221,50 +166,43 @@
       </div>
 
       <div class="q-pl-md row q-col-gutter-md">
-        <div
-          v-for="opt in store.pintumasukOptions"
-          :key="opt?.value"
-          class="col-12 col-md-3"
-        >
-          <q-radio
-            class="text-caption"
-            v-model="store.formkunjungan.pintu_masuk"
-            :val="opt?.value"
-            :label="opt?.label"
-            dense
-          />
+        <div v-for="opt in store.pintumasukOptions" :key="opt?.value" class="col-12 col-md-3">
+          <q-radio class="text-caption" v-model="store.formkunjungan.pintu_masuk" :val="opt?.value" :label="opt?.label"
+            dense />
         </div>
       </div>
     </div>
   </div>
   <div class="col-12 col-md-12 q-pt-md">
-    <q-input v-model="store.formkunjungan.alergi" outlined dense label="Alergi"
-      :disable="store.loadingSave" :loading="store.loadingSave" />
+    <q-input v-model="store.formkunjungan.alergi" outlined dense label="Alergi" :disable="store.loadingSave"
+      :loading="store.loadingSave" />
   </div>
   <div class="col-12 col-md-12 q-pt-md">
-    <q-input v-model="store.formkunjungan.rs" outlined dense label="Rumah Sakit Asal"
-      :disable="store.loadingSave" :loading="store.loadingSave" />
+    <q-input v-model="store.formkunjungan.rs" outlined dense label="Rumah Sakit Asal" :disable="store.loadingSave"
+      :loading="store.loadingSave" />
   </div>
 
 </template>
 <script setup>
-import { date } from 'quasar';
-import { api } from 'src/boot/axios';
-import { useMasterAgamaStore } from 'src/stores/master/agama/mainstore';
-import { useMasterCaraMasukStore } from 'src/stores/master/caramasuk/mainstore';
-import { useMasterPekerjaanStore } from 'src/stores/master/pekerjaan/mainstore';
-import { useMasterPendidikanStore } from 'src/stores/master/pendidikan/mainstore';
-import { useKunjunganPasienStore } from 'src/stores/pendaftaran/pasienbaru/mainstore';
-import { onMounted, ref } from 'vue';
+import { date } from 'quasar'
+import { api } from 'src/boot/axios'
+import { useMasterAgamaStore } from 'src/stores/master/agama/mainstore'
+import { useMasterCaraMasukStore } from 'src/stores/master/caramasuk/mainstore'
+import { useMasterDokterStore } from 'src/stores/master/dokter/mainstore'
+import { useMasterPekerjaanStore } from 'src/stores/master/pekerjaan/mainstore'
+import { useMasterPendidikanStore } from 'src/stores/master/pendidikan/mainstore'
+import { useKunjunganPasienStore } from 'src/stores/pendaftaran/pasienbaru/mainstore'
+import { onMounted, ref } from 'vue'
 
 const store = useKunjunganPasienStore()
 const selectagama = useMasterAgamaStore()
 const selectpekerjaan = useMasterPekerjaanStore()
 const selectpendidikan = useMasterPendidikanStore()
 const selectcaramasuk = useMasterCaraMasukStore()
+const selectdokter = useMasterDokterStore()
 const options = ref([])
 
-function hitungUmur(tglLahir) {
+function hitungUmur (tglLahir) {
   const today = new Date()
   const birthDate = new Date(tglLahir)
 
@@ -278,7 +216,7 @@ function hitungUmur(tglLahir) {
   return umur
 }
 
-function updateModel(val) {
+function updateModel (val) {
   const item = store.options.find(x => x.norm === val)
   console.log('item ditemukan:', item)
   store.form.norm = val
@@ -334,31 +272,31 @@ const clearSearch = () => {
   store.displaytanggal.tgl_lahir = date.formatDate(Date.now(), 'DD MMMM YYYY')
   options.value = []
 }
-function tglLahir(val) {
+function tglLahir (val) {
   if (!val) return
   const dates = new Date(val)
   store.form.tgl_lahir = date.formatDate(dates, 'YYYY-MM-DD')
 }
-function displayTanggal(val) {
+function displayTanggal (val) {
   store.displaytanggal.tgl_lahir = val
 }
-function tglMrs(val) {
+function tglMrs (val) {
   if (!val) return
   const dates = new Date(val)
   store.formkunjungan.tgl_mrs = date.formatDate(dates, 'YYYY-MM-DD HH:mm:ss')
 }
-function displayMrs(val) {
+function displayMrs (val) {
   store.displaytanggal.mrs = val
 }
-function tglPengkajian(val) {
+function tglPengkajian (val) {
   if (!val) return
 
   store.formkunjungan.tgl_pengkajian = date.formatDate(val, 'YYYY-MM-DD')
 }
-function displayPengkajian(val) {
+function displayPengkajian (val) {
   store.displaytanggal.pengkajian = val
 }
-async function filterFn(val, update) {
+async function filterFn (val, update) {
   // isLoading.value = true // Aktifkan loading saat filter dimulai
 
   // Jika input kosong, kembalikan semua opsi
@@ -375,8 +313,8 @@ async function filterFn(val, update) {
   const needle = val.toLowerCase()
   const localResults = store.options?.filter(
     (item) =>
-      (item.norm?.toLowerCase().includes(needle) ||
-        item.nama?.toLowerCase().includes(needle))
+    (item.norm?.toLowerCase().includes(needle) ||
+      item.nama?.toLowerCase().includes(needle))
   ) || []
 
   console.log('Hasil filter lokal:', localResults)
@@ -450,6 +388,7 @@ onMounted(async () => {
   await selectpekerjaan.getData()
   await selectpendidikan.getData()
   await selectcaramasuk.getData()
+  await selectdokter.getData()
 })
 
 
@@ -457,8 +396,8 @@ onMounted(async () => {
 <style lang="scss">
 .btn-toggle-inset {
   border-radius: 8px;
-  background: #e0e0e0;
-  padding: 4px;
+  background: #f0efef;
+  padding: 2px;
 
   .q-btn {
     border-radius: 6px;
@@ -473,5 +412,4 @@ onMounted(async () => {
     transform: translateY(1px);
   }
 }
-
 </style>

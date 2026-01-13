@@ -388,6 +388,241 @@
           color="cyan" />
       </div>
       <div class="q-ml-md">Penilaian sulit ventilasi (MOANS)</div>
+      <div class="q-ml-xl q-pl-md">i.Mask Seal (kumis/janggut lebat, kelainan wajah, deformitas, trauma) <q-radio
+          v-model="store.f6b.maskseal" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.maskseal" val="Tidak" label="Tidak" color="cyan" :update:model-value="moans(1)" />
+        <q-input v-if="store.f6b.maskseal === 'Ya'" v-model="store.f6b.keteranganmaskseal" label="Keterangan" dense
+          type="text" autogrow />
+      </div>
+      <div class="q-ml-xl q-pl-md">ii. Obesity (BMI > 26, leher pendek, lingkar leher besar) <q-radio
+          v-model="store.f6b.obesity" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.obesity" val="Tidak" label="Tidak" color="cyan" :update:model-value="moans(2)" />
+        <q-input v-if="store.f6b.obesity === 'Ya'" v-model="store.f6b.keteranganobesity" label="Keterangan" dense
+          type="text" autogrow />
+      </div>
+      <div class="q-ml-xl q-pl-md">iii. Age >55 <q-radio v-model="store.f6b.age" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.age" val="Tidak" label="Tidak" color="cyan" :update:model-value="moans(3)" />
+        <q-input v-if="store.f6b.age === 'Ya'" v-model="store.f6b.keteranganage" label="Keterangan" dense type="text"
+          autogrow />
+      </div>
+      <div class="q-ml-xl q-pl-md">iv. No teeth <q-radio v-model="store.f6b.notooth" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.notooth" val="Tidak" label="Tidak" color="cyan" :update:model-value="moans(4)" />
+        <q-input v-if="store.f6b.notooth === 'Ya'" v-model="store.f6b.keteranganotooth" label="Keterangan" dense
+          type="text" autogrow />
+      </div>
+      <div class="q-ml-xl q-pl-md">v. Stiff/snoring (riwayat mendengkur, OSA) <q-radio v-model="store.f6b.stiffsnoring"
+          val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.stiffsnoring" val="Tidak" label="Tidak" color="cyan"
+          :update:model-value="moans(5)" />
+        <q-input v-if="store.f6b.stiffsnoring === 'Ya'" v-model="store.f6b.keteranganstiffsnoring" label="Keterangan"
+          dense type="text" autogrow />
+      </div>
+      <div class="q-ml-md">Penilaian sulit pemasangan LMA (RODS)</div>
+      <div class="q-ml-xl q-pl-md">i. Restricted Mouth Opening: Jarak gigi seri atas dan bawah dengan lebar 3 jari
+        <q-radio v-model="store.f6b.restrictedmouthopening" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.restrictedmouthopening" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-md">ii. Obstruction/obesity</div>
+      <div class="q-ml-xl q-pl-xl">Massa pada palatume :
+        <q-radio v-model="store.f6b.massapadapalatume" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.massapadapalatume" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Massa pada uvula :
+        <q-radio v-model="store.f6b.massapadauvula" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.massapadauvula" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Massa pada faring :
+        <q-radio v-model="store.f6b.massapadafaring" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.massapadafaring" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Massa pada laring :
+        <q-radio v-model="store.f6b.massapadalaring" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.massapadalaring" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Massa Epigolotis :
+        <q-radio v-model="store.f6b.massaepiglotesis" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.massaepiglotesis" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Obesitas :
+        <q-radio v-model="store.f6b.obesitas" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.obesitas" val="Tidak" label="Tidak" color="cyan"
+          :update:model-value="store.f6b.keteranganobesitas = ''" />
+        <q-input v-if="store.f6b.obesitas === 'Ya'" v-model="store.f6b.keteranganobesitas" label="Keterangan" dense
+          type="text" autogrow />
+      </div>
+      <div class="q-ml-xl q-pl-md">iii. Disrupted or Distorted</div>
+      <div class="q-ml-xl q-pl-xl">Kelainan tulang belakang leher :
+        <q-radio v-model="store.f6b.kelainantulangbelakangleher" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.kelainantulangbelakangleher" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Cedera pada leher :
+        <q-radio v-model="store.f6b.cederapadaleher" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.cederapadaleher" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-md">iv. Stiff Lung or Cervical Spine</div>
+      <div class="q-ml-xl q-pl-xl">Pengembangan dada kiri kanan simetris :
+        <q-radio v-model="store.f6b.pengembangandadakirikanansimetris" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.pengembangandadakirikanansimetris" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-xl q-pl-xl">Pengembangan dada depan belakang simetris :
+        <q-radio v-model="store.f6b.pengembangandadadepanbelakangsimetris" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.pengembangandadadepanbelakangsimetris" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md">Bentuk thorax:</div>
+      <div class="q-ml-xl q-pl-md">Pola napas:
+        <q-option-group v-model="store.f6b.polanafas" :options="optpolanafas" color="cyan" type="checkbox" inline />
+      </div>
+      <div class="q-ml-md">Penggunaan otot bantu napa:
+        <q-radio v-model="store.f6b.penggunaanototbantunafas" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.penggunaanototbantunafas" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md">Pernapasan cuping hidung:
+        <q-radio v-model="store.f6b.pernapasancupinghidung" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.pernapasancupinghidung" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md">Perkusi paru:
+        <q-radio v-model="store.f6b.perkusiparu" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.perkusiparu" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md q-mb-md">Suara napas:
+        <q-option-group v-model="store.f6b.suaranapas" :options="optsuaranapas" color="cyan" type="checkbox" inline />
+      </div>
+      <div class="text-weight-bold q-ml-md ">B2 (Blood)</div>
+      <div class="q-ml-md">Nyeri dada: <q-radio v-model="store.f6b.nyeridada" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.nyeridada" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md">Konjungtiva: <q-radio v-model="store.f6b.konjungtiva" val="Anemis" label="Anemis"
+          color="cyan" />
+        <q-radio v-model="store.f6b.konjungtiva" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md">Kulit Pucat: <q-radio v-model="store.f6b.kulitpucat" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.kulitpucat" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md">CRT: <q-radio v-model="store.f6b.crt" val="< 2 detik" label="< 2 detik" color="cyan" />
+        <q-radio v-model="store.f6b.crt" val="> 2 detik" label="> 2 detik" color="cyan" />
+      </div>
+      <div class="q-ml-md">Pembesaran vena jugularis:
+        <q-radio v-model="store.f6b.pembesaranvenajugularis" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranvenajugularis" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="row items-center">
+        <div class="col-3 q-ml-md">Ictus cordis:
+          <q-radio v-model="store.f6b.ictuscordis" val="+" label="+" color="cyan" />
+          <q-radio v-model="store.f6b.ictuscordis" val="-" label="-" color="cyan" />
+        </div>
+        <div class="col-auto q-pr-sm">
+          Pelebaran :
+        </div>
+        <div class="col-1 q-pl-sm">
+          <q-input v-model="store.f6bpelebaran" type="text" dense autogrow />
+        </div>
+      </div>
+      <div class="row items-center">
+        <div class="col-3 q-ml-md">Perdarahan:
+          <q-radio v-model="store.f6b.perdarahan" val="Ada" label="Ada" color="cyan" />
+          <q-radio v-model="store.f6b.perdarahan" val="Tidak" label="Tidak" color="cyan" @click="moans(6)" />
+        </div>
+        <div class="col-auto q-pr-sm">
+          Lokasi perdarahan :
+        </div>
+        <div class="col-1 q-pl-sm">
+          <q-input v-model="store.f6b.lokasiperdarahan" type="text" dense autogrow
+            v-if="store.f6b.perdarahan === 'Ada'" />
+        </div>
+      </div>
+      <div class="row items-center">
+        <div class="col-auto q-ml-md">Akral : </div>
+        <div class="col-auto q-pl-sm">
+          <q-input v-model="store.f6b.akral" type="text" dense autogrow />
+        </div>
+      </div>
+      <div class="row items-center">
+        <div class="col-auto q-ml-md">Pulsasi pada dinding torak teraba:
+        </div>
+        <div class="col-auto q-pl-sm">
+          <q-radio v-model="store.f6b.pulsasipadadindingtorak" val="Lemah" label="Lemah" color="cyan" />
+          <q-radio v-model="store.f6b.pulsasipadadindingtorak" val="Kuat" label="Kuat" color="cyan" />
+          <q-radio v-model="store.f6b.pulsasipadadindingtorak" val="Tidak teraba" label="Tidak teraba" color="cyan" />
+        </div>
+      </div>
+      <div class="row items-center">
+        <div class="col-auto q-ml-md">BJ I:
+        </div>
+        <div class="col-auto q-pl-sm">
+          <q-radio v-model="store.f6b.bji" val="tunggal" label="tunggal" color="cyan" />
+          <q-radio v-model="store.f6b.bji" val="ganda" label="ganda" color="cyan" />
+          <q-radio v-model="store.f6b.bji" val="regular" label="regular" color="cyan" />
+          <q-radio v-model="store.f6b.bji" val="irreguler" label="irreguler" color="cyan" />
+        </div>
+      </div>
+      <div class="row items-center">
+        <div class="col-auto q-ml-md">BJ II:
+        </div>
+        <div class="col-auto q-pl-sm">
+          <q-radio v-model="store.f6b.bjii" val="tunggal" label="tunggal" color="cyan" />
+          <q-radio v-model="store.f6b.bjii" val="ganda" label="ganda" color="cyan" />
+          <q-radio v-model="store.f6b.bjii" val="regular" label="regular" color="cyan" />
+          <q-radio v-model="store.f6b.bjii" val="irreguler" label="irreguler" color="cyan" />
+        </div>
+      </div>
+      <div class="col-auto q-ml-md">Bunyi jantung tambahan:</div>
+      <div class="row items-center">
+        <div class="col-2 q-ml-md">BJ III
+          <q-radio v-model="store.f6b.bjiii" val="+" label="+" color="cyan" />
+          <q-radio v-model="store.f6b.bjiii" val="-" label="-" color="cyan" />
+        </div>
+        <div class="col-2 q-pl-sm">Gallop Rhythm
+          <q-radio v-model="store.f6b.galloprhythm" val="+" label="+" color="cyan" />
+          <q-radio v-model="store.f6b.galloprhythm" val="-" label="-" color="cyan" />
+        </div>
+        <div class="col-2 q-pl-sm">Murmur
+          <q-radio v-model="store.f6b.murmur" val="+" label="+" color="cyan" />
+          <q-radio v-model="store.f6b.murmur" val="-" label="-" color="cyan" />
+        </div>
+      </div>
+      <div class="text-weight-bold q-ml-md ">B3 (Brain)</div>
+      <div class=" q-ml-md"><q-option-group v-model="store.f6b.b3" :options="optb3" color="cyan" type="checkbox"
+          inline /></div>
+      <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm text-weight-medium">
+          Pupil
+        </div>
+        <q-option-group v-model="store.f6b.pupil" :options="optpupil" color="cyan" type="checkbox" inline />
+      </div>
+      <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm text-weight-medium">
+          Reflek
+        </div>
+
+        <q-option-group v-model="store.f6b.reflek" :options="optreflek" color="cyan" type="checkbox" inline />
+      </div>
+      <div class="text-weight-bold q-ml-md ">B4 (Bladder)</div>
+      <div class="q-ml-lg">Nyeri saat BAK
+        <q-radio v-model="store.f6b.nyerisaatbak" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.nyerisaatbak" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Urine disertai darah
+        <q-radio v-model="store.f6b.urinedisertaidarah" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.urinedisertaidarah" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Kateter
+        <q-radio v-model="store.f6b.kateter" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.kateter" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Nyeri tekan pada Ginjal
+        <q-radio v-model="store.f6b.kateter" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.kateter" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Pembesaran pada Ginjal
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Ya" label="Ya" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm text-weight-medium">
+          Jumlah urine:
+        </div>
+        <q-input v-model="store.f6b.jumlahurine" type="text" dense autogrow />cc
+      </div>
 
       <div class="q-mt-md text-right q-gutter-sm print-hide">
         <q-btn label="Simpan" color="red" />
@@ -411,6 +646,50 @@ const optlookexternaly = [
   { label: 'Gigi Goyang', value: 'Gigi Goyang' },
   { label: 'Gigi Maju', value: 'Gigi Maju' }
 ]
+const optpolanafas = [
+  { label: 'Eupnea', value: 'Eupnea' },
+  { label: 'Bradypnea', value: 'Bradypnea' },
+  { label: 'Tchypnea', value: 'Tchypnea' },
+  { label: 'Apneat', value: 'Apnea' },
+  { label: 'Hyperapnea', value: 'Hyperapnea' },
+  { label: 'Cheyne-Stokes', value: 'Cheyne-Stokes' },
+  { label: 'Boit`s', value: 'Boit`s' },
+  { label: 'Kussmaul`s', value: 'Kussmaul`s' },
+  { label: 'Apneustic', value: 'Apneustic' }
+]
+const optsuaranapas = [
+  { label: 'Trakeal', value: 'Trakeal' },
+  { label: 'bronchial', value: 'bronchial' },
+  { label: 'bronkovesikular', value: 'bronkovesikular' },
+  { label: 'vesikuler', value: 'vesikuler' },
+  { label: 'ronchi', value: 'ronchi' },
+  { label: 'wheezing', value: 'wheezing' },
+  { label: 'stridor', value: 'stridor' },
+
+]
+const optb3 = [
+  { label: 'gelisah', value: 'gelisah' },
+  { label: 'kaku kuduk', value: 'kaku kuduk' },
+  { label: 'kejang', value: 'kejang' },
+  { label: 'tremor', value: 'tremor' },
+  { label: 'nyeri kepala', value: 'nyeri kepala' },
+]
+
+const optpupil = [
+  { label: 'isokor', value: 'isokor' },
+  { label: 'unisokor', value: 'unisokor' },
+  { label: 'midriasis', value: 'midriasis' },
+  { label: 'miosis', value: 'miosis' },
+  { label: 'tidak ada reaksi', value: 'tidak ada reaksi' },
+]
+
+const optreflek = [
+  { label: 'normal', value: 'normal' },
+  { label: 'abnormal', value: 'abnormal' },
+  { label: 'parese ', value: 'parese ' },
+  { label: 'plegi ', value: 'plegi ' },
+]
+
 const store = usePengkajianAnastesiStore()
 defineProps({
   pasien: {
@@ -418,7 +697,21 @@ defineProps({
     default: null
   }
 })
-
+function moans(val) {
+  if (val === 1) {
+    store.f6b.keteranganmaskseal = ''
+  } else if (val === 2) {
+    store.f6b.keteranganobesity = ''
+  } else if (val === 3) {
+    store.f6b.keteranganage = ''
+  } else if (val === 4) {
+    store.f6b.keteranganotooth = ''
+  } else if (val === 5) {
+    store.f6b.keteranganstiffsnoring = ''
+  } else if (val === 6) {
+    store.f6b.lokasiperdarahan = ''
+  }
+}
 
 const printObj = {
   id: 'printMe',
