@@ -18,15 +18,15 @@
             <div class="col-6">
               <div class="row q-mb-xs">
                 <div class="col-4 label">Nama</div>
-                <div class="col-8">: {{ storepasien.pasien.nama }}</div>
+                <div class="col-8">: {{ pasien.pasien.nama }}</div>
               </div>
               <div class="row q-mb-xs">
                 <div class="col-4 label">No RM</div>
-                <div class="col-8">: {{ storepasien.pasien.norm }}</div>
+                <div class="col-8">: {{ pasien.pasien.norm }}</div>
               </div>
               <div class="row q-mb-xs">
                 <div class="col-4 label">NIK</div>
-                <div class="col-8">: {{ storepasien.pasien.nik }}</div>
+                <div class="col-8">: {{ pasien.pasien.nik }}</div>
               </div>
             </div>
 
@@ -34,15 +34,15 @@
             <div class="col-6">
               <div class="row q-mb-xs">
                 <div class="col-5 label">Diagnosis Medis</div>
-                <div class="col-7">: {{ storepasien.pasien.diagnosa }}</div>
+                <div class="col-7">: {{ pasien.pasien.diagnosa }}</div>
               </div>
               <div class="row q-mb-xs">
                 <div class="col-5 label">Tgl Pemeriksaan</div>
-                <div class="col-7">: {{ storepasien.pasien.tgl_mrs }}</div>
+                <div class="col-7">: {{ pasien.pasien.tgl_mrs }}</div>
               </div>
               <div class="row q-mb-xs">
                 <div class="col-5 label">Ruang</div>
-                <div class="col-7">: {{ storepasien.pasien.ruang_ranap }}</div>
+                <div class="col-7">: {{ pasien.pasien.ruang_ranap }}</div>
               </div>
             </div>
           </div>
@@ -118,12 +118,15 @@
 </template>
 <script setup>
 import { useAssasementPraAnastesiStore } from 'src/stores/master/pelayanan/assesment_pra_anastesi'
-import { useListPasienAnastesiStore } from 'src/stores/master/pelayanan/listpasienanastesi'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 const store = useAssasementPraAnastesiStore()
-const storepasien = useListPasienAnastesiStore()
-
-
+const props = defineProps({
+  pasien: {
+    type: Object,
+    default: null
+  }
+})
+console.log('PROPS', props?.pasien)
 const opsiASA = [
   { label: 'I', value: 'I' },
   { label: 'II', value: 'II' },
@@ -140,7 +143,7 @@ const opsiJenisAnastesi = [
 ]
 
 function simpan() {
-  store.form.noreg = storepasien.pasien.noreg
+  store.form.noreg = props.pasien.noreg
   store.simpanData()
 }
 
@@ -149,6 +152,25 @@ const printObj = computed(() => ({
   popTitle: 'Asesmen Pra Anastesi',
   preview: false
 }))
+
+
+watch(
+  () => props.pasien?.assasement_pra_anastesi,
+  (val) => {
+    if (!val) return
+
+    // mapping langsung ke form
+    store.form.noreg = val.noreg ?? null
+    store.form.klassifikasi_asa = val.klassifikasi_asa ?? null
+
+    store.form.jenis_anastesi = val.jenis_anastesi ?? null
+    store.form.teknik_anastesi = val.teknik_anastesi ?? null
+    store.form.indikasi = val.indikasi ?? null
+    store.form.nama_pelaksana = val.nama_pelaksana ?? null
+    store.form.kode_user = val.kode_user ?? null
+  },
+  { immediate: true }
+)
 </script>
 <style>
 .label {

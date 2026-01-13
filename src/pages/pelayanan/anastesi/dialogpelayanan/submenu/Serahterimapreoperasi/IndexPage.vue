@@ -7,6 +7,46 @@
           <div class="text-weight-bold text-h6 text-center">Serah Terima Pre Operasi</div>
         </q-card-section>
       </q-card>
+      <!-- IDENTITAS -->
+      <q-card flat class="q-mb-xs print-only">
+        <q-card-section>
+
+          <div class="row q-col-gutter-xl">
+            <!-- KIRI -->
+            <div class="col-6">
+              <div class="row q-mb-xs">
+                <div class="col-4 label">Nama</div>
+                <div class="col-8">: {{ pasien.pasien.nama }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-4 label">No RM</div>
+                <div class="col-8">: {{ pasien.pasien.norm }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-4 label">NIK</div>
+                <div class="col-8">: {{ pasien.pasien.nik }}</div>
+              </div>
+            </div>
+
+            <!-- KANAN -->
+            <div class="col-6">
+              <div class="row q-mb-xs">
+                <div class="col-5 label">Diagnosis Medis</div>
+                <div class="col-7">: {{ pasien.pasien.diagnosa }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-5 label">Tgl Pemeriksaan</div>
+                <div class="col-7">: {{ pasien.pasien.tgl_mrs }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-5 label">Ruang</div>
+                <div class="col-7">: {{ pasien.pasien.ruang_ranap }}</div>
+              </div>
+            </div>
+          </div>
+
+        </q-card-section>
+      </q-card>
 
       <q-card class="q-mb-sm" flat>
         <q-card-section>
@@ -128,12 +168,10 @@
 </template>
 
 <script setup>
-import { useListPasienAnastesiStore } from 'src/stores/master/pelayanan/listpasienanastesi'
 import { useSerahterimaPreOperasiStore } from 'src/stores/master/pelayanan/serahterimapreoperasi'
-import { computed } from 'vue'
-const storepasien = useListPasienAnastesiStore()
+import { computed, watch } from 'vue'
 const store = useSerahterimaPreOperasiStore()
-defineProps({
+const props = defineProps({
   pasien: {
     type: Object,
     default: null
@@ -195,7 +233,7 @@ function modelJenisDarah() {
   if (!OpsiPersiapanOperasi.value.includes('Jenis Darah')) store.form.jumlah_darah = null
 }
 function simpan() {
-  store.form.noreg = storepasien.pasien.noreg
+  store.form.noreg = props.pasien.noreg
   store.simpanData()
 }
 
@@ -216,8 +254,41 @@ const printObj = computed(() => ({
     emit('close')
   }
 }))
+
+watch(
+  () => props.pasien?.sertipreop,
+  (val) => {
+    if (!val) return
+
+    // mapping langsung ke form
+    store.form.noreg = val.noreg ?? null
+    store.form.kesadaran = val.kesadaran ?? null
+
+    store.form.riwayat_penyakit = val.riwayat_penyakit ?? null
+    store.form.riwayat_penyakit_lain = val.riwayat_penyakit_lain ?? null
+    store.form.riwayat_alergi_obat = val.riwayat_alergi_obat ?? null
+    store.form.jenis_alergi_obat = val.jenis_alergi_obat ?? null
+    store.form.reaksi_alergi_obat = val.reaksi_alergi_obat ?? null
+    store.form.persiapan_operasi = val.persiapan_operasi ?? null
+    store.form.mulai_puasa = val.mulai_puasa ?? null
+    store.form.alat_kesehatan = val.alat_kesehatan ?? null
+    store.form.alat_kesehatan_lainnya = val.alat_kesehatan_lainnya ?? null
+    store.form.jenis_darah = val.jenis_darah ?? null
+    store.form.jumlah_darah = val.jumlah_darah ?? null
+    store.form.vital_td = val.vital_td ?? null
+    store.form.vital_n = val.vital_n ?? null
+    store.form.vital_s = val.vital_s ?? null
+    store.form.vital_rr = val.vital_rr ?? null
+  },
+  { immediate: true }
+)
 </script>
 <style>
+.print-only,
+.ttd-print {
+  display: none;
+}
+
 @media print {
   @page {
     size: A4;
