@@ -4,7 +4,7 @@
     <div id="printData">
       <q-card class="q-mb-sm" flat>
         <q-card-section>
-          <div class="text-weight-bold text-h6 text-center">Serah Terima Pre Operasi</div>
+          <div class="text-weight-bold text-h6 text-center">Serah Terima Pasien Pre Operasi</div>
         </q-card-section>
       </q-card>
       <!-- IDENTITAS -->
