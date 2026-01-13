@@ -23,23 +23,24 @@
         <q-badge outline color="orange" :label="`${pasien?.sistembayar ?? '-'}`" />
       </div>
     </div> -->
+
     <div class="absolute-bottom">
       <div class="q-pa-md">
         <app-avatar-pasien :key="pasien" :pasien="pasien" width="45px" />
         <div class="text-weight-bold f-12 q-mt-sm">
-          Nama: {{ pasien ? pasien.nama : '-' }}
+          Nama: {{ pasien?.pasien?.nama }}
         </div>
         <div class="text-weight-bold">
           No. RM: {{ pasien ? pasien.norm : '-' }}
         </div>
         <div class="text-teal">
-          Umur: {{ hitungUmur(pasien?.tgl_lahir) }} Thn
+          Umur: {{ pasien?.pasien?.usia }}
         </div>
         <div class="text-yellow text-italic f-10">
           Diagnosa: {{ pasien?.diagnosa ?? '-' }}
         </div>
         <div class="text-yellow text-italic f-10">
-          DPJP: dr. Tirta
+          DPJP: {{ pasien?.dr_operator?.nama ?? '-' }}
         </div>
       </div>
       <!-- <q-bar>
@@ -81,7 +82,7 @@ const emits = defineEmits(['clickMenu'])
 function pilihMenu(item) {
   emits('clickMenu', item)
 }
-defineProps({
+const props = defineProps({
   pasien: {
     type: Object,
     default: null
@@ -96,19 +97,8 @@ defineProps({
   }
 })
 
-function hitungUmur(tglLahir) {
-  const today = new Date()
-  const birthDate = new Date(tglLahir)
+console.log('props', props)
 
-  let umur = today.getFullYear() - birthDate.getFullYear()
-  const bulan = today.getMonth() - birthDate.getMonth()
-
-  if (bulan < 0 || (bulan === 0 && today.getDate() < birthDate.getDate())) {
-    umur--
-  }
-
-  return umur
-}
 
 // const refBilling = ref(null)
 // function bukaBill() {

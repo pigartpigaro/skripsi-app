@@ -55,8 +55,12 @@
         const resp = await api.get('/v1/transaksi/kunjungan/terima-pasien', params)
         // console.log('resp Data Store', resp)
         if (resp.status === 200) {
-          this.itemsrincian = resp?.data?.data
-          this.meta = resp?.data?.meta
+          const findPasien = this.items.findIndex(x => x?.noreg === resp?.data?.noreg)
+          if(findPasien !== -1) {
+            this.items[findPasien] = resp?.data
+          }
+          console.log('findPasien', this.items[findPasien])
+          this.pasien = resp?.data
           this.loading = false
         }
         this.loadingcari = false

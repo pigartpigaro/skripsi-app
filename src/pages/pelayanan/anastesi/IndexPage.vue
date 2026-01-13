@@ -25,7 +25,7 @@ import IndexPage from './dialogpelayanan/IndexPage.vue';
 const store = useListPasienAnastesiStore()
 
 function opendialog(pasien) {
-  // store.pasien = pasien
+  store.pasien = pasien
   console.log('pasien', pasien)
   store.terimadata(pasien.id)
   store.dialogPelayanan = true
