@@ -197,6 +197,7 @@ function modelJenisDarah() {
 }
 function simpan() {
   console.log('DATA FORM:', store.form)
+  store.simpanData()
 }
 
 const printObj = computed(() => ({
@@ -205,13 +206,13 @@ const printObj = computed(() => ({
   preview: false,
   extraCss: '',
   extraHead: '',
-  beforeOpenCallback(vue) {
+  beforeOpenCallback() {
     console.log('wait...')
   },
-  openCallback(vue) {
+  openCallback() {
     console.log('opened')
   },
-  closeCallback(vue) {
+  closeCallback() {
     console.log('closePrint')
     emit('close')
   }
