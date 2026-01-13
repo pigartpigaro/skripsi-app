@@ -55,6 +55,7 @@ const props = defineProps({
   }
 })
 
+
 const menus = ref([
   {
     name: 'SerahTerimaPreOperasi ',
@@ -186,6 +187,7 @@ function menuDiganti(val) {
 }
 
 onMounted(() => {
+
   const link = route?.path
   const pathSegments = link.split('/').filter(Boolean)
   filteredMenus.value = menus.value?.filter(menu => menu?.route?.some(r => pathSegments.includes(r))) || []

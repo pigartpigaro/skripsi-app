@@ -3,176 +3,218 @@
     <div id="printMe" class="q-pa-md full-width full-height bg-white">
       <div class="text-weight-bold text-h6 text-center q-pb-md">Assesment Pra Induksi</div>
       <q-separator spaced style="border-top: 1px solid #000" />
-
-      <div class="q-ml-md row items-center no-wrap">
-        <div class="q-mr-sm text-weight-medium">
-          Tanggal:
-        </div>
-        <q-input v-model="store.form.tanggal" dense type="text" autogrow>
-          <template v-slot:append>
-            <q-icon name="event">
-              <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                <q-date v-model="store.form.tanggal" mask="DD MMMM YYYY" />
-              </q-popup-proxy>
-            </q-icon>
-          </template>
-        </q-input>
-        <!-- <app-input-date-human :model="store.tanggaldisplay.tgldari" label="Tanggal" dense autogrow @db-model="setTo"
+      <q-form @submit="simpan" class="q-gutter-sm">
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm text-weight-medium">
+            Tanggal:
+          </div>
+          <q-input v-model="store.form.tanggal" dense type="text" autogrow @db-model="setTo" @set-display="setToDisp">
+            <template v-slot:append>
+              <q-icon name="event">
+                <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                  <q-date v-model="store.form.tanggal" mask="YYYY-MM-DD" />
+                </q-popup-proxy>
+              </q-icon>
+            </template>
+          </q-input>
+          <!-- <app-input-date-human :model="store.tanggaldisplay.tgldari" label="Tanggal" dense autogrow @db-model="setTo"
           @set-display="setToDisp" /> -->
-      </div>
-      <div class="q-ml-md row q-mt-md items-center no-wrap">
-        <div class="q-mr-sm text-weight-medium">
-          Kesadaran:
         </div>
-        <!-- <q-input v-model="store.form.kesadaran" dense type="text" autogrow /> -->
-      </div>
-      <div class="q-ml-md row items-center no-wrap">
-        <div class="q-mr-sm">
-          TD:
+        <div class="q-ml-md row q-mt-md items-center no-wrap">
+          <div class="q-mr-sm text-weight-medium">
+            Kesadaran:
+          </div>
+          <!-- <q-input v-model="store.form.kesadaran" dense type="text" autogrow /> -->
         </div>
-        <q-input v-model="store.form.td" dense type="text" autogrow />
-        <!-- <q-input v-model="store.form.kesadaran" dense type="text" autogrow /> -->
-      </div>
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            TD:
+          </div>
+          <q-input v-model="store.form.td" dense type="number" autogrow />
+          <!-- <q-input v-model="store.form.kesadaran" dense type="text" autogrow /> -->
+        </div>
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            N:
+          </div>
+          <q-input v-model="store.form.n" dense type="number" autogrow />
+          <!-- <q-input v-model="store.form.kesadaran" dense type="text" autogrow /> -->
+        </div>
 
-      <!-- VITAL SIGN -->
-      <div class="q-ml-md row items-center no-wrap">
-        <div class="row items-center q-mb-xs">
-          <div class="col-3">N</div>
-          <div class="col-9">
-            <q-input dense v-model="store.form.nadi" suffix="x / menit" />
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            RR:
           </div>
+          <q-input v-model="store.form.rr" dense type="number" autogrow />
         </div>
-      </div>
-      <div class="q-ml-md row items-center no-wrap">
-        <div class="row items-center q-mb-xs">
-          <div class="col-3">RR</div>
-          <div class="col-9">
-            <q-input dense v-model="store.form.rr" suffix="x / menit" />
-          </div>
-        </div>
-      </div>
-      <div class="q-ml-md row items-center no-wrap">
-        <div class="row items-center q-mb-xs">
-          <div class="col-3">Suhu</div>
-          <div class="col-9">
-            <q-input dense v-model="store.form.suhu" suffix="°C" />
-          </div>
-        </div>
-      </div>
-      <div class="q-ml-md row items-center no-wrap">
-        <div class="row items-center q-mb-xs">
-          <div class="col-3">Saturasi O2</div>
-          <div class="col-9">
-            <q-input dense v-model="store.form.spo2" suffix="%" />
-          </div>
-        </div>
-      </div>
-      <div class="q-ml-md row items-center no-wrap">
-        <div class="row items-center q-mb-xs">
-          <div class="col-3">Gambaran EKG</div>
-          <div class="col-9">
-            <q-input dense v-model="store.form.ekg" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="q-ml-md row items-center no-wrap">
-      <!-- IV LINE -->
-      <div class="q-mt-md">
-        <div class="row items-center">
-          <div class="col-3">Pemasangan IV Line</div>
-          <div class="col-9">
-            <q-radio v-model="store.form.ivline" val="1" label="1 buah" />
-            <q-radio v-model="store.form.ivline" val="2" label="2 buah" />
-          </div>
-        </div>
-      </div>
 
-      <!-- CAIRAN & DARAH -->
-      <div class="row items-center q-mt-sm">
-        <div class="col-3">Cairan infus & darah</div>
-        <div class="col-9">
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            Suhu:
+          </div>
+          <q-input v-model="store.form.suhu" dense type="number" autogrow />
+        </div>
+
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            Saturasi O₂:
+          </div>
+          <q-input v-model="store.form.saturasi" dense type="number" autogrow />
+        </div>
+
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            Gambaran EKG:
+          </div>
+          <q-input v-model="store.form.ekg" dense type="number" autogrow />
+        </div>
+
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            Pemasangan IV Line:
+          </div>
+          <q-radio v-model="store.form.ivline" val="1" label="1 buah" />
+          <q-radio v-model="store.form.ivline" val="2" label="2 buah" />
+        </div>
+
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            Cairan infus & darah:
+          </div>
           <q-radio v-model="store.form.cairan" val="tidak" label="Tidak" />
           <q-radio v-model="store.form.cairan" val="siap" label="Siap" />
           <q-input dense v-if="store.form.cairan === 'siap'" v-model="store.form.jenis_cairan" placeholder="Jenis"
             class="q-ml-sm" style="max-width:200px" />
         </div>
-      </div>
 
-      <!-- MESIN ANESTESI -->
-      <div class="row items-center q-mt-sm">
-        <div class="col-3">Mesin Anestesi</div>
-        <div class="col-9">
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            Mesin Anastesi:
+          </div>
           <q-radio v-model="store.form.mesin" val="siap" label="Siap" />
           <q-radio v-model="store.form.mesin" val="tidak" label="Tidak" />
         </div>
-      </div>
 
-      <!-- GENERAL ANESTESI -->
-      <div class="q-mt-md">
-        <div class="text-weight-bold">General Anestesi</div>
-
-        <q-radio v-model="store.form.ga" val="siap" label="Siap" />
-        <q-radio v-model="store.form.ga" val="tidak" label="Tidak" />
-
-        <div class="q-ml-lg q-mt-sm">
-          <q-input dense v-model="store.form.scope" label="Scope" />
-          <q-input dense v-model="store.form.tube" label="Tube" />
-          <q-input dense v-model="store.form.airway" label="Airway" />
-          <q-input dense v-model="store.form.tape" label="Tape" />
-          <q-input dense v-model="store.form.introducer" label="Introducer" />
-          <q-input dense v-model="store.form.connector" label="Connector" />
-          <q-input dense v-model="store.form.suction" label="Suction" />
-        </div>
-      </div>
-
-      <!-- REGIONAL ANESTESI -->
-      <div class="q-mt-md">
-        <div class="text-weight-bold">Regional Anestesi</div>
-
-        <q-radio v-model="store.form.ra" val="siap" label="Siap" />
-        <q-radio v-model="store.form.ra" val="tidak" label="Tidak" />
-
-        <q-input dense v-model="store.form.alat_ra" label="Alat yang disiapkan" class="q-ml-lg" />
-      </div>
-
-      <!-- OBAT -->
-      <!-- <div class="q-mt-md">
-        <div class="text-weight-bold">Obat Anestesi</div>
-        <q-input dense v-for="n in 3" :key="'oa' + n" v-model="store.form.obat_anestesi[n]" />
-      </div> -->
-
-      <!-- <div class="q-mt-md">
-        <div class="text-weight-bold">Obat Emergency</div>
-        <q-radio v-model="store.form.obat_emergency" val="siap" label="Siap" />
-        <q-radio v-model="store.form.obat_emergency" val="tidak" label="Tidak" />
-        <q-input dense v-for="n in 3" :key="'oe' + n" v-model="store.form.obat_emergency_list[n]" />
-      </div> -->
-
-      <!-- RIWAYAT -->
-      <div class="q-mt-md">
-        <div class="row items-center">
-          <div class="col-3">Penyakit</div>
-          <div class="col-9">
-            <q-radio v-model="store.form.penyakit" val="tidak" label="Tidak" />
-            <q-radio v-model="store.form.penyakit" val="ada" label="Ada" />
-            <q-input dense v-if="store.form.penyakit === 'ada'" class="q-ml-sm" />
+        <!-- GENERAL ANESTESI -->
+        <div class="q-mt-md">
+          <div class="text-weight-bold q-ml-md">Kesiapan Peralatan Anestesi</div>
+          <div class="q-ml-md row items-center no-wrap">
+            <div class="q-mr-sm">
+              General Anestesi:
+            </div>
+            <q-radio v-model="store.form.ga" val="siap" label="Siap" />
+            <q-radio v-model="store.form.ga" val="tidak" label="Tidak" />
+          </div>
+          <div class="q-ml-lg q-mt-sm">
+            <q-input dense v-model="store.form.scope" label="Scope" />
+            <q-input dense v-model="store.form.tube" label="Tube" />
+            <q-input dense v-model="store.form.airway" label="Airway" />
+            <q-input dense v-model="store.form.tape" label="Tape" />
+            <q-input dense v-model="store.form.introducer" label="Introducer" />
+            <q-input dense v-model="store.form.connector" label="Connector" />
+            <q-input dense v-model="store.form.suction" label="Suction" />
           </div>
         </div>
-      </div>
-
-      <div class="row items-center q-mt-sm">
-        <div class="col-3">Catatan Lain</div>
-        <div class="col-9">
-          <q-input dense v-model="store.form.catatan" />
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            Regional Anestesi:
+          </div>
+          <q-radio v-model="store.form.regionalanastesi" val="siap" label="Siap" />
+          <q-radio v-model="store.form.regionalanastesi" val="tidak" label="Tidak" />
         </div>
-      </div>
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            Alat Yang disiapkan:
+          </div>
+          <q-radio v-model="store.form.alatyangdisiapkan" val="siap" label="Siap" />
+          <q-radio v-model="store.form.alatyangdisiapkan" val="tidak" label="Tidak" />
+        </div>
+        <!-- <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm">
+          Alat Yang disiapkan:
+        </div>
+        <q-radio v-model="store.form.ga" val="siap" label="Siap" />
+        <q-radio v-model="store.form.ga" val="tidak" label="Tidak" />
+      </div> -->
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="col-2 q-mr-sm">
+            Obat Anastesi:
+          </div>
+          <div class="col-9">
+            <q-input dense v-model="store.form.obatanestesi" autogrow />
+          </div>
+        </div>
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="col-2 q-mr-sm">
+            Obat Emergency:
+          </div>
+          <div class="col-9">
+            <q-input dense v-model="store.form.obatemergency" autogrow />
+          </div>
+        </div>
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            Penyakit Yang Diderita:
+          </div>
+          <q-radio v-model="store.form.penyakityangdiderita" val="tidak" label="Tidak" />
+          <q-radio v-model="store.form.penyakityangdiderita" val="siap" label="Siap" />
+          <q-input dense v-if="store.form.penyakityangdiderita === 'siap'"
+            v-model="store.form.keteranganpenyakityangdiderita" placeholder="Jenis" class="q-ml-sm"
+            style="max-width:200px" />
+        </div>
 
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            Gigi Palsu:
+          </div>
+          <q-radio v-model="store.form.gigipalsu" val="Tidak Ada" label="Tidak Ada" />
+          <q-radio v-model="store.form.gigipalsu" val="Ada, Permanen" label="Ada, Permanen" />
+          <q-radio v-model="store.form.gigipalsu" val="Ada, Sudah Dilepas" label="Ada, Sudah Dilepas" />
+        </div>
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            Alergi:
+          </div>
+          <q-radio v-model="store.form.alergi" val="Tidak Ada" label="Tidak Ada" />
+          <q-radio v-model="store.form.alergi" val="Ada" label="Ada" />
+          <q-input dense v-if="store.form.alergi === 'Ada'" v-model="store.form.keteranganalergi" placeholder="Jenis"
+            class="q-ml-sm" style="max-width:200px" />
+        </div>
+        <div class="q-ml-md row items-center no-wrap">
+          <div class="q-mr-sm">
+            Lensa Kontak:
+          </div>
+          <q-radio v-model="store.form.lensakontak" val="Tidak Ada" label="Tidak Ada" />
+          <q-radio v-model="store.form.lensakontak" val="Ada Sudah Dilepas" label="Ada Sudah Dilepas" />
+          <q-input dense v-if="store.form.lensakontak === 'Ada'" v-model="store.form.keteranganlensakontak"
+            placeholder="Jenis" class="q-ml-sm" style="max-width:200px" />
+        </div>
+        <div class="q-ml-md row items-center no-wrap ">
+          <div class="q-mr-sm">
+            Penggunaan Obat sebelumnya:
+          </div>
+          <q-radio v-model="store.form.penggunaanobatsebelumnya" val="Tidak Ada" label="Tidak Ada" />
+          <q-radio v-model="store.form.penggunaanobatsebelumnya" val="Ada" label="Ada" />
+          <div class="q-mr-sm">
+            <q-input dense v-if="store.form.penggunaanobatsebelumnya === 'Ada'"
+              v-model="store.form.keteranganpenggunaanobatsebelumnya" placeholder="Jelaskan" class="q-ml-md"
+              style="width:500px" autogrow />
+          </div>
+        </div>
 
-      <div class="q-mt-md text-right q-gutter-sm print-hide">
-        <q-btn label="Simpan" color="red" />
-        <q-btn label="Cetak" color="red" v-print="printObj" />
-      </div>
+        <div class="q-ml-md row items-center q-mt-sm">
+          <div class="col-auto">Catatan Lain</div>
+          <div class="col-9">
+            <q-input dense v-model="store.form.catatan" />
+          </div>
+        </div>
+
+        <div class="q-mt-md text-right q-gutter-sm print-hide">
+          <q-btn label="Simpan" type="submit" color="red" :loading="store.loadingSave" :disabled="store.loadingSave" />
+          <q-btn label="Cetak" color="red" v-print="printObj" />
+        </div>
+      </q-form>
+      <!-- </div> -->
     </div>
   </q-page>
 </template>
@@ -180,13 +222,25 @@
 
 import { useAssesmentPraInduksiStore } from 'src/stores/transaksi/assesmenprainduksi';
 
+const props = defineProps({
+  pasien: {
+    type: Object,
+    default: null
+  }
+})
+
 const store = useAssesmentPraInduksiStore()
 function setTo(val) {
-  store.params.from = val
+  store.form.tanggal = val
 }
 
 function setToDisp(val) {
-  store.tanggaldisplay.tgldari = val
+  store.tanggaldisplay.tanggal = val
+}
+
+function simpan() {
+  store.form.noreg = props.pasien.noreg
+  store.simpanData()
 }
 
 const printObj = {

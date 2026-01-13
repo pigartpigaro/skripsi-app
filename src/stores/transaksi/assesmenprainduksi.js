@@ -9,13 +9,43 @@ export const useAssesmentPraInduksiStore = defineStore('assesment-pra-induksi-st
     loadingSave: false,
     dialogPelayanan: false,
     pasien: {},
-    items: [],
+    itemsprainduksi: [],
     meta: {},
     form: {
-      tanggal: date.formatDate(Date.now(), 'YYYY MMMM DD'),
+      tanggal: date.formatDate(Date.now(), 'YYYY-MM-DD'),
+      // kesadaran: [],
+      td: null,
+      n: null,
+      rr: null,
+      suhu: null,
+      saturasi: null,
+      ekg: null,
+      ivline: null,
+      cairaninfus: null,
+      darah: null,
+      ga: null,
+      scope: null,
+      tube: null,
+      airway: null,
+      tape: null,
+      introducer: null,
+      connector: null,
+      suction: null,
+      regionalanastesi: null,
+      alatyangdisiapkan: null,
+      obatanestesi: null,
+      obatemergency: null,
+      penyakityangdiderita: null,
+      alergi: null,
+      keteranganalergi: null,
+      lensakontak: null,
+      keteranganlensakontak: null,
+      penggunaanobatsebelumnya: null,
+      keteranganpenggunaanobatsebelumnya: null,
+      catatan: null,
     },
     tanggaldisplay: {
-      tgldari: date.formatDate(Date.now(), 'DD MMMM YYYY'),
+      tanggal: date.formatDate(Date.now(), 'DD MMMM YYYY'),
     },
 
 
@@ -25,11 +55,11 @@ export const useAssesmentPraInduksiStore = defineStore('assesment-pra-induksi-st
     async simpanData() {
       this.loadingSave = true
       try {
-        const resp = await api.post('v1/master/pekerjaan/save', this.form)
-
-        if (resp.success === true) {
-          this.items.unshift(resp?.data?.data)
-          notifSuccessVue(resp?.data?.message)
+        const resp = await api.post('v1/transaksi/asessement-pra-induksi/simpan', this.form)
+        console.log('resp', resp)
+        if (resp.data.status === true) {
+          this.itemsprainduksi = resp?.data?.data
+          notifSuccessVue(resp?.data.message)
           this.loadingSave = false
           this.initForm()
 

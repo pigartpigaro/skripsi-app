@@ -34,6 +34,10 @@ defineProps({
   menu: {
     type: Object,
     default: null
+  },
+  pasien: {
+    type: Object,
+    default: null
   }
 })
 </script>

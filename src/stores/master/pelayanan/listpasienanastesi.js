@@ -5,11 +5,13 @@
 
   export const useListPasienAnastesiStore = defineStore('list-pasien-anastesi-store', {
     state: () => ({
+      loading: false,
       loadingcari: false,
       loadingSave: false,
       dialogPelayanan: false,
       pasien: {},
       items: [],
+      itemsrincian: [],
       meta: {},
       params: {
         q: '',
@@ -43,6 +45,19 @@
           this.items = resp?.data?.data
           this.meta = resp?.data?.meta
           this.loadingcari = false
+        }
+        this.loadingcari = false
+      },
+      async terimadata(val) {
+        console.log('val', val)
+        this.loading = true
+        const params = { params: { id: val } }
+        const resp = await api.get('/v1/transaksi/kunjungan/terima-pasien', params)
+        // console.log('resp Data Store', resp)
+        if (resp.status === 200) {
+          this.itemsrincian = resp?.data?.data
+          this.meta = resp?.data?.meta
+          this.loading = false
         }
         this.loadingcari = false
       },

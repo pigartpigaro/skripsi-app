@@ -2,7 +2,7 @@
   <q-scroll-area
     :style="`height: calc(100% - ${tinggiDetailPas * 2}px); margin-top: ${tinggiDetailPas}px; border-right: 1px solid #ddd`">
     <q-separator />
-    <list-menu :menus="menus" :menu="menu" @menu-click="(val) => emits('clickMenu', val)" />
+    <list-menu :menus="menus" :menu="menu" :pasien="pasien" @menu-click="(val) => emits('clickMenu', val)" />
   </q-scroll-area>
   <!-- <div
     class="absolute-bottom"
