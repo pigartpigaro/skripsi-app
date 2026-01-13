@@ -35,7 +35,7 @@ export const useSerahterimaPreOperasiStore = defineStore('serahterima-preoperasi
     async simpanData() {
       this.loadingSave = true
       try {
-        const resp = await api.post('v1/transaksi/serah-terima-pre-operasi/save', this.form)
+        const resp = await api.post('v1/transaksi/serah-terima-pre-operasi/simpan', this.form)
 
         if (resp.success === true) {
           this.items.unshift(resp?.data?.data)
