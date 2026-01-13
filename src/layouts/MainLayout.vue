@@ -14,28 +14,15 @@
     </q-header>
 
     <!-- LEFT DRAWER -->
-    <q-drawer
-      show-if-above
-      bordered
-      :mini="miniState"
-      :mini-width="64"
-
-      :width="220"
-      @mouseover="miniState = false"
-      @mouseleave="miniState = true"
-    >
+    <q-drawer show-if-above bordered :mini="miniState" :mini-width="64" :width="220" @mouseover="miniState = false"
+      @mouseleave="miniState = true">
       <q-scroll-area class="fit">
         <q-list padding>
 
           <template v-for="menu in menus" :key="menu.id">
 
             <!-- MENU TANPA CHILD -->
-            <q-item
-              v-if="!menu.children.length"
-              clickable
-              v-ripple
-              :to="menu.route"
-            >
+            <q-item v-if="!menu.children.length" clickable v-ripple :to="menu.route">
               <q-item-section avatar>
                 <q-icon color="primary" :name="menu.icon" />
               </q-item-section>
@@ -46,32 +33,19 @@
             </q-item>
 
             <!-- MENU DENGAN CHILD -->
-            <q-expansion-item
-              v-else
-              :icon="menu.icon"
-              :label="menu.title"
-              expand-separator
-              :default-opened="false"
-              :expand-icon="miniState ? '' : 'keyboard_arrow_down'"
-            >
-            <template #header>
-              <q-item-section avatar>
-                <q-icon :name="menu.icon" color="primary" />
-              </q-item-section>
+            <q-expansion-item v-else :icon="menu.icon" :label="menu.title" expand-separator :default-opened="false"
+              :expand-icon="miniState ? '' : 'keyboard_arrow_down'">
+              <template #header>
+                <q-item-section avatar>
+                  <q-icon :name="menu.icon" color="primary" />
+                </q-item-section>
 
-              <q-item-section v-if="!miniState">
-                <q-item-label>{{ menu.title }}</q-item-label>
-              </q-item-section>
-            </template>
-              <q-item
-                v-for="child in menu.children"
-                :key="child.id"
-
-                clickable
-                v-ripple
-                :to="child.route"
-                class="submenu-item"
-              >
+                <q-item-section v-if="!miniState">
+                  <q-item-label>{{ menu.title }}</q-item-label>
+                </q-item-section>
+              </template>
+              <q-item v-for="child in menu.children" :key="child.id" clickable v-ripple :to="child.route"
+                class="submenu-item">
                 <q-item-section avatar v-if="!miniState" class="submenu-bullet" />
                 <q-item-section v-if="!miniState">
                   <q-item-label>{{ child.title }}</q-item-label>
@@ -194,6 +168,15 @@ const menus = [
         route: '/pelayanan/anastesi',
         name: 'pelayanan.anastesi'
       }
+    ]
+  },
+  {
+    id: 11,
+    title: 'Logout',
+    icon: 'logout',
+    route: '/logout',
+    name: 'logout',
+    children: [
     ]
   },
 

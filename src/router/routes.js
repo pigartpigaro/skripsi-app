@@ -111,6 +111,21 @@ const routes = [
     ]
   },
 
+  {
+    path: '/logout',
+    meta: {
+      requiresAuth: true
+    },
+    beforeEnter: async () => {
+      const { useAuthStore } = await import('src/stores/auth/auth.js')
+      const store = useAuthStore()
+
+      store.logout()
+
+      return { path: '/login', replace: true }
+    }
+  },
+
 
   // {
   //   path: '/',
