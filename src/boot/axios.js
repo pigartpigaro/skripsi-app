@@ -51,6 +51,10 @@ api.interceptors.response.use(
   error => {
     try {
       if (error.response) {
+        // console.log('err', error);
+        if(error.response.status === 401){
+          window.location.href = '/login'
+        }
         notifErr(error.response)
       } else if (error.message?.includes('413')) {
         notifErr({ status: 413, data: { message: 'The file is too large' } })
