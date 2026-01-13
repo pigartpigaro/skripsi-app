@@ -16,15 +16,15 @@
             <div class="col-6">
               <div class="row q-mb-xs">
                 <div class="col-4 label">Nama</div>
-                <div class="col-8">: {{ pasien.pasien.nama }}</div>
+                <div class="col-8">: {{ pasien?.pasien?.nama }}</div>
               </div>
               <div class="row q-mb-xs">
                 <div class="col-4 label">No RM</div>
-                <div class="col-8">: {{ pasien.pasien.norm }}</div>
+                <div class="col-8">: {{ pasien?.pasien?.norm }}</div>
               </div>
               <div class="row q-mb-xs">
                 <div class="col-4 label">NIK</div>
-                <div class="col-8">: {{ pasien.pasien.nik }}</div>
+                <div class="col-8">: {{ pasien?.pasien?.nik }}</div>
               </div>
             </div>
 
@@ -32,15 +32,15 @@
             <div class="col-6">
               <div class="row q-mb-xs">
                 <div class="col-5 label">Diagnosis Medis</div>
-                <div class="col-7">: {{ pasien.pasien.diagnosa }}</div>
+                <div class="col-7">: {{ pasien?.pasien?.diagnosa }}</div>
               </div>
               <div class="row q-mb-xs">
                 <div class="col-5 label">Tgl Pemeriksaan</div>
-                <div class="col-7">: {{ pasien.pasien.tgl_mrs }}</div>
+                <div class="col-7">: {{ pasien?.pasien?.tgl_mrs }}</div>
               </div>
               <div class="row q-mb-xs">
                 <div class="col-5 label">Ruang</div>
-                <div class="col-7">: {{ pasien.pasien.ruang_ranap }}</div>
+                <div class="col-7">: {{ pasien?.pasien?.ruang_ranap }}</div>
               </div>
             </div>
           </div>

@@ -236,7 +236,7 @@ function menuDiganti(val) {
 }
 
 onMounted(() => {
-
+  // store.pasien = props.pasien
   const link = route?.path
   const pathSegments = link.split('/').filter(Boolean)
   filteredMenus.value = menus.value?.filter(menu => menu?.route?.some(r => pathSegments.includes(r))) || []
