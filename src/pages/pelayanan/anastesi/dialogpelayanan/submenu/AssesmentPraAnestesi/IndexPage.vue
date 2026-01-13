@@ -65,7 +65,7 @@
           <div class="row items-center q-mb-sm">
             <div class="col-3">Jenis Anastesi</div>
             <div class="col">
-              <q-option-group v-model="store.form.jenis_anastesi" inline type="checkbox" :options="opsiJenisAnastesi" />
+              <q-option-group v-model="store.form.jenis_anastesi" inline :options="opsiJenisAnastesi" />
             </div>
           </div>
 

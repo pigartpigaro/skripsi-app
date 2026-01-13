@@ -38,17 +38,15 @@
             </div>
             <div class="q-pl-sm row q-col-gutter-sm">
               <div class="col">
-                <q-option-group class="q-col-gutter-md" v-model="store.form.riwayat_alergi_obat" type="checkbox"
+                <q-option-group class="q-col-gutter-md" v-model="store.form.riwayat_alergi_obat"
                   :options="OpsiRiwayatAlergi" @update:model-value="modelRiwayatAlergi" />
               </div>
               <div class="q-pl-xl col-9">
-                <q-input v-if="store.form.riwayat_alergi_obat.includes('Jenis')" v-model="store.form.jenis_alergi_obat"
+                <q-input v-if="store.form.riwayat_alergi_obat === 'Jenis'" v-model="store.form.jenis_alergi_obat"
                   label="Jenis Alergi" outlined dense :rules="[val => !!val || 'Harap Diisi']" />
-                <div style="height:60px"
-                  v-if="store.form.riwayat_alergi_obat.includes('Reaksi') && !store.form.riwayat_alergi_obat.includes('Jenis')" />
-                <q-input v-if="store.form.riwayat_alergi_obat.includes('Reaksi')"
-                  v-model="store.form.reaksi_alergi_obat" label="Reaksi Alergi" outlined dense
-                  :rules="[val => !!val || 'Harap Diisi']" />
+                <div style="height:60px" v-if="store.form.riwayat_alergi_obat === 'Reaksi'" />
+                <q-input v-if="store.form.riwayat_alergi_obat === 'Reaksi'" v-model="store.form.reaksi_alergi_obat"
+                  label="Reaksi Alergi" outlined dense :rules="[val => !!val || 'Harap Diisi']" />
               </div>
             </div>
 
@@ -165,8 +163,8 @@ const OpsiRiwayatAlergi = [
   { value: 'Reaksi', label: 'Reaksi' }
 ]
 function modelRiwayatAlergi(val) {
-  if (!val.includes('Jenis')) store.form.jenis_alergi_obat = null
-  if (!val.includes('Reaksi')) store.form.reaksi_alergi_obat = null
+  if (!val === 'Jenis') store.form.jenis_alergi_obat = null
+  if (!val === 'Reaksi') store.form.reaksi_alergi_obat = null
 }
 const OpsiPersiapanOperasi = [
   { value: 'Surat Persetujuan Operasi', label: 'Surat Persetujuan Operasi' },

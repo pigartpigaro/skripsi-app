@@ -93,18 +93,67 @@ const menus = ref([
     comp: shallowRef(defineAsyncComponent(() => import('./submenu/AssesmentPraInduksi/IndexPage.vue')))
   },
   {
-    name: 'SerahTerimaPasienPreOp',
-    label: 'Serah Terima Pasien Pre Op',
-    icon: 'textsms',
-    route: ['anastesi'],
-    comp: shallowRef(defineAsyncComponent(() => import('./submenu/SerahTerimaPasienPreOp/IndexPage.vue')))
-  },
-  {
     name: 'SurgicalSafetyChecklist',
-    label: 'Surgical Safety Checklist',
+    label: 'Checklist Keselamatan Operasi',
     icon: 'transfer_within_a_station',
     route: ['anastesi'],
     comp: shallowRef(defineAsyncComponent(() => import('./submenu/SurgicalSafetyChecklist/IndexPage.vue')))
+  },
+  {
+    name: 'LaporanAnestesi',
+    label: 'Laporan Anestesi',
+    icon: 'description',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/LaporanAnestesi/IndexPage.vue')))
+  },
+  {
+    name: 'AskanPraAnestesi',
+    label: 'Askan Pra Anestesi',
+    icon: 'vaccines',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/AskanPraAnestesi/IndexPage.vue')))
+  },
+  {
+    name: 'AskanIntraAnestesi',
+    label: 'Askan Intra Anestesi',
+    icon: 'monitor_heart',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/AskanIntraAnestesi/IndexPage.vue')))
+  },
+  {
+    name: 'SerahterimaOKkeRR',
+    label: 'Serah Terima OK ke RR',
+    icon: 'queue_play_next',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/SerahterimaOK_RR/IndexPage.vue')))
+  },
+  {
+    name: 'ScorePascaAnestesi',
+    label: 'Score Pasca Anestesi',
+    icon: 'credit_score',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/ScorePascaAnestesi/IndexPage.vue')))
+  },
+  {
+    name: 'SerahterimaRRkeRanap',
+    label: 'Serah Terima RR ke Ranap',
+    icon: 'bento',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/SerahterimaRR_Ranap/IndexPage.vue')))
+  },
+  {
+    name: 'PemantauanPascaAnestesi',
+    label: 'Pemantauan Pasca Anestesi',
+    icon: 'padding',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/PemantauanPascaAnestesi/IndexPage.vue')))
+  },
+  {
+    name: 'PemakaianObatdanAlkes',
+    label: 'Pemakaian Obat dan Alkes',
+    icon: 'medication_liquid',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/PemakaianObatdanAlkes/IndexPage.vue')))
   },
   // {
   //   name: 'AssesmentPage',
