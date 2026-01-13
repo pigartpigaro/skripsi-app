@@ -15,7 +15,7 @@ export const useSerahterimaPreOperasiStore = defineStore('serahterima-preoperasi
       kesadaran: [],
       riwayat_penyakit: [],
       riwayat_penyakit_lain: null,
-      riwayat_alergi_obat: [],
+      riwayat_alergi_obat: null,
       jenis_alergi_obat: null,
       reaksi_alergi_obat: null,
       persiapan_operasi: [],
