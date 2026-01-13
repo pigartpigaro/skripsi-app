@@ -83,6 +83,13 @@
           notifErrVue(error?.response?.data?.message)
         }
       },
+      insertToPasien(pasien,key,data){
+        const index=this.items.findIndex(x => x?.noreg === pasien?.noreg)
+        if(index !== -1) {
+          this.items[index][key]=data
+        }
+        this.pasien[key]=data
+      }
       // initForm() {
       //   this.form = {
       //     pekerjaan: ''

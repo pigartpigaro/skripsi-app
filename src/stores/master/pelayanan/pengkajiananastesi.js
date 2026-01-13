@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { acceptHMRUpdate, defineStore } from 'pinia'
 import { date } from 'quasar'
 import { api } from 'src/boot/axios'
 import { notifSuccessVue } from 'src/modules/utils'
@@ -145,3 +145,7 @@ export const usePengkajianAnastesiStore = defineStore('pengkajian-anastesi-store
     },
   }
 })
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(usePengkajianAnastesiStore, import.meta.hot))
+
+}
