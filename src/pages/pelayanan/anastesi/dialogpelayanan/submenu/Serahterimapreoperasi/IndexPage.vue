@@ -15,7 +15,7 @@
               A. Kesadaran :
             </div>
             <div class="q-pl-md row q-col-gutter-md">
-              <q-option-group v-model="store.form.kesadaran" inline :options="OpsiKesadaran" />
+              <q-option-group v-model="store.form.kesadaran" type="checkbox" inline :options="OpsiKesadaran" />
             </div>
           </div>
           <div class="col-12 col-md-10 q-pt-md">
@@ -121,7 +121,7 @@
     <!-- ACTION -->
     <q-card flat>
       <q-card-actions align="right">
-        <q-btn color="primary" label="Simpan Data" @click="simpan" />
+        <q-btn color="primary" :loading="store.loadingSave" label="Simpan Data" @click="simpan" />
         <q-btn label="Cetak" color="yellow-9" v-print="printObj" />
       </q-card-actions>
     </q-card>
@@ -130,9 +130,10 @@
 </template>
 
 <script setup>
+import { useListPasienAnastesiStore } from 'src/stores/master/pelayanan/listpasienanastesi'
 import { useSerahterimaPreOperasiStore } from 'src/stores/master/pelayanan/serahterimapreoperasi'
 import { computed } from 'vue'
-
+const storepasien = useListPasienAnastesiStore()
 const store = useSerahterimaPreOperasiStore()
 defineProps({
   pasien: {
@@ -196,7 +197,8 @@ function modelJenisDarah() {
   if (!OpsiPersiapanOperasi.value.includes('Jenis Darah')) store.form.jumlah_darah = null
 }
 function simpan() {
-  console.log('DATA FORM:', store.form)
+  store.form.noreg = storepasien.pasien.noreg
+  store.simpanData()
 }
 
 const printObj = computed(() => ({
@@ -205,13 +207,13 @@ const printObj = computed(() => ({
   preview: false,
   extraCss: '',
   extraHead: '',
-  beforeOpenCallback(vue) {
+  beforeOpenCallback() {
     console.log('wait...')
   },
-  openCallback(vue) {
+  openCallback() {
     console.log('opened')
   },
-  closeCallback(vue) {
+  closeCallback() {
     console.log('closePrint')
     emit('close')
   }
