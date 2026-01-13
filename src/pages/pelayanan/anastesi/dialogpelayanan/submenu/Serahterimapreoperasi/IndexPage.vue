@@ -230,7 +230,7 @@ const OpsiJenisDarah = [
   { value: 'Plasma', label: 'Plasma' }
 ]
 function modelJenisDarah() {
-  if (!OpsiPersiapanOperasi.value.includes('Jenis Darah')) store.form.jumlah_darah = null
+  if (!store.form.persiapan_operasi.includes('Jenis Darah')) store.form.jumlah_darah = null
 }
 function simpan() {
   store.form.noreg = props.pasien.noreg
