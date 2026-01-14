@@ -41,7 +41,7 @@ function isImage (val) {
   return type[1] !== 'pdf'
 
 }
-function onFileRejected (rejectedFiles) {
+function onFileRejected () {
   $q.notify({
     type: 'negative',
     message: 'File terlalu besar atau format tidak sesuai (maks 1MB PDF).'

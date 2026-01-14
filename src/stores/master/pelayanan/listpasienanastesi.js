@@ -89,6 +89,20 @@
           this.items[index][key]=data
         }
         this.pasien[key]=data
+      },
+      insertToPasienWithParam(pasien,key,data,param,value){
+        const index=this.items.findIndex(x => x?.noreg === pasien?.noreg)
+        if(index !== -1) {
+          const pasien=this.items[index][key]
+          const indexParam=pasien.findIndex(k=>k[param]===value)
+          if(indexParam !== -1) {
+            this.items[index][key][indexParam]=data
+            this.pasien[key][indexParam]=data
+        }else{
+          this.items[index][key].push(data)
+           this.pasien[key].push(data)
+        }
+        }
       }
       // initForm() {
       //   this.form = {
