@@ -621,9 +621,180 @@
         <div class="q-mr-sm text-weight-medium">
           Jumlah urine:
         </div>
+
         <q-input v-model="store.f6b.jumlahurine" type="text" dense autogrow />cc
       </div>
+      <div class="text-weight-bold q-ml-md ">B5 (Bowel)</div>
+      <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm text-weight-medium">
+          Bising usus :
+        </div>
 
+        <q-input v-model="store.f6b.jumlahurine" type="text" dense autogrow />x/menit
+      </div>
+      <div class="q-ml-lg">Mual:
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Muntah:
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Nyeri menelan:
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg row items-center">Nyeri Perut:
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
+        <q-input class="q-ml-lg col-3" v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak"
+          color="cyan" />
+      </div>
+      <div class="q-ml-lg">Distensi :
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Borborygmi :
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Distensi :
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Asites :
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="shifting dullness" label="shifting dullness"
+          color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="undulasi" label="undulasi" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Terpasang NGT :
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak" color="cyan" />
+      </div>
+      <div class="text-weight-bold q-ml-md ">B6 (Bone)</div>
+      <div class="col-12">(1) Pemeriksaan tulang belakang</div>
+      <div class="q-ml-lg">Kelainan tulang belakang:
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Kyposis" label="Kyposis" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Scoliosis" label="Scoliosis" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Lordosis" label="Lordosis" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Perlukaan" label="Perlukaan" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="infeksi" label="infeksi" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="Fibrosis" label="Fibrosis" color="cyan" />
+      </div>
+      <div class="q-ml-lg">Mobilitas :
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="leluasa" label="leluasa" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="terbatas" label="terbatas" color="cyan" />
+      </div>
+      <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm text-weight-medium">
+          Lainnya :
+        </div>
+
+        <q-input v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+      </div>
+      <div class="col-12">(2) Pemeriksaan Ekstremitas</div>
+      <div class="q-mt-md">* Ekstermitas atas</div>
+      <div class="q-ml-lg">Otot antar sisi kanan dan kiri :
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="simetris" label="simetris" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="asimetris" label="asimetris" color="cyan" />
+      </div>
+      <div class="q-ml-lg row items-center">Jejas:
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Ya" label="Ya" color="cyan" />
+        <q-input class="q-ml-lg col-3" v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak"
+          color="cyan" />
+      </div>
+      <div class="q-ml-lg row items-center">Deformitas:
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Ya" label="Ya" color="cyan" />
+        <q-input class="q-ml-lg col-3" v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak"
+          color="cyan" />
+      </div>
+      <div class="q-ml-lg row items-center">Fraktur:
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Ya" label="Ya" color="cyan" />
+        <q-input class="q-ml-lg col-3" v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak"
+          color="cyan" />
+      </div>
+      <div class="q-ml-lg row items-center">Atropi otot:
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Ya" label="Ya" color="cyan" />
+        <q-input class="q-ml-lg col-3" v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak"
+          color="cyan" />
+      </div>
+      <div class="q-ml-lg row items-center">
+        <div class="q-mr-sm">
+          IV line: terpasang di
+        </div>
+
+        <q-input v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+        , ukuran abocatch
+      </div>
+      <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm text-weight-medium">
+          ROM
+        </div>
+
+        <q-input v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+      </div>
+      <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm text-weight-medium">
+          Lainnya:
+        </div>
+
+        <q-input v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+      </div>
+      <div class="q-mt-md">* Ekstermitas bawah</div>
+      <div class="q-ml-lg">Otot antar sisi kanan dan kiri :
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="simetris" label="simetris" color="cyan" />
+        <q-radio v-model="store.f6b.pembesaranpadaginjal" val="asimetris" label="asimetris" color="cyan" />
+      </div>
+      <div class="q-ml-lg row items-center">Jejas:
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Ya" label="Ya" color="cyan" />
+        <q-input class="q-ml-lg col-3" v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak"
+          color="cyan" />
+      </div>
+      <div class="q-ml-lg row items-center">Deformitas:
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Ya" label="Ya" color="cyan" />
+        <q-input class="q-ml-lg col-3" v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak"
+          color="cyan" />
+      </div>
+      <div class="q-ml-lg row items-center">Fraktur:
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Ya" label="Ya" color="cyan" />
+        <q-input class="q-ml-lg col-3" v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak"
+          color="cyan" />
+      </div>
+      <div class="q-ml-lg row items-center">Atropi otot:
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Ya" label="Ya" color="cyan" />
+        <q-input class="q-ml-lg col-3" v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+        <q-radio class="q-ml-lg col-1" v-model="store.f6b.pembesaranpadaginjal" val="Tidak" label="Tidak"
+          color="cyan" />
+      </div>
+      <div class="q-ml-lg row items-center">
+        <div class="q-mr-sm">
+          IV line: terpasang di
+        </div>
+
+        <q-input v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+        , ukuran abocatch
+      </div>
+      <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm text-weight-medium">
+          ROM
+        </div>
+
+        <q-input v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+      </div>
+      <div class="q-ml-md row items-center no-wrap">
+        <div class="q-mr-sm text-weight-medium">
+          Lainnya:
+        </div>
+
+        <q-input v-model="store.f6b.jumlahurine" type="text" dense autogrow />
+      </div>
       <div class="q-mt-md text-right q-gutter-sm print-hide">
         <q-btn label="Simpan" color="red" />
         <q-btn label="Cetak" color="red" v-print="printObj" />
