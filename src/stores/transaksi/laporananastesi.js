@@ -68,26 +68,27 @@ state: () => ({
   },
   formtabel:{
     noreg: null,
-    monitoring_anestesi: {
-      waktu: '',
-      operasi: '',
-      anestesi: '',
-      sistole: '',
-      diastole: '',
-      nadi: '',
-      spo2: '',
-      rr: '',
-      mode_ventilator: '',
-      ekg: '',
-      suhu: '',
-      etco2: '',
-      n2o_o2: '',
-      flow: '',
-      gas_anestesi: '',
-      mac: '',
-      obat: '',
-      cairan: '',
-    },
+    monitoring_anestesi: []
+    // monitoring_anestesi: {
+    //   waktu: '',
+    //   operasi: '',
+    //   anestesi: '',
+    //   sistole: '',
+    //   diastole: '',
+    //   nadi: '',
+    //   spo2: '',
+    //   rr: '',
+    //   mode_ventilator: '',
+    //   ekg: '',
+    //   suhu: '',
+    //   etco2: '',
+    //   n2o_o2: '',
+    //   flow: '',
+    //   gas_anestesi: '',
+    //   mac: '',
+    //   obat: '',
+    //   cairan: '',
+    // },
   },
   itemstabel: [],
 
@@ -110,31 +111,74 @@ actions: {
       notifErrVue(error?.response?.data?.message)
     }
   },
-  async simpanDataTabel() {
+  async simpanDataTabel () {
     this.loadingSavetabel = true
+
     try {
-      const resp = await api.post('v1/transaksi/laporan-anestesi/simpan-monitoring', this.formtabel)
-      console.log('resp', resp)
-      if (resp.status === 200) {
-        // this.items.unshift(resp?.data?.data)
-        // this.itemstabel = resp?.data?.data?.monitoring_anestesi
-        this.itemstabel.unshift(resp?.data?.data?.monitoring_anestesi)
-        notifSuccessVue(resp?.data?.message)
-        this.loadingSavetabel = false
-        // this.initForm()
+      // 1️⃣ ambil input baru (clone biar aman)
+      const rowBaru = {
+        ...this.formtabel.monitoring_anestesi
       }
+
+      // 2️⃣ gabungkan dengan data lama (di depan)
+      const monitoringGabungan = [
+        rowBaru,
+        ...this.itemstabel
+      ]
+
+      // 3️⃣ susun payload kirim SEMUA DATA
+      const payload = {
+        noreg: this.formtabel.noreg,
+        monitoring_anestesi: monitoringGabungan
+      }
+
+      // 4️⃣ kirim ke backend
+      const resp = await api.post(
+        'v1/transaksi/laporan-anestesi/simpan-monitoring',
+        payload
+      )
+
+      console.log('resp', resp)
+
+      if (resp.status === 200) {
+        // 5️⃣ update tabel frontend (clone biar aman)
+        this.itemstabel = monitoringGabungan.map(item => ({ ...item }))
+
+        notifSuccessVue(resp?.data?.message)
+
+        // 6️⃣ reset form input (TANPA ganggu data lama)
+        Object.keys(this.formtabel.monitoring_anestesi)
+          .forEach(k => this.formtabel.monitoring_anestesi[k] = '')
+      }
+
     } catch (error) {
       console.log(error)
-      this.loadingSavetabel = false
       notifErrVue(error?.response?.data?.message)
+    } finally {
+      this.loadingSavetabel = false
     }
   },
+
   isiForm(val) {
     // console.log('val', val)
-    const temp = val?.laporan_anastesi
-    this.itemstabel.push({
-      ...temp.monitoring_anestesi
-    })
+   if (!val || typeof val !== 'object') {
+    console.warn('isiForm: val bukan object', val)
+    return
+  }
+
+  const temp = val?.laporan_anastesi
+  if (!temp) {
+    console.warn('laporan_anastesi kosong', val)
+    return
+  }
+
+  // RESET dulu biar gak dobel
+  this.itemstabel = []
+
+  // monitoring_anestesi HARUS array
+  if (Array.isArray(temp.monitoring_anestesi)) {
+    this.itemstabel.push(...temp.monitoring_anestesi)
+  }
 
     this.form = {
       noreg: val?.noreg,
