@@ -242,23 +242,103 @@
             <div class="q-mr-sm">
               Komplikasi :
             </div>
-            <q-input dense type="text" autogrow v-model="store.form.regional_anestesi.kompilkasi" />
+            <q-input dense type="text" autogrow v-model="store.form.komplikasi_anestesi" />
           </div>
         </div>
-
+        <div class="row">
+          <div class="row items-center no-wrap">
+            <div class="q-mr-sm">
+              Tanggal Mulai :
+            </div>
+            <q-input dense type="text" autogrow v-model="store.form.tanggal_mulai">
+              <template v-slot:append>
+                <q-icon name="event">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale"
+                    class="q-gutter-md row items-start">
+                    <q-date v-model="store.form.tanggal_mulai" mask="YYYY-MM-DD HH:mm" />
+                    <q-time v-model="store.form.tanggal_mulai" mask="YYYY-MM-DD HH:mm" />
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
+          </div>
+          <div class="row items-center no-wrap">
+            <div class="q-mr-sm">
+              Tanggal Selesai :
+            </div>
+            <q-input dense type="text" autogrow v-model="store.form.tanggal_selesai">
+              <template v-slot:append>
+                <q-icon name="event">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale"
+                    class="q-gutter-md row items-start">
+                    <q-date v-model="store.form.tanggal_selesai" mask="YYYY-MM-DD HH:mm" />
+                    <q-time v-model="store.form.tanggal_selesai" mask="YYYY-MM-DD HH:mm" />
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
+          </div>
+          <div class="row items-center no-wrap">
+            <div class="q-mr-sm">
+              Lama :
+            </div>
+            {{ lama }}
+          </div>
+        </div>
         <div class="q-mt-md text-right q-gutter-sm print-hide">
           <q-btn label="Simpan" type="submit" color="red" :loading="store.loadingSave" :disabled="store.loadingSave" />
           <q-btn label="Cetak" color="red" v-print="printObj" />
         </div>
       </q-form>
+      <q-separator class="q-mt-md q-mb-md" />
+      <table class="monitor-table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Waktu</th>
+            <th>Operasi</th>
+            <th>Anestesi</th>
+            <th>Sistole</th>
+            <th>Diastole</th>
+            <th>Nadi</th>
+            <th>SpO₂</th>
+            <th>RR</th>
+            <th>Mode Ventilator</th>
+            <th>EKG</th>
+            <th>Suhu</th>
+            <th>EtCO₂</th>
+            <th>N₂O / O₂</th>
+            <th>Flow %</th>
+            <th>Gas Anestesi</th>
+            <th>MAC %</th>
+            <th>Obat</th>
+            <th>Cairan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><q-input /></td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+          </tr>
+        </tbody>
+      </table>
       <!-- </div> -->
     </div>
+
 
   </q-page>
 </template>
 <script setup>
 import { useLaporananastesiStore } from 'src/stores/transaksi/laporananastesi';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 
 const store = useLaporananastesiStore()
 const props = defineProps({
@@ -320,6 +400,25 @@ const intubasi1 = [
   { label: 'Pack', value: 'pack' }
 ]
 
+const lama = computed(() => {
+  const mulai = store.form.tanggal_mulai
+  const selesai = store.form.tanggal_selesai
+
+  if (!mulai || !selesai) return ''
+
+  const tMulai = new Date(mulai).getTime()
+  const tSelesai = new Date(selesai).getTime()
+
+  const diffMs = tSelesai - tMulai
+  if (diffMs <= 0) return '0'
+
+  const menit = Math.floor(diffMs / 60000)
+  const jam = Math.floor(menit / 60)
+  const sisaMenit = menit % 60
+
+  return `${jam} jam ${sisaMenit} menit`
+})
+
 onMounted(() => {
   store.isiForm(props.pasien)
 })
@@ -338,5 +437,32 @@ onMounted(() => {
   border-bottom: 1px solid #000;
   width: 60px;
   margin: 0 6px;
+}
+
+.monitor-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.monitor-table th {
+  border: 1px solid #ccc;
+  padding: 6px 4px;
+  text-align: center;
+  font-weight: 600;
+  background: #f5f7fa;
+  white-space: nowrap;
+}
+
+.monitor-table th:nth-child(1),
+.monitor-table th:nth-child(2) {
+  position: sticky;
+  left: 0;
+  background: #eef2f7;
+  z-index: 2;
+}
+
+.monitor-table th:nth-child(2) {
+  left: 40px;
 }
 </style>

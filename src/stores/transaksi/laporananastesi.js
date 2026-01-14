@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { date } from "quasar";
 import { api } from "src/boot/axios";
 import { notifErrVue, notifSuccessVue } from "src/modules/utils";
 
@@ -56,12 +57,14 @@ state: () => ({
       jenisjarum: null,
       obat: null,
       komplikasi: null,
-      hasil_total: null,
-      hasil_partial: null,
-      hasil_gagal: null,
+      hasil_total: '',
+      hasil_partial: '',
+      hasil_gagal: '',
     },
     komplikasi_anestesi: null,
-    monitoring_anestesi: [],
+    tanggal_mulai: date.formatDate(Date.now(), 'YYYY-MM-DD HH:mm'),
+    tanggal_selesai: date.formatDate(Date.now(), 'YYYY-MM-DD HH:mm'),
+    // monitoring_anestesi: [],
   }
 }),
 actions: {
