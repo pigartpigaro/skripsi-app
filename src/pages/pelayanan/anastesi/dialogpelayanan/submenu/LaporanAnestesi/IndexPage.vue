@@ -317,16 +317,46 @@
         </thead>
         <tbody>
           <tr>
-            <td><q-input /></td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-            <td>10</td>
+            <td>-</td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.waktu" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.operasi" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.anestesi" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.sistole" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.diastole" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.nadi" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.spo2" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.rr" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.mode_ventilator" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.ekg" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.suhu" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.etco2" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.n2o_o2" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.flow" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.gas_anestesi" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.mac" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.obat" dense /></td>
+            <td><q-input autogrow v-model="store.form.monitoring_anestesi.cairan" dense /></td>
+          </tr>
+          <tr v-for="(row, index) in store.form.monitoring_anestesi" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td><q-input autogrow v-model="row.waktu" dense /></td>
+            <td><q-input autogrow v-model="row.operasi" dense /></td>
+            <td><q-input autogrow v-model="row.anestesi" dense /></td>
+            <td><q-input autogrow v-model="row.sistole" dense /></td>
+            <td><q-input autogrow v-model="row.diastole" dense /></td>
+            <td><q-input autogrow v-model="row.nadi" dense /></td>
+            <td><q-input autogrow v-model="row.spo2" dense /></td>
+            <td><q-input autogrow v-model="row.rr" dense /></td>
+            <td><q-input autogrow v-model="row.mode_ventilator" dense /></td>
+            <td><q-input autogrow v-model="row.ekg" dense /></td>
+            <td><q-input autogrow v-model="row.suhu" dense /></td>
+            <td><q-input autogrow v-model="row.etco2" dense /></td>
+            <td><q-input autogrow v-model="row.n2o_o2" dense /></td>
+            <td><q-input autogrow v-model="row.flow" dense /></td>
+            <td><q-input autogrow v-model="row.gas_anestesi" dense /></td>
+            <td><q-input autogrow v-model="row.mac" dense /></td>
+            <td><q-input autogrow v-model="row.obat" dense /></td>
+            <td><q-input autogrow v-model="row.cairan" dense /></td>
           </tr>
         </tbody>
       </table>
