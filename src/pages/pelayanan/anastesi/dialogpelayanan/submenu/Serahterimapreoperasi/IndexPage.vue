@@ -6,9 +6,6 @@
         <q-card-section>
           <div class="text-weight-bold text-h6 text-center">Serah Terima Pasien Pre Operasi</div>
         </q-card-section>
-      </q-card>
-      <!-- IDENTITAS -->
-      <q-card flat class="q-mb-xs print-only">
         <q-card-section>
 
           <div class="row q-col-gutter-xl">
@@ -26,29 +23,35 @@
                 <div class="col-4 label">NIK</div>
                 <div class="col-8">: {{ pasien?.pasien?.nik }}</div>
               </div>
+              <div class="row q-mb-xs">
+                <div class="col-4 label">Tanggal/Jam Masuk</div>
+                <div class="col-8">: {{ dateFullFormat(pasien?.tgl_mrs) }} {{ jamTnpDetik(pasien?.tgl_mrs) }} </div>
+              </div>
             </div>
 
             <!-- KANAN -->
             <div class="col-6">
               <div class="row q-mb-xs">
                 <div class="col-5 label">Diagnosis Medis</div>
-                <div class="col-7">: {{ pasien?.pasien?.diagnosa }}</div>
+                <div class="col-7">: {{ pasien?.diagnosa }}</div>
               </div>
               <div class="row q-mb-xs">
-                <div class="col-5 label">Tgl Pemeriksaan</div>
-                <div class="col-7">: {{ pasien?.pasien?.tgl_mrs }}</div>
+                <div class="col-5 label">Dokter Bedah</div>
+                <div class="col-7">: {{ pasien?.dr_operator?.nama }}</div>
               </div>
               <div class="row q-mb-xs">
                 <div class="col-5 label">Ruang</div>
-                <div class="col-7">: {{ pasien?.pasien?.ruang_ranap }}</div>
+                <div class="col-7">: {{ pasien?.ruang_tindakan }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-5 label">Ruang RS</div>
+                <div class="col-7">: {{ pasien?.ruang_ranap }}</div>
               </div>
             </div>
           </div>
 
         </q-card-section>
-      </q-card>
 
-      <q-card class="q-mb-sm" flat>
         <q-card-section>
           <div class="col-12 col-md-12">
             <div class="text-subtitle2 q-mb-sm">
@@ -72,7 +75,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-12 q-pt-sm">
+          <!-- <div class="col-12 col-md-12 q-pt-sm">
             <div class="text-subtitle2 q-mb-sm">
               C. Riwayat Alergi Obat :
             </div>
@@ -90,9 +93,42 @@
               </div>
             </div>
 
-          </div>
+          </div> -->
 
-          <div class="col-12 col-md-12 q-pt-sm">
+          <div class="col-12 q-pt-sm">
+            <div class="text-subtitle2 q-mb-sm">
+              C. Riwayat Alergi Obat :
+            </div>
+
+            <div class="column q-gutter-sm">
+
+              <!-- JENIS -->
+              <div class="row items-center q-col-gutter-sm">
+                <div class="col-auto">
+                  <q-radio v-model="store.form.riwayat_alergi_obat" val="Jenis" label="Jenis" />
+                </div>
+
+                <div class="col-4">
+                  <q-input v-if="store.form.riwayat_alergi_obat === 'Jenis'" v-model="store.form.jenis_alergi_obat"
+                    label="Jenis Alergi" outlined dense />
+                </div>
+              </div>
+
+              <!-- REAKSI -->
+              <div class="row items-center q-col-gutter-sm">
+                <div class="col-auto">
+                  <q-radio v-model="store.form.riwayat_alergi_obat" val="Reaksi" label="Reaksi" />
+                </div>
+
+                <div class="col-4">
+                  <q-input v-if="store.form.riwayat_alergi_obat === 'Reaksi'" v-model="store.form.reaksi_alergi_obat"
+                    label="Reaksi Alergi" outlined dense />
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- <div class="col-12 col-md-12 q-pt-sm">
             <div class="text-subtitle2 q-mb-sm">
               D. Persiapan Operasi :
             </div>
@@ -126,7 +162,7 @@
                   <q-option-group v-if="store.form.persiapan_operasi.includes('Jenis Darah')" class="q-col-gutter-sm"
                     v-model="store.form.jenis_darah" inline type="checkbox" :options="OpsiJenisDarah"
                     @update:model-value="modelJenisDarah" />
-                  <q-input v-if="store.form.persiapan_operasi.includes('Jenis Darah')" class="q-pl-md col-4"
+                  <q-input v-if="store.form.persiapan_operasi.includes('Jenis Darah')" class="q-pl-md col"
                     v-model="store.form.jumlah_darah" label="Jumlah" outlined dense
                     :rules="[val => !!val || 'Harap Diisi']" />
                 </div>
@@ -134,9 +170,8 @@
             </div>
             <div style="height:25px" v-if="!store.form.persiapan_operasi.includes('Jenis Darah')" />
             <div class="q-pl-lg row q-col-gutter-sm">
-              <div class="col-2 q-pl-md q-pt-md">
-                <div>Tanda-tanda Vital :</div>
-              </div>
+
+              <div>Tanda-tanda Vital :</div>
               <div class="col-4">
                 <q-input class="col-4" v-model="store.form.vital_td" label="Tekanan Darah" outlined dense
                   :rules="[val => !!val || 'Harap Diisi']" />
@@ -151,7 +186,115 @@
 
             </div>
 
+          </div> -->
+
+
+          <div class="col-12 q-pt-sm">
+            <div class="text-subtitle2 q-mb-sm">
+              D. Persiapan Operasi :
+            </div>
+
+            <div class="column q-gutter-xs">
+
+              <!-- SURAT PERSETUJUAN OPERASI -->
+              <q-checkbox v-model="store.form.persiapan_operasi" val="Surat Persetujuan Operasi"
+                label="Surat Persetujuan Operasi" @update:model-value="modelPersiapanOperasi" />
+
+              <!-- SURAT PERSETUJUAN ANESTESI -->
+              <q-checkbox v-model="store.form.persiapan_operasi" val="Surat Persetujuan Anestesi"
+                label="Surat Persetujuan Anestesi" @update:model-value="modelPersiapanOperasi" />
+
+              <!-- PUASA -->
+              <div class="row items-center">
+                <div class="col-auto">
+                  <q-checkbox v-model="store.form.persiapan_operasi" val="Puasa" label="Puasa"
+                    @update:model-value="modelPersiapanOperasi" />
+                </div>
+                <div class="col-3 q-pl-sm">
+                  <q-input v-if="store.form.persiapan_operasi.includes('Puasa')" v-model="store.form.mulai_puasa"
+                    label="Mulai Puasa" outlined dense />
+                </div>
+              </div>
+
+              <!-- PENGOSONGAN KANDUNG KEMIH -->
+              <q-checkbox v-model="store.form.persiapan_operasi" val="Pengosongan Kandung Kemih"
+                label="Pengosongan Kandung Kemih" @update:model-value="modelPersiapanOperasi" />
+
+              <!-- GIGI PALSU -->
+              <q-checkbox v-model="store.form.persiapan_operasi" val="Gigi Palsu" label="Gigi Palsu"
+                @update:model-value="modelPersiapanOperasi" />
+
+              <!-- PERHIASAN -->
+              <q-checkbox v-model="store.form.persiapan_operasi" val="Perhiasan" label="Perhiasan"
+                @update:model-value="modelPersiapanOperasi" />
+
+              <!-- KOSMETIK -->
+              <q-checkbox v-model="store.form.persiapan_operasi" val="Kosmetik / Cat Kuku"
+                label="Kosmetik / Cat Kuku" />
+
+              <!-- PENCUKURAN -->
+              <q-checkbox v-model="store.form.persiapan_operasi" val="Pencukuran Daerah Operasi"
+                label="Pencukuran Daerah Operasi" @update:model-value="modelPersiapanOperasi" />
+
+              <!-- PENANDAAN -->
+              <q-checkbox v-model="store.form.persiapan_operasi" val="Penandaan (Marker)" label="Penandaan (Marker)"
+                @update:model-value="modelPersiapanOperasi" />
+
+              <!-- HASIL PEMERIKSAAN -->
+              <q-checkbox v-model="store.form.persiapan_operasi" val="Hasil Pemeriksaan" label="Hasil Pemeriksaan"
+                @update:model-value="modelPersiapanOperasi" />
+
+              <!-- ALAT KESEHATAN -->
+              <div class="row items-center ">
+                <div class="col-auto">
+                  <q-checkbox v-model="store.form.persiapan_operasi" val="Alat Kesehatan" label="Alat Kesehatan"
+                    @update:model-value="modelPersiapanOperasi" />
+                </div>
+                <div class="col-4 q-pl-sm">
+                  <q-input v-if="store.form.persiapan_operasi.includes('Alat Kesehatan')"
+                    v-model="store.form.alat_kesehatan_lainnya" label="Alat Kesehatan Lainnya" outlined dense />
+                </div>
+              </div>
+
+              <!-- JENIS DARAH -->
+              <div class="row items-start">
+                <div class="col-auto q-pt-xs">
+                  <q-checkbox v-model="store.form.persiapan_operasi" val="Jenis Darah" label="Jenis Darah"
+                    @update:model-value="modelPersiapanOperasi" />
+                </div>
+
+                <div class="col-auto q-pl-xl q-pt-md q-gutter-xs">
+                  <div class="row items-center q-col-gutter-sm">
+                    <q-checkbox v-model="store.form.jenis_darah" val="PRC" label="PRC" dense />
+                    <q-checkbox v-model="store.form.jenis_darah" val="WB" label="WB" dense />
+                    <q-checkbox v-model="store.form.jenis_darah" val="Trombocyte" label="Trombocyte" dense />
+                    <q-checkbox v-model="store.form.jenis_darah" val="Plasma" label="Plasma" dense />
+                    <q-input v-if="store.form.jenis_darah?.length" v-model="store.form.jumlah_darah" label="Jumlah"
+                      outlined dense class="col-4" />
+                  </div>
+
+
+                </div>
+              </div>
+              <div class="q-pl-lg q-pt-md row q-col-gutter-sm">
+
+                <div>Tanda-tanda Vital :</div>
+                <div class="col-4">
+                  <q-input class="col-4" v-model="store.form.vital_td" label="Tekanan Darah" outlined dense
+                    :rules="[val => !!val || 'Harap Diisi']" />
+                  <q-input class="col-4" v-model="store.form.vital_n" label="Nadi/Detak Jantung" outlined dense
+                    :rules="[val => !!val || 'Harap Diisi']" />
+                  <q-input class="col-4" v-model="store.form.vital_s" label="Suhu" outlined dense
+                    :rules="[val => !!val || 'Harap Diisi']" />
+                  <q-input class="col-4" v-model="store.form.vital_rr" label="Respiratory Rate" outlined dense
+                    :rules="[val => !!val || 'Harap Diisi']" />
+                </div>
+
+
+              </div>
+            </div>
           </div>
+
         </q-card-section>
       </q-card>
 
@@ -168,6 +311,7 @@
 </template>
 
 <script setup>
+import { dateFullFormat, jamTnpDetik } from 'src/modules/formatter'
 import { useSerahterimaPreOperasiStore } from 'src/stores/master/pelayanan/serahterimapreoperasi'
 import { computed, watch } from 'vue'
 const store = useSerahterimaPreOperasiStore()
@@ -221,6 +365,10 @@ const OpsiPersiapanOperasi = [
 function modelPersiapanOperasi(val) {
   if (!val.includes('Puasa')) store.form.mulai_puasa = null
   if (!val.includes('Alat Kesehatan')) store.form.alat_kesehatan_lainnya = null
+  if (!val.includes('Jenis Darah')) {
+    store.form.jenis_darah = []
+    store.form.jumlah_darah = null
+  }
 }
 
 const OpsiJenisDarah = [
@@ -248,10 +396,6 @@ const printObj = computed(() => ({
   },
   openCallback() {
     console.log('opened')
-  },
-  closeCallback() {
-    console.log('closePrint')
-    emit('close')
   }
 }))
 
@@ -293,6 +437,16 @@ watch(
   @page {
     size: A4;
     margin: 15mm;
+    padding: 5mm;
+  }
+
+  .print-keep {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-only {
+    display: block;
   }
 
   body {
@@ -311,6 +465,14 @@ watch(
   .q-card {
     box-shadow: none !important;
     border: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* HILANGKAN OUTLINE INPUT */
+  .q-field--outlined .q-field__control:before,
+  .q-field--outlined .q-field__control:after {
+    display: none !important;
   }
 
   /* Tombol tidak ikut tercetak */
