@@ -5,7 +5,7 @@
       <!-- JUDUL -->
       <q-card flat class="q-mb-xs">
         <q-card-section class="text-center">
-          <div class="text-h6 text-weight-bold">ASSESMENT PRA ANASTESI</div>
+          <div class="text-h6 text-weight-bold">ASSESMENT PRA ANESTESI</div>
         </q-card-section>
       </q-card>
 
@@ -59,11 +59,11 @@
           <q-option-group class="q-mb-sm" v-model="store.form.klassifikasi_asa" inline type="radio"
             :options="opsiASA" />
 
-          <div class="text-weight-bold">Pertimbangan Anastesi</div>
+          <div class="text-weight-bold">Pertimbangan Anestesi</div>
 
           <!-- JENIS -->
           <div class="row items-center q-mb-sm">
-            <div class="col-3">Jenis Anastesi</div>
+            <div class="col-3">Jenis Anestesi</div>
             <div class="col">
               <q-option-group v-model="store.form.jenis_anastesi" inline :options="opsiJenisAnastesi" />
             </div>
@@ -71,7 +71,7 @@
 
           <!-- TEKNIK -->
           <div class="row q-mb-sm">
-            <div class="col-3">Teknik Anastesi</div>
+            <div class="col-3">Teknik Anestesi</div>
             <div class="col">
               <q-input v-model="store.form.teknik_anastesi" type="textarea" dense outlined />
             </div>
@@ -89,13 +89,13 @@
       </q-card>
       <q-card flat class="q-mt-xs no-print">
         <q-card-section>
-          <div class="text-weight-bold">Pelaksana Anastesi</div>
+          <div class="text-weight-bold">Pelaksana Anestesi</div>
 
           <q-input v-model="store.form.nama_pelaksana" label="Nama Terang & Gelar" dense outlined />
         </q-card-section>
       </q-card>
       <div class="ttd-print">
-        <div class="text-weight-bold">Pelaksana Anastesi</div>
+        <div class="text-weight-bold">Pelaksana Anestesi</div>
         <div style="height:60px"></div>
         <div class="ttd-line"></div>
         <div class="q-mt-xs text-weight-bold">
@@ -126,7 +126,6 @@ const props = defineProps({
     default: null
   }
 })
-console.log('PROPS', props?.pasien)
 const opsiASA = [
   { label: 'I', value: 'I' },
   { label: 'II', value: 'II' },

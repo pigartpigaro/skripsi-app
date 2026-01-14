@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
+import { date } from 'quasar'
 import { api } from 'src/boot/axios'
 import { notifErrVue, notifSuccessVue } from 'src/modules/utils'
 
-export const useAssasementPraAnastesiStore = defineStore('assasement-pra-anastesi-store', {
+export const usePemantauanPascaAnestesiStore = defineStore('pemantauan-pasca-anestesi-store', {
   state: () => ({
     loadingcari: false,
     loadingSave: false,
@@ -12,12 +13,28 @@ export const useAssasementPraAnastesiStore = defineStore('assasement-pra-anastes
     meta: {},
     form: {
       noreg: null,
-      klassifikasi_asa: null,
-      jenis_anastesi: null,
-      teknik_anastesi: null,
-      indikasi: null,
-      nama_pelaksana: null,
-      kode_user: null
+      tanggal: null,
+        jam_masuk_rr: date.formatDate(new Date(), 'HH:mm'),
+        jam_keluar_rr: null,
+
+        jalan_napas: null,
+        alat_bantu_napas: null,
+        pernapasan: null,
+        bila_spontan: null,
+        kesadaran: null,
+
+        pemantauan_vital: [],
+
+        posisi_pasien: null,
+        makan_minum: null,
+        infus_transfusi: null,
+        obat_obatan: null,
+        pemantauan_ttv: null,
+        lain_lain: null
+
+    },
+    displaytanggal: {
+      tanggal: date.formatDate(Date.now(), 'DD MMMM YYYY'),
     },
 
   }),
@@ -26,7 +43,7 @@ export const useAssasementPraAnastesiStore = defineStore('assasement-pra-anastes
     async simpanData() {
       this.loadingSave = true
       try {
-        const resp = await api.post('v1/transaksi/assasement-pra-anastesi/simpan', this.form)
+        const resp = await api.post('v1/transaksi/pemantauan-pasca-anastesi/simpan', this.form)
 
         if (resp.success === true || resp.status === 200) {
           this.items.unshift(resp?.data?.data)
