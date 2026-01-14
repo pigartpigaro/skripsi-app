@@ -16,16 +16,40 @@
         <q-card-section>
           <div class="row q-col-gutter-xl">
             <div class="col-6">
-              <div>Nama : {{ pasien?.pasien?.nama }}</div>
-              <div>No RM : {{ pasien?.pasien?.norm }}</div>
-              <div>Umur : {{ pasien?.pasien?.umur }}</div>
-              <div>NIK : {{ pasien?.pasien?.nik }}</div>
+              <div class="row q-mb-xs">
+                <div class="col-4 label">Nama</div>
+                <div class="col-8">: {{ pasien?.pasien?.nama }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-4 label">No RM</div>
+                <div class="col-8">: {{ pasien?.pasien?.norm }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-4 label">Umur</div>
+                <div class="col-8">: {{ pasien?.pasien?.usia }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-4 label">NIK</div>
+                <div class="col-8">: {{ pasien?.pasien?.nik }}</div>
+              </div>
             </div>
             <div class="col-6">
-              <div>Diagnosis : {{ pasien?.pasien?.diagnosa }}</div>
-              <div>Jenis Kelamin : {{ pasien?.pasien?.jk }}</div>
-              <div>Ruang : {{ pasien?.pasien?.ruang_ranap }}</div>
-              <div>Tindakan : {{ pasien?.pasien?.tindakan }}</div>
+              <div class="row q-mb-xs">
+                <div class="col-5 label">Diagnosis Medis</div>
+                <div class="col-7">: {{ pasien?.diagnosa }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-5 label">Jenis Kelamin</div>
+                <div class="col-7">: {{ pasien?.pasien?.kelamin }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-5 label">Ruang</div>
+                <div class="col-7">: {{ pasien?.ruang_ranap }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-5 label">Tindakan</div>
+                <div class="col-7">: {{ pasien?.tindakan_operasi }}</div>
+              </div>
             </div>
           </div>
         </q-card-section>
@@ -244,8 +268,7 @@ watch(
 )
 </script>
 <style>
-.print-only,
-.ttd-print {
+.print-only {
   display: none;
 }
 
@@ -253,6 +276,11 @@ watch(
   @page {
     size: A4;
     margin: 15mm;
+    padding: 5mm;
+  }
+
+  .print-only {
+    display: block;
   }
 
   body {

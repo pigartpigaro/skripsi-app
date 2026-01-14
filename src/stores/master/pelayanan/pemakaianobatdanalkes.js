@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { api } from 'src/boot/axios'
 import { notifErrVue, notifSuccessVue } from 'src/modules/utils'
 
-export const useAssasementPraAnastesiStore = defineStore('assasement-pra-anastesi-store', {
+export const usePemakaianObatdanAlkesStore = defineStore('pemakaian-obat-alkes-store', {
   state: () => ({
     loadingcari: false,
     loadingSave: false,
@@ -12,21 +12,17 @@ export const useAssasementPraAnastesiStore = defineStore('assasement-pra-anastes
     meta: {},
     form: {
       noreg: null,
-      klassifikasi_asa: null,
-      jenis_anastesi: null,
-      teknik_anastesi: null,
-      indikasi: null,
-      nama_pelaksana: null,
-      kode_user: null
-    },
+      cairan: [],
+      obat: [],
+      alkes: [],
 
+    },
   }),
   actions: {
-
     async simpanData() {
       this.loadingSave = true
       try {
-        const resp = await api.post('v1/transaksi/assasement-pra-anastesi/simpan', this.form)
+        const resp = await api.post('v1/transaksi/pemakaian-obat-alkes/simpan', this.form)
 
         if (resp.success === true || resp.status === 200) {
           this.items.unshift(resp?.data?.data)

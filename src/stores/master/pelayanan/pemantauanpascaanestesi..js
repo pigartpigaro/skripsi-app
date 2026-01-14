@@ -45,12 +45,13 @@ export const usePemantauanPascaAnestesiStore = defineStore('pemantauan-pasca-ane
       try {
         const resp = await api.post('v1/transaksi/pemantauan-pasca-anastesi/simpan', this.form)
 
-        if (resp.success === true) {
+        if (resp.success === true || resp.status === 200) {
           this.items.unshift(resp?.data?.data)
-          notifSuccessVue(resp?.data?.message)
-          this.loadingSave = false
+          notifSuccessVue(resp?.data?.message || resp?.message)
+
 
         }
+        this.loadingSave = false
       } catch (error) {
         console.log(error)
         this.loadingSave = false
