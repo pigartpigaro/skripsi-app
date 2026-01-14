@@ -65,7 +65,27 @@ state: () => ({
     tanggal_mulai: date.formatDate(Date.now(), 'YYYY-MM-DD HH:mm'),
     tanggal_selesai: date.formatDate(Date.now(), 'YYYY-MM-DD HH:mm'),
     // monitoring_anestesi: [],
-  }
+  },
+  monitoring_anestesi: {
+    waktu: '',
+    operasi: '',
+    anestesi: '',
+    sistole: '',
+    diastole: '',
+    nadi: '',
+    spo2: '',
+    rr: '',
+    mode_ventilator: '',
+    ekg: '',
+    suhu: '',
+    etco2: '',
+    n2o_o2: '',
+    flow: '',
+    gas_anestesi: '',
+    mac: '',
+    obat: '',
+    cairan: '',
+  },
 }),
 actions: {
   async simpanData() {
