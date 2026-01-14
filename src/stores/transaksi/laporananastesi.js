@@ -6,6 +6,7 @@ import { notifErrVue, notifSuccessVue } from "src/modules/utils";
 export const useLaporananastesiStore = defineStore('laporan-anastesi-store', {
 state: () => ({
   loadingSave: false,
+  loadingSavetabel: false,
   form: {
     noreg: null,
     infus_tempat_ukuran: {
@@ -64,28 +65,32 @@ state: () => ({
     komplikasi_anestesi: null,
     tanggal_mulai: date.formatDate(Date.now(), 'YYYY-MM-DD HH:mm'),
     tanggal_selesai: date.formatDate(Date.now(), 'YYYY-MM-DD HH:mm'),
-    // monitoring_anestesi: [],
   },
-  monitoring_anestesi: {
-    waktu: '',
-    operasi: '',
-    anestesi: '',
-    sistole: '',
-    diastole: '',
-    nadi: '',
-    spo2: '',
-    rr: '',
-    mode_ventilator: '',
-    ekg: '',
-    suhu: '',
-    etco2: '',
-    n2o_o2: '',
-    flow: '',
-    gas_anestesi: '',
-    mac: '',
-    obat: '',
-    cairan: '',
+  formtabel:{
+    noreg: null,
+    monitoring_anestesi: {
+      waktu: '',
+      operasi: '',
+      anestesi: '',
+      sistole: '',
+      diastole: '',
+      nadi: '',
+      spo2: '',
+      rr: '',
+      mode_ventilator: '',
+      ekg: '',
+      suhu: '',
+      etco2: '',
+      n2o_o2: '',
+      flow: '',
+      gas_anestesi: '',
+      mac: '',
+      obat: '',
+      cairan: '',
+    },
   },
+  itemstabel: [],
+
 }),
 actions: {
   async simpanData() {
@@ -105,10 +110,32 @@ actions: {
       notifErrVue(error?.response?.data?.message)
     }
   },
+  async simpanDataTabel() {
+    this.loadingSavetabel = true
+    try {
+      const resp = await api.post('v1/transaksi/laporan-anestesi/simpan-monitoring', this.formtabel)
+      console.log('resp', resp)
+      if (resp.status === 200) {
+        // this.items.unshift(resp?.data?.data)
+        // this.itemstabel = resp?.data?.data?.monitoring_anestesi
+        this.itemstabel.unshift(resp?.data?.data?.monitoring_anestesi)
+        notifSuccessVue(resp?.data?.message)
+        this.loadingSavetabel = false
+        // this.initForm()
+      }
+    } catch (error) {
+      console.log(error)
+      this.loadingSavetabel = false
+      notifErrVue(error?.response?.data?.message)
+    }
+  },
   isiForm(val) {
-    console.log('val', val)
+    // console.log('val', val)
     const temp = val?.laporan_anastesi
-    console.log('isiForm', temp)
+    this.itemstabel.push({
+      ...temp.monitoring_anestesi
+    })
+
     this.form = {
       noreg: val?.noreg,
       infus_tempat_ukuran: {
@@ -164,8 +191,8 @@ actions: {
         hasil_partial: temp?.regional_anestesi?.hasil_partial,
         hasil_gagal: temp?.regional_anestesi?.hasil_gagal,
       },
-      monitoring_anestesi: temp?.monitoring_anestesi,
     }
+    // this.itemstabel = temp?.monitoring_anestesi
   }
 }
 })

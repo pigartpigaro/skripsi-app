@@ -71,12 +71,10 @@
         <!-- POSISI PASIEN -->
         <div class="text-weight-bold q-mt-md">Posisi Pasien</div>
         <div class="row q-gutter-sm q-ml-md">
-          <q-option-group v-model="store.form.posisi_pasien.atas" :options="posisi1" type="checkbox" :key="p"
-            :label="label" inline dense />
+          <q-option-group v-model="store.form.posisi_pasien.atas" :options="posisi1" type="checkbox" inline dense />
         </div>
         <div class="row q-gutter-sm q-ml-md">
-          <q-option-group v-model="store.form.posisi_pasien.bawah" :options="posisi2" type="checkbox" :key="p"
-            :label="label" inline dense />
+          <q-option-group v-model="store.form.posisi_pasien.bawah" :options="posisi2" type="checkbox" inline dense />
         </div>
         <!-- PREMEDIKASI -->
         <div class="text-weight-bold q-mt-md">Premedikasi</div>
@@ -287,14 +285,15 @@
         </div>
         <div class="q-mt-md text-right q-gutter-sm print-hide">
           <q-btn label="Simpan" type="submit" color="red" :loading="store.loadingSave" :disabled="store.loadingSave" />
-          <q-btn label="Cetak" color="red" v-print="printObj" />
+          <!-- <q-btn label="Cetak" color="red" v-print="printObj" /> -->
         </div>
       </q-form>
       <q-separator class="q-mt-md q-mb-md" />
+
       <table class="monitor-table">
         <thead>
           <tr>
-            <th>No</th>
+            <th>No.</th>
             <th>Waktu</th>
             <th>Operasi</th>
             <th>Anestesi</th>
@@ -313,59 +312,64 @@
             <th>MAC %</th>
             <th>Obat</th>
             <th>Cairan</th>
-            <th>#</th>
+            <th class="print-hide">#</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>-</td>
-            <q-form @submit="simpantabel" class="q-gutter-sm">
-              <td><q-input autogrow v-model="store.monitoring_anestesi.waktu" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.operasi" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.anestesi" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.sistole" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.diastole" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.nadi" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.spo2" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.rr" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.mode_ventilator" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.ekg" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.suhu" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.etco2" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.n2o_o2" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.flow" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.gas_anestesi" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.mac" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.obat" dense /></td>
-              <td><q-input autogrow v-model="store.monitoring_anestesi.cairan" dense /></td>
-              <td><q-btn flat icon="save" color="red" @click="hapusBaris(index)" /></td>
-            </q-form>
+          <tr class="print-hide">
+            <td></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.waktu" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.operasi" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.anestesi" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.sistole" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.diastole" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.nadi" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.spo2" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.rr" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.mode_ventilator" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.ekg" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.suhu" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.etco2" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.n2o_o2" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.flow" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.gas_anestesi" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.mac" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.obat" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.cairan" /></td>
+            <td class="text-center">
+              <q-btn dense flat icon="save" color="red" @click="simpantabel()" :loading="store.loadingSavetabel" />
+            </td>
           </tr>
-          <tr v-for="(row, index) in store.form.monitoring_anestesi" :key="index">
-            <td>{{ index + 1 }}</td>
-            <td><q-input autogrow v-model="row.waktu" dense /></td>
-            <td><q-input autogrow v-model="row.operasi" dense /></td>
-            <td><q-input autogrow v-model="row.anestesi" dense /></td>
-            <td><q-input autogrow v-model="row.sistole" dense /></td>
-            <td><q-input autogrow v-model="row.diastole" dense /></td>
-            <td><q-input autogrow v-model="row.nadi" dense /></td>
-            <td><q-input autogrow v-model="row.spo2" dense /></td>
-            <td><q-input autogrow v-model="row.rr" dense /></td>
-            <td><q-input autogrow v-model="row.mode_ventilator" dense /></td>
-            <td><q-input autogrow v-model="row.ekg" dense /></td>
-            <td><q-input autogrow v-model="row.suhu" dense /></td>
-            <td><q-input autogrow v-model="row.etco2" dense /></td>
-            <td><q-input autogrow v-model="row.n2o_o2" dense /></td>
-            <td><q-input autogrow v-model="row.flow" dense /></td>
-            <td><q-input autogrow v-model="row.gas_anestesi" dense /></td>
-            <td><q-input autogrow v-model="row.mac" dense /></td>
-            <td><q-input autogrow v-model="row.obat" dense /></td>
-            <td><q-input autogrow v-model="row.cairan" dense /></td>
+          <tr v-for="(item, index) in store.itemstabel" :key="index">
+            <td>{{ index + 1 }}.</td>
+            <td>{{ item.waktu }}</td>
+            <td>{{ item.operasi }}</td>
+            <td>{{ item.anestesi }}</td>
+            <td>{{ item.sistole }}</td>
+            <td>{{ item.diastole }}</td>
+            <td>{{ item.nadi }}</td>
+            <td>{{ item.spo2 }}</td>
+            <td>{{ item.rr }}</td>
+            <td>{{ item.mode_ventilator }}</td>
+            <td>{{ item.ekg }}</td>
+            <td>{{ item.suhu }}</td>
+            <td>{{ item.etco2 }}</td>
+            <td>{{ item.n2o_o2 }}</td>
+            <td>{{ item.flow }}</td>
+            <td>{{ item.gas_anestesi }}</td>
+            <td>{{ item.mac }}</td>
+            <td>{{ item.obat }}</td>
+            <td>{{ item.cairan }}</td>
+
           </tr>
         </tbody>
       </table>
       <!-- </div> -->
+      <div class="q-mt-md text-right q-gutter-sm print-hide">
+        <q-btn label="Cetak" color="red" v-print="printObj" />
+      </div>
     </div>
+
 
 
   </q-page>
@@ -413,13 +417,14 @@ const opsiASA = [
 ]
 
 function simpan() {
-  console.log('xxxxxx', props.pasien?.noreg)
+  // console.log('xxxxxx', props.pasien?.noreg)
   store.form.noreg = props.pasien?.noreg
   store.simpanData()
 }
 
 function simpantabel() {
-  console.log('store.form.monitoring_anestesi', store.monitoring_anestesi)
+  store.formtabel.noreg = props.pasien?.noreg
+  store.simpanDataTabel()
 }
 
 const intubasi1 = [
@@ -457,11 +462,62 @@ const lama = computed(() => {
   return `${jam} jam ${sisaMenit} menit`
 })
 
+const printObj = computed(() => ({
+  id: '#printData',
+  popTitle: 'Asesmen Pra Anastesi',
+  preview: false
+}))
+
 onMounted(() => {
   store.isiForm(props.pasien)
 })
 </script>
 <style scoped>
+.print-only,
+.ttd-print {
+  display: none;
+}
+
+@media print {
+  .text-h6 {
+    padding-left: 5mm;
+    padding-right: 5mm;
+  }
+
+  body {
+    background: white !important;
+  }
+
+  .print-only,
+  .ttd-print {
+    display: block !important;
+  }
+
+  .no-print,
+  .q-btn,
+  .q-card-actions {
+    display: none !important;
+  }
+
+  #printData {
+    width: 100%;
+    padding: 0;
+    /* ⬅️ padding dipindah ke @page */
+    box-sizing: border-box;
+    font-size: 12px;
+  }
+
+  .q-card {
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .ttd-line {
+    width: 200px;
+    border-bottom: 1px solid #000;
+  }
+}
+
 .line {
   display: inline-block;
   border-bottom: 1px solid #000;
@@ -479,28 +535,89 @@ onMounted(() => {
 
 .monitor-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 12px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.monitor-table th {
-  border: 1px solid #ccc;
-  padding: 6px 4px;
-  text-align: center;
+/* Header */
+.monitor-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: linear-gradient(180deg, #f8fafc, #eef2f7);
+  color: #334155;
   font-weight: 600;
-  background: #f5f7fa;
+  text-align: center;
+  padding: 8px 6px;
+  border-bottom: 1px solid #dbe1e8;
   white-space: nowrap;
 }
 
-.monitor-table th:nth-child(1),
-.monitor-table th:nth-child(2) {
-  position: sticky;
-  left: 0;
-  background: #eef2f7;
-  z-index: 2;
+/* Body */
+.monitor-table tbody td {
+  padding: 6px 4px;
+  border-bottom: 1px solid #eef2f7;
+  text-align: center;
+  vertical-align: middle;
 }
 
-.monitor-table th:nth-child(2) {
-  left: 40px;
+/* Input row */
+.monitor-table tbody tr.print-hide {
+  background: #f8fafc;
+  position: sticky;
+  top: 36px;
+  z-index: 4;
+}
+
+/* Hover row */
+.monitor-table tbody tr:not(.print-hide):hover {
+  background: #f1f5f9;
+}
+
+/* First column (No) sticky */
+.monitor-table th:first-child,
+.monitor-table td:first-child {
+  position: sticky;
+  left: 0;
+  background: #f8fafc;
+  z-index: 6;
+  min-width: 40px;
+}
+
+/* Action column sticky */
+.monitor-table th:last-child,
+.monitor-table td:last-child {
+  position: sticky;
+  right: 0;
+  background: #f8fafc;
+  z-index: 6;
+}
+
+/* q-input inside table */
+.monitor-table .q-field--dense .q-field__control {
+  height: 26px;
+  min-height: 26px;
+}
+
+.monitor-table .q-field__control {
+  padding: 0 6px;
+  font-size: 11px;
+}
+
+/* Button */
+.monitor-table .q-btn {
+  min-width: 28px;
+  min-height: 28px;
+}
+
+/* Print */
+@media print {
+  .print-hide {
+    display: none !important;
+  }
 }
 </style>
