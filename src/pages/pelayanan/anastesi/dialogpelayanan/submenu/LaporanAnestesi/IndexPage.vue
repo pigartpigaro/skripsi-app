@@ -313,29 +313,33 @@
             <th>MAC %</th>
             <th>Obat</th>
             <th>Cairan</th>
+            <th>#</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>-</td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.waktu" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.operasi" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.anestesi" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.sistole" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.diastole" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.nadi" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.spo2" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.rr" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.mode_ventilator" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.ekg" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.suhu" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.etco2" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.n2o_o2" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.flow" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.gas_anestesi" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.mac" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.obat" dense /></td>
-            <td><q-input autogrow v-model="store.form.monitoring_anestesi.cairan" dense /></td>
+            <q-form @submit="simpantabel" class="q-gutter-sm">
+              <td><q-input autogrow v-model="store.monitoring_anestesi.waktu" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.operasi" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.anestesi" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.sistole" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.diastole" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.nadi" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.spo2" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.rr" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.mode_ventilator" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.ekg" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.suhu" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.etco2" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.n2o_o2" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.flow" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.gas_anestesi" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.mac" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.obat" dense /></td>
+              <td><q-input autogrow v-model="store.monitoring_anestesi.cairan" dense /></td>
+              <td><q-btn flat icon="save" color="red" @click="hapusBaris(index)" /></td>
+            </q-form>
           </tr>
           <tr v-for="(row, index) in store.form.monitoring_anestesi" :key="index">
             <td>{{ index + 1 }}</td>
@@ -412,6 +416,10 @@ function simpan() {
   console.log('xxxxxx', props.pasien?.noreg)
   store.form.noreg = props.pasien?.noreg
   store.simpanData()
+}
+
+function simpantabel() {
+  console.log('store.form.monitoring_anestesi', store.monitoring_anestesi)
 }
 
 const intubasi1 = [
