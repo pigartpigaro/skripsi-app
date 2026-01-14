@@ -1,6 +1,6 @@
 <script setup>
 import { useSerahTerimaPascaOpStore } from 'src/stores/master/pelayanan/serahTerimaPascaOp'
-import { computed, onMounted, watch } from 'vue'
+import { computed, onMounted } from 'vue'
 
 const props = defineProps({
   pasien: {
@@ -17,16 +17,22 @@ onMounted(() => {
   if (sr?.length) {
     const form = sr.find(f => f.tujuan == 'RR')
     if (form) store.form = form
+    else {
+      store.resetForm('RR')
+    }
   }
 })
-watch(() => props.pasien, () => {
-  const sr = props.pasien?.serah_terima_pasca_op
-  // console.log('wathc rr')
-  if (sr?.length) {
-    const form = sr.find(f => f.tujuan == 'RR')
-    if (form) store.form = form
-  }
-}, { deep: true })
+// watch(() => props.pasien, () => {
+//   const sr = props.pasien?.serah_terima_pasca_op
+//   // console.log('wathc rr')
+//   if (sr?.length) {
+//     const form = sr.find(f => f.tujuan == 'RR')
+//     if (form) store.form = form
+//     else {
+//       store.resetForm('RR')
+//     }
+//   }
+// }, { deep: true })
 const simpan = () => {
   store.form.tujuan = 'RR'
   store.simpan(props.pasien, 'RR')

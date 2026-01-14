@@ -48,7 +48,7 @@ export const useSerahTerimaPascaOpStore = defineStore('serah-terima-pasaca-op', 
 
         notifSuccessVue(resp?.data?.message || 'Data berhasil disimpan')
         kunj.insertToPasienWithParam(pasien,'serah_terima_pasca_op',resp?.data?.data,'tujuan',tujuan)
-        this.resetForm(tujuan)
+        // this.resetForm(tujuan)
       } catch (err) {
         notifErrVue(err?.response?.data?.message || 'Gagal menyimpan data')
       } finally {
