@@ -117,10 +117,11 @@ const routes = [
       requiresAuth: true
     },
     beforeEnter: async () => {
+       console.log('BEFORE ENTER LOGOUT')
       const { useAuthStore } = await import('src/stores/auth/auth.js')
       const store = useAuthStore()
 
-      store.logout()
+      await store.logout()
 
       return { path: '/login', replace: true }
     }
