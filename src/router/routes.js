@@ -79,6 +79,11 @@ const routes = [
         path: 'agama',
         name: 'master.agama',
         component: () => import('pages/master/agama/IndexPage.vue')
+      },
+      {
+        path: 'user',
+        name: 'master.user',
+        component: () => import('pages/master/user/IndexPage.vue')
       }
     ]
   },

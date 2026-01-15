@@ -90,7 +90,7 @@ const auth = useAuthStores()
 const router = useRouter()
 const user = computed(() => auth?.user)
 // const user = JSON.parse(localStorage.getItem('user'))
-console.log('user', user?.value?.user?.kode_jabatan)
+// console.log('user', user?.value?.user?.kode_jabatan)
 const menus = computed(() => {
   if (!user?.value) {
     return []        // ⬅️ INI KUNCI
@@ -112,7 +112,8 @@ const menus = computed(() => {
           { id: 5, title: 'Ruangan', route: '/master/ruangan' },
           { id: 6, title: 'Pekerjaan', route: '/master/pekerjaan' },
           { id: 7, title: 'Cara Masuk', route: '/master/cara-masuk' },
-          { id: 8, title: 'Asuransi', route: '/master/asuransi' }
+          { id: 8, title: 'Asuransi', route: '/master/asuransi' },
+          { id: 8, title: 'User', route: '/master/user' }
         ]
       },
       {
