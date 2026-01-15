@@ -5,8 +5,8 @@ import { api } from 'src/boot/axios'
 export const useAuthStores = defineStore('auths', {
   state: () => ({
     loading:false,
-    token: localStorage.getItem('token'),
-    user: JSON.parse(localStorage.getItem('user'))
+    token: null,
+    user: null
   }),
 
   actions: {
@@ -34,6 +34,13 @@ export const useAuthStores = defineStore('auths', {
         this.loading=false
         // router.replace({ name: 'login' })
       }
+    },
+    initAuth () {
+      if (typeof window === 'undefined') return
+
+      const raw = localStorage.getItem('user')
+      this.user = raw && raw !== 'undefined' ? JSON.parse(raw) : null
+      this.token = localStorage.getItem('token')
     }
   }
 })

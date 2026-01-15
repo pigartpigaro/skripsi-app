@@ -77,114 +77,84 @@
 
 
 <script setup>
-import { ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import logo from 'src/assets/images/udumbara2.png'
 import { useAuthStores } from 'src/stores/auth/auth'
 import { useRouter } from 'vue-router'
 
+onMounted(() => {
+  auth.initAuth()
+})
 const miniState = ref(true)
-const user = JSON.parse(localStorage.getItem('user') || '{}')
-let menus = []
-if (!user.kode_jabatan) {
-  menus = [
-    {
-      id: 1,
-      title: 'Dashboard',
-      icon: 'home',
-      route: '/dashboard',
-      name: 'dashboard',
-      children: []
-    },
-    {
-      id: 3,
-      title: 'Pendaftaran',
-      icon: 'person_add',
-      route: '/pendaftaran',
-      name: 'pendaftaran',
-      children: [
-        { id: 1, title: 'Pasien Baru', route: '/pendaftaran/pasienbaru', name: 'pendaftaran.pasienbaru' }
-      ]
-    },
-    {
-      id: 4,
-      title: 'Pelayanan',
-      icon: 'vaccines',
-      route: '/pelayanan',
-      name: 'pelayanan',
-      children: [
-        { id: 1, title: 'Anastesi', route: '/pelayanan/anastesi', name: 'pelayanan.anastesi' }
-      ]
-    },
-    {
-      id: 11,
-      title: 'Logout',
-      icon: 'logout',
-      route: '/logout',
-      name: 'logout',
-      children: []
-    }
-  ]
-} else {
-  menus = [
-    {
-      id: 1,
-      title: 'Dashboard',
-      icon: 'home',
-      route: '/dashboard',
-      name: 'dashboard',
-      children: []
-    },
-    {
-      id: 2,
-      title: 'Master',
-      icon: 'layers',
-      route: '/master',
-      name: 'master',
-      children: [
-        { id: 1, title: 'Dokter', route: '/master/dokter', name: 'master.dokter' },
-        { id: 2, title: 'Pasien', route: '/master/pasien', name: 'master.pasien' },
-        { id: 3, title: 'Pendidikan', route: '/master/pendidikan', name: 'master.pendidikan' },
-        { id: 4, title: 'Agama', route: '/master/agama', name: 'master.agama' },
-        { id: 5, title: 'Ruangan', route: '/master/ruangan', name: 'master.ruangan' },
-        { id: 6, title: 'Pekerjaan', route: '/master/pekerjaan', name: 'master.pekerjaan' },
-        { id: 7, title: 'Cara Masuk', route: '/master/cara-masuk', name: 'master.cara-masuk' },
-        { id: 8, title: 'Asuransi', route: '/master/asuransi', name: 'master.asuransi' }
-      ]
-    },
-    {
-      id: 3,
-      title: 'Pendaftaran',
-      icon: 'person_add',
-      route: '/pendaftaran',
-      name: 'pendaftaran',
-      children: [
-        { id: 1, title: 'Pasien Baru', route: '/pendaftaran/pasienbaru', name: 'pendaftaran.pasienbaru' }
-      ]
-    },
-    {
-      id: 4,
-      title: 'Pelayanan',
-      icon: 'vaccines',
-      route: '/pelayanan',
-      name: 'pelayanan',
-      children: [
-        { id: 1, title: 'Anastesi', route: '/pelayanan/anastesi', name: 'pelayanan.anastesi' }
-      ]
-    },
-    {
-      id: 11,
-      title: 'Logout',
-      icon: 'logout',
-      route: '/logout',
-      name: 'logout',
-      children: []
-    }
-  ]
-}
-
-
 const auth = useAuthStores()
 const router = useRouter()
+const user = computed(() => auth?.user)
+// const user = JSON.parse(localStorage.getItem('user'))
+console.log('user', user?.value?.user?.kode_jabatan)
+const menus = computed(() => {
+  if (!user?.value) {
+    return []        // ⬅️ INI KUNCI
+  }
+
+  if (user.value?.kode_jabatan === 'root') {
+    return [
+      { id: 1, title: 'Dashboard', icon: 'home', route: '/dashboard', children: [] },
+      {
+        id: 2,
+        title: 'Master',
+        icon: 'layers',
+        route: '/master',
+        children: [
+          { id: 1, title: 'Dokter', route: '/master/dokter' },
+          { id: 2, title: 'Pasien', route: '/master/pasien' },
+          { id: 3, title: 'Pendidikan', route: '/master/pendidikan' },
+          { id: 4, title: 'Agama', route: '/master/agama' },
+          { id: 5, title: 'Ruangan', route: '/master/ruangan' },
+          { id: 6, title: 'Pekerjaan', route: '/master/pekerjaan' },
+          { id: 7, title: 'Cara Masuk', route: '/master/cara-masuk' },
+          { id: 8, title: 'Asuransi', route: '/master/asuransi' }
+        ]
+      },
+      {
+        id: 3,
+        title: 'Pendaftaran',
+        icon: 'person_add',
+        route: '/pendaftaran',
+        children: [{ id: 1, title: 'Pasien Baru', route: '/pendaftaran/pasienbaru' }]
+      },
+      {
+        id: 4,
+        title: 'Pelayanan',
+        icon: 'vaccines',
+        route: '/pelayanan',
+        children: [{ id: 1, title: 'Anastesi', route: '/pelayanan/anastesi' }]
+      }
+    ]
+  }
+
+  return [
+    { id: 1, title: 'Dashboard', icon: 'home', route: '/dashboard', children: [] },
+    {
+      id: 3,
+      title: 'Pendaftaran',
+      icon: 'person_add',
+      route: '/pendaftaran',
+      children: [{ id: 1, title: 'Pasien Baru', route: '/pendaftaran/pasienbaru' }]
+    },
+    {
+      id: 4,
+      title: 'Pelayanan',
+      icon: 'vaccines',
+      route: '/pelayanan',
+      children: [{ id: 1, title: 'Anastesi', route: '/pelayanan/anastesi' }]
+    }
+  ]
+})
+
+
+
+
+
 const doLogout = async () => {
   await auth.logout()
   router.replace({ name: 'login' })
