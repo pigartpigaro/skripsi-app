@@ -181,6 +181,12 @@ const menus = [
   },
 
 ]
+
+
+const doLogout = async () => {
+  await auth.logout()
+  router.replace({ name: 'login' })
+}
 </script>
 <style scoped>
 .submenu-item {
