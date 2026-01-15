@@ -121,6 +121,13 @@ const menus = ref([
     comp: shallowRef(defineAsyncComponent(() => import('./submenu/AskanIntraAnestesi/IndexPage.vue')))
   },
   {
+    name: 'AskanPascaanastesi',
+    label: 'Askan Pasca Anestesi',
+    icon: 'cancel_presentation',
+    route: ['anastesi'],
+    comp: shallowRef(defineAsyncComponent(() => import('./submenu/AskanPascaAnestesi/IndexPage.vue')))
+  },
+  {
     name: 'SerahterimaOKkeRR',
     label: 'Serah Terima OK ke RR',
     icon: 'queue_play_next',

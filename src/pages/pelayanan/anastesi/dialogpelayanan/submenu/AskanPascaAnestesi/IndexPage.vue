@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md bg-white">
-    <div class="q-text-weight-bold text-h6 text-center q-pb-md bg-white">ASKAN PRA ANESTESI</div>
+    <div class="q-text-weight-bold text-h6 text-center q-pb-md bg-white">ASKAN PASCA ANESTESI</div>
     <q-separator spaced style="border-top: 1px solid #000" />
     <q-form @submit="simpan">
       <div class="row">
