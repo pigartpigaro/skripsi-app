@@ -6,6 +6,7 @@ import { notifErrVue, notifSuccessVue } from "src/modules/utils";
 export const useLaporananastesiStore = defineStore('laporan-anastesi-store', {
 state: () => ({
   loadingSave: false,
+  loadingSavetabel: false,
   form: {
     noreg: null,
     infus_tempat_ukuran: {
@@ -64,28 +65,33 @@ state: () => ({
     komplikasi_anestesi: null,
     tanggal_mulai: date.formatDate(Date.now(), 'YYYY-MM-DD HH:mm'),
     tanggal_selesai: date.formatDate(Date.now(), 'YYYY-MM-DD HH:mm'),
-    // monitoring_anestesi: [],
   },
-  monitoring_anestesi: {
-    waktu: '',
-    operasi: '',
-    anestesi: '',
-    sistole: '',
-    diastole: '',
-    nadi: '',
-    spo2: '',
-    rr: '',
-    mode_ventilator: '',
-    ekg: '',
-    suhu: '',
-    etco2: '',
-    n2o_o2: '',
-    flow: '',
-    gas_anestesi: '',
-    mac: '',
-    obat: '',
-    cairan: '',
+  formtabel:{
+    noreg: null,
+    monitoring_anestesi: []
+    // monitoring_anestesi: {
+    //   waktu: '',
+    //   operasi: '',
+    //   anestesi: '',
+    //   sistole: '',
+    //   diastole: '',
+    //   nadi: '',
+    //   spo2: '',
+    //   rr: '',
+    //   mode_ventilator: '',
+    //   ekg: '',
+    //   suhu: '',
+    //   etco2: '',
+    //   n2o_o2: '',
+    //   flow: '',
+    //   gas_anestesi: '',
+    //   mac: '',
+    //   obat: '',
+    //   cairan: '',
+    // },
   },
+  itemstabel: [],
+
 }),
 actions: {
   async simpanData() {
@@ -105,10 +111,75 @@ actions: {
       notifErrVue(error?.response?.data?.message)
     }
   },
+  async simpanDataTabel () {
+    this.loadingSavetabel = true
+
+    try {
+      // 1️⃣ ambil input baru (clone biar aman)
+      const rowBaru = {
+        ...this.formtabel.monitoring_anestesi
+      }
+
+      // 2️⃣ gabungkan dengan data lama (di depan)
+      const monitoringGabungan = [
+        rowBaru,
+        ...this.itemstabel
+      ]
+
+      // 3️⃣ susun payload kirim SEMUA DATA
+      const payload = {
+        noreg: this.formtabel.noreg,
+        monitoring_anestesi: monitoringGabungan
+      }
+
+      // 4️⃣ kirim ke backend
+      const resp = await api.post(
+        'v1/transaksi/laporan-anestesi/simpan-monitoring',
+        payload
+      )
+
+      console.log('resp', resp)
+
+      if (resp.status === 200) {
+        // 5️⃣ update tabel frontend (clone biar aman)
+        this.itemstabel = monitoringGabungan.map(item => ({ ...item }))
+
+        notifSuccessVue(resp?.data?.message)
+
+        // 6️⃣ reset form input (TANPA ganggu data lama)
+        Object.keys(this.formtabel.monitoring_anestesi)
+          .forEach(k => this.formtabel.monitoring_anestesi[k] = '')
+      }
+
+    } catch (error) {
+      console.log(error)
+      notifErrVue(error?.response?.data?.message)
+    } finally {
+      this.loadingSavetabel = false
+    }
+  },
+
   isiForm(val) {
-    console.log('val', val)
-    const temp = val?.laporan_anastesi
-    console.log('isiForm', temp)
+    // console.log('val', val)
+   if (!val || typeof val !== 'object') {
+    console.warn('isiForm: val bukan object', val)
+    return
+  }
+
+  const temp = val?.laporan_anastesi
+  if (!temp) {
+    console.warn('laporan_anastesi kosong', val)
+    return
+  }
+
+  // RESET dulu biar gak dobel
+  this.itemstabel = []
+
+  // monitoring_anestesi HARUS array
+  if (Array.isArray(temp.monitoring_anestesi)) {
+    this.itemstabel.push(...temp.monitoring_anestesi)
+  }
+
     this.form = {
       noreg: val?.noreg,
       infus_tempat_ukuran: {
@@ -164,8 +235,8 @@ actions: {
         hasil_partial: temp?.regional_anestesi?.hasil_partial,
         hasil_gagal: temp?.regional_anestesi?.hasil_gagal,
       },
-      monitoring_anestesi: temp?.monitoring_anestesi,
     }
+    // this.itemstabel = temp?.monitoring_anestesi
   }
 }
 })

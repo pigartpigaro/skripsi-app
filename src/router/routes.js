@@ -79,6 +79,11 @@ const routes = [
         path: 'agama',
         name: 'master.agama',
         component: () => import('pages/master/agama/IndexPage.vue')
+      },
+      {
+        path: 'user',
+        name: 'master.user',
+        component: () => import('pages/master/user/IndexPage.vue')
       }
     ]
   },
@@ -117,10 +122,11 @@ const routes = [
       requiresAuth: true
     },
     beforeEnter: async () => {
+       console.log('BEFORE ENTER LOGOUT')
       const { useAuthStore } = await import('src/stores/auth/auth.js')
       const store = useAuthStore()
 
-      store.logout()
+      await store.logout()
 
       return { path: '/login', replace: true }
     }

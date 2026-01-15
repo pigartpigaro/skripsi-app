@@ -84,8 +84,8 @@ async function onSubmit() {
   console.count('LOGIN SUBMIT')
   try {
     await storeAuth.login(formlogin.value)
+    // storeAuth.getprofil()
     router.push({ path: '/dashboard' })
-    storeAuth.getprofil()
   } catch (err) {
     if (err?.status === 422 || err?.errors) {
       $q.notify({

@@ -1,28 +1,46 @@
 import { defineStore } from 'pinia'
-import api from 'src/boot/axios'
+import { api } from 'src/boot/axios'
+// import { useRouter } from 'vue-router'
 
 export const useAuthStores = defineStore('auths', {
   state: () => ({
-    token: localStorage.getItem('token'),
-    user: JSON.parse(localStorage.getItem('user'))
+    loading:false,
+    token: null,
+    user: null
   }),
 
   actions: {
     async logout () {
+        console.log('LOGOUT')
+      // const router = useRouter()
+      this.loading=true
       try {
-        await api.post('v1/auth/logout', {}, {
+        await api.post('v1/auth/logout', null, {
           headers: {
             Authorization: `Bearer ${this.token}`
           }
-        })
-      } catch (e) {
-        // backend boleh gagal
-      }
+        }).then((resp)=>{
+          console.log('then',resp);
 
-      this.token = null
-      this.user = null
-      localStorage.removeItem('token')
-      localStorage.removeItem('user')
+          this.token = null
+          this.user = null
+
+          localStorage.removeItem('token')
+          localStorage.removeItem('user')
+        })
+      } catch (err) {
+        console.warn('Logout API failed:', err)
+      } finally {
+        this.loading=false
+        // router.replace({ name: 'login' })
+      }
+    },
+    initAuth () {
+      if (typeof window === 'undefined') return
+
+      const raw = localStorage.getItem('user')
+      this.user = raw && raw !== 'undefined' ? JSON.parse(raw) : null
+      this.token = localStorage.getItem('token')
     }
   }
 })
