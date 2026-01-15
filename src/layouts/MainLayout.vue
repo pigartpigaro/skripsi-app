@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh LpR fFf">
-
+    <app-loader v-if="auth.loading" />
     <!-- HEADER -->
     <q-header elevated class="header-gradient text-white">
       <q-toolbar>
@@ -17,7 +17,7 @@
     <q-drawer show-if-above bordered :mini="miniState" :mini-width="64" :width="220" @mouseover="miniState = false"
       @mouseleave="miniState = true">
       <q-scroll-area class="fit">
-        <q-list padding>
+        <q-list padding class="column">
 
           <template v-for="menu in menus" :key="menu.id">
 
@@ -55,6 +55,14 @@
 
           </template>
 
+          <q-item clickable v-ripple @click="doLogout()">
+            <q-item-section avatar>
+              <q-icon color="primary" name="logout" />
+            </q-item-section>
+            <q-item-section avatar>
+              <q-item-label>Logout</q-item-label>
+            </q-item-section>
+          </q-item>
         </q-list>
       </q-scroll-area>
     </q-drawer>
@@ -71,6 +79,8 @@
 <script setup>
 import { ref } from 'vue'
 import logo from 'src/assets/images/udumbara2.png'
+import { useAuthStores } from 'src/stores/auth/auth'
+import { useRouter } from 'vue-router'
 
 const miniState = ref(true)
 
@@ -170,19 +180,20 @@ const menus = [
       }
     ]
   },
-  {
-    id: 11,
-    title: 'Logout',
-    icon: 'logout',
-    route: '/logout',
-    name: 'logout',
-    children: [
-    ]
-  },
+  // {
+  //   id: 11,
+  //   title: 'Logout',
+  //   icon: 'logout',
+  //   route: '/logout',
+  //   name: 'logout',
+  //   children: [
+  //   ]
+  // },
 
 ]
 
-
+const auth = useAuthStores()
+const router = useRouter()
 const doLogout = async () => {
   await auth.logout()
   router.replace({ name: 'login' })
