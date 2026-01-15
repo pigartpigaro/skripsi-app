@@ -62,15 +62,10 @@ export const useAuthStore = defineStore('auth', {
     async register (payload) {
       this.loading = true
       try {
-        const res = await api.post('/register', payload)
-
-        this.token = res.data.token
-        this.user = res.data.user
-
-        localStorage.setItem('token', this.token)
-        api.defaults.headers.common.Authorization = `Bearer ${this.token}`
-
-        return res
+        const res = await api.post('/v1/auth/register', payload)
+        if(res.status == 200){
+         notifSuccess('Register Berhasil, Silahkan Login')
+        }
       } catch (err) {
         throw err.response?.data || err
       } finally {

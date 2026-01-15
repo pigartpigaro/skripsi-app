@@ -1,75 +1,32 @@
 <template>
-  <div
-    class="bg-transparent text-white"
-    :class="fixed?'fixed-top':'relative'"
-    style="z-index:10"
-  >
+  <div class="bg-transparent text-white" :class="fixed ? 'fixed-top' : 'relative'" style="z-index:10">
     <!-- <transition
       appear
       enter-active-class="animated fadeIn"
       leave-active-class="animated fadeOut"
     > -->
-    <div
-      v-if="!store.visible"
-      class="header-one transparent"
-    >
+    <div v-if="!store.visible" class="header-one transparent">
       <q-bar class="container-padding bg-primary text-white">
-        <q-icon
-          name="call"
-          size="14px"
-        />
+        <q-icon name="call" size="14px" />
         <div class="f-12">
           {{ store.header.phone }}
         </div>
 
         <q-space />
 
-        <q-btn
-          class="q-mr-sm"
-          dense
-          flat
-          icon="ti-facebook"
-          size="xs"
-          :href="store.header.link_fb"
-          target="_blank"
-        />
-        <q-btn
-          class="q-mr-sm"
-          dense
-          flat
-          icon="ti-instagram"
-          size="xs"
-          :href="store.header.link_instagram"
-          target="_blank"
-        />
-        <q-btn
-          class="q-mr-sm"
-          dense
-          flat
-          icon="ti-youtube"
-          size="xs"
-          :href="store.header.link_youtube"
-          target="_blank"
-        />
+        <q-btn class="q-mr-sm" dense flat icon="ti-facebook" size="xs" :href="store.header.link_fb" target="_blank" />
+        <q-btn class="q-mr-sm" dense flat icon="ti-instagram" size="xs" :href="store.header.link_instagram"
+          target="_blank" />
+        <q-btn class="q-mr-sm" dense flat icon="ti-youtube" size="xs" :href="store.header.link_youtube"
+          target="_blank" />
       </q-bar>
     </div>
     <!-- </transition> -->
-    <div :class="store.visible?'bg-primary':'transparent'">
-      <q-bar
-        class="container-padding"
-        style="height:60px"
-      >
+    <div :class="store.visible ? 'bg-primary' : 'transparent'">
+      <q-bar class="container-padding" style="height:60px">
         <div class="logo-web text-center q-pa-xs bg-primary">
-          <q-skeleton
-            v-if="store.loading"
-            type="QAvatar"
-            style="height: 45px; margin-top:5px;"
-          />
-          <q-img
-            :src="logo"
-            :ratio="1"
-            fit="cover"
-          />
+          <q-skeleton v-if="store.loading" type="QAvatar" style="height: 45px; margin-top:5px;" />
+          <q-img :src="logo" :ratio="1" fit="cover" />
         </div>
         <div class="title-website q-ml-sm">
           <div class="f-18">
@@ -81,16 +38,8 @@
         </div>
         <q-space />
 
-        <div
-          v-if="fixed"
-          class="menu__header deskt-only flex"
-        >
-          <router-link
-            v-for="(menu, i) in menus"
-            :key="i"
-            :to="`/${menu.name}`"
-            class="menu__item"
-          >
+        <div v-if="fixed" class="menu__header deskt-only flex">
+          <router-link v-for="(menu, i) in menus" :key="i" :to="`/${menu.name}`" class="menu__item">
             {{ menu.title }}
           </router-link>
         </div>
@@ -121,6 +70,7 @@ const logo = computed(() => {
   return pathImg + store.logo
 })
 
+
 const menus = ref([
   { name: 'beranda', url: '/', title: 'Beranda', active: false },
   { name: 'berita', url: '/berita', title: 'Berita', active: false },
@@ -133,9 +83,9 @@ const menus = ref([
 
 <style lang="scss" scoped>
 .logo-web {
-    width:60px;
-    height:60px;
-    overflow: hidden;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
 }
 
 a.menu__item {
@@ -143,7 +93,7 @@ a.menu__item {
   margin-right: 3px;
   font-size: 12px;
   padding: 5px 10px;
-  color:#fff;
+  color: #fff;
   text-decoration: none;
 
   &::before {
@@ -159,13 +109,15 @@ a.menu__item {
     opacity: 0;
     transition: all 0.3s ease;
   }
+
   &:hover {
-      &::before {
-        width: 20px;
-        opacity: 1
-      }
+    &::before {
+      width: 20px;
+      opacity: 1
     }
+  }
 }
+
 a.router-link-active {
   background-color: $secondary;
   border-radius: 5px;

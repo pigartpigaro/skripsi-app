@@ -7,7 +7,7 @@
     </div>
     <div class="q-my-sm full-width">
       <q-form ref="myForm" class="q-pa-sm" @submit="onSubmit">
-        <q-input v-model="form.name" color="white" label="Nama" dark
+        <q-input v-model="form.nama" color="white" label="Nama" dark
           :rules="[val => !!val || 'Harap diisi terlebih dahulu']" autocorrect="off" autocapitalize="off"
           autocomplete="chrome-off" spellcheck="false">
           <template #label>
@@ -55,8 +55,22 @@
             <q-icon name="key" />
           </template>
           <template #append>
-            <q-icon :name="isPasw ? 'visibility_off' : 'visibility'" class="cursor-pointer"
-              @click="isPasw = !isPasw" />
+            <q-icon :name="isPasw ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPasw = !isPasw" />
+          </template>
+        </q-input>
+
+        <q-input v-model="form.password_confirmation" color="white" label="Konfirmasi Password" dark
+          :rules="[val => !!val || 'Harap diisi terlebih dahulu']" :type="isPasw ? 'password' : 'text'"
+          autocorrect="off" autocapitalize="off" autocomplete="chrome-off" spellcheck="false">
+          <template #label>
+            <!-- <span class="text-weight-bold text-deep-orange">You</span> -->
+            <span class="q-px-sm bg-deep-orange text-white text-italic rounded-borders">Konfirmasi Password</span>
+          </template>
+          <template #prepend>
+            <q-icon name="key" />
+          </template>
+          <template #append>
+            <q-icon :name="isPasw ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPasw = !isPasw" />
           </template>
         </q-input>
 
@@ -99,8 +113,9 @@ const isPasw = ref(true)
 const myForm = ref(null)
 
 const form = ref({
-  name: '',
+  nama: '',
   email: '',
+  username: '',
   password: '',
   password_confirmation: ''
 })
@@ -114,7 +129,7 @@ function onSubmit() {
 //   // location.reload()
 // }
 
-function goToLogin () {
+function goToLogin() {
   router.replace({
     name: 'login'
   })
