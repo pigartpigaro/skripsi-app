@@ -29,12 +29,19 @@
         </q-item-section>
 
         <q-item-section>
-          <div class="text-weight-medium text-weight-bold text-red">
-            User Name:{{ row.username }}
+          <div class="text-weight-medium text-weight-bold text-dark">
+            User Name : {{ row.username }}
           </div>
-          <div class="text-caption text-dark">
-            Pass: {{ row.password }}
+          <div class="q-mb-sm">
+            <div class="text-caption text-dark text-weight-bold row items-center q-gutter-xs">
+              Pass:
+              <span>{{ showPass[row.id] ? row.pass : '**********' }}</span>
+
+              <q-btn flat round size="sm" icon="visibility" color="primary" @click="togglePass(row.id)" />
+            </div>
           </div>
+
+
         </q-item-section>
 
         <!-- ACTION -->
@@ -46,9 +53,12 @@
       </q-item>
     </q-list>
   </div>
+
 </template>
 <script setup>
-import { humanDate } from 'src/modules/formatter'
+import { ref } from 'vue';
+
+
 
 const props = defineProps({
   items: {
@@ -61,6 +71,14 @@ const props = defineProps({
   }
 })
 
+const showPass = ref({})
+
+const togglePass = (id) => {
+  showPass.value[id] = true
+  setTimeout(() => {
+    showPass.value[id] = false
+  }, 5000)
+}
 
 </script>
 <style scoped>

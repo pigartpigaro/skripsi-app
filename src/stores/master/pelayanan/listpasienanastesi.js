@@ -84,7 +84,9 @@
         }
       },
       insertToPasien(pasien,key,data){
+        console.log('insertToPasien', pasien)
         const index=this.items.findIndex(x => x?.noreg === pasien?.noreg)
+         console.log('insertToPasien', index)
         if(index !== -1) {
           this.items[index][key]=data
         }
