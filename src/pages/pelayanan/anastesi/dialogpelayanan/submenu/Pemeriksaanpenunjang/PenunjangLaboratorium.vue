@@ -35,13 +35,13 @@ defineProps({
 })
 
 const $q = useQuasar()
-function isImage (val) {
+function isImage(val) {
   const type = val?.path.split('.')
   console.log('val', val, type[1])
   return type[1] !== 'pdf'
 
 }
-function onFileRejected () {
+function onFileRejected() {
   $q.notify({
     type: 'negative',
     message: 'File terlalu besar atau format tidak sesuai (maks 1MB PDF).'
