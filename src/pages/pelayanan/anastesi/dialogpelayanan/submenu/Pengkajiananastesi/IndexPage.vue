@@ -53,16 +53,28 @@
         <div class="col-3">
           > Riwayat alergi makanan
         </div>
-        <div class="col-9"> :
-          <q-radio v-model="store.anamnesis.alergi.makanan.status" val="Ada" label="Ada" color="cyan" />
-          <q-radio v-model="store.anamnesis.alergi.makanan.status" val="Tidak" label="Tidak" color="cyan" />
+        <div class="col-9">
+          <div class="row q-col-gutter-x-sm items-center"> :
+            <q-radio v-model="store.anamnesis.alergi.makanan.status" class="col-shrink" val="Ada" label="Ada"
+              color="cyan" />
+            <q-input v-if="store.anamnesis.alergi.makanan.status == 'Ada'" class="col-3"
+              v-model="store.anamnesis.alergi.makanan.keterangan" type="text" dense autogrow />
+            <q-radio v-model="store.anamnesis.alergi.makanan.status" class="col-shrink" val="Tidak" label="Tidak"
+              color="cyan" @update:model-value="hapusKet($event, store.anamnesis.alergi.makanan)" />
+          </div>
         </div>
         <div class="col-3">
           > Riwayat alergi Obat-obatan
         </div>
-        <div class="col-9"> :
-          <q-radio v-model="store.anamnesis.alergi.obat.status" val="Ada" label="Ada" color="cyan" />
-          <q-radio v-model="store.anamnesis.alergi.obat.status" val="Tidak" label="Tidak" color="cyan" />
+        <div class="col-9">
+          <div class="row q-col-gutter-x-sm items-center"> :
+            <q-radio v-model="store.anamnesis.alergi.obat.status" class="col-shrink" val="Ada" label="Ada"
+              color="cyan" />
+            <q-input v-if="store.anamnesis.alergi.obat.status == 'Ada'" class="col-3"
+              v-model="store.anamnesis.alergi.obat.keterangan" type="text" dense autogrow />
+            <q-radio v-model="store.anamnesis.alergi.obat.status" class="col-shrink" val="Tidak" label="Tidak"
+              color="cyan" @update:model-value="hapusKet($event, store.anamnesis.alergi.obat)" />
+          </div>
         </div>
         <div class="col-3">> Riwayat Lainnya </div>
         <div class="col-9">
@@ -72,29 +84,62 @@
       <div class="text-weight-bold q-mt-md">* Medication (M)</div>
       <div class="row items-center">
         <div class="col-3">> Obat anti hipertensi </div>
-        <div class="col-9"> :
-          <q-radio v-model="store.anamnesis.medication.antihipertensi.status" val="Ya" label="Ya" color="cyan" />
-          <q-radio v-model="store.anamnesis.medication.antihipertensi.status" val="Tidak" label="Tidak" color="cyan" />
+        <div class="col-9">
+          <div class="row q-col-gutter-x-sm items-center"> :
+            <q-radio v-model="store.anamnesis.medication.antihipertensi.status" class="col-shrink" val="Ada" label="Ada"
+              color="cyan" />
+            <q-input v-if="store.anamnesis.medication.antihipertensi.status == 'Ada'" class="col-3"
+              v-model="store.anamnesis.medication.antihipertensi.keterangan" type="text" dense autogrow />
+            <q-radio v-model="store.anamnesis.medication.antihipertensi.status" class="col-shrink" val="Tidak"
+              label="Tidak" color="cyan"
+              @update:model-value="hapusKet($event, store.anamnesis.medication.antihipertensi)" />
+          </div>
         </div>
         <div class="col-3">> Obat antidiabetik </div>
-        <div class="col-9"> :
-          <q-radio v-model="store.anamnesis.medication.antidiabetik.status" val="Ya" label="Ya" color="cyan" />
-          <q-radio v-model="store.anamnesis.medication.antidiabetik.status" val="Tidak" label="Tidak" color="cyan" />
+        <div class="col-9">
+          <div class="row q-col-gutter-x-sm items-center"> :
+            <q-radio v-model="store.anamnesis.medication.antidiabetik.status" class="col-shrink" val="Ada" label="Ada"
+              color="cyan" />
+            <q-input v-if="store.anamnesis.medication.antidiabetik.status == 'Ada'" class="col-3"
+              v-model="store.anamnesis.medication.antidiabetik.keterangan" type="text" dense autogrow />
+            <q-radio v-model="store.anamnesis.medication.antidiabetik.status" class="col-shrink" val="Tidak"
+              label="Tidak" color="cyan"
+              @update:model-value="hapusKet($event, store.anamnesis.medication.antidiabetik)" />
+          </div>
         </div>
         <div class="col-3">> Obat diuretik </div>
-        <div class="col-9"> :
-          <q-radio v-model="store.anamnesis.medication.diuretik.status" val="Ya" label="Ya" color="cyan" />
-          <q-radio v-model="store.anamnesis.medication.diuretik.status" val="Tidak" label="Tidak" color="cyan" />
+        <div class="col-9">
+          <div class="row q-col-gutter-x-sm items-center"> :
+            <q-radio v-model="store.anamnesis.medication.diuretik.status" class="col-shrink" val="Ada" label="Ada"
+              color="cyan" />
+            <q-input v-if="store.anamnesis.medication.diuretik.status == 'Ada'" class="col-3"
+              v-model="store.anamnesis.medication.diuretik.keterangan" type="text" dense autogrow />
+            <q-radio v-model="store.anamnesis.medication.diuretik.status" class="col-shrink" val="Tidak" label="Tidak"
+              color="cyan" @update:model-value="hapusKet($event, store.anamnesis.medication.diuretik)" />
+          </div>
         </div>
         <div class="col-3">> Obat antikoagulan </div>
-        <div class="col-9"> :
-          <q-radio v-model="store.anamnesis.medication.antikoagulan.status" val="Ya" label="Ya" color="cyan" />
-          <q-radio v-model="store.anamnesis.medication.antikoagulan.status" val="Tidak" label="Tidak" color="cyan" />
+        <div class="col-9">
+          <div class="row q-col-gutter-x-sm items-center"> :
+            <q-radio v-model="store.anamnesis.medication.antikoagulan.status" class="col-shrink" val="Ada" label="Ada"
+              color="cyan" />
+            <q-input v-if="store.anamnesis.medication.antikoagulan.status == 'Ada'" class="col-3"
+              v-model="store.anamnesis.medication.antikoagulan.keterangan" type="text" dense autogrow />
+            <q-radio v-model="store.anamnesis.medication.antikoagulan.status" class="col-shrink" val="Tidak"
+              label="Tidak" color="cyan"
+              @update:model-value="hapusKet($event, store.anamnesis.medication.antikoagulan)" />
+          </div>
         </div>
         <div class="col-3">> Obat digitalis </div>
-        <div class="col-9"> :
-          <q-radio v-model="store.anamnesis.medication.digitalis.status" val="Ya" label="Ya" color="cyan" />
-          <q-radio v-model="store.anamnesis.medication.digitalis.status" val="Tidak" label="Tidak" color="cyan" />
+        <div class="col-9">
+          <div class="row q-col-gutter-x-sm items-center"> :
+            <q-radio v-model="store.anamnesis.medication.digitalis.status" class="col-shrink" val="Ada" label="Ada"
+              color="cyan" />
+            <q-input v-if="store.anamnesis.medication.digitalis.status == 'Ada'" class="col-3"
+              v-model="store.anamnesis.medication.digitalis.keterangan" type="text" dense autogrow />
+            <q-radio v-model="store.anamnesis.medication.digitalis.status" class="col-shrink" val="Tidak" label="Tidak"
+              color="cyan" @update:model-value="hapusKet($event, store.anamnesis.medication.digitalis)" />
+          </div>
         </div>
         <div class="col-3">> Obat Lainnya : </div>
         <div class="col-9">
@@ -144,19 +189,40 @@
       </div>
       <div class="row q-mt-sm items-center">
         <div class="col-3"># Riwayat Penyakit Keluarga</div>
-        <div class="col-9"> :
-          <q-radio v-model="store.anamnesis.past_illness.riwayat_keluarga" val="Ya" label="Ya" color="cyan" />
-          <q-radio v-model="store.anamnesis.past_illness.riwayat_keluarga" val="Tidak" label="Tidak" color="cyan" />
+        <div class="col-9">
+          <div class="row q-col-gutter-x-sm items-center"> :
+            <q-radio v-model="store.anamnesis.past_illness.riwayat_keluarga.status" class="col-shrink" val="Ada"
+              label="Ada" color="cyan" />
+            <q-input v-if="store.anamnesis.past_illness.riwayat_keluarga.status == 'Ada'" class="col-3"
+              v-model="store.anamnesis.past_illness.riwayat_keluarga.keterangan" type="text" dense autogrow />
+            <q-radio v-model="store.anamnesis.past_illness.riwayat_keluarga.status" class="col-shrink" val="Tidak"
+              label="Tidak" color="cyan"
+              @update:model-value="hapusKet($event, store.anamnesis.past_illness.riwayat_keluarga)" />
+          </div>
         </div>
         <div class="col-3"># Riwayat Operasi </div>
-        <div class="col-9"> :
-          <q-radio v-model="store.anamnesis.past_illness.riwayat_operasi" val="Ya" label="Ya" color="cyan" />
-          <q-radio v-model="store.anamnesis.past_illness.riwayat_operasi" val="Tidak" label="Tidak" color="cyan" />
+        <div class="col-9">
+          <div class="row q-col-gutter-x-sm items-center"> :
+            <q-radio v-model="store.anamnesis.past_illness.riwayat_operasi.status" class="col-shrink" val="Ada"
+              label="Ada" color="cyan" />
+            <q-input v-if="store.anamnesis.past_illness.riwayat_operasi.status == 'Ada'" class="col-3"
+              v-model="store.anamnesis.past_illness.riwayat_operasi.keterangan" type="text" dense autogrow />
+            <q-radio v-model="store.anamnesis.past_illness.riwayat_operasi.status" class="col-shrink" val="Tidak"
+              label="Tidak" color="cyan"
+              @update:model-value="hapusKet($event, store.anamnesis.past_illness.riwayat_operasi)" />
+          </div>
         </div>
         <div class="col-3"># Riwayat Anestesi </div>
-        <div class="col-9"> :
-          <q-radio v-model="store.anamnesis.past_illness.riwayat_anestesi" val="Ya" label="Ya" color="cyan" />
-          <q-radio v-model="store.anamnesis.past_illness.riwayat_anestesi" val="Tidak" label="Tidak" color="cyan" />
+        <div class="col-9">
+          <div class="row q-col-gutter-x-sm items-center"> :
+            <q-radio v-model="store.anamnesis.past_illness.riwayat_anestesi.status" class="col-shrink" val="Ada"
+              label="Ada" color="cyan" />
+            <q-input v-if="store.anamnesis.past_illness.riwayat_anestesi.status == 'Ada'" class="col-3"
+              v-model="store.anamnesis.past_illness.riwayat_anestesi.keterangan" type="text" dense autogrow />
+            <q-radio v-model="store.anamnesis.past_illness.riwayat_anestesi.status" class="col-shrink" val="Tidak"
+              label="Tidak" color="cyan"
+              @update:model-value="hapusKet($event, store.anamnesis.past_illness.riwayat_anestesi)" />
+          </div>
         </div>
       </div>
 
@@ -1111,7 +1177,8 @@
           IV line: terpasang di
         </div>
         <q-input v-model="store.pemeriksaan_fisik_umum.b6.exter_atas.iv_line" type="text" dense autogrow />
-        , ukuran abocatch
+        <span class="q-mx-sm">, ukuran abocatch</span>
+        <q-input v-model="store.pemeriksaan_fisik_umum.b6.exter_atas.abocatch" type="text" dense autogrow />
       </div>
       <div class="q-ml-md row items-center no-wrap">
         <div class="q-mr-sm text-weight-medium">
@@ -1176,7 +1243,8 @@
         </div>
 
         <q-input v-model="store.pemeriksaan_fisik_umum.b6.exter_bawah.iv_line" type="text" dense autogrow />
-        , ukuran abocatch
+        <span class="q-mx-sm">, ukuran abocatch</span>
+        <q-input v-model="store.pemeriksaan_fisik_umum.b6.exter_bawah.abocatch" type="text" dense autogrow />
       </div>
       <div class="q-ml-md row items-center no-wrap">
         <div class="q-mr-sm text-weight-medium">
@@ -1193,6 +1261,7 @@
         <q-input v-model="store.pemeriksaan_fisik_umum.b6.exter_bawah.lainnya" class="col-3" type="text" dense
           autogrow />
       </div>
+
       <div class="q-mt-md text-right q-gutter-sm print-hide">
         <q-btn label="Simpan" color="red" @click="store.simpanData(pasien)" :loading="store.loadingSave"
           :disable="store.loadingSave" />
@@ -1206,7 +1275,11 @@
 <script setup>
 import { usePengkajianAnastesiStore } from 'src/stores/master/pelayanan/pengkajiananastesi'
 import { watch } from 'vue'
+function hapusKet (evt, val) {
+  val.keterangan = ''
+  // console.log('val', evt, val)
 
+}
 const optMallapati = [
   { label: 'I', value: 'I' },
   { label: 'II', value: 'II' },

@@ -12,16 +12,16 @@ export const usePengkajianAnastesiStore = defineStore('pengkajian-anastesi-store
     meta: {},
     anamnesis: {
       alergi: {
-        makanan: { status: "" },
-        obat: { status: "" },
+        makanan: { status: "",keterangan:'' },
+        obat: { status: "",keterangan:'' },
         lainnya: { status: "" }
       },
       medication: {
-        antihipertensi: { status: "" },
-        antidiabetik: { status: "" },
-        diuretik: { status: "" },
-        antikoagulan: { status: "" },
-        digitalis: { status: "" },
+        antihipertensi: { status: "",keterangan:'' },
+        antidiabetik: { status: "",keterangan:'' },
+        diuretik: { status: "",keterangan:'' },
+        antikoagulan: { status: "",keterangan:'' },
+        digitalis: { status: "",keterangan:'' },
         lainnya: { keterangan: "" }
       },
       past_illness: {
@@ -31,9 +31,9 @@ export const usePengkajianAnastesiStore = defineStore('pengkajian-anastesi-store
         hipertensi: { status: "" },
         paru: { status: "" },
         penyakit_lain: { keterangan: "" },
-        riwayat_keluarga: { status: "" },
-        riwayat_operasi: { status: "" },
-        riwayat_anestesi: { status: "" }
+        riwayat_keluarga: { status: "",keterangan: '' },
+        riwayat_operasi: { status: "",keterangan: '' },
+        riwayat_anestesi: { status: "",keterangan: '' }
       },
       last_meal: {
         neonatus: { padat: "", cair_jernih: "", susu_formula: "", asi: "" },
@@ -118,6 +118,7 @@ export const usePengkajianAnastesiStore = defineStore('pengkajian-anastesi-store
           fraktur:{status:'',keterangan:''},
           atropi:{status:'',keterangan:''},
           iv_line:'',
+          abocatch:'',
           rom:'',
           lainnya: ''
         },
@@ -128,6 +129,7 @@ export const usePengkajianAnastesiStore = defineStore('pengkajian-anastesi-store
           fraktur:{status:'',keterangan:''},
           atropi:{status:'',keterangan:''},
           iv_line:'',
+          abocatch:'',
           rom:'',
           lainnya: ''
         },
