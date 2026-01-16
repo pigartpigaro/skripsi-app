@@ -72,7 +72,7 @@
 
               <tbody>
                 <tr v-for="row in cairan" :key="row.id">
-                  <td>{{ row.nama }}</td>
+                  <td><q-input v-model="row.nama" dense outlined /></td>
 
                   <td>
                     <q-input v-model="row.ukuran" dense outlined style="width:120px" placeholder="" />
@@ -82,10 +82,12 @@
                     <q-input v-model.number="row.jumlah" type="number" dense outlined style="width:120px" />
                   </td>
 
-                  <td>{{ row.satuan }}</td>
+                  <td><q-input v-model="row.satuan" dense outlined /></td>
                 </tr>
               </tbody>
             </q-markup-table>
+            <q-btn flat icon="add" label="Tambah Cairan Lain" color="primary" size="md" class="q-mt-xs"
+              @click="tambahCairan" />
           </div>
         </q-card-section>
       </q-card>
@@ -108,7 +110,7 @@
 
               <tbody>
                 <tr v-for="row in alkes" :key="row.id">
-                  <td>{{ row.nama }}</td>
+                  <td><q-input v-model="row.nama" dense outlined /></td>
                   <td>
                     <q-input v-model="row.ukuran" dense outlined style="width:120px" />
                   </td>
@@ -116,10 +118,12 @@
                     <q-input v-model.number="row.jumlah" type="number" dense outlined style="width:120px" />
                   </td>
 
-                  <td>{{ row.satuan }}</td>
+                  <td><q-input v-model="row.satuan" dense outlined /></td>
                 </tr>
               </tbody>
             </q-markup-table>
+            <q-btn flat icon="add" label="Tambah Alkes Lain" color="primary" size="md" class="q-mt-xs"
+              @click="tambahAlkes" />
           </div>
         </q-card-section>
       </q-card>
@@ -142,7 +146,7 @@
 
               <tbody>
                 <tr v-for="row in obat" :key="row.id">
-                  <td>{{ row.nama }}</td>
+                  <td><q-input v-model="row.nama" dense outlined /></td>
 
                   <td>
                     <q-input v-model="row.ukuran" dense outlined style="width:120px" />
@@ -152,10 +156,12 @@
                     <q-input v-model.number="row.jumlah" type="number" dense outlined style="width:120px" />
                   </td>
 
-                  <td>{{ row.satuan }}</td>
+                  <td><q-input v-model="row.satuan" dense outlined /></td>
                 </tr>
               </tbody>
             </q-markup-table>
+            <q-btn flat icon="add" label="Tambah Obat Lain" color="primary" size="md" class="q-mt-xs"
+              @click="tambahObat" />
           </div>
         </q-card-section>
       </q-card>
@@ -208,7 +214,15 @@ const cairan = reactive([
   { id: 23, nama: 'Granulosit', ukuran: null, jumlah: null, satuan: 'unit' }
 ])
 
-
+function tambahCairan() {
+  cairan.push({
+    id: Date.now() + Math.random(),
+    nama: '',
+    ukuran: '',
+    jumlah: null,
+    satuan: ''
+  })
+}
 const alkes = reactive([
   { id: 1, nama: 'Alkohol swab', ukuran: '-', jumlah: null, satuan: 'pcs' },
   { id: 2, nama: 'Alkohol 70%', ukuran: '-', jumlah: null, satuan: 'cc' },
@@ -241,7 +255,15 @@ const alkes = reactive([
   { id: 29, nama: 'Three Way Stopcock (dengan selang)', ukuran: '-', jumlah: null, satuan: 'pcs' },
   { id: 30, nama: 'Three Way Stopcock (tanpa selang)', ukuran: '-', jumlah: null, satuan: 'pcs' }
 ])
-
+function tambahAlkes() {
+  alkes.push({
+    id: Date.now() + Math.random(),
+    nama: '',
+    ukuran: '',
+    jumlah: null,
+    satuan: ''
+  })
+}
 
 const obat = reactive([
   { id: 1, nama: 'Aminophilin', ukuran: null, jumlah: null, satuan: 'ampul' },
@@ -293,7 +315,15 @@ const obat = reactive([
   { id: 47, nama: 'Tramadol', ukuran: null, jumlah: null, satuan: 'ampul' },
   { id: 48, nama: 'Thiopental', ukuran: null, jumlah: null, satuan: 'mg' }
 ])
-
+function tambahObat() {
+  obat.push({
+    id: Date.now() + Math.random(),
+    nama: '',
+    ukuran: '',
+    jumlah: null,
+    satuan: ''
+  })
+}
 
 function simpan() {
   store.form.noreg = props.pasien?.noreg
@@ -303,35 +333,65 @@ function simpan() {
   store.simpanData()
 }
 
+function mergeData(master, saved = []) {
+  // update item master
+  master.forEach(m => {
+    const s = saved.find(x => x.id === m.id)
+    if (s) {
+      m.nama = s.nama
+      m.ukuran = s.ukuran
+      m.jumlah = s.jumlah
+      m.satuan = s.satuan
+    }
+  })
+
+  // tambahkan item custom (yang tidak ada di master)
+  saved.forEach(s => {
+    const exists = master.find(m => m.id === s.id)
+    if (!exists) {
+      master.push({
+        id: s.id,
+        nama: s.nama,
+        ukuran: s.ukuran,
+        jumlah: s.jumlah,
+        satuan: s.satuan
+      })
+    }
+  })
+}
+
 // load ulang jika sudah ada data
 watch(
   () => props.pasien?.pemakaian_obat_alkes,
   (val) => {
     if (!val) return
+    mergeData(cairan, val.cairan)
+    mergeData(alkes, val.alkes)
+    mergeData(obat, val.obat)
 
-    // sync cairan
-    cairan.forEach(r => {
-      const s = val.cairan?.find(x => x.id === r.id)
-      r.jumlah = s ? s.jumlah : null
-      r.ukuran = s ? s.ukuran : r.ukuran
-      r.nama = s ? s.nama : r.nama
-    })
+    // // sync cairan
+    // cairan.forEach(r => {
+    //   const s = val.cairan?.find(x => x.id === r.id)
+    //   r.jumlah = s ? s.jumlah : null
+    //   r.ukuran = s ? s.ukuran : r.ukuran
+    //   r.nama = s ? s.nama : r.nama
+    // })
 
-    // sync alkes
-    alkes.forEach(r => {
-      const s = val.alkes?.find(x => x.id === r.id)
-      r.jumlah = s ? s.jumlah : null
-      r.ukuran = s ? s.ukuran : r.ukuran
-      r.nama = s ? s.nama : r.nama
-    })
+    // // sync alkes
+    // alkes.forEach(r => {
+    //   const s = val.alkes?.find(x => x.id === r.id)
+    //   r.jumlah = s ? s.jumlah : null
+    //   r.ukuran = s ? s.ukuran : r.ukuran
+    //   r.nama = s ? s.nama : r.nama
+    // })
 
-    // sync obat
-    obat.forEach(r => {
-      const s = val.obat?.find(x => x.id === r.id)
-      r.jumlah = s ? s.jumlah : null
-      r.ukuran = s ? s.ukuran : r.ukuran
-      r.nama = s ? s.nama : r.nama
-    })
+    // // sync obat
+    // obat.forEach(r => {
+    //   const s = val.obat?.find(x => x.id === r.id)
+    //   r.jumlah = s ? s.jumlah : null
+    //   r.ukuran = s ? s.ukuran : r.ukuran
+    //   r.nama = s ? s.nama : r.nama
+    // })
   },
   { immediate: true }
 )
