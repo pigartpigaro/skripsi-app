@@ -133,7 +133,7 @@
       <q-card flat>
         <q-card-section>
           <div class="q-col-gutter-sm">
-            <div class="text-subtitle2 q-mb-sm">Istruksi Pasca Bedah</div>
+            <div class="text-subtitle2 q-mb-sm">Istruksi Pasca Anestesi</div>
             <q-input class="q-gutter-sm" autogrow outlined type="textarea" v-model="store.form.posisi_pasien"
               label="Posisi Pasien" />
             <q-input class="q-gutter-sm" autogrow outlined type="textarea" v-model="store.form.makan_minum"
@@ -216,16 +216,35 @@ function tambahBaris() {
     store.form.pemantauan_vital = []
   }
 
+  // store.form.pemantauan_vital.push({
+  //   id: Date.now() + Math.random(),
+  //   waktu: '',
+  //   sistole: '',
+  //   diastole: '',
+  //   nadi: '',
+  //   spo2: '',
+  //   rr: '',
+  //   obat: '',
+  //   cairan: ''
+  // })
+
+  const lastRow =
+    store.form.pemantauan_vital.length > 0
+      ? store.form.pemantauan_vital[store.form.pemantauan_vital.length - 1]
+      : {
+        waktu: '',
+        sistole: '',
+        diastole: '',
+        nadi: '',
+        spo2: '',
+        rr: '',
+        obat: '',
+        cairan: ''
+      }
+
   store.form.pemantauan_vital.push({
     id: Date.now() + Math.random(),
-    waktu: '',
-    sistole: '',
-    diastole: '',
-    nadi: '',
-    spo2: '',
-    rr: '',
-    obat: '',
-    cairan: ''
+    ...JSON.parse(JSON.stringify(lastRow)) // deep clone biar gak nyangkut reactive
   })
 }
 function modelTanggal(val) {
