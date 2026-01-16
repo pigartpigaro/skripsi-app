@@ -1,5 +1,4 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import { date } from 'quasar'
 import { api } from 'src/boot/axios'
 import { notifSuccessVue } from 'src/modules/utils'
 
@@ -11,6 +10,185 @@ export const usePengkajianAnastesiStore = defineStore('pengkajian-anastesi-store
     pasien: {},
     items: [],
     meta: {},
+    anamnesis: {
+      alergi: {
+        makanan: { status: "" },
+        obat: { status: "" },
+        lainnya: { status: "" }
+      },
+      medication: {
+        antihipertensi: { status: "" },
+        antidiabetik: { status: "" },
+        diuretik: { status: "" },
+        antikoagulan: { status: "" },
+        digitalis: { status: "" },
+        lainnya: { keterangan: "" }
+      },
+      past_illness: {
+        dm: { status: "" },
+        jantung: { status: "" },
+        ginjal: { status: "" },
+        hipertensi: { status: "" },
+        paru: { status: "" },
+        penyakit_lain: { keterangan: "" },
+        riwayat_keluarga: { status: "" },
+        riwayat_operasi: { status: "" },
+        riwayat_anestesi: { status: "" }
+      },
+      last_meal: {
+        neonatus: { padat: "", cair_jernih: "", susu_formula: "", asi: "" },
+        bayi_kurang_6_bulan: { padat: "", cair_jernih: "", susu_formula: "", asi: "" },
+        balita: { padat: "", cair_jernih: "", susu_formula: "", asi: "" },
+        anak: { padat: "", cair_jernih: "", susu_formula: "", asi: "" },
+        dewasa: { padat: "", cair_jernih: "" }
+      },
+      environment: {
+        merokok: { status: "" },
+        alkohol: { status: "" }
+      }
+    },
+    pemeriksaan_fisik_umum:{
+      gcs: {
+        e: "",
+        m: "",
+        v: "",
+        t: ""
+      },
+      kesadaran:'',
+      vital: {
+        td: "",
+        nadi: "",
+        rr: "",
+        suhu: "",
+        map: "",
+        nyeri: "",
+        bb: "",
+        tb: "",
+        imt: ""
+      },
+      b2: {
+        nyeri_dada: '',
+        konjungtiva: '',
+        kulit_pucat: '',
+        crt: '',
+        jvp: '',
+        ictus_cordis: '',
+        pelebaran: '',
+        perdarahan: {status:'',lokasi:''},
+        akral: '',
+        pulsasi: '',
+        bji: '',
+        bjii: '',
+        bjiii: '',
+        galloprhythm: '',
+        murmur: '',
+      },
+      b3:{
+        general:[],
+        pupil:[],
+        reflek:[],
+      },
+      b4:{
+        nyeriBAK: '',
+        hematuria: '',
+        kateter: '',
+        nyeriGinjal: '',
+        pembesaranGinjal: '',
+        jumlahUrine: '',
+      },
+      b5:{
+        bising_usus: '',
+        mual: '',
+        muntah:'',
+        nyeris_telan: '',
+        nyeri_perut:{status:'',keterangan:''},
+        borborygmi:'',
+        distensi:'',
+        asites:'',
+        ngt:'',
+      },
+      b6:{
+        tulang_belakang:'',
+        mobilitas:'',
+        lainnya:'',
+        exter_atas:{
+          otot: '',
+          jejas:{status:'',keterangan:''},
+          deformitas:{status:'',keterangan:''},
+          fraktur:{status:'',keterangan:''},
+          atropi:{status:'',keterangan:''},
+          iv_line:'',
+          rom:'',
+          lainnya: ''
+        },
+        exter_bawah:{
+          otot: '',
+          jejas:{status:'',keterangan:''},
+          deformitas:{status:'',keterangan:''},
+          fraktur:{status:'',keterangan:''},
+          atropi:{status:'',keterangan:''},
+          iv_line:'',
+          rom:'',
+          lainnya: ''
+        },
+      },
+    },
+    pemeriksaan_jalan_napas:{
+      lemon: {
+        look_externally: [],
+        evaluate_332: {
+          mulut:'',
+          thyro:'',
+          hyoid:''
+        },
+        mallampati: '',
+        obstruction: '',
+        neck_mobility: {
+          bentuk_leher:'',
+          leher_pendek:'',
+          gerakan_rahang:'',
+          extensi_leher_kepala:'',
+          rotasi_leher_kepala:'',
+          bekas_luka:'',
+          neck_colar:'',
+        }
+      },
+      moans: {
+        mask_seal: { status: "", keterangan: "" },
+        obesity: { status: "", keterangan: "" },
+        age: { status: "", keterangan: "" },
+        no_teeth: { status: "" , keterangan: ""},
+        stiff_lungs: { status: "", keterangan: "" }
+      },
+      rods: {
+        restricted_mouth: { status: "" },
+        obstruction: {
+          palatume :'',
+          uvula :'',
+          faring :'',
+          laring :'',
+          epigolotis :'',
+          obesitas :{status: "", keterangan: ""},
+
+         },
+        disrupted_airway: {
+          kelainan:'',
+          cedera:'',
+         },
+        stiff_cervical: {
+          kanan_kiri:'',
+          depan_belakang:'',
+         }
+      },
+      fisik:{
+        pola_napas:[],
+        otot_bantu_napas:'',
+        cuping_hidung:'',
+        perkusi_paru:'',
+        suara_napas:[],
+      }
+    },
+
     falergi: {
       makanan: null,
       obat: null,
@@ -76,6 +254,9 @@ export const usePengkajianAnastesiStore = defineStore('pengkajian-anastesi-store
     },
 
     f6b: {
+      b3:[],
+      pupil:[],
+      reflek:[],
       lookexternaly: [],
       jaraktyhro: null,
       kemampuanmembukamulut: null,
@@ -125,22 +306,31 @@ export const usePengkajianAnastesiStore = defineStore('pengkajian-anastesi-store
   }),
   actions: {
 
-    async simpanData() {
+    async simpanData(pasien) {
       this.loadingSave = true
+      const form={
+        noreg:pasien.noreg,
+        anamnesis:this.anamnesis,
+        pemeriksaan_fisik_umum:this.pemeriksaan_fisik_umum,
+        pemeriksaan_jalan_napas:this.pemeriksaan_jalan_napas,
+      }
       try {
-        const resp = await api.post('v1/master/pekerjaan/save', this.form)
+        const resp = await api.post('v1/transaksi/pengkajian-pre-anastesi/simpan', form)
 
         if (resp.success === true) {
           this.items.unshift(resp?.data?.data)
           notifSuccessVue(resp?.data?.message)
           this.loadingSave = false
-          this.initForm()
+          // this.initForm()
 
         }
       } catch (error) {
         console.log(error)
         this.loadingSave = false
         notifErrVue(error?.response?.data?.message)
+      }
+      finally{
+        this.loadingSave=false
       }
     },
   }
