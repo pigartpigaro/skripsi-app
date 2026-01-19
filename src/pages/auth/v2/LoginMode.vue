@@ -25,14 +25,13 @@
           </div>
         </div>
         <template v-if="!loading">
-          <div v-if="mode === 'form-login' && !isMobile"
-            class="login-form col-md-6 col-lg-6 col-xl-6 col-sm-6 col-xs-12 min-h">
+          <div v-if="mode === 'form-login'" class="login-form col-md-6 col-lg-6 col-xl-6 col-sm-6 col-xs-12 min-h">
             <FormLogin :key="mode" />
           </div>
-          <div v-else-if="mode === 'form-login' && isMobile"
+          <!-- <div v-else-if="mode === 'register' && isMobile"
             class="login-form col-md-6 col-lg-6 col-xl-6 col-sm-6 col-xs-12 min-h">
-            <FormLogin :key="isMobile" />
-          </div>
+            <FormRegister :key="isMobile" />
+          </div> -->
           <div v-else class="login-qr col-md-6 col-lg-6 col-xl-6 col-sm-6 col-xs-12 min-h">
             <FormRegister :key="mode" :register="store.qrCode" />
           </div>
