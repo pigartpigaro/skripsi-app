@@ -170,6 +170,16 @@ watch(
   },
   { immediate: true }
 )
+
+watch(
+  () => props.pasien.value,
+  (val) => {
+    if (val?.dokter_anastesi && !store.form.nama_pelaksana) {
+      store.form.nama_pelaksana = val.dokter_anastesi
+    }
+  },
+  { immediate: true }
+)
 </script>
 <style>
 .label {

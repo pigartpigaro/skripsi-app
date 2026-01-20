@@ -1,7 +1,15 @@
 <template>
-  <q-page class="q-pa-md bg-white">
+  <q-page class="q-pa-md bg-grey-2">
     <div id="printData">
-      <div class="q-text-weight-bold text-h6 text-center q-pb-md bg-white">ASKAN PRA ANESTESI</div>
+
+      <!-- JUDUL -->
+      <q-card flat class="q-mb-xs">
+        <q-card-section class="text-center">
+          <div class="text-h6 text-weight-bold">ASKAN PRA ANESTESI</div>
+        </q-card-section>
+      </q-card>
+
+      <!-- IDENTITAS -->
       <q-card flat class="q-mb-xs print-only">
         <q-card-section>
 
@@ -20,6 +28,14 @@
                 <div class="col-4 label">NIK</div>
                 <div class="col-8">: {{ pasien.pasien?.nik }}</div>
               </div>
+              <div class="row q-mb-xs">
+                <div class="col-4 label">Sifat Operasi</div>
+                <div class="col-8">: {{ pasien.status }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-4 label">Jam Pengkajian</div>
+                <div class="col-8">: {{ pasien.jam_pengkajian }}</div>
+              </div>
             </div>
 
             <!-- KANAN -->
@@ -29,285 +45,297 @@
                 <div class="col-7">: {{ pasien.pasien?.diagnosa }}</div>
               </div>
               <div class="row q-mb-xs">
-                <div class="col-5 label">Tgl Pemeriksaan</div>
-                <div class="col-7">: {{ pasien.pasien?.tgl_mrs }}</div>
+                <div class="col-5 label">Dokter Operator</div>
+                <div class="col-7">: {{ pasien.dr_operator?.nama }}</div>
               </div>
               <div class="row q-mb-xs">
-                <div class="col-5 label">Ruang</div>
-                <div class="col-7">: {{ pasien.pasien?.ruang_ranap }}</div>
+                <div class="col-5 label">Dokter Anestesi</div>
+                <div class="col-7">: {{ pasien.dr_anastesi?.nama }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-5 label">Penata Anestesi</div>
+                <div class="col-7">: {{ pasien.penata_anastesi }}</div>
+              </div>
+              <div class="row q-mb-xs">
+                <div class="col-5 label">Tindakan Medis</div>
+                <div class="col-7">: {{ pasien.tindakan_operasi }}</div>
               </div>
             </div>
           </div>
 
         </q-card-section>
       </q-card>
-      <q-separator spaced style="border-top: 1px solid #000" />
-      <q-form @submit="simpan">
-        <div class="row no-wrap items-center q-mb-sm">
-          <div class="col-2">
-            Masalah Kesehatan Anestesi :
-          </div>
-          <div class="col-10">
-            <q-input v-model="store.form.askan_data.masalah_kesehatan_anestesi" dense type="text" autogrow />
-          </div>
-        </div>
-        <div class="row no-wrap items-center q-mb-sm">
-          <div class="col-2">
-            Waktu :
-          </div>
-          <div class="col-10">
-            <q-input dense type="text" autogrow v-model="store.form.askan_data.waktu">
-              <template v-slot:append>
-                <q-icon name="event">
-                  <q-popup-proxy cover transition-show="scale" transition-hide="scale"
-                    class="q-gutter-md row items-start">
-                    <q-date v-model="store.form.askan_data.waktu" mask="YYYY-MM-DD HH:mm" />
-                    <q-time v-model="store.form.askan_data.waktu" mask="YYYY-MM-DD HH:mm" />
+      <q-card flat class="q-mb-xs">
+        <q-card-section>
+          <!-- <div class="row q-col-gutter-xl q-mb-md">
+            <div class="col-6">
+              <div class="row q-mb-sm">
+                <div class="col-2 text-subtitle2">Sifat Operasi</div>
+                <div class="align-center">
+                  <q-option-group v-model="sifatOperasi" type="radio" inline :options="[
+                    { label: 'Cito', value: 'Cito' },
+                    { label: 'Elektif', value: 'Elektif' }
+                  ]" />
+                </div>
+              </div>
+            </div>
+
+          </div> -->
+
+          <q-table flat bordered dense :rows="store.form.askan_data" :columns="columns" row-key="id" hide-bottom>
+            <template #body-cell-data="props">
+              <q-td>
+                <q-input dense v-model="props.row.data" />
+              </q-td>
+            </template>
+            <template #body-cell-masalah_kesehatan_anestesi="props">
+              <q-td>
+                <q-input dense v-model="props.row.masalah_kesehatan_anestesi" />
+              </q-td>
+            </template>
+
+            <template #body-cell-waktu="props">
+              <q-td>
+                <q-input dense v-model="props.row.waktu" mask="##:##" fill-mask>
+                  <q-popup-proxy transition-show="scale" transition-hide="scale" cover fit>
+                    <q-time v-model="props.row.waktu" format24h minimal square>
+                      <div class="row justify-end q-pa-xs">
+                        <q-btn label="OK" color="primary" flat v-close-popup />
+                      </div>
+                    </q-time>
                   </q-popup-proxy>
-                </q-icon>
-              </template>
-            </q-input>
-          </div>
-        </div>
-        <div class="row no-wrap items-center q-mb-sm">
-          <div class="col-2">
-            Intervensi :
-          </div>
-          <div class="col-10">
-            <q-input dense type="text" autogrow v-model="store.form.askan_data.intervensi" />
-          </div>
-        </div>
-        <div class="row no-wrap items-center q-mb-sm">
-          <div class="col-2">
-            Implementasi :
-          </div>
-          <div class="col-10">
-            <q-input dense type="text" autogrow v-model="store.form.askan_data.implementasi" />
-          </div>
-        </div>
-        <div class="q-pt-lg q-pb-lg">Evaluasi</div>
-        <div class="row no-wrap items-center q-mb-sm">
-          <div class="col-2">
-            S :
-          </div>
-          <div class="col-10">
-            <q-input v-model="store.form.askan_data.s" type="text" autogrow />
-          </div>
-        </div>
-        <div class="row no-wrap items-center q-mb-sm">
-          <div class="col-2">
-            O :
-          </div>
-          <div class="col-10">
-            <q-input v-model="store.form.askan_data.o" dense type="text" autogrow />
-          </div>
-        </div>
-        <div class="row no-wrap items-center q-mb-sm">
-          <div class="col-2">
-            A :
-          </div>
-          <div class="col-10">
-            <q-input dense v-model="store.form.askan_data.a" type="text" autogrow />
-          </div>
-        </div>
-        <div class="row no-wrap items-center q-mb-sm">
-          <div class="col-2">
-            P :
-          </div>
-          <div class="col-10">
-            <q-input v-model="store.form.askan_data.p" dense type="text" autogrow />
-          </div>
-        </div>
-        <div class="row no-wrap items-center q-mb-sm">
-          <div class="col-2">
-            Nama TTD :
-          </div>
-          <div class="col-10">
-            <q-input v-model="store.form.askan_data.nama_ttd" dense type="text" autogrow />
-          </div>
-        </div>
-        <div class="q-mt-md text-right q-gutter-sm print-hide">
-          <q-btn label="Simpan" type="submit" color="red" :loading="store.loadingSave" :disabled="store.loadingSave" />
-          <q-btn label="Cetak" color="red" v-print="printObj" />
-        </div>
-      </q-form>
+                </q-input>
+
+              </q-td>
+            </template>
+
+            <template #body-cell-intervensi="props">
+              <q-td>
+                <q-input dense autogrow v-model="props.row.intervensi" />
+              </q-td>
+            </template>
+
+            <template #body-cell-implementasi="props">
+              <q-td>
+                <q-input dense autogrow v-model="props.row.implementasi" />
+              </q-td>
+            </template>
+
+            <template #body-cell-evaluasi="props">
+              <q-td>
+                <q-input dense label="S : " v-model="props.row.s" />
+                <q-input dense label="O : " v-model="props.row.o" />
+                <q-input dense label="A : " v-model="props.row.a" />
+                <q-input dense label="P : " v-model="props.row.p" />
+              </q-td>
+            </template>
+
+            <template #body-cell-nama_ttd="props">
+              <q-td>
+                <q-input dense v-model="props.row.nama_ttd" />
+              </q-td>
+            </template>
+          </q-table>
+          <q-btn flat icon="add" label="Tambah Data" class="q-mt-sm" @click="tambahBaris" />
+        </q-card-section>
+      </q-card>
+      <!-- PERTIMBANGAN Anastesi -->
+
+
+
     </div>
+
+    <!-- ACTION -->
+    <q-card flat>
+      <q-card-actions align="right">
+        <q-btn color="primary" :loading="store.loadingSave" label="Simpan" @click="simpan" />
+        <q-btn color="yellow-9" label="Cetak" v-print="printObj" />
+      </q-card-actions>
+    </q-card>
+
   </q-page>
 </template>
 <script setup>
-import { useAskanPraAnestesiStore } from 'src/stores/transaksi/askanpraanastesi';
-import { computed, onMounted } from 'vue';
+import { date } from 'quasar'
+import { useAskanPraIntraPascaAnestesiStore } from 'src/stores/transaksi/askanpraanastesi'
+import { computed, onMounted, watch } from 'vue'
 
-const store = useAskanPraAnestesiStore()
-
+const store = useAskanPraIntraPascaAnestesiStore()
 const props = defineProps({
-  pasien: {
-    type: Object,
-    default: null
-  },
+  pasien: { type: Object, default: null }
 })
+const columns = [
+  { name: 'data', label: 'Data', field: 'data', align: 'left' },
+  { name: 'masalah_kesehatan_anestesi', label: 'Masalah Kesehatan Anestesi', field: 'masalah_kesehatan_anestesi', align: 'left' },
+  { name: 'waktu', label: 'Waktu', field: 'waktu', align: 'left' },
+  { name: 'intervensi', label: 'Intervensi', field: 'intervensi', align: 'left' },
+  { name: 'implementasi', label: 'Implementasi', field: 'implementasi', align: 'left' },
+  { name: 'evaluasi', label: 'Evaluasi (SOAP)', field: 'evaluasi', align: 'left' },
+  { name: 'nama_ttd', label: 'Nama TTD', field: 'nama_ttd', align: 'left' }
+]
+function newAskanRow() {
+  return {
+    id: Date.now() + Math.random(),
+    data: '',
+    masalah_kesehatan_anestesi: '',
+    waktu: date.formatDate(Date.now(), 'HH:mm'),
+    intervensi: '',
+    implementasi: '',
+    s: '',
+    o: '',
+    a: '',
+    p: '',
+    nama_ttd: ''
+  }
+}
+function tambahBaris() {
+  if (!Array.isArray(store.form.askan_data)) {
+    store.form.askan_data = []
+  }
+
+  // clone dari baris terakhir (UX lebih enak)
+  const last = store.form.askan_data.at(-1)
+
+  store.form.askan_data.push(
+    last
+      ? { ...JSON.parse(JSON.stringify(last)), id: Date.now() + Math.random() }
+      : newAskanRow()
+  )
+}
 function simpan() {
-  store.form.noreg = props.pasien.noreg
+  store.form.noreg = props.pasien?.noreg
   store.form.fase = 'Pra'
-  store.pasien = props.pasien
-  store.simpanData()
+  store.simpanData('Pra')
 }
 
+onMounted(() => {
+  if (!store.form.askan_data.length) {
+    store.form.askan_data.push(newAskanRow())
+  }
+})
+
+watch(
+  () => props.pasien,
+  (val) => {
+    if (!val) return
+
+    console.log('WATCH PASIEN TRIGGERED', val)
+
+    // ===============================
+    // PRA ANESTESI
+    // ===============================
+    const pra = val?.askan_anastesi?.find(
+      i => i.fase === 'Pra'
+    )
+
+    if (pra?.askan_data?.length) {
+      store.form.noreg = val.noreg
+      store.form.fase = 'Pra'
+
+      store.form.askan_data = pra.askan_data.map(item => ({
+        id: Date.now() + Math.random(),
+        data: item.data ?? '',
+        masalah_kesehatan_anestesi: item.masalah_kesehatan_anestesi ?? '',
+        waktu: item.waktu ?? '',
+        intervensi: item.intervensi ?? '',
+        implementasi: item.implementasi ?? '',
+        s: item.evaluasi?.s ?? '',
+        o: item.evaluasi?.o ?? '',
+        a: item.evaluasi?.a ?? '',
+        p: item.evaluasi?.p ?? '',
+        nama_ttd: item.nama_ttd ?? ''
+      }))
+    } else {
+      // kalau belum ada data → minimal 1 baris
+      if (!store.form.askan_data.length) {
+        store.form.askan_data.push({
+          id: Date.now() + Math.random(),
+          data: '',
+          masalah_kesehatan_anestesi: '',
+          waktu: '',
+          intervensi: '',
+          implementasi: '',
+          s: '',
+          o: '',
+          a: '',
+          p: '',
+          nama_ttd: ''
+        })
+      }
+    }
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
+// watch(
+//   () => props.pasien,
+//   (val) => {
+//     if (!val) return
+//     store.isiForm(val)
+//   },
+//   { immediate: true }
+// )
 const printObj = computed(() => ({
   id: '#printData',
-  popTitle: '',
-  preview: false
+  popTitle: 'Askan Pra Anestesi',
+  preview: false,
+  extraCss: '',
+  extraHead: '',
+  beforeOpenCallback() {
+    console.log('wait...')
+  },
+  openCallback() {
+    console.log('opened')
+  },
+  closeCallback() {
+    console.log('closePrint')
+  }
 }))
-
-onMounted(() => {
-  store.isiForm(props.pasien)
-})
 </script>
-<style scoped>
-.print-only,
-.ttd-print {
+<style>
+.print-only {
   display: none;
 }
 
+.q-table td,
+.q-table th {
+  vertical-align: top !important;
+}
+
 @media print {
-  .text-h6 {
-    padding-left: 5mm;
-    padding-right: 5mm;
+  @page {
+    size: A4;
+    margin: 15mm;
+    padding: 5mm;
+  }
+
+  .print-only {
+    display: block;
   }
 
   body {
     background: white !important;
   }
 
-  .print-only,
-  .ttd-print {
-    display: block !important;
-  }
-
-  .no-print,
-  .q-btn,
-  .q-card-actions {
-    display: none !important;
-  }
-
+  /* Area yang dicetak */
   #printData {
-    width: 100%;
-    padding: 0;
-    /* ⬅️ padding dipindah ke @page */
-    box-sizing: border-box;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
     font-size: 12px;
   }
 
+  /* Hilangkan shadow/card */
   .q-card {
     box-shadow: none !important;
     border: none !important;
   }
 
-  .ttd-line {
-    width: 200px;
-    border-bottom: 1px solid #000;
-  }
-}
-
-.line {
-  display: inline-block;
-  border-bottom: 1px solid #000;
-  width: 100%;
-  min-width: 200px;
-  margin-left: 6px;
-}
-
-.line-sm {
-  display: inline-block;
-  border-bottom: 1px solid #000;
-  width: 60px;
-  margin: 0 6px;
-}
-
-.monitor-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  font-size: 12px;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-/* Header */
-.monitor-table thead th {
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  background: linear-gradient(180deg, #f8fafc, #eef2f7);
-  color: #334155;
-  font-weight: 600;
-  text-align: center;
-  padding: 8px 6px;
-  border-bottom: 1px solid #dbe1e8;
-  white-space: nowrap;
-}
-
-/* Body */
-.monitor-table tbody td {
-  padding: 6px 4px;
-  border-bottom: 1px solid #eef2f7;
-  text-align: center;
-  vertical-align: middle;
-}
-
-/* Input row */
-.monitor-table tbody tr.print-hide {
-  background: #f8fafc;
-  position: sticky;
-  top: 36px;
-  z-index: 4;
-}
-
-/* Hover row */
-.monitor-table tbody tr:not(.print-hide):hover {
-  background: #f1f5f9;
-}
-
-/* First column (No) sticky */
-.monitor-table th:first-child,
-.monitor-table td:first-child {
-  position: sticky;
-  left: 0;
-  background: #f8fafc;
-  z-index: 6;
-  min-width: 40px;
-}
-
-/* Action column sticky */
-.monitor-table th:last-child,
-.monitor-table td:last-child {
-  position: sticky;
-  right: 0;
-  background: #f8fafc;
-  z-index: 6;
-}
-
-/* q-input inside table */
-.monitor-table .q-field--dense .q-field__control {
-  height: 26px;
-  min-height: 26px;
-}
-
-.monitor-table .q-field__control {
-  padding: 0 6px;
-  font-size: 11px;
-}
-
-/* Button */
-.monitor-table .q-btn {
-  min-width: 28px;
-  min-height: 28px;
-}
-
-/* Print */
-@media print {
-  .print-hide {
+  /* Tombol tidak ikut tercetak */
+  .q-btn,
+  .q-card-actions {
     display: none !important;
   }
 }
