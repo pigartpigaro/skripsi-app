@@ -19,7 +19,7 @@
           <th rowspan="2">Penilaian</th>
           <th rowspan="2">Kriteria</th>
           <th rowspan="2">Skor</th>
-          <th colspan="6">Score</th>
+          <th colspan="6">Menit</th>
         </tr>
         <tr>
           <th v-for="t in times" :key="'h' + t">{{ t }}'</th>
@@ -171,7 +171,7 @@
         <tr>
           <th rowspan="2">Kriteria</th>
           <th rowspan="2">Skor</th>
-          <th colspan="6">Score</th>
+          <th colspan="6">Menit</th>
         </tr>
         <tr>
           <th v-for="t in times" :key="'bh' + t">{{ t }}'</th>
