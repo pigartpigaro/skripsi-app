@@ -6,9 +6,8 @@
         <q-card-section>
           <div class="text-weight-bold text-h6 text-center">Serah Terima Pasien Pre Operasi</div>
         </q-card-section>
-        <q-card-section>
-
-          <div class="row q-col-gutter-xl">
+        <q-card-section class="print-only">
+          <div class="row q-col-gutter-xl ">
             <!-- KIRI -->
             <div class="col-6">
               <div class="row q-mb-xs">
