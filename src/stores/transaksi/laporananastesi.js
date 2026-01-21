@@ -1,4 +1,4 @@
-import { defineStore } from "pinia";
+import { acceptHMRUpdate, defineStore } from "pinia";
 import { date } from "quasar";
 import { api } from "src/boot/axios";
 import { notifErrVue, notifSuccessVue } from "src/modules/utils";
@@ -31,8 +31,8 @@ state: () => ({
       face_mask: null,
       ett: null,
       lma: null,
-      nonkinkin: null,
-      fiksasi: null,
+      nonkinkin: false,
+      fiksasi: false,
       cm: null,
       bronkospifiberoptik: null,
       glidescope: null,
@@ -41,26 +41,26 @@ state: () => ({
     },
     intubasi: [],
     ventilasi: {
-      spontan: null,
-      kendali: null,
-      ventilator: null,
+      spontan: false,
+      kendali: false,
+      ventilator: false,
       tv: null,
       rr: null,
       peep: null,
       konversi: null,
     },
     regional_anestesi: {
-      spinalanastesi: null,
-      epiduralanastesi: null,
-      lainnya: null,
+      spinalanastesi: false,
+      epiduralanastesi: false,
+      lainnya: false,
       lainnya_text: null,
       lokasi: null,
       jenisjarum: null,
       obat: null,
       komplikasi: null,
-      hasil_total: '',
-      hasil_partial: '',
-      hasil_gagal: '',
+      hasil_total: false,
+      hasil_partial: false,
+      hasil_gagal: false,
     },
     komplikasi_anestesi: null,
     tanggal_mulai: date.formatDate(Date.now(), 'YYYY-MM-DD HH:mm'),
@@ -240,3 +240,8 @@ actions: {
   }
 }
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useLaporananastesiStore, import.meta.hot))
+
+}

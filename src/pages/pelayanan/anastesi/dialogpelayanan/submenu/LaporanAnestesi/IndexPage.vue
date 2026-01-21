@@ -177,7 +177,9 @@
         <!-- VENTILASI -->
         <div class="text-weight-bold q-mt-md">Ventilasi</div>
         <div class="row q-gutter-md q-ml-md">
-          <q-checkbox label="Spontan" dense val="Spontan" v-model="store.form.ventilasi.spontan" />
+          <q-checkbox label="Spontan" dense val="Spontan" v-model="store.form.ventilasi.spontan" @update:model-value="() => {
+            console.log(store.form);
+          }" />
           <q-checkbox label="Kendali" dense val="Kendali" v-model="store.form.ventilasi.kendali" />
           <q-checkbox label="Ventilator" dense val="Ventilator" v-model="store.form.ventilasi.ventilator" />
           <div class="row items-center no-wrap">
@@ -375,8 +377,8 @@
   </q-page>
 </template>
 <script setup>
-import { useLaporananastesiStore } from 'src/stores/transaksi/laporananastesi';
-import { computed, onMounted } from 'vue';
+import { useLaporananastesiStore } from 'src/stores/transaksi/laporananastesi'
+import { computed, onMounted } from 'vue'
 
 const store = useLaporananastesiStore()
 const props = defineProps({
@@ -416,13 +418,13 @@ const opsiASA = [
   { label: 'E', value: 'E' }
 ]
 
-function simpan() {
+function simpan () {
   // console.log('xxxxxx', props.pasien?.noreg)
   store.form.noreg = props.pasien?.noreg
   store.simpanData()
 }
 
-function simpantabel() {
+function simpantabel () {
   store.formtabel.noreg = props.pasien?.noreg
   store.simpanDataTabel()
 }
