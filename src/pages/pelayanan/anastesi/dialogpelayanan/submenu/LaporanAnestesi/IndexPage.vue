@@ -308,7 +308,7 @@
             <th>EKG</th>
             <th>Suhu</th>
             <th>EtCO₂</th>
-            <th>N₂O / O₂</th>
+            <th>N₂O / Air</th>
             <th>Flow %</th>
             <th>Gas Anestesi</th>
             <th>MAC %</th>
