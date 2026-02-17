@@ -7,23 +7,46 @@
     <!-- Toolbar Title / Info -->
     <q-toolbar-title class="text-h6 q-pa-none">
       <div class="row items-center justify-between no-wrap">
-        <!-- Petugas Info -->
-        <div class="text-subtitle2">
-          <q-icon name="person" class="q-mr-xs" />
-          Petugas: <span class="text-bold">{{ props.user?.nama || '-' }}</span>
+        <div class="row q-col-gutter-lg">
+
+          <!-- PETUGAS -->
+          <div class="text-subtitle2 text-indigo-9 row items-center">
+            <q-icon name="badge" class="q-mr-sm text-indigo-7" size="20px" />
+            Petugas:
+            <span class="text-weight-bold q-ml-xs text-indigo-10">
+              {{ props.user?.nama || '-' }}
+            </span>
+          </div>
+
+          <!-- DOKTER OPERATOR -->
+          <div class="text-subtitle2 text-red-9 row items-center">
+            <q-icon name="medical_services" class="q-mr-sm text-red-6" size="20px" />
+            Dr. Operator:
+            <span class="text-weight-bold q-ml-xs text-red-10">
+              {{ props?.pasien?.dokter_operator || '-' }}
+            </span>
+          </div>
+
+          <!-- DOKTER ANESTESI -->
+          <div class="text-subtitle2 text-deep-purple-9 row items-center">
+            <q-icon name="healing" class="q-mr-sm text-deep-purple-6" size="20px" />
+            Dr. Anastesi:
+            <span class="text-weight-bold q-ml-xs text-deep-purple-10">
+              {{ props?.pasien?.dokter_anastesi || '-' }}
+            </span>
+          </div>
+
+          <!-- PENATA ANESTESI -->
+          <div class="text-subtitle2 text-teal-9 row items-center">
+            <q-icon name="monitor_heart" class="q-mr-sm text-teal-6" size="20px" />
+            Penata Anastesi:
+            <span class="text-weight-bold q-ml-xs text-teal-10">
+              {{ props?.pasien?.penata_anastesi || '-' }}
+            </span>
+          </div>
+
         </div>
-        <div class="text-subtitle2">
-          <q-icon name="person" class="q-mr-xs" />
-          Dr. Operator: <span class="text-bold">{{ props?.pasien?.dokter_operator || '-' }}</span>
-        </div>
-        <div class="text-subtitle2">
-          <q-icon name="person" class="q-mr-xs" />
-          Dr. Anastesi: <span class="text-bold">{{ props?.pasien?.dokter_anastesi || '-' }}</span>
-        </div>
-        <div class="text-subtitle2">
-          <q-icon name="person" class="q-mr-xs" />
-          Penata Anastesi: <span class="text-bold">{{ props?.pasien?.penata_anastesi || '-' }}</span>
-        </div>
+
 
         <!-- Separator -->
         <q-separator vertical color="white" class="q-mx-md" />
