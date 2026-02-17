@@ -26,7 +26,7 @@
 
     <div class="absolute-bottom">
       <div class="q-pa-md">
-        <app-avatar-pasien :key="pasien" :pasien="pasien" width="45px" />
+        <!-- <app-avatar-pasien :key="pasien" :pasien="pasien" width="45px" /> -->
         <div class="text-weight-bold f-12 q-mt-sm">
           Nama: {{ pasien?.pasien?.nama }}
         </div>

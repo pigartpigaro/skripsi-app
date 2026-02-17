@@ -57,10 +57,10 @@
         if (resp.status === 200) {
           const findPasien = this.items.findIndex(x => x?.noreg === resp?.data?.noreg)
           if(findPasien !== -1) {
-            this.items[findPasien] = resp?.data
+            this.items[findPasien] = resp?.data ?? []
           }
           console.log('findPasien', this.items[findPasien])
-          this.pasien = resp?.data
+          this.pasien = resp?.data ?? []
           this.loading = false
         }
         this.loadingcari = false

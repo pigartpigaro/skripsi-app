@@ -1052,54 +1052,47 @@
         <div class="col-2">
           Mual:
         </div>
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Tidak" label="Tidak"
-          color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.mual" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.mual" val="Tidak" label="Tidak" color="cyan" />
       </div>
       <div class="q-ml-lg row items-center">
         <div class="col-2">Muntah:</div>
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Tidak" label="Tidak"
-          color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.muntah" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.muntah" val="Tidak" label="Tidak" color="cyan" />
       </div>
       <div class="q-ml-lg row items-center">
         <div class="col-2">Nyeri menelan:</div>
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Tidak" label="Tidak"
-          color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.nyeris_telan" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.nyeris_telan" val="Tidak" label="Tidak" color="cyan" />
       </div>
       <div class="q-ml-lg row items-center">
         <div class="col-2">Nyeri Perut:</div>
-        <q-radio class="col-1" v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Ada" label="Ada"
+        <q-radio class="col-1" v-model="store.pemeriksaan_fisik_umum.b5.nyeri_perut" val="Ada" label="Ada"
           color="cyan" />
         <q-input class="col-3" v-model="store.pemeriksaan_fisik_umum.b5.jumlahurine" type="text" dense autogrow />
-        <q-radio class="col-1" v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Tidak" label="Tidak"
+        <q-radio class="col-1" v-model="store.pemeriksaan_fisik_umum.b5.nyeri_perut" val="Tidak" label="Tidak"
           color="cyan" />
       </div>
       <div class="q-ml-lg row items-center">
         <div class="col-2">Borborygmi :</div>
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Tidak" label="Tidak"
-          color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.borborygmi" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.borborygmi" val="Tidak" label="Tidak" color="cyan" />
       </div>
       <div class="q-ml-lg row items-center">
         <div class="col-2">Distensi :</div>
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Tidak" label="Tidak"
-          color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.distensi" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.distensi" val="Tidak" label="Tidak" color="cyan" />
       </div>
       <div class="q-ml-lg row items-center">
         <div class="col-2">Asites :</div>
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="shifting dullness"
-          label="shifting dullness" color="cyan" />
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="undulasi" label="undulasi"
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.asites" val="shifting dullness" label="shifting dullness"
           color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.asites" val="undulasi" label="undulasi" color="cyan" />
       </div>
       <div class="q-ml-lg row items-center">
         <div class="col-2">Terpasang NGT :</div>
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Ada" label="Ada" color="cyan" />
-        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.pembesaranpadaginjal" val="Tidak" label="Tidak"
-          color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.ngt" val="Ada" label="Ada" color="cyan" />
+        <q-radio v-model="store.pemeriksaan_fisik_umum.b5.ngt" val="Tidak" label="Tidak" color="cyan" />
       </div>
       <div class="text-weight-bold q-ml-md ">B6 (Bone)</div>
       <div class="col-12">(1) Pemeriksaan tulang belakang</div>
@@ -1275,7 +1268,7 @@
 <script setup>
 import { usePengkajianAnastesiStore } from 'src/stores/master/pelayanan/pengkajiananastesi'
 import { watch } from 'vue'
-function hapusKet (evt, val) {
+function hapusKet(evt, val) {
   val.keterangan = ''
   // console.log('val', evt, val)
 
@@ -1347,7 +1340,7 @@ const props = defineProps({
     default: null
   }
 })
-function moans (val) {
+function moans(val) {
   if (val === 1) {
     store.pemeriksaan_jalan_napas.moans.mask_seal.keterangan = ''
   } else if (val === 2) {

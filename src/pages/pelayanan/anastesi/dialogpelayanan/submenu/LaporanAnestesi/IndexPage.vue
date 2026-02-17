@@ -1,5 +1,5 @@
 <template>
-  <!-- <pre>{{ props.pasien?.asessement_pra_induksi }}</pre> -->
+  <!-- <pre>{{ store.itemstabel }}</pre> -->
   <q-page class="q-pa-md bg-grey-6">
     <div id="printData" class="q-pa-md full-width full-height bg-white">
       <q-card flat class="q-mb-xs">
@@ -339,7 +339,7 @@
             <td><q-input dense v-model="store.formtabel.monitoring_anestesi.obat" /></td>
             <td><q-input dense v-model="store.formtabel.monitoring_anestesi.cairan" /></td>
             <td class="text-center">
-              <q-btn dense flat icon="save" color="red" @click="simpantabel()" :loading="store.loadingSavetabel" />
+              <q-btn dense flat icon="save" color="teal" @click="simpantabel()" :loading="store.loadingSavetabel" />
             </td>
           </tr>
           <tr v-for="(item, index) in store.itemstabel" :key="index">
@@ -362,7 +362,13 @@
             <td>{{ item.mac }}</td>
             <td>{{ item.obat }}</td>
             <td>{{ item.cairan }}</td>
-
+            <td class="text-center">
+              <q-btn dense flat icon="file_copy" color="blue" @click="copyatauedit(item)" size="sm" />
+            </td>
+            <td class="text-center">
+              <q-btn dense flat icon="delete" color="red" @click="hapus(index)" size="sm"
+                :loading="store.loadingSavetabel && item.id == store.formtabel.monitoring_anestesi.id" />
+            </td>
           </tr>
         </tbody>
       </table>
@@ -377,6 +383,7 @@
   </q-page>
 </template>
 <script setup>
+import { useQuasar } from 'quasar'
 import { useLaporananastesiStore } from 'src/stores/transaksi/laporananastesi'
 import { computed, onMounted } from 'vue'
 
@@ -387,6 +394,8 @@ const props = defineProps({
     default: null
   },
 })
+const $q = useQuasar()
+
 
 const posisi1 = [
   { label: 'Supine', value: 'supine' },
@@ -418,13 +427,24 @@ const opsiASA = [
   { label: 'E', value: 'E' }
 ]
 
-function simpan () {
+function simpan() {
   // console.log('xxxxxx', props.pasien?.noreg)
   store.form.noreg = props.pasien?.noreg
   store.simpanData()
 }
 
-function simpantabel () {
+function copyatauedit(item) {
+  store.formtabel.monitoring_anestesi = { ...item }
+  console.log('store.formtabel.monitoring_anestesi', store.formtabel.monitoring_anestesi)
+
+}
+
+function hapus(id) {
+  store.itemstabel.splice(id, 1)
+  store.hapusitemtabel()
+}
+
+function simpantabel() {
   store.formtabel.noreg = props.pasien?.noreg
   store.simpanDataTabel()
 }
