@@ -1,7 +1,7 @@
 <template>
   <q-dialog v-model="store.dialogPelayanan" persistent maximized transition-show="slide-up"
     transition-hide="slide-down">
-    <!-- <pre>{{ menu }}</pre> -->
+    <!-- <pre>{{ props }}</pre> -->
     <q-card square flat class="container-no-header">
       <q-layout view="lHr Lpr lFf" container class="shadow-2 rounded-borders z-top">
         <q-header elevated class="bg-primary">

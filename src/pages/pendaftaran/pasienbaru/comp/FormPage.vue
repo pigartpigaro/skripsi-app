@@ -139,16 +139,16 @@
         :loading="store.loadingSave" />
     </div>
     <div class="col-12 col-md-12 q-pt-md">
-      <q-input v-model="store.form.dokter_operator" outlined dense label="Dokter Operator" :disable="store.loadingSave"
-        :loading="store.loadingSave" />
+      <q-input v-model="store.formkunjungan.dokter_operator" outlined dense label="Dokter Operator"
+        :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <q-input v-model="store.form.dokter_anastesi" outlined dense label="Dokter Anastesi" :disable="store.loadingSave"
-        :loading="store.loadingSave" />
+      <q-input v-model="store.formkunjungan.dokter_anastesi" outlined dense label="Dokter Anastesi"
+        :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <div class="col-12 col-md-6 q-pt-md">
-      <q-input v-model="store.form.penata_anastesi" outlined dense label="Penata Anastesi" :disable="store.loadingSave"
-        :loading="store.loadingSave" />
+      <q-input v-model="store.formkunjungan.penata_anastesi" outlined dense label="Penata Anastesi"
+        :disable="store.loadingSave" :loading="store.loadingSave" />
     </div>
     <!-- <div class="col-12 col-md-6 q-pt-md">
       <app-autocomplete label="Dokter Anastesi" v-model="store.form.dokter_anastesi" autocomplete="kode"
@@ -214,7 +214,7 @@ const selectcaramasuk = useMasterCaraMasukStore()
 const selectdokter = useMasterDokterStore()
 const options = ref([])
 
-function hitungUmur (tglLahir) {
+function hitungUmur(tglLahir) {
   const today = new Date()
   const birthDate = new Date(tglLahir)
 
@@ -228,7 +228,7 @@ function hitungUmur (tglLahir) {
   return umur
 }
 
-function updateModel (val) {
+function updateModel(val) {
   const item = store.options.find(x => x.norm === val)
   console.log('item ditemukan:', item)
   store.form.norm = val
@@ -284,31 +284,31 @@ const clearSearch = () => {
   store.displaytanggal.tgl_lahir = date.formatDate(Date.now(), 'DD MMMM YYYY')
   options.value = []
 }
-function tglLahir (val) {
+function tglLahir(val) {
   if (!val) return
   const dates = new Date(val)
   store.form.tgl_lahir = date.formatDate(dates, 'YYYY-MM-DD')
 }
-function displayTanggal (val) {
+function displayTanggal(val) {
   store.displaytanggal.tgl_lahir = val
 }
-function tglMrs (val) {
+function tglMrs(val) {
   if (!val) return
   const dates = new Date(val)
   store.formkunjungan.tgl_mrs = date.formatDate(dates, 'YYYY-MM-DD HH:mm:ss')
 }
-function displayMrs (val) {
+function displayMrs(val) {
   store.displaytanggal.mrs = val
 }
-function tglPengkajian (val) {
+function tglPengkajian(val) {
   if (!val) return
 
   store.formkunjungan.tgl_pengkajian = date.formatDate(val, 'YYYY-MM-DD')
 }
-function displayPengkajian (val) {
+function displayPengkajian(val) {
   store.displaytanggal.pengkajian = val
 }
-async function filterFn (val, update) {
+async function filterFn(val, update) {
   // isLoading.value = true // Aktifkan loading saat filter dimulai
 
   // Jika input kosong, kembalikan semua opsi

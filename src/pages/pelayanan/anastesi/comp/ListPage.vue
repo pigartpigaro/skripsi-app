@@ -1,76 +1,123 @@
 <template>
   <div>
-    <div v-if="props?.loading === true" class="column flex-center text-white" style="min-height:400px">
-      <q-spinner-dots color="primary" size="30px" />
+
+    <!-- LOADING -->
+    <div v-if="props?.loading" class="column flex-center text-primary" style="min-height:400px">
+      <q-spinner-dots size="40px" />
+      <div class="text-caption q-mt-sm">Memuat data pasien...</div>
     </div>
-    <div v-else-if="!props?.items?.length" class="column flex-center text-dark" style="min-height:400px">
-      No Data Available
+
+    <!-- EMPTY -->
+    <div v-else-if="!props?.items?.length" class="column flex-center text-grey-7" style="min-height:400px">
+      <q-icon name="folder_off" size="60px" />
+      <div class="text-subtitle1 q-mt-sm">No Data Available</div>
     </div>
-    <q-list v-else bordered class="bg-grey-1 rounded-borders q-pa-xs" separator>
-      <q-item v-for="(row, i) in props.items" :key="i" v-ripple class="q-py-sm q-px-md list-item-modern">
+
+    <!-- LIST -->
+    <q-list v-else separator class="bg-white rounded-borders shadow-1">
+
+      <q-item v-for="(row, i) in props.items" :key="i" class="modern-row hover-shake">
+
         <!-- AVATAR -->
         <q-item-section avatar>
-          <q-avatar size="42px">
+          <q-avatar size="50px" class="shadow-2">
             <img :src="getAvatar(row.kelamin)" />
           </q-avatar>
         </q-item-section>
 
-        <!-- NAMA -->
-        <q-item-section>
-          <div class="text-weight-medium text-dark">
-            {{ row.nama }} ({{ row.norm }}) || NIK: {{ row.nik }}
+        <!-- LEFT SIDE (BIODATA LENGKAP) -->
+        <q-item-section class="col-5">
+
+          <div class="text-weight-bold text-dark">
+            {{ row.nama }}
+            <span class="text-grey-6">({{ row.norm }})</span>
+            || NIK: {{ row.nik }}
           </div>
-          <div class="text-caption text-grey-9">
-            {{ row.kelamin === 'L' ? 'Laki-laki' : 'Perempuan' }} || {{ humanDate(row.tgl_lahir) }} || {{
-              hitungUmur(row.tgl_lahir) }} Tahun || StatusPerkawinan : {{ row.status_perkawinan }}
+
+          <div class="text-caption text-grey-8">
+            {{ row.kelamin === 'L' ? 'Laki-laki' : 'Perempuan' }} ||
+            {{ humanDate(row.tgl_lahir) }} ||
+            {{ hitungUmur(row.tgl_lahir) }} Tahun ||
+            Status: {{ row.status_perkawinan }}
           </div>
-          <div class="text-caption text-grey-6">
-            Alamat: {{ row.alamat }} Desa {{ row.desa }} Kec {{ row.kecamatan }}
+
+          <div class="text-caption text-grey-7">
+            Alamat: {{ row.alamat }} Desa {{ row.desa }}
+            Kec {{ row.kecamatan }}
           </div>
-          <div class="text-caption text-grey-6">
+
+          <div class="text-caption text-grey-7">
             {{ row.kabupaten }} {{ row.provinsi }} {{ row.negara }}
           </div>
-          <div class="text-caption text-grey-6">
+
+          <div class="text-caption text-grey-7">
             No Telp: {{ row.tlp }}
           </div>
-          <div class="text-caption text-grey-6">
-            Pekerjaan: {{ row.pekerjaan }} || Pendidikan: {{ row.pendidikan }}
+
+          <div class="text-caption text-grey-7">
+            Pekerjaan: {{ row.pekerjaan }} ||
+            Pendidikan: {{ row.pendidikan }}
           </div>
+
         </q-item-section>
 
-        <q-item-section>
-          <div class="text-weight-medium text-weight-bold text-red">
+        <!-- RIGHT SIDE (MEDIS LENGKAP) -->
+        <q-item-section class="col-5">
+
+          <div class="text-weight-bold text-negative">
             {{ row.diagnosa }}
           </div>
+
           <div class="text-caption text-dark">
-            MRS: {{ humanDate(row.tgl_mrs) }} || Pengkajian: {{ humanDate(row.tgl_pengkajian) }} {{ row.jam_pengkajian
-            }}
+            MRS: {{ humanDate(row.tgl_mrs) }} ||
+            Pengkajian: {{ humanDate(row.tgl_pengkajian) }}
+            {{ row.jam_pengkajian }}
           </div>
+
           <div class="text-caption text-dark">
             Alergi: {{ row.alergi }}
           </div>
-          <div class="text-caption text-grey-6">
+
+          <div class="text-caption text-grey-7">
             Ruang: {{ row.ruang_ranap }} {{ row.rs }}
           </div>
-          <div class="text-caption text-dark text-weight-bold">
+
+          <div class="text-caption text-primary text-weight-medium">
             Rencana Tindak Lanjut: {{ row.rencana_tindakan }}
           </div>
-          <div class="text-caption text-grey-6">
-            Cara Masuk: {{ row.cara_masuk }} || Pintu Masuk: {{ row.pintu_masuk }}
+
+          <div class="text-caption text-grey-7">
+            Cara Masuk: {{ row.cara_masuk }} ||
+            Pintu Masuk: {{ row.pintu_masuk }}
           </div>
-          <div>
-            <q-badge outline :color="row.status === 'Aktif' ? 'red' : 'green'">{{ row.status }}</q-badge>
+
+          <div class="q-mt-xs q-gutter-xs">
+            <q-badge color="red" outline dense>
+              {{ row.dokter_operator }}
+            </q-badge>
+
+            <q-badge color="primary" outline dense>
+              {{ row.dokter_anastesi }}
+            </q-badge>
+
+            <q-badge color="teal" outline dense>
+              {{ row.penata_anastesi }}
+            </q-badge>
           </div>
+
         </q-item-section>
 
         <!-- ACTION -->
         <q-item-section side>
-          <q-btn flat round size="sm" icon="edit" color="primary" @click="emits('rinci', row)">
+          <q-btn flat round icon="edit" color="primary" @click="emits('rinci', row)">
             <q-tooltip>Edit Data</q-tooltip>
           </q-btn>
         </q-item-section>
+
       </q-item>
+
     </q-list>
+
   </div>
 </template>
 <script setup>
@@ -115,13 +162,43 @@ const getAvatar = (kelamin) => {
 
 </script>
 <style scoped>
-.list-item-modern {
-  border-radius: 12px;
+.modern-row {
   transition: all 0.2s ease;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.list-item-modern:hover {
-  background-color: #f5f7fa;
-  transform: translateY(-1px);
+.modern-row:hover {
+  background-color: #f4f7fb;
+}
+
+/* Hover effect */
+.hover-shake:hover {
+  background-color: #f4f7fb;
+  animation: shakeX 0.3s ease-in-out;
+}
+
+/* Keyframes goyang kanan-kiri halus */
+@keyframes shakeX {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-3px);
+  }
+
+  50% {
+    transform: translateX(3px);
+  }
+
+  75% {
+    transform: translateX(-2px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 </style>

@@ -37,10 +37,7 @@
           Umur: {{ pasien?.pasien?.usia }}
         </div>
         <div class="text-yellow text-italic f-10">
-          Diagnosa: {{ pasien?.diagnosa ?? '-' }}
-        </div>
-        <div class="text-yellow text-italic f-10">
-          DPJP: {{ pasien?.dr_operator?.nama ?? '-' }}
+          Sistem Bayar: {{ pasien?.nama_asuransi ?? '-' }}
         </div>
       </div>
       <!-- <q-bar>

@@ -27,7 +27,7 @@ const store = useListPasienAnastesiStore()
 function opendialog(pasien) {
   store.pasien = pasien
   console.log('pasien', pasien)
-  store.terimadata(pasien.id)
+  store.terimadata(pasien.kunjungan_id)
   store.dialogPelayanan = true
 }
 

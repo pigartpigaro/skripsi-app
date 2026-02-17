@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { date } from "quasar";
 import { api } from "src/boot/axios";
-import { notifSuccess, notifSuccessVue } from "src/modules/utils";
+import { notifSuccess, notifSuccessVue, notifErr } from "src/modules/utils";
 
 export const useKunjunganPasienStore = defineStore('master-kunjungan-pasien-store', {
   state: () => ({
@@ -48,6 +48,9 @@ export const useKunjunganPasienStore = defineStore('master-kunjungan-pasien-stor
       pintu_masuk: '',
       alergi: '',
       rs: '',
+      dokter_operator: '',
+      dokter_anastesi: '',
+      penata_anastesi: '',
     },
     formpendamping: {
       nama: '',
@@ -163,7 +166,7 @@ export const useKunjunganPasienStore = defineStore('master-kunjungan-pasien-stor
         this.getData()
         this.loadingSave = false
       } catch (error) {
-        console.log(error)
+        notifErr(error)
         this.loadingSave = false
       }
     },
@@ -256,6 +259,9 @@ export const useKunjunganPasienStore = defineStore('master-kunjungan-pasien-stor
         pintu_masuk: '',
         alergi: '',
         rs: '',
+        dokter_operator: '',
+        dokter_anastesi: '',
+        penata_anastesi: '',
       }
       this.formpendamping = {
         nama: '',

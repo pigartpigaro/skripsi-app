@@ -310,6 +310,8 @@
             <th>EtCO₂</th>
             <th>N₂O / Air</th>
             <th>Flow %</th>
+            <th>O2</th>
+            <th>Flow O2 %</th>
             <th>Gas Anestesi</th>
             <th>MAC %</th>
             <th>Obat</th>
@@ -334,6 +336,8 @@
             <td><q-input dense v-model="store.formtabel.monitoring_anestesi.etco2" /></td>
             <td><q-input dense v-model="store.formtabel.monitoring_anestesi.n2o_o2" /></td>
             <td><q-input dense v-model="store.formtabel.monitoring_anestesi.flow" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.o2" /></td>
+            <td><q-input dense v-model="store.formtabel.monitoring_anestesi.flow_o2" /></td>
             <td><q-input dense v-model="store.formtabel.monitoring_anestesi.gas_anestesi" /></td>
             <td><q-input dense v-model="store.formtabel.monitoring_anestesi.mac" /></td>
             <td><q-input dense v-model="store.formtabel.monitoring_anestesi.obat" /></td>
@@ -358,6 +362,8 @@
             <td>{{ item.etco2 }}</td>
             <td>{{ item.n2o_o2 }}</td>
             <td>{{ item.flow }}</td>
+            <td>{{ item.o2 }}</td>
+            <td>{{ item.flow_o2 }}</td>
             <td>{{ item.gas_anestesi }}</td>
             <td>{{ item.mac }}</td>
             <td>{{ item.obat }}</td>
