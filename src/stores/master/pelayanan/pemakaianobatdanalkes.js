@@ -15,6 +15,7 @@ export const usePemakaianObatdanAlkesStore = defineStore('pemakaian-obat-alkes-s
       cairan: [],
       obat: [],
       alkes: [],
+      gasanastesi: [],
 
     },
   }),

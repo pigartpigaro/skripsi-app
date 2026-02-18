@@ -102,26 +102,22 @@
             <div class="column q-gutter-sm">
 
               <!-- JENIS -->
-              <div class="row items-center q-col-gutter-sm">
+              <div class="row items-center q-pl-md q-col-gutter-sm">
                 <div class="col-auto">
-                  <q-radio v-model="store.form.riwayat_alergi_obat" val="Jenis" label="Jenis" />
+                  Jenis :
                 </div>
-
                 <div class="col-4">
-                  <q-input v-if="store.form.riwayat_alergi_obat === 'Jenis'" v-model="store.form.jenis_alergi_obat"
-                    label="Jenis Alergi" outlined dense />
+                  <q-input v-model="store.form.jenis_alergi_obat" label="Jenis Alergi" outlined dense />
                 </div>
               </div>
 
               <!-- REAKSI -->
-              <div class="row items-center q-col-gutter-sm">
+              <div class="row items-center q-pl-md q-col-gutter-sm">
                 <div class="col-auto">
-                  <q-radio v-model="store.form.riwayat_alergi_obat" val="Reaksi" label="Reaksi" />
+                  Reaksi :
                 </div>
-
                 <div class="col-4">
-                  <q-input v-if="store.form.riwayat_alergi_obat === 'Reaksi'" v-model="store.form.reaksi_alergi_obat"
-                    label="Reaksi Alergi" outlined dense />
+                  <q-input v-model="store.form.reaksi_alergi_obat" label="Reaksi Alergi" outlined dense />
                 </div>
               </div>
 
@@ -409,7 +405,7 @@ watch(
 
     store.form.riwayat_penyakit = val.riwayat_penyakit ?? null
     store.form.riwayat_penyakit_lain = val.riwayat_penyakit_lain ?? null
-    store.form.riwayat_alergi_obat = val.riwayat_alergi_obat ?? null
+    // store.form.riwayat_alergi_obat = val.riwayat_alergi_obat ?? null
     store.form.jenis_alergi_obat = val.jenis_alergi_obat ?? null
     store.form.reaksi_alergi_obat = val.reaksi_alergi_obat ?? null
     store.form.persiapan_operasi = val.persiapan_operasi ?? null

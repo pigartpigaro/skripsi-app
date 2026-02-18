@@ -160,8 +160,43 @@
                 </tr>
               </tbody>
             </q-markup-table>
-            <q-btn flat icon="add" label="Tambah Obat Lain" color="primary" size="md" class="q-mt-xs"
-              @click="tambahObat" />
+          </div>
+        </q-card-section>
+      </q-card>
+
+      <!-- GAS ANASTESI -->
+      <q-card flat class="print-page">
+        <q-card-section>
+          <div class="text-subtitle2 q-mb-sm">Gas Anestesi</div>
+
+          <div class="full-width">
+            <q-markup-table dense flat bordered>
+              <thead>
+                <tr>
+                  <th class="text-left" style="width:40%">Nama</th>
+                  <th class="text-left" style="width:20%">Ukuran</th>
+                  <th class="text-left" style="width:20%">Jumlah</th>
+                  <th class="text-left" style="width:20%">Satuan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="row in gasanastesi" :key="row.id">
+                  <td><q-input v-model="row.nama" dense outlined /></td>
+
+                  <td>
+                    <q-input v-model="row.ukuran" dense outlined style="width:120px" />
+                  </td>
+
+                  <td>
+                    <q-input v-model.number="row.jumlah" type="number" dense outlined style="width:120px" />
+                  </td>
+
+                  <td><q-input v-model="row.satuan" dense outlined /></td>
+                </tr>
+              </tbody>
+            </q-markup-table>
+            <q-btn flat icon="add" label="Tambah Gas Anastesi Lain" color="primary" size="md" class="q-mt-xs"
+              @click="tambahGasanastesi" />
           </div>
         </q-card-section>
       </q-card>
@@ -255,6 +290,7 @@ const alkes = reactive([
   { id: 29, nama: 'Three Way Stopcock (dengan selang)', ukuran: '-', jumlah: null, satuan: 'pcs' },
   { id: 30, nama: 'Three Way Stopcock (tanpa selang)', ukuran: '-', jumlah: null, satuan: 'pcs' }
 ])
+
 function tambahAlkes() {
   alkes.push({
     id: Date.now() + Math.random(),
@@ -297,11 +333,6 @@ const obat = reactive([
   { id: 29, nama: 'Naloxone', ukuran: null, jumlah: null, satuan: 'ampul' },
   { id: 30, nama: 'Neostigmin', ukuran: null, jumlah: null, satuan: 'ampul' },
   { id: 31, nama: 'Norepinefrin', ukuran: null, jumlah: null, satuan: 'ampul' },
-  { id: 32, nama: 'N2O', ukuran: null, jumlah: null, satuan: 'cc' },
-  { id: 33, nama: 'O2', ukuran: null, jumlah: null, satuan: 'cc' },
-  { id: 34, nama: 'Sevoflurane', ukuran: null, jumlah: null, satuan: 'cc' },
-  { id: 35, nama: 'Isoflurane', ukuran: null, jumlah: null, satuan: 'cc' },
-  { id: 36, nama: 'Desflurane', ukuran: null, jumlah: null, satuan: 'cc' },
   { id: 37, nama: 'Oxytocin', ukuran: null, jumlah: null, satuan: 'ampul' },
   { id: 38, nama: 'Paracetamol', ukuran: null, jumlah: null, satuan: 'flabot' },
   { id: 39, nama: 'Pethidin', ukuran: null, jumlah: null, satuan: 'ampul' },
@@ -325,11 +356,30 @@ function tambahObat() {
   })
 }
 
+const gasanastesi = reactive([
+  { id: 1, nama: 'N2O', ukuran: null, jumlah: null, satuan: 'cc' },
+  { id: 2, nama: 'O2', ukuran: null, jumlah: null, satuan: 'cc' },
+  { id: 3, nama: 'Sevoflurane', ukuran: null, jumlah: null, satuan: 'cc' },
+  { id: 4, nama: 'Isoflurane', ukuran: null, jumlah: null, satuan: 'cc' },
+  { id: 5, nama: 'Desflurane', ukuran: null, jumlah: null, satuan: 'cc' },
+])
+function tambahGasanastesi() {
+  obat.push({
+    id: Date.now() + Math.random(),
+    nama: '',
+    ukuran: '',
+    jumlah: null,
+    satuan: ''
+  })
+}
+
 function simpan() {
   store.form.noreg = props.pasien?.noreg
   store.form.cairan = cairan
   store.form.alkes = alkes
   store.form.obat = obat
+  store.form.gasanastesi = gasanastesi
+
   store.simpanData()
 }
 
