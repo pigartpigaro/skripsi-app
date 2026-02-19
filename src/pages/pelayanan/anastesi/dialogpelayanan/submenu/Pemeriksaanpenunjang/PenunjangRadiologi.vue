@@ -19,7 +19,7 @@
 
     <q-card-actions align="right">
       <q-btn v-if="store.radiologi.dokumen" label="Hapus" color="negative" flat
-        @click="store.hapusRadiologi(store.radiologi.dokumen.id)" />
+        @click="store.hapusRadiologi(pasien, store.radiologi.dokumen.id)" />
       <q-btn label="Simpan" color="primary" :loading="store.loadingRadiologi" @click="store.simpanRadiologi(pasien)" />
     </q-card-actions>
   </q-card>

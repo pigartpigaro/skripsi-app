@@ -2,6 +2,7 @@
   import { date } from 'quasar'
   import { api } from 'src/boot/axios'
   import { notifSuccessVue } from 'src/modules/utils'
+import { usePenunjangStore } from './penunjang'
 
   export const useListPasienAnastesiStore = defineStore('list-pasien-anastesi-store', {
     state: () => ({
@@ -61,6 +62,9 @@
           }
           console.log('findPasien', this.items[findPasien])
           this.pasien = resp?.data ?? []
+          // inject form lab
+          const pen=usePenunjangStore()
+          pen.lab=this.pasien?.laboratorium
           this.loading = false
         }
         this.loadingcari = false
