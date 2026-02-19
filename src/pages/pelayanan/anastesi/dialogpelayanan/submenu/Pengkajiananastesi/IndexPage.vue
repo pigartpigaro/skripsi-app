@@ -785,7 +785,12 @@
             color="cyan" />
         </div>
       </div>
-      <div class="q-ml-md">Bentuk thorax:</div>
+      <div class="q-ml-md row items-center">
+        <div class="col-2">
+          Bentuk thorax:
+        </div>
+        <div class="col-10"><q-input v-model="store.pemeriksaan_jalan_napas.thorax" label="" dense /></div>
+      </div>
       <div class="q-ml-xl q-pl-md row items-center  ">
         <div class="col-3">
           Pola napas:
@@ -1268,7 +1273,7 @@
 <script setup>
 import { usePengkajianAnastesiStore } from 'src/stores/master/pelayanan/pengkajiananastesi'
 import { watch } from 'vue'
-function hapusKet(evt, val) {
+function hapusKet (evt, val) {
   val.keterangan = ''
   // console.log('val', evt, val)
 
@@ -1340,7 +1345,7 @@ const props = defineProps({
     default: null
   }
 })
-function moans(val) {
+function moans (val) {
   if (val === 1) {
     store.pemeriksaan_jalan_napas.moans.mask_seal.keterangan = ''
   } else if (val === 2) {
