@@ -64,7 +64,7 @@ import { usePenunjangStore } from './penunjang'
           this.pasien = resp?.data ?? []
           // inject form lab
           const pen=usePenunjangStore()
-          pen.lab=this.pasien?.laboratorium
+          pen.lab=this.pasien?.laboratorium??{dokumen: null, file: null}
           this.loading = false
         }
         this.loadingcari = false
