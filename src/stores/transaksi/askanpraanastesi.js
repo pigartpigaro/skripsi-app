@@ -220,7 +220,7 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore('askan-praintrapas
       // mapAskan('Pasca', this.formpasca)
       // mapAskan('Intra', this.formintra)
     },
-    async hapusData(row, faseAktif) {
+    async hapusData(index, faseAktif) {
       this.loadinghapus = true
 
       const source =
@@ -230,26 +230,21 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore('askan-praintrapas
 
       try {
 
-        // 🚀 Hapus berdasarkan ID (lebih aman daripada index)
-        const updatedAskan = source.askan_data.filter(
-          item => item.id !== row.id
-        )
+        // Hapus berdasarkan index
+        const updatedAskan = [...source.askan_data]
+        updatedAskan.splice(index, 1)
 
-        // 🚨 Kalau setelah dihapus kosong → delete row DB
         if (updatedAskan.length === 0) {
 
-          await api.delete('v1/transaksi/askan-anestesi/delete', {
-            data: {
-              noreg: source.noreg,
-              fase: source.fase
-            }
+          await api.post('v1/transaksi/askan-anestesi/delete', {
+            noreg: source.noreg,
+            fase: source.fase
           })
 
           source.askan_data = []
 
         } else {
 
-          // Kalau masih ada → update JSON
           const resp = await api.post(
             'v1/transaksi/askan-anestesi/simpan',
             {

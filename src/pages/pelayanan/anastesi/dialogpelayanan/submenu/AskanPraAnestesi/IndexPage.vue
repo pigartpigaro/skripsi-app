@@ -84,12 +84,12 @@
 
           <q-table flat bordered dense :rows="store.form.askan_data" :columns="columns" row-key="id" hide-bottom>
 
-            <template #body="props">
+            <template #top-row>
 
               <!-- ============================= -->
               <!-- BARIS INPUT (HANYA SEKALI) -->
               <!-- ============================= -->
-              <q-tr v-if="props.pageIndex === 0" class="bg-grey-2 no-print">
+              <q-tr class="bg-grey-2 no-print">
 
                 <q-td>
                   <q-input dense v-model="store.form.current.data" />
@@ -134,11 +134,11 @@
                 </q-td>
 
               </q-tr>
+            </template>
 
-              <!-- ============================= -->
-              <!-- DATA YANG SUDAH ADA -->
-              <!-- ============================= -->
+            <template #body="props">
               <q-tr :props="props">
+
                 <q-td>{{ props.row.data }}</q-td>
                 <q-td>{{ props.row.masalah_kesehatan_anestesi }}</q-td>
                 <q-td>{{ props.row.waktu }}</q-td>
@@ -153,12 +153,13 @@
                 </q-td>
 
                 <q-td>{{ props.row.nama_ttd }}</q-td>
-                <td>
+
+                <q-td>
                   <q-btn dense flat icon="delete" color="red" @click="store.hapusData(props.row, 'Pra')"
                     :loading="store.loadinghapus" class="no-print" />
-                </td>
-              </q-tr>
+                </q-td>
 
+              </q-tr>
             </template>
           </q-table>
           <!-- <q-btn flat icon="add" label="Tambah Data" class="q-mt-sm" @click="tambahBaris" /> -->
@@ -190,7 +191,6 @@ const store = useAskanPraIntraPascaAnestesiStore()
 const props = defineProps({
   pasien: { type: Object, default: null }
 })
-
 
 
 const columns = [
