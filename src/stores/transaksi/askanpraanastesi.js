@@ -8,11 +8,29 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore('askan-praintrapas
   state: () => ({
     loadingcari: false,
     loadingSave: false,
+    loadinghapus: false,
     dialogPelayanan: false,
     items: [],
     pasien: {},
     itemsaskanpraanestesi: [],
     meta: {},
+    form: {
+      noreg: null,
+      fase: 'Pra',
+      current: {
+        data: '',
+        masalah_kesehatan_anestesi: '',
+        waktu: '',
+        intervensi: '',
+        implementasi: '',
+        s: '',
+        o: '',
+        a: '',
+        p: '',
+        nama_ttd: ''
+      },
+      askan_data: []
+    },
     // form: {
     //   noreg: null,
     //   fase: '',
@@ -81,7 +99,7 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore('askan-praintrapas
     }
   }),
   actions: {
-    async simpanData (faseAktif) {
+    async simpanData(faseAktif) {
       this.loadingSave = true
 
       const source =
@@ -89,35 +107,63 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore('askan-praintrapas
         faseAktif === 'Pasca' ? this.formpasca :
         this.formintra
 
-      const payload = {
-        noreg: source.noreg,
-        fase: source.fase,
-        askan_data: source.askan_data.map(row => ({
-          data: row.data,
-          masalah_kesehatan_anestesi: row.masalah_kesehatan_anestesi,
-          waktu: row.waktu,
-          intervensi: row.intervensi,
-          implementasi: row.implementasi,
-          evaluasi: {
-            s: row.s,
-            o: row.o,
-            a: row.a,
-            p: row.p
-          },
-          nama_ttd: row.nama_ttd
-        }))
-      }
-      console.log('payload', payload)
       try {
-        const resp = await api.post('v1/transaksi/askan-anestesi/simpan', payload)
 
-        const storepasien = useListPasienAnastesiStore()
-        storepasien.insertToPasien(this.pasien,'askan_anastesi',null)
-        this.isiForm(this.items)
-        notifSuccessVue(resp?.data.message)
-        // this.loadingSave = false
+        // 🚀 Payload hanya kirim data lama + current (TANPA inject dulu)
+        const payload = {
+          noreg: source.noreg,
+          fase: source.fase,
+          askan_data: [
+            ...source.askan_data,
+            ...(source.current?.data?.trim()
+              ? [{
+                  data: source.current.data,
+                  masalah_kesehatan_anestesi: source.current.masalah_kesehatan_anestesi,
+                  waktu: source.current.waktu,
+                  intervensi: source.current.intervensi,
+                  implementasi: source.current.implementasi,
+                  evaluasi: {
+                    s: source.current.s,
+                    o: source.current.o,
+                    a: source.current.a,
+                    p: source.current.p
+                  },
+                  nama_ttd: source.current.nama_ttd
+                }]
+              : [])
+          ]
+        }
+
+        console.log('PAYLOAD DIKIRIM:', payload)
+
+        // 🚀 Tunggu backend
+        const resp = await api.post(
+          'v1/transaksi/askan-anestesi/simpan',
+          payload
+        )
+
+        // ✅ Baru replace dari response backend
+        source.askan_data = resp.data.data.askan_data
+        this.items = resp.data.data.askan_data
+
+        // reset form
+        source.current = {
+          data: '',
+          masalah_kesehatan_anestesi: '',
+          waktu: '',
+          intervensi: '',
+          implementasi: '',
+          s: '',
+          o: '',
+          a: '',
+          p: '',
+          nama_ttd: ''
+        }
+
+        notifSuccessVue(resp?.data?.message)
+
       } catch (e) {
-        notifErrVue(e.response?.data?.message)
+        notifErrVue(e.response?.data?.message || 'Terjadi kesalahan')
       } finally {
         this.loadingSave = false
       }
@@ -146,31 +192,83 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore('askan-praintrapas
       }))
     },
     isiForm (val) {
-      const mapAskan = (fase, target) => {
-        const temp = val?.askan_anastesi?.find(i => i.fase === fase)
-        if (!temp || !temp.askan_data?.length) return
+      console.log('isiForm', val)
 
-        target.noreg = val.noreg
-        target.fase = fase
+      // const mapAskan = (fase, target) => {
+      //   const temp = val?.askan_anastesi?.find(i => i.fase === fase)
+      //   if (!temp || !temp.askan_data?.length) return
 
-        target.askan_data = temp.askan_data.map(item => ({
-          id: Date.now() + Math.random(),
-          data: item.data ?? '',
-          masalah_kesehatan_anestesi: item.masalah_kesehatan_anestesi ?? '',
-          waktu: item.waktu ?? '',
-          intervensi: item.intervensi ?? '',
-          implementasi: item.implementasi ?? '',
-          s: item.evaluasi?.s ?? '',
-          o: item.evaluasi?.o ?? '',
-          a: item.evaluasi?.a ?? '',
-          p: item.evaluasi?.p ?? '',
-          nama_ttd: item.nama_ttd ?? ''
-        }))
+      //   target.noreg = val.noreg
+      //   target.fase = fase
+
+      //   target.askan_data = temp.askan_data.map(item => ({
+      //     id: Date.now() + Math.random(),
+      //     data: item.data ?? '',
+      //     masalah_kesehatan_anestesi: item.masalah_kesehatan_anestesi ?? '',
+      //     waktu: item.waktu ?? '',
+      //     intervensi: item.intervensi ?? '',
+      //     implementasi: item.implementasi ?? '',
+      //     s: item.evaluasi?.s ?? '',
+      //     o: item.evaluasi?.o ?? '',
+      //     a: item.evaluasi?.a ?? '',
+      //     p: item.evaluasi?.p ?? '',
+      //     nama_ttd: item.nama_ttd ?? ''
+      //   }))
+      // }
+
+      // mapAskan('Pra', this.form)
+      // mapAskan('Pasca', this.formpasca)
+      // mapAskan('Intra', this.formintra)
+    },
+    async hapusData(row, faseAktif) {
+      this.loadinghapus = true
+
+      const source =
+        faseAktif === 'Pra' ? this.form :
+        faseAktif === 'Pasca' ? this.formpasca :
+        this.formintra
+
+      try {
+
+        // 🚀 Hapus berdasarkan ID (lebih aman daripada index)
+        const updatedAskan = source.askan_data.filter(
+          item => item.id !== row.id
+        )
+
+        // 🚨 Kalau setelah dihapus kosong → delete row DB
+        if (updatedAskan.length === 0) {
+
+          await api.delete('v1/transaksi/askan-anestesi/delete', {
+            data: {
+              noreg: source.noreg,
+              fase: source.fase
+            }
+          })
+
+          source.askan_data = []
+
+        } else {
+
+          // Kalau masih ada → update JSON
+          const resp = await api.post(
+            'v1/transaksi/askan-anestesi/simpan',
+            {
+              noreg: source.noreg,
+              fase: source.fase,
+              askan_data: updatedAskan
+            }
+          )
+
+          source.askan_data = resp.data.data.askan_data
+        }
+
+        notifSuccessVue('Data berhasil dihapus')
+
+      } catch (e) {
+        notifErrVue(e.response?.data?.message || 'Gagal hapus data')
+      } finally {
+        this.loadinghapus = false
       }
-
-      mapAskan('Pra', this.form)
-      mapAskan('Pasca', this.formpasca)
-      mapAskan('Intra', this.formintra)
     }
   }
 })

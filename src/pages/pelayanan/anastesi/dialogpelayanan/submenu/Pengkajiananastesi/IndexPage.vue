@@ -239,14 +239,14 @@
               </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.padat" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.neonatus.padat" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
 
               <div class="col-2 q-pr-sm">Clear Liquid </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.cair_jernih" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.neonatus.cair_jernih" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
             </div>
@@ -256,14 +256,14 @@
               <div class="col-2 q-pr-sm">Susu Formula </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.susu_formula" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.neonatus.susu_formula" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
 
               <div class="col-2 q-pr-sm">ASI </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.asi" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.neonatus.asi" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
             </div>
@@ -280,14 +280,15 @@
               <div class="col-2 q-pr-sm">Makanan padat </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.padat" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.bayi_kurang_6_bulan.padat" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
 
               <div class="col-2 q-pr-sm">Clear Liquid </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.cair_jernih" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.bayi_kurang_6_bulan.cair_jernih" dense type="text"
+                  autogrow />
               </div>
               <div class="col-1">Jam</div>
             </div>
@@ -297,13 +298,14 @@
               <div class="col-2 q-pr-sm">Susu Formula </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.susu_formula" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.bayi_kurang_6_bulan.susu_formula" dense type="text"
+                  autogrow />
               </div>
               <div class="col-1">Jam</div>
               <div class="col-2 q-pr-sm">ASI </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.asi" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.bayi_kurang_6_bulan.asi" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
             </div>
@@ -320,13 +322,13 @@
               <div class="col-2 q-pr-sm">Makanan padat </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.padat" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.balita.padat" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
               <div class="col-2 q-pr-sm">Clear Liquid </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.cair_jernih" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.balita.cair_jernih" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
             </div>
@@ -336,14 +338,14 @@
               <div class="col-2 q-pr-sm">Susu Formula </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.susu_formula" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.balita.susu_formula" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
 
               <div class="col-2 q-pr-sm">ASI </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.asi" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.balita.asi" dense type=" text" autogrow />
               </div>
               <div class="col-1">Jam</div>
             </div>
@@ -360,14 +362,14 @@
               <div class="col-2 q-pr-sm">Makanan padat </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.padat" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.anak.padat" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
 
               <div class="col-2 q-pr-sm">Clear Liquid </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.cair_jernih" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.anak.cair_jernih" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
             </div>
@@ -377,13 +379,13 @@
               <div class="col-2 q-pr-sm">Susu Formula </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.susu_formula" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.anak.susu_formula" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
               <div class="col-2 q-pr-sm">ASI </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.asi" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.anak.asi" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
             </div>
@@ -400,13 +402,13 @@
               <div class="col-2 q-pr-sm">Makanan padat </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.padat" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.dewasa.padat" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
               <div class="col-2 q-pr-sm">Clear Liquid </div>
               <div class="col-shrink">:</div>
               <div class="col-1">
-                <q-input v-model="store.anamnesis.last_meal.cair_jernih" dense type="text" autogrow />
+                <q-input v-model="store.anamnesis.last_meal.dewasa.cair_jernih" dense type="text" autogrow />
               </div>
               <div class="col-1">Jam</div>
             </div>

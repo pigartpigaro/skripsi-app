@@ -83,60 +83,85 @@
           </div> -->
 
           <q-table flat bordered dense :rows="store.form.askan_data" :columns="columns" row-key="id" hide-bottom>
-            <template #body-cell-data="props">
-              <q-td>
-                <q-input dense v-model="props.row.data" />
-              </q-td>
-            </template>
-            <template #body-cell-masalah_kesehatan_anestesi="props">
-              <q-td>
-                <q-input dense v-model="props.row.masalah_kesehatan_anestesi" />
-              </q-td>
-            </template>
 
-            <template #body-cell-waktu="props">
-              <q-td>
-                <q-input dense v-model="props.row.waktu" mask="##:##" fill-mask>
-                  <q-popup-proxy transition-show="scale" transition-hide="scale" cover fit>
-                    <q-time v-model="props.row.waktu" format24h minimal square>
-                      <div class="row justify-end q-pa-xs">
-                        <q-btn label="OK" color="primary" flat v-close-popup />
-                      </div>
-                    </q-time>
-                  </q-popup-proxy>
-                </q-input>
+            <template #body="props">
 
-              </q-td>
-            </template>
+              <!-- ============================= -->
+              <!-- BARIS INPUT (HANYA SEKALI) -->
+              <!-- ============================= -->
+              <q-tr v-if="props.pageIndex === 0" class="bg-grey-2 no-print">
 
-            <template #body-cell-intervensi="props">
-              <q-td>
-                <q-input dense autogrow v-model="props.row.intervensi" />
-              </q-td>
-            </template>
+                <q-td>
+                  <q-input dense v-model="store.form.current.data" />
+                </q-td>
 
-            <template #body-cell-implementasi="props">
-              <q-td>
-                <q-input dense autogrow v-model="props.row.implementasi" />
-              </q-td>
-            </template>
+                <q-td>
+                  <q-input dense v-model="store.form.current.masalah_kesehatan_anestesi" />
+                </q-td>
 
-            <template #body-cell-evaluasi="props">
-              <q-td>
-                <q-input dense label="S : " v-model="props.row.s" />
-                <q-input dense label="O : " v-model="props.row.o" />
-                <q-input dense label="A : " v-model="props.row.a" />
-                <q-input dense label="P : " v-model="props.row.p" />
-              </q-td>
-            </template>
+                <q-td>
+                  <q-input dense v-model="store.form.current.waktu" mask="##:##" fill-mask>
+                    <q-popup-proxy transition-show="scale" transition-hide="scale" cover fit>
+                      <q-time v-model="store.form.current.waktu" format24h minimal square>
+                        <div class="row justify-end q-pa-xs">
+                          <q-btn label="OK" color="primary" flat v-close-popup />
+                        </div>
+                      </q-time>
+                    </q-popup-proxy>
+                  </q-input>
+                </q-td>
 
-            <template #body-cell-nama_ttd="props">
-              <q-td>
-                <q-input dense v-model="props.row.nama_ttd" />
-              </q-td>
+                <q-td>
+                  <q-input dense autogrow v-model="store.form.current.intervensi" />
+                </q-td>
+
+                <q-td>
+                  <q-input dense autogrow v-model="store.form.current.implementasi" />
+                </q-td>
+
+                <q-td>
+                  <q-input dense label="S" v-model="store.form.current.s" />
+                  <q-input dense label="O" v-model="store.form.current.o" />
+                  <q-input dense label="A" v-model="store.form.current.a" />
+                  <q-input dense label="P" v-model="store.form.current.p" />
+                </q-td>
+
+                <q-td>
+                  <q-input dense v-model="store.form.current.nama_ttd" />
+                </q-td>
+                <q-td>
+
+                </q-td>
+
+              </q-tr>
+
+              <!-- ============================= -->
+              <!-- DATA YANG SUDAH ADA -->
+              <!-- ============================= -->
+              <q-tr :props="props">
+                <q-td>{{ props.row.data }}</q-td>
+                <q-td>{{ props.row.masalah_kesehatan_anestesi }}</q-td>
+                <q-td>{{ props.row.waktu }}</q-td>
+                <q-td>{{ props.row.intervensi }}</q-td>
+                <q-td>{{ props.row.implementasi }}</q-td>
+
+                <q-td>
+                  <div><b>S:</b> {{ props.row.s }}</div>
+                  <div><b>O:</b> {{ props.row.o }}</div>
+                  <div><b>A:</b> {{ props.row.a }}</div>
+                  <div><b>P:</b> {{ props.row.p }}</div>
+                </q-td>
+
+                <q-td>{{ props.row.nama_ttd }}</q-td>
+                <td>
+                  <q-btn dense flat icon="delete" color="red" @click="store.hapusData(props.row, 'Pra')"
+                    :loading="store.loadinghapus" class="no-print" />
+                </td>
+              </q-tr>
+
             </template>
           </q-table>
-          <q-btn flat icon="add" label="Tambah Data" class="q-mt-sm" @click="tambahBaris" />
+          <!-- <q-btn flat icon="add" label="Tambah Data" class="q-mt-sm" @click="tambahBaris" /> -->
         </q-card-section>
       </q-card>
       <!-- PERTIMBANGAN Anastesi -->
@@ -160,10 +185,14 @@ import { date } from 'quasar'
 import { useAskanPraIntraPascaAnestesiStore } from 'src/stores/transaksi/askanpraanastesi'
 import { computed, onMounted, watch } from 'vue'
 
+
 const store = useAskanPraIntraPascaAnestesiStore()
 const props = defineProps({
   pasien: { type: Object, default: null }
 })
+
+
+
 const columns = [
   { name: 'data', label: 'Data', field: 'data', align: 'left' },
   { name: 'masalah_kesehatan_anestesi', label: 'Masalah Kesehatan Anestesi', field: 'masalah_kesehatan_anestesi', align: 'left' },
@@ -171,7 +200,8 @@ const columns = [
   { name: 'intervensi', label: 'Intervensi', field: 'intervensi', align: 'left' },
   { name: 'implementasi', label: 'Implementasi', field: 'implementasi', align: 'left' },
   { name: 'evaluasi', label: 'Evaluasi (SOAP)', field: 'evaluasi', align: 'left' },
-  { name: 'nama_ttd', label: 'Nama TTD', field: 'nama_ttd', align: 'left' }
+  { name: 'nama_ttd', label: 'Nama TTD', field: 'nama_ttd', align: 'left' },
+  { name: 'aksi', label: '#', field: 'aksi', align: 'left' }
 ]
 function newAskanRow() {
   return {
@@ -188,20 +218,20 @@ function newAskanRow() {
     nama_ttd: ''
   }
 }
-function tambahBaris() {
-  if (!Array.isArray(store.form.askan_data)) {
-    store.form.askan_data = []
-  }
+// function tambahBaris() {
+//   if (!Array.isArray(store.form.askan_data)) {
+//     store.form.askan_data = []
+//   }
 
-  // clone dari baris terakhir (UX lebih enak)
-  const last = store.form.askan_data.at(-1)
+//   // clone dari baris terakhir (UX lebih enak)
+//   const last = store.form.askan_data.at(-1)
 
-  store.form.askan_data.push(
-    last
-      ? { ...JSON.parse(JSON.stringify(last)), id: Date.now() + Math.random() }
-      : newAskanRow()
-  )
-}
+//   store.form.askan_data.push(
+//     last
+//       ? { ...JSON.parse(JSON.stringify(last)), id: Date.now() + Math.random() }
+//       : newAskanRow()
+//   )
+// }
 function simpan() {
   store.form.noreg = props.pasien?.noreg
   store.form.fase = 'Pra'
@@ -209,31 +239,43 @@ function simpan() {
 }
 
 onMounted(() => {
-  if (!store.form.askan_data.length) {
-    store.form.askan_data.push(newAskanRow())
-  }
+  // if (!store.form.askan_data.length) {
+  //   store.form.askan_data.push(newAskanRow())
+  // }
+  store.isiForm(props.pasien)
 })
+
+function resetInput() {
+  store.form.current = {
+    data: '',
+    masalah_kesehatan_anestesi: '',
+    waktu: '',
+    intervensi: '',
+    implementasi: '',
+    s: '',
+    o: '',
+    a: '',
+    p: '',
+    nama_ttd: ''
+  }
+}
 
 watch(
   () => props.pasien,
   (val) => {
     if (!val) return
 
-    console.log('WATCH PASIEN TRIGGERED', val)
-
-    // ===============================
-    // PRA ANESTESI
-    // ===============================
     const pra = val?.askan_anastesi?.find(
       i => i.fase === 'Pra'
     )
 
     if (pra?.askan_data?.length) {
+
       store.form.noreg = val.noreg
       store.form.fase = 'Pra'
 
       store.form.askan_data = pra.askan_data.map(item => ({
-        id: Date.now() + Math.random(),
+        id: item.id ?? Date.now() + Math.random(),
         data: item.data ?? '',
         masalah_kesehatan_anestesi: item.masalah_kesehatan_anestesi ?? '',
         waktu: item.waktu ?? '',
@@ -245,29 +287,16 @@ watch(
         p: item.evaluasi?.p ?? '',
         nama_ttd: item.nama_ttd ?? ''
       }))
+
     } else {
-      // kalau belum ada data → minimal 1 baris
-      if (!store.form.askan_data.length) {
-        store.form.askan_data.push({
-          id: Date.now() + Math.random(),
-          data: '',
-          masalah_kesehatan_anestesi: '',
-          waktu: '',
-          intervensi: '',
-          implementasi: '',
-          s: '',
-          o: '',
-          a: '',
-          p: '',
-          nama_ttd: ''
-        })
-      }
+      store.form.askan_data = []
     }
+
+    // ✅ INPUT SELALU DI RESET
+    resetInput()
+
   },
-  {
-    immediate: true,
-    deep: true
-  }
+  { immediate: true }
 )
 // watch(
 //   () => props.pasien,
@@ -313,6 +342,10 @@ const printObj = computed(() => ({
 
   .print-only {
     display: block;
+  }
+
+  .no-print {
+    display: none !important;
   }
 
   body {
