@@ -28,7 +28,7 @@ export const usePenunjangStore = defineStore('penunjang-store', {
           'v1/transaksi/penunjang-laborat/dokumen',
           { params: { noreg:pasien?.noreg } }
         )
-        this.lab.dokumen = resp.data?.data || null
+        this.lab = resp.data?.data || null
       } catch (e) {
         console.error(e)
       }
@@ -44,6 +44,7 @@ export const usePenunjangStore = defineStore('penunjang-store', {
         fd.append('noreg', pasien?.noreg)
         fd.append('norm', pasien?.norm)
         if (this.lab.file) fd.append('dokumen', this.lab.file)
+        if (this.lab.lainnya) fd.append('lainnya', this.lab.lainnya)
 
         const resp = await api.post(
           'v1/transaksi/penunjang-laborat/simpan',
@@ -51,9 +52,12 @@ export const usePenunjangStore = defineStore('penunjang-store', {
         )
 
         notifSuccessVue(resp.data?.message)
-        this.lab.dokumen = resp.data?.data
+        // this.lab.dokumen = resp.data?.data
+        // this.lab.lainnya = resp.data?.data?.lainnya
+        this.lab = resp.data?.data
         this.kunjungan().insertToPasien(pasien,'laboratorium',resp.data?.data)
         this.lab.file = null
+        this.lab.lainnya = null
       } catch (e) {
         notifErrVue(e?.response?.data?.message)
       } finally {
@@ -61,11 +65,11 @@ export const usePenunjangStore = defineStore('penunjang-store', {
       }
     },
 
-    async hapusLab(id) {
+    async hapusLab(pasien,id) {
       try {
         await api.post('v1/transaksi/penunjang-laborat/delete', { id })
          this.kunjungan().insertToPasien(pasien,'laboratorium',null)
-        this.lab.dokumen = null
+        this.lab = null
         notifSuccessVue('Dokumen laboratorium berhasil dihapus')
       } catch (e) {
         notifErrVue(e?.response?.data?.message)
@@ -114,7 +118,7 @@ export const usePenunjangStore = defineStore('penunjang-store', {
       }
     },
 
-    async hapusRadiologi(id) {
+    async hapusRadiologi(pasien,id) {
       try {
         await api.post('v1/transaksi/penunjang-radiologi/delete', { id })
         this.radiologi.dokumen = null
