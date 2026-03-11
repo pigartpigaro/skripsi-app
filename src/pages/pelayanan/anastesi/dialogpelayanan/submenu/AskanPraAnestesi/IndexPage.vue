@@ -67,20 +67,7 @@
       </q-card>
       <q-card flat class="q-mb-xs">
         <q-card-section>
-          <!-- <div class="row q-col-gutter-xl q-mb-md">
-            <div class="col-6">
-              <div class="row q-mb-sm">
-                <div class="col-2 text-subtitle2">Sifat Operasi</div>
-                <div class="align-center">
-                  <q-option-group v-model="sifatOperasi" type="radio" inline :options="[
-                    { label: 'Cito', value: 'Cito' },
-                    { label: 'Elektif', value: 'Elektif' }
-                  ]" />
-                </div>
-              </div>
-            </div>
 
-          </div> -->
 
           <q-table flat bordered dense :rows="store.form.askan_data" :columns="columns" row-key="id" hide-bottom>
 
@@ -139,11 +126,12 @@
             <template #body="props">
               <q-tr :props="props">
 
-                <q-td>{{ props.row.data }}</q-td>
-                <q-td>{{ props.row.masalah_kesehatan_anestesi }}</q-td>
-                <q-td>{{ props.row.waktu }}</q-td>
-                <q-td>{{ props.row.intervensi }}</q-td>
-                <q-td>{{ props.row.implementasi }}</q-td>
+                <q-td class="text-wrap" style="white-space: normal;">{{ props.row.data
+                  }}</q-td>
+                <q-td class="text-wrap" style="white-space: normal;">{{ props.row.masalah_kesehatan_anestesi }}</q-td>
+                <q-td class="text-wrap" style="white-space: normal;">{{ props.row.waktu }}</q-td>
+                <q-td class="text-wrap" style="white-space: normal;">{{ props.row.intervensi }}</q-td>
+                <q-td class="text-wrap" style="white-space: normal;">{{ props.row.implementasi }}</q-td>
 
                 <q-td>
                   <div><b>S:</b> {{ props.row.s }}</div>
@@ -203,7 +191,7 @@ const columns = [
   { name: 'nama_ttd', label: 'Nama TTD', field: 'nama_ttd', align: 'left' },
   { name: 'aksi', label: '#', field: 'aksi', align: 'left' }
 ]
-function newAskanRow() {
+function newAskanRow () {
   return {
     id: Date.now() + Math.random(),
     data: '',
@@ -232,7 +220,7 @@ function newAskanRow() {
 //       : newAskanRow()
 //   )
 // }
-function simpan() {
+function simpan () {
   store.form.noreg = props.pasien?.noreg
   store.form.fase = 'Pra'
   store.simpanData('Pra')
@@ -245,7 +233,7 @@ onMounted(() => {
   store.isiForm(props.pasien)
 })
 
-function resetInput() {
+function resetInput () {
   store.form.current = {
     data: '',
     masalah_kesehatan_anestesi: '',
@@ -312,18 +300,23 @@ const printObj = computed(() => ({
   preview: false,
   extraCss: '',
   extraHead: '',
-  beforeOpenCallback() {
+  beforeOpenCallback () {
     console.log('wait...')
   },
-  openCallback() {
+  openCallback () {
     console.log('opened')
   },
-  closeCallback() {
+  closeCallback () {
     console.log('closePrint')
   }
 }))
 </script>
 <style>
+.text-wrap {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 .print-only {
   display: none;
 }

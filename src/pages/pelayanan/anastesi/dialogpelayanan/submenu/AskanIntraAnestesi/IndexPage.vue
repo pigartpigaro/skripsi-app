@@ -67,20 +67,89 @@
       </q-card>
       <q-card flat class="q-mb-xs">
         <q-card-section>
-          <!-- <div class="row q-col-gutter-xl q-mb-md">
-            <div class="col-6">
-              <div class="row q-mb-sm">
-                <div class="col-2 text-subtitle2">Sifat Operasi</div>
-                <div class="align-center">
-                  <q-option-group v-model="sifatOperasi" type="radio" inline :options="[
-                    { label: 'Cito', value: 'Cito' },
-                    { label: 'Elektif', value: 'Elektif' }
-                  ]" />
-                </div>
-              </div>
-            </div>
+          <q-table flat bordered dense :rows="store.formintra.askan_data" :columns="columns" row-key="id" hide-bottom>
 
-          </div> -->
+            <template #top-row>
+
+              <!-- ============================= -->
+              <!-- BARIS INPUT (HANYA SEKALI) -->
+              <!-- ============================= -->
+              <q-tr class="bg-grey-2 no-print">
+
+                <q-td>
+                  <q-input dense v-model="store.formintra.current.data" />
+                </q-td>
+
+                <q-td>
+                  <q-input dense v-model="store.formintra.current.masalah_kesehatan_anestesi" />
+                </q-td>
+
+                <q-td>
+                  <q-input dense v-model="store.formintra.current.waktu" mask="##:##" fill-mask>
+                    <q-popup-proxy transition-show="scale" transition-hide="scale" cover fit>
+                      <q-time v-model="store.formintra.current.waktu" format24h minimal square>
+                        <div class="row justify-end q-pa-xs">
+                          <q-btn label="OK" color="primary" flat v-close-popup />
+                        </div>
+                      </q-time>
+                    </q-popup-proxy>
+                  </q-input>
+                </q-td>
+
+                <q-td>
+                  <q-input dense autogrow v-model="store.formintra.current.intervensi" />
+                </q-td>
+
+                <q-td>
+                  <q-input dense autogrow v-model="store.formintra.current.implementasi" />
+                </q-td>
+
+                <q-td>
+                  <q-input dense label="S" v-model="store.formintra.current.s" />
+                  <q-input dense label="O" v-model="store.formintra.current.o" />
+                  <q-input dense label="A" v-model="store.formintra.current.a" />
+                  <q-input dense label="P" v-model="store.formintra.current.p" />
+                </q-td>
+
+                <q-td>
+                  <q-input dense v-model="store.formintra.current.nama_ttd" />
+                </q-td>
+                <q-td>
+
+                </q-td>
+
+              </q-tr>
+            </template>
+
+            <template #body="props">
+              <q-tr :props="props">
+
+                <q-td class="text-wrap" style="white-space: normal;">{{ props.row.data
+                  }}</q-td>
+                <q-td class="text-wrap" style="white-space: normal;">{{ props.row.masalah_kesehatan_anestesi }}</q-td>
+                <q-td class="text-wrap" style="white-space: normal;">{{ props.row.waktu }}</q-td>
+                <q-td class="text-wrap" style="white-space: normal;">{{ props.row.intervensi }}</q-td>
+                <q-td class="text-wrap" style="white-space: normal;">{{ props.row.implementasi }}</q-td>
+
+                <q-td>
+                  <div><b>S:</b> {{ props.row.s }}</div>
+                  <div><b>O:</b> {{ props.row.o }}</div>
+                  <div><b>A:</b> {{ props.row.a }}</div>
+                  <div><b>P:</b> {{ props.row.p }}</div>
+                </q-td>
+
+                <q-td>{{ props.row.nama_ttd }}</q-td>
+
+                <q-td>
+                  <q-btn dense flat icon="delete" color="red" @click="store.hapusData(props.row, 'Pra')"
+                    :loading="store.loadinghapus" class="no-print" />
+                </q-td>
+
+              </q-tr>
+            </template>
+          </q-table>
+        </q-card-section>
+        <!-- <q-card-section>
 
           <q-table flat bordered dense :rows="store.formintra.askan_data" :columns="columns" row-key="id" hide-bottom>
             <template #body-cell-data="props">
@@ -137,7 +206,7 @@
             </template>
           </q-table>
           <q-btn flat icon="add" label="Tambah Data" class="q-mt-sm" @click="tambahBaris" />
-        </q-card-section>
+        </q-card-section> -->
       </q-card>
       <!-- PERTIMBANGAN Anastesi -->
 
@@ -173,7 +242,7 @@ const columns = [
   { name: 'evaluasi', label: 'Evaluasi (SOAP)', field: 'evaluasi', align: 'left' },
   { name: 'nama_ttd', label: 'Nama TTD', field: 'nama_ttd', align: 'left' }
 ]
-function newAskanRow() {
+function newAskanRow () {
   return {
     id: Date.now() + Math.random(),
     data: '',
@@ -188,7 +257,7 @@ function newAskanRow() {
     nama_ttd: ''
   }
 }
-function tambahBaris() {
+function tambahBaris () {
   if (!Array.isArray(store.formintra.askan_data)) {
     store.formintra.askan_data = []
   }
@@ -202,7 +271,7 @@ function tambahBaris() {
       : newAskanRow()
   )
 }
-function simpan() {
+function simpan () {
   store.formintra.noreg = props.pasien?.noreg
   store.formintra.fase = 'Intra'
   store.simpanData('Intra')
@@ -275,13 +344,13 @@ const printObj = computed(() => ({
   preview: false,
   extraCss: '',
   extraHead: '',
-  beforeOpenCallback() {
+  beforeOpenCallback () {
     console.log('wait...')
   },
-  openCallback() {
+  openCallback () {
     console.log('opened')
   },
-  closeCallback() {
+  closeCallback () {
     console.log('closePrint')
   }
 }))
