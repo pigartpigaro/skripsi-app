@@ -291,7 +291,7 @@ watch(
     if (!val) return
 
     console.log('WATCH PASIEN TRIGGERED', val)
-    if (store.formpasca.askan_data?.length > 0) return
+    if (store.formintra.askan_data?.length > 0) return
     // ===============================
     // INTRA ANESTESI
     // ===============================
@@ -320,7 +320,6 @@ watch(
   },
   {
     immediate: true,
-    deep: true
   }
 )
 const printObj = computed(() => ({

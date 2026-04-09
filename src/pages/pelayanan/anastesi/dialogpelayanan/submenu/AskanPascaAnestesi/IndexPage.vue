@@ -322,7 +322,6 @@ watch(
   },
   {
     immediate: true,
-    deep: true
   }
 )
 const printObj = computed(() => ({

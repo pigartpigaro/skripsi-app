@@ -128,7 +128,7 @@
               <q-tr :props="props">
 
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.data
-                  }}</q-td>
+                }}</q-td>
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.masalah_kesehatan_anestesi }}</q-td>
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.waktu }}</q-td>
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.intervensi }}</q-td>
@@ -255,7 +255,7 @@ watch(
   () => props.pasien,
   (val) => {
     if (!val) return
-    if (store.formpasca.askan_data?.length > 0) return
+    if (store.form.askan_data?.length > 0) return
     const pra = val?.askan_anastesi?.find(
       i => i.fase === 'Pra'
     )
