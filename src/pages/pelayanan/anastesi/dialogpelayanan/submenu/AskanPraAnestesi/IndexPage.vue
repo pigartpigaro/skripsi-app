@@ -69,7 +69,8 @@
         <q-card-section>
 
 
-          <q-table flat bordered dense :rows="store.form.askan_data" :columns="columns" row-key="id" hide-bottom>
+          <q-table flat bordered dense :rows="store.form.askan_data" :columns="columns" row-key="id" hide-bottom
+            :rows-per-page-options="[0]">
 
             <template #top-row>
 
@@ -191,9 +192,9 @@ const columns = [
   { name: 'nama_ttd', label: 'Nama TTD', field: 'nama_ttd', align: 'left' },
   { name: 'aksi', label: '#', field: 'aksi', align: 'left' }
 ]
-function newAskanRow () {
+function newAskanRow() {
   return {
-    id: Date.now() + Math.random(),
+    id_item: crypto.randomUUID(),
     data: '',
     masalah_kesehatan_anestesi: '',
     waktu: date.formatDate(Date.now(), 'HH:mm'),
@@ -220,21 +221,23 @@ function newAskanRow () {
 //       : newAskanRow()
 //   )
 // }
-function simpan () {
+function simpan() {
   store.form.noreg = props.pasien?.noreg
   store.form.fase = 'Pra'
   store.simpanData('Pra')
 }
 
 onMounted(() => {
+  store.form.fase = 'Pra'
   // if (!store.form.askan_data.length) {
   //   store.form.askan_data.push(newAskanRow())
   // }
   store.isiForm(props.pasien)
 })
 
-function resetInput () {
+function resetInput() {
   store.form.current = {
+    id_item: crypto.randomUUID(),
     data: '',
     masalah_kesehatan_anestesi: '',
     waktu: '',
@@ -252,7 +255,7 @@ watch(
   () => props.pasien,
   (val) => {
     if (!val) return
-
+    if (store.formpasca.askan_data?.length > 0) return
     const pra = val?.askan_anastesi?.find(
       i => i.fase === 'Pra'
     )
@@ -263,7 +266,7 @@ watch(
       store.form.fase = 'Pra'
 
       store.form.askan_data = pra.askan_data.map(item => ({
-        id: item.id ?? Date.now() + Math.random(),
+        id_item: item.id_item ?? crypto.randomUUID(),
         data: item.data ?? '',
         masalah_kesehatan_anestesi: item.masalah_kesehatan_anestesi ?? '',
         waktu: item.waktu ?? '',
@@ -275,13 +278,10 @@ watch(
         p: item.evaluasi?.p ?? '',
         nama_ttd: item.nama_ttd ?? ''
       }))
-
-    } else {
-      store.form.askan_data = []
     }
 
     // ✅ INPUT SELALU DI RESET
-    resetInput()
+    // resetInput()
 
   },
   { immediate: true }
@@ -300,13 +300,13 @@ const printObj = computed(() => ({
   preview: false,
   extraCss: '',
   extraHead: '',
-  beforeOpenCallback () {
+  beforeOpenCallback() {
     console.log('wait...')
   },
-  openCallback () {
+  openCallback() {
     console.log('opened')
   },
-  closeCallback () {
+  closeCallback() {
     console.log('closePrint')
   }
 }))

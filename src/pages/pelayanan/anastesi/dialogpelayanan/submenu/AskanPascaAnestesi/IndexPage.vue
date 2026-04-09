@@ -67,7 +67,8 @@
       </q-card>
       <q-card flat class="q-mb-xs">
         <q-card-section>
-          <q-table flat bordered dense :rows="store.formpasca.askan_data" :columns="columns" row-key="id" hide-bottom>
+          <q-table flat bordered dense :rows="store.formpasca.askan_data" :columns="columns" row-key="id" hide-bottom
+            :rows-per-page-options="[0]">
 
             <template #top-row>
 
@@ -125,7 +126,7 @@
               <q-tr :props="props">
 
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.data
-                }}</q-td>
+                  }} {{ props.row }}</q-td>
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.masalah_kesehatan_anestesi }}</q-td>
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.waktu }}</q-td>
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.intervensi }}</q-td>
@@ -141,7 +142,7 @@
                 <q-td>{{ props.row.nama_ttd }}</q-td>
 
                 <q-td>
-                  <q-btn dense flat icon="delete" color="red" @click="store.hapusData(props.row, 'Pra')"
+                  <q-btn dense flat icon="delete" color="red" @click="store.hapusData(props.row, 'Pasca')"
                     :loading="store.loadinghapus" class="no-print" />
                 </q-td>
 
@@ -243,9 +244,9 @@ const columns = [
   { name: 'evaluasi', label: 'Evaluasi (SOAP)', field: 'evaluasi', align: 'left' },
   { name: 'nama_ttd', label: 'Nama TTD', field: 'nama_ttd', align: 'left' }
 ]
-function newAskanRow () {
+function newAskanRow() {
   return {
-    id: Date.now() + Math.random(),
+    id_item: crypto.randomUUID(),
     data: '',
     masalah_kesehatan_anestesi: '',
     waktu: date.formatDate(Date.now(), 'HH:mm'),
@@ -258,7 +259,7 @@ function newAskanRow () {
     nama_ttd: ''
   }
 }
-function tambahBaris () {
+function tambahBaris() {
   if (!Array.isArray(store.formpasca.askan_data)) {
     store.formpasca.askan_data = []
   }
@@ -272,16 +273,17 @@ function tambahBaris () {
       : newAskanRow()
   )
 }
-function simpan () {
+function simpan() {
   store.formpasca.noreg = props.pasien?.noreg
   store.formpasca.fase = 'Pasca'
   store.simpanData('Pasca')
 }
 
 onMounted(() => {
-  if (!store.formpasca.askan_data.length) {
-    store.formpasca.askan_data.push(newAskanRow())
-  }
+  store.formpasca.fase = 'Pasca'
+  // if (!store.formpasca.askan_data.length) {
+  //   store.formpasca.askan_data.push(newAskanRow())
+  // }
 })
 
 watch(
@@ -290,7 +292,7 @@ watch(
     if (!val) return
 
     console.log('WATCH PASIEN TRIGGERED', val)
-
+    if (store.formpasca.askan_data?.length > 0) return
     // ===============================
     // PASCA ANESTESI
     // ===============================
@@ -303,7 +305,8 @@ watch(
       store.formpasca.fase = 'Pasca'
 
       store.formpasca.askan_data = pasca.askan_data.map(item => ({
-        id: Date.now() + Math.random(),
+        // id: Date.now() + Math.random(),
+        id_item: item.id_item ?? crypto.randomUUID(),
         data: item.data ?? '',
         masalah_kesehatan_anestesi: item.masalah_kesehatan_anestesi ?? '',
         waktu: item.waktu ?? '',
@@ -315,23 +318,6 @@ watch(
         p: item.evaluasi?.p ?? '',
         nama_ttd: item.nama_ttd ?? ''
       }))
-    } else {
-      // kalau belum ada data → minimal 1 baris
-      if (!store.formpasca.askan_data.length) {
-        store.formpasca.askan_data.push({
-          id: Date.now() + Math.random(),
-          data: '',
-          masalah_kesehatan_anestesi: '',
-          waktu: '',
-          intervensi: '',
-          implementasi: '',
-          s: '',
-          o: '',
-          a: '',
-          p: '',
-          nama_ttd: ''
-        })
-      }
     }
   },
   {
@@ -345,13 +331,13 @@ const printObj = computed(() => ({
   preview: false,
   extraCss: '',
   extraHead: '',
-  beforeOpenCallback () {
+  beforeOpenCallback() {
     console.log('wait...')
   },
-  openCallback () {
+  openCallback() {
     console.log('opened')
   },
-  closeCallback () {
+  closeCallback() {
     console.log('closePrint')
   }
 }))

@@ -20,6 +20,7 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
         noreg: null,
         fase: "Pra",
         current: {
+          id_item: "",
           data: "",
           masalah_kesehatan_anestesi: "",
           waktu: "",
@@ -93,6 +94,7 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
         noreg: null,
         fase: "Pasca",
         current: {
+          id_item: "",
           data: "",
           masalah_kesehatan_anestesi: "",
           waktu: "",
@@ -110,6 +112,7 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
         noreg: null,
         fase: "Intra",
         current: {
+          id_item: "",
           data: "",
           masalah_kesehatan_anestesi: "",
           waktu: "",
@@ -136,15 +139,22 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
               : this.formintra;
 
         try {
+          if (!source.current.id_item) {
+            source.current.id_item = crypto.randomUUID()
+          }
           // 🚀 Payload hanya kirim data lama + current (TANPA inject dulu)
           const payload = {
             noreg: source.noreg,
             fase: source.fase,
             askan_data: [
-              ...source.askan_data,
+              ...source.askan_data.map(item => ({
+                ...item,
+                id_item: item.id_item ?? crypto.randomUUID() // ✅ jaga data lama juga punya id
+              })),
               ...(source.current?.data?.trim()
                 ? [
                     {
+                      id_item: source.current.id_item,
                       data: source.current.data,
                       masalah_kesehatan_anestesi:
                         source.current.masalah_kesehatan_anestesi,
@@ -173,11 +183,16 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
           );
 
           // ✅ Baru replace dari response backend
-          source.askan_data = resp.data.data.askan_data;
+          source.askan_data = resp.data.data.askan_data.map(item => ({
+            ...item,
+            id_item: item.id_item ?? crypto.randomUUID()
+          }));
           this.items = resp.data.data.askan_data;
 
           // reset form
           source.current = {
+            id_item: crypto.randomUUID(),
+
             data: "",
             masalah_kesehatan_anestesi: "",
             waktu: "",
@@ -209,7 +224,7 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
         target.fase = val.fase;
 
         target.askan_data = val.askan_data.map((item) => ({
-          id: Date.now() + Math.random(),
+          id_item: item.id_item ?? crypto.randomUUID(),
           data: item.data ?? "",
           masalah_kesehatan_anestesi: item.masalah_kesehatan_anestesi ?? "",
           waktu: item.waktu ?? "",
@@ -251,7 +266,8 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
         // mapAskan('Pasca', this.formpasca)
         // mapAskan('Intra', this.formintra)
       },
-      async hapusData(index, faseAktif) {
+      async hapusData(row, faseAktif) {
+        console.log('hapusData', row)
         this.loadinghapus = true;
 
         const source =
@@ -260,8 +276,10 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
             : faseAktif === "Pasca"
               ? this.formpasca
               : this.formintra;
-
         try {
+          const index = source.askan_data.findIndex(x => x.id_item === row.id_item)
+          console.log('index', index)
+          if (index === -1) return notifErrVue("Data tidak ditemukan")
           // Hapus berdasarkan index
           const updatedAskan = [...source.askan_data];
           updatedAskan.splice(index, 1);

@@ -67,7 +67,8 @@
       </q-card>
       <q-card flat class="q-mb-xs">
         <q-card-section>
-          <q-table flat bordered dense :rows="store.formintra.askan_data" :columns="columns" row-key="id" hide-bottom>
+          <q-table flat bordered dense :rows="store.formintra.askan_data" :columns="columns" row-key="id" hide-bottom
+            :rows-per-page-options="[0]">
 
             <template #top-row>
 
@@ -141,7 +142,7 @@
                 <q-td>{{ props.row.nama_ttd }}</q-td>
 
                 <q-td>
-                  <q-btn dense flat icon="delete" color="red" @click="store.hapusData(props.row, 'Pra')"
+                  <q-btn dense flat icon="delete" color="red" @click="store.hapusData(props.row, 'Intra')"
                     :loading="store.loadinghapus" class="no-print" />
                 </q-td>
 
@@ -242,9 +243,9 @@ const columns = [
   { name: 'evaluasi', label: 'Evaluasi (SOAP)', field: 'evaluasi', align: 'left' },
   { name: 'nama_ttd', label: 'Nama TTD', field: 'nama_ttd', align: 'left' }
 ]
-function newAskanRow () {
+function newAskanRow() {
   return {
-    id: Date.now() + Math.random(),
+    id_item: crypto.randomUUID(),
     data: '',
     masalah_kesehatan_anestesi: '',
     waktu: date.formatDate(Date.now(), 'HH:mm'),
@@ -257,7 +258,7 @@ function newAskanRow () {
     nama_ttd: ''
   }
 }
-function tambahBaris () {
+function tambahBaris() {
   if (!Array.isArray(store.formintra.askan_data)) {
     store.formintra.askan_data = []
   }
@@ -271,16 +272,17 @@ function tambahBaris () {
       : newAskanRow()
   )
 }
-function simpan () {
+function simpan() {
   store.formintra.noreg = props.pasien?.noreg
   store.formintra.fase = 'Intra'
   store.simpanData('Intra')
 }
 
 onMounted(() => {
-  if (!store.formintra.askan_data.length) {
-    store.formintra.askan_data.push(newAskanRow())
-  }
+  store.formintra.fase = 'Intra'
+  // if (!store.formintra.askan_data.length) {
+  //   store.formintra.askan_data.push(newAskanRow())
+  // }
 })
 
 watch(
@@ -289,7 +291,7 @@ watch(
     if (!val) return
 
     console.log('WATCH PASIEN TRIGGERED', val)
-
+    if (store.formpasca.askan_data?.length > 0) return
     // ===============================
     // INTRA ANESTESI
     // ===============================
@@ -302,7 +304,7 @@ watch(
       store.formintra.fase = 'Intra'
 
       store.formintra.askan_data = intra.askan_data.map(item => ({
-        id: Date.now() + Math.random(),
+        id_item: item.id_item ?? crypto.randomUUID(),
         data: item.data ?? '',
         masalah_kesehatan_anestesi: item.masalah_kesehatan_anestesi ?? '',
         waktu: item.waktu ?? '',
@@ -314,23 +316,6 @@ watch(
         p: item.evaluasi?.p ?? '',
         nama_ttd: item.nama_ttd ?? ''
       }))
-    } else {
-      // kalau belum ada data → minimal 1 baris
-      if (!store.formintra.askan_data.length) {
-        store.formintra.askan_data.push({
-          id: Date.now() + Math.random(),
-          data: '',
-          masalah_kesehatan_anestesi: '',
-          waktu: '',
-          intervensi: '',
-          implementasi: '',
-          s: '',
-          o: '',
-          a: '',
-          p: '',
-          nama_ttd: ''
-        })
-      }
     }
   },
   {
@@ -344,13 +329,13 @@ const printObj = computed(() => ({
   preview: false,
   extraCss: '',
   extraHead: '',
-  beforeOpenCallback () {
+  beforeOpenCallback() {
     console.log('wait...')
   },
-  openCallback () {
+  openCallback() {
     console.log('opened')
   },
-  closeCallback () {
+  closeCallback() {
     console.log('closePrint')
   }
 }))
