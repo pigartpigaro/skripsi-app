@@ -32,13 +32,18 @@ import { usePenunjangStore } from './penunjang'
     actions: {
       search (val) {
         this.params.q = val
+        this.params.page = 1
         this.getData()
       },
       refresh () {
         this.getData()
       },
-      async getData() {
+      async getData(payload = {}) {
         this.loadingcari = true
+        this.params = {
+          ...this.params,
+          ...payload
+        }
         const params = { params: this.params }
         const resp = await api.get('/v1/transaksi/kunjungan/get-list', params)
         // console.log('resp Data Store', resp)

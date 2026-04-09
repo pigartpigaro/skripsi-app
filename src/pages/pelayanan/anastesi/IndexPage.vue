@@ -31,6 +31,9 @@ function opendialog(pasien) {
   store.dialogPelayanan = true
 }
 
+function goTo(page) {
+  store.getData({ page })
+}
 onMounted(() => {
   store.getData()
   // store.init()
