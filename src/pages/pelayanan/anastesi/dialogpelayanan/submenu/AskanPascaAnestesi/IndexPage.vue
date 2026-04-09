@@ -126,7 +126,7 @@
               <q-tr :props="props">
 
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.data
-                  }} {{ props.row }}</q-td>
+                }}</q-td>
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.masalah_kesehatan_anestesi }}</q-td>
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.waktu }}</q-td>
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.intervensi }}</q-td>
