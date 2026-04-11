@@ -144,7 +144,7 @@
                 <q-td>{{ props.row.nama_ttd }}</q-td>
 
                 <q-td>
-                  <q-btn dense flat icon="delete" color="red" @click="store.hapusData(props.row, 'Pra')"
+                  <q-btn dense flat icon="delete" color="red" @click="store.hapusData(props.pageIndex, 'Pra')"
                     :loading="store.loadinghapus" class="no-print" />
                 </q-td>
 

@@ -266,8 +266,8 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
         // mapAskan('Pasca', this.formpasca)
         // mapAskan('Intra', this.formintra)
       },
-      async hapusData(row, faseAktif) {
-        console.log('hapusData', row)
+      async hapusData(index, faseAktif) {
+        // console.log('hapusData', index)
         this.loadinghapus = true;
 
         const source =
@@ -277,9 +277,12 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
               ? this.formpasca
               : this.formintra;
         try {
-          const index = source.askan_data.findIndex(x => x.id_item === row.id_item)
-          console.log('index', index)
-          if (index === -1) return notifErrVue("Data tidak ditemukan")
+          // const index = source.askan_data.findIndex(x => x.id_item === row.id_item)
+          // console.log('index', index)
+          // if (index === -1) return notifErrVue("Data tidak ditemukan")
+          if (index < 0 || index >= source.askan_data.length) {
+            return notifErrVue("Index tidak valid")
+          }
           // Hapus berdasarkan index
           const updatedAskan = [...source.askan_data];
           updatedAskan.splice(index, 1);

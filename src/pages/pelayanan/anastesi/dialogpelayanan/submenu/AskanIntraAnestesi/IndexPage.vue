@@ -126,7 +126,7 @@
               <q-tr :props="props">
 
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.data
-                  }}</q-td>
+                }}</q-td>
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.masalah_kesehatan_anestesi }}</q-td>
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.waktu }}</q-td>
                 <q-td class="text-wrap" style="white-space: normal;">{{ props.row.intervensi }}</q-td>
@@ -142,7 +142,7 @@
                 <q-td>{{ props.row.nama_ttd }}</q-td>
 
                 <q-td>
-                  <q-btn dense flat icon="delete" color="red" @click="store.hapusData(props.row, 'Intra')"
+                  <q-btn dense flat icon="delete" color="red" @click="store.hapusData(props.pageIndex, 'Intra')"
                     :loading="store.loadinghapus" class="no-print" />
                 </q-td>
 
