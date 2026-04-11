@@ -245,7 +245,7 @@ const columns = [
 ]
 function newAskanRow() {
   return {
-    id_item: crypto.randomUUID(),
+    // id_item: crypto.randomUUID(),
     data: '',
     masalah_kesehatan_anestesi: '',
     waktu: date.formatDate(Date.now(), 'HH:mm'),
@@ -304,7 +304,7 @@ watch(
       store.formintra.fase = 'Intra'
 
       store.formintra.askan_data = intra.askan_data.map(item => ({
-        id_item: item.id_item ?? crypto.randomUUID(),
+        // id_item: item.id_item ?? crypto.randomUUID(),
         data: item.data ?? '',
         masalah_kesehatan_anestesi: item.masalah_kesehatan_anestesi ?? '',
         waktu: item.waktu ?? '',

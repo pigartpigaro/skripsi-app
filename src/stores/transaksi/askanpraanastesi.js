@@ -20,7 +20,6 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
         noreg: null,
         fase: "Pra",
         current: {
-          id_item: "",
           data: "",
           masalah_kesehatan_anestesi: "",
           waktu: "",
@@ -94,7 +93,6 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
         noreg: null,
         fase: "Pasca",
         current: {
-          id_item: "",
           data: "",
           masalah_kesehatan_anestesi: "",
           waktu: "",
@@ -112,7 +110,6 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
         noreg: null,
         fase: "Intra",
         current: {
-          id_item: "",
           data: "",
           masalah_kesehatan_anestesi: "",
           waktu: "",
@@ -139,9 +136,9 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
               : this.formintra;
 
         try {
-          if (!source.current.id_item) {
-            source.current.id_item = crypto.randomUUID()
-          }
+          // if (!source.current.id_item) {
+          //   source.current.id_item = crypto.randomUUID()
+          // }
           // 🚀 Payload hanya kirim data lama + current (TANPA inject dulu)
           const payload = {
             noreg: source.noreg,
@@ -149,12 +146,12 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
             askan_data: [
               ...source.askan_data.map(item => ({
                 ...item,
-                id_item: item.id_item ?? crypto.randomUUID() // ✅ jaga data lama juga punya id
+                // id_item: item.id_item ?? crypto.randomUUID() // ✅ jaga data lama juga punya id
               })),
               ...(source.current?.data?.trim()
                 ? [
                     {
-                      id_item: source.current.id_item,
+                      // id_item: source.current.id_item,
                       data: source.current.data,
                       masalah_kesehatan_anestesi:
                         source.current.masalah_kesehatan_anestesi,
@@ -185,13 +182,13 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
           // ✅ Baru replace dari response backend
           source.askan_data = resp.data.data.askan_data.map(item => ({
             ...item,
-            id_item: item.id_item ?? crypto.randomUUID()
+            // id_item: item.id_item ?? crypto.randomUUID()
           }));
           this.items = resp.data.data.askan_data;
 
           // reset form
           source.current = {
-            id_item: crypto.randomUUID(),
+            // id_item: crypto.randomUUID(),
 
             data: "",
             masalah_kesehatan_anestesi: "",
@@ -224,7 +221,7 @@ export const useAskanPraIntraPascaAnestesiStore = defineStore(
         target.fase = val.fase;
 
         target.askan_data = val.askan_data.map((item) => ({
-          id_item: item.id_item ?? crypto.randomUUID(),
+          // id_item: item.id_item ?? crypto.randomUUID(),
           data: item.data ?? "",
           masalah_kesehatan_anestesi: item.masalah_kesehatan_anestesi ?? "",
           waktu: item.waktu ?? "",
